@@ -21,19 +21,9 @@ public class BusquedaAdmin extends JFrame {
 	 */
 	private static final long serialVersionUID = 7057016663401901410L;
 	private JPanel contentPane;
-	private JTextField tfResultado1;
-	private JTextField tfResultado2;
-	private JTextField tfResultado3;
-	private JTextField tfResultado4;
-	private JTextField tfResultado5;
 	private JSeparator menu_separator;
 	private JLabel lblBusqueda;
 	private JSeparator separator;
-	private JLabel label;
-	private JLabel label_1;
-	private JLabel label_2;
-	private JLabel label_3;
-	private JLabel label_4;
 	private JTextField tfBusqueda;
 	private JButton btnLupa;
 	private JLabel lblResultados;
@@ -83,31 +73,6 @@ public class BusquedaAdmin extends JFrame {
 		separator.setBounds(0, 60, 784, 2);
 		contentPane.add(separator);
 		
-		label = new JLabel("1.");
-		label.setFont(new Font("Tunga", Font.PLAIN, 20));
-		label.setBounds(80, 123, 19, 27);
-		contentPane.add(label);
-		
-		label_1 = new JLabel("2.");
-		label_1.setFont(new Font("Tunga", Font.PLAIN, 20));
-		label_1.setBounds(77, 176, 19, 27);
-		contentPane.add(label_1);
-		
-		label_2 = new JLabel("3.");
-		label_2.setFont(new Font("Tunga", Font.PLAIN, 20));
-		label_2.setBounds(78, 229, 19, 27);
-		contentPane.add(label_2);
-		
-		label_3 = new JLabel("4.");
-		label_3.setFont(new Font("Tunga", Font.PLAIN, 20));
-		label_3.setBounds(77, 281, 19, 27);
-		contentPane.add(label_3);
-		
-		label_4 = new JLabel("5.");
-		label_4.setFont(new Font("Tunga", Font.PLAIN, 20));
-		label_4.setBounds(77, 330, 19, 27);
-		contentPane.add(label_4);
-		
 		tfBusqueda = new JTextField();
 		tfBusqueda.setBounds(109, 22, 547, 27);
 		contentPane.add(tfBusqueda);
@@ -121,41 +86,6 @@ public class BusquedaAdmin extends JFrame {
 		lblResultados.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
 		lblResultados.setBounds(10, 73, 132, 27);
 		contentPane.add(lblResultados);
-		
-		tfResultado1 = new JTextField();
-		tfResultado1.setBackground(UIManager.getColor("Button.background"));
-		tfResultado1.setEditable(false);
-		tfResultado1.setColumns(10);
-		tfResultado1.setBounds(109, 120, 547, 27);
-		contentPane.add(tfResultado1);
-		
-		tfResultado2 = new JTextField();
-		tfResultado2.setBackground(UIManager.getColor("Button.background"));
-		tfResultado2.setEditable(false);
-		tfResultado2.setColumns(10);
-		tfResultado2.setBounds(109, 176, 547, 27);
-		contentPane.add(tfResultado2);
-		
-		tfResultado3 = new JTextField();
-		tfResultado3.setBackground(UIManager.getColor("Button.background"));
-		tfResultado3.setEditable(false);
-		tfResultado3.setColumns(10);
-		tfResultado3.setBounds(109, 229, 547, 27);
-		contentPane.add(tfResultado3);
-		
-		tfResultado4 = new JTextField();
-		tfResultado4.setBackground(UIManager.getColor("Button.background"));
-		tfResultado4.setEditable(false);
-		tfResultado4.setColumns(10);
-		tfResultado4.setBounds(109, 281, 547, 27);
-		contentPane.add(tfResultado4);
-		
-		tfResultado5 = new JTextField();
-		tfResultado5.setBackground(UIManager.getColor("Button.background"));
-		tfResultado5.setEditable(false);
-		tfResultado5.setColumns(10);
-		tfResultado5.setBounds(109, 330, 547, 27);
-		contentPane.add(tfResultado5);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 388, 89, 27);

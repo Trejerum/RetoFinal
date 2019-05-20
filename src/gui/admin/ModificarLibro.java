@@ -23,7 +23,6 @@ public class ModificarLibro extends JFrame {
 	private JPanel contentPane;
 	private JTextField tfIsbn;
 	private JTextField tfTitulo;
-	private JTextField tfAutor2;
 	private JTextField tfFechaPubli;
 	private JTextField tfPrecio;
 	private JTextField tfDescuento;
@@ -47,7 +46,6 @@ public class ModificarLibro extends JFrame {
 	private JLabel lblGenero;
 	private JLabel lblDescripcion;
 	private JTextArea tfDescripcion;
-	private JButton btnMasAutores;
 	private JLabel lblFormateFecha;
 
 	/**
@@ -71,7 +69,7 @@ public class ModificarLibro extends JFrame {
 	 */
 	public ModificarLibro() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 571, 566);
+		setBounds(100, 100, 571, 597);
 		contentPane = new JPanel();
 		contentPane.setBackground(UIManager.getColor("Button.background"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,7 +99,7 @@ public class ModificarLibro extends JFrame {
 		
 		lblPrecio = new JLabel("*Precio:");
 		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblPrecio.setBounds(87, 275, 61, 14);
+		lblPrecio.setBounds(87, 293, 61, 14);
 		contentPane.add(lblPrecio);
 		
 		btnModificarLibro = new JButton("Modificar");
@@ -135,36 +133,28 @@ public class ModificarLibro extends JFrame {
 		tfAutor.setBounds(161, 167, 145, 14);
 		contentPane.add(tfAutor);
 		
-		tfAutor2 = new JTextField();
-		tfAutor2.setEditable(false);
-		tfAutor2.setForeground(new Color(0, 0, 205));
-		tfAutor2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tfAutor2.setColumns(10);
-		tfAutor2.setBounds(161, 203, 145, 14);
-		contentPane.add(tfAutor2);
-		
 		lblFechaPubli = new JLabel("Fecha publicaci\u00F3n:");
 		lblFechaPubli.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblFechaPubli.setBounds(26, 239, 121, 14);
+		lblFechaPubli.setBounds(26, 257, 121, 14);
 		contentPane.add(lblFechaPubli);
 		
 		tfFechaPubli = new JTextField();
 		tfFechaPubli.setForeground(new Color(0, 0, 205));
 		tfFechaPubli.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfFechaPubli.setColumns(10);
-		tfFechaPubli.setBounds(161, 239, 86, 14);
+		tfFechaPubli.setBounds(161, 257, 86, 14);
 		contentPane.add(tfFechaPubli);
 		
 		tfPrecio = new JTextField();
 		tfPrecio.setForeground(new Color(0, 0, 205));
 		tfPrecio.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfPrecio.setColumns(10);
-		tfPrecio.setBounds(161, 275, 145, 14);
+		tfPrecio.setBounds(161, 293, 145, 14);
 		contentPane.add(tfPrecio);
 		
 		lblOferta = new JLabel("Oferta:");
 		lblOferta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblOferta.setBounds(93, 308, 79, 14);
+		lblOferta.setBounds(93, 326, 79, 14);
 		contentPane.add(lblOferta);
 		
 		btnCancelar = new JButton("Cancelar");
@@ -173,11 +163,11 @@ public class ModificarLibro extends JFrame {
 		contentPane.add(btnCancelar);
 		
 		chckbxOfertaSi = new JCheckBox("S\u00ED");
-		chckbxOfertaSi.setBounds(167, 306, 50, 23);
+		chckbxOfertaSi.setBounds(167, 324, 50, 23);
 		contentPane.add(chckbxOfertaSi);
 		
 		chckbxOfertaNo = new JCheckBox("No");
-		chckbxOfertaNo.setBounds(214, 306, 50, 23);
+		chckbxOfertaNo.setBounds(214, 324, 50, 23);
 		contentPane.add(chckbxOfertaNo);
 		
 		tfDescuento = new JTextField();
@@ -185,56 +175,60 @@ public class ModificarLibro extends JFrame {
 		tfDescuento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfDescuento.setEditable(false);
 		tfDescuento.setColumns(10);
-		tfDescuento.setBounds(245, 336, 61, 16);
+		tfDescuento.setBounds(245, 354, 61, 16);
 		contentPane.add(tfDescuento);
 		
 		lblDescuento = new JLabel("Descuento:");
 		lblDescuento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDescuento.setBounds(161, 338, 74, 14);
+		lblDescuento.setBounds(161, 356, 74, 14);
 		contentPane.add(lblDescuento);
 		
 		lblStock = new JLabel("*Stock:");
 		lblStock.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblStock.setBounds(90, 360, 61, 14);
+		lblStock.setBounds(90, 378, 61, 14);
 		contentPane.add(lblStock);
 		
 		tfStock = new JTextField();
 		tfStock.setForeground(new Color(0, 0, 205));
 		tfStock.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfStock.setColumns(10);
-		tfStock.setBounds(161, 363, 66, 14);
+		tfStock.setBounds(161, 381, 66, 14);
 		contentPane.add(tfStock);
 		
 		tfGenero = new JTextField();
 		tfGenero.setForeground(new Color(0, 0, 205));
 		tfGenero.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfGenero.setColumns(10);
-		tfGenero.setBounds(161, 388, 150, 14);
+		tfGenero.setBounds(161, 406, 150, 14);
 		contentPane.add(tfGenero);
 		
 		lblGenero = new JLabel("*G\u00E9nero:");
 		lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblGenero.setBounds(80, 385, 68, 14);
+		lblGenero.setBounds(80, 403, 68, 14);
 		contentPane.add(lblGenero);
 		
 		lblDescripcion = new JLabel("Descripci\u00F3n:");
 		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDescripcion.setBounds(64, 413, 79, 14);
+		lblDescripcion.setBounds(64, 431, 79, 14);
 		contentPane.add(lblDescripcion);
 		
 		tfDescripcion = new JTextArea();
-		tfDescripcion.setBounds(161, 415, 247, 84);
+		tfDescripcion.setBounds(161, 433, 247, 84);
 		contentPane.add(tfDescripcion);
-		
-		btnMasAutores = new JButton("M\u00E1s autores");
-		btnMasAutores.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnMasAutores.setBounds(48, 198, 103, 23);
-		contentPane.add(btnMasAutores);
 		
 		lblFormateFecha = new JLabel("(dd-mm-yyyy)");
 		lblFormateFecha.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblFormateFecha.setBounds(252, 241, 74, 14);
+		lblFormateFecha.setBounds(252, 259, 74, 14);
 		contentPane.add(lblFormateFecha);
+		
+		JButton button = new JButton("+");
+		button.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		button.setBounds(87, 192, 47, 17);
+		contentPane.add(button);
+		
+		JLabel label = new JLabel("Pulse para poder a\u00F1adir un autor m\u00E1s.");
+		label.setBounds(161, 193, 247, 14);
+		contentPane.add(label);
 		
 		
 		

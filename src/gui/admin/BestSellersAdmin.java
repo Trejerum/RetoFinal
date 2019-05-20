@@ -90,7 +90,7 @@ public class BestSellersAdmin extends JFrame {
 		tfDate.setFont(new Font("Maiandra GD", Font.PLAIN, 24));
 		tfDate.setEditable(false);
 		tfDate.setBackground(UIManager.getColor("Button.background"));
-		tfDate.setBounds(389, 65, 126, 27);
+		tfDate.setBounds(389, 65, 134, 27);
 		contentPane.add(tfDate);
 		tfDate.setColumns(10);
 		LocalDate calendario = LocalDate.now();
