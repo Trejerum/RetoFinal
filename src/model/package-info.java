@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author 1dam
+ * @author grupoB
  *
  */
 package model;

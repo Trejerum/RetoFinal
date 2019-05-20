@@ -1,6 +1,14 @@
 package model;
 
+/**
+ * La clase usuarios va a registrar todos los usuarios de la libreria
+ * @author grupoB
+ *
+ */
+
 public class Usuarios {
+	
+	
 	protected String nombreUsuario;
 	protected String nombre;
 	protected String apellidos;
@@ -10,11 +18,21 @@ public class Usuarios {
 	protected boolean esAdmin;
 	protected String contraseña;
 	
-	
+	//Constructors
 	public Usuarios() {
 		super();
 	}
-	
+	/**
+	 * 
+	 * @param nombreUsuario Sirve para diferenciar a cada usuario
+	 * @param nombre Para saber el nombre de la persona
+	 * @param apellidos Para saber el apellido de la persona
+	 * @param direccion Sirve para poder enviarle el libro a su direccion, despues de realizar la compra
+	 * @param telefono Para poder contactar con el usuario
+	 * @param email Para enviarle ofertas de sus libros favoritos
+	 * @param esAdmin Para saber si es un usuario administrador o no
+	 * @param contraseña Sirve para iniciar sesion con su nombre de usuario
+	 */
 	public Usuarios(String nombreUsuario, String nombre, String apellidos, String direccion, int telefono, String email,
 			boolean esAdmin, String contraseña) {
 		super();
@@ -27,7 +45,12 @@ public class Usuarios {
 		this.esAdmin = esAdmin;
 		this.contraseña = contraseña;
 	}
-
+	
+	/**
+	 * Getters and setters
+	 * Los siguientes métodos get and set se usan para acceder y usar un atributo o también para establecerlo/modificarlo.
+	 * @return
+	 */
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
