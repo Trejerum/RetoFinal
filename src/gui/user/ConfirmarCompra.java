@@ -15,13 +15,14 @@ import java.awt.Font;
 import java.awt.TextField;
 
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
-public class ComprasRealizadas extends JFrame implements ActionListener{
+public class ConfirmarCompra extends JFrame implements ActionListener{
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -4599970365472572583L;
+	private static final long serialVersionUID = -9196680677816620968L;
 	private JPanel contentPane;
 	private JSeparator menu_separator;
 	private JButton btnHome;
@@ -29,8 +30,12 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	private JButton btnUsuario;
 	private JButton btnCompras;
 	private JButton btnBuscar;
+	private JLabel lblConfirmarCompra;
 	private JSeparator separator;
-	private JLabel lblCompras;
+	private JButton btnCancelar;
+	private JLabel lblLibrosCarrito;
+	private JButton btnConfirmar;
+	private JLabel lblInfoLibro;
 
 	/**
 	 * Launch the application.
@@ -39,7 +44,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ComprasRealizadas frame = new ComprasRealizadas();
+					ConfirmarCompra frame = new ConfirmarCompra();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -51,7 +56,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public ComprasRealizadas() {
+	public ConfirmarCompra() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 505);
 		contentPane = new JPanel();
@@ -97,6 +102,11 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		btnBuscar.setBackground(new Color(245, 245, 220));
 		btnBuscar.setBounds(309, 407, 156, 61);
 		contentPane.add(btnBuscar);
+		
+		lblConfirmarCompra = new JLabel("Confirmar compra");
+		lblConfirmarCompra.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
+		lblConfirmarCompra.setBounds(10, 20, 349, 27);
+		contentPane.add(lblConfirmarCompra);
 		LocalDate calendario = LocalDate.now();
 		TextField texto = new TextField(calendario.toString());
 		String fecha = texto.getText();
@@ -105,10 +115,28 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		separator.setBounds(0, 60, 784, 2);
 		contentPane.add(separator);
 		
-		lblCompras = new JLabel("Compras realizadas:");
-		lblCompras.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
-		lblCompras.setBounds(20, 22, 234, 27);
-		contentPane.add(lblCompras);
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(518, 358, 89, 23);
+		contentPane.add(btnCancelar);
+		
+		lblLibrosCarrito = new JLabel("Libros en el carrito:");
+		lblLibrosCarrito.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblLibrosCarrito.setBounds(28, 73, 146, 27);
+		contentPane.add(lblLibrosCarrito);
+		
+		btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnConfirmar.setBounds(617, 358, 134, 23);
+		contentPane.add(btnConfirmar);
+		
+		lblInfoLibro = new JLabel("ISBN / T\u00EDtulo / Editorial / Precio ");
+		lblInfoLibro.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblInfoLibro.setBounds(28, 123, 201, 14);
+		contentPane.add(lblInfoLibro);
+		
+		JComboBox cbUnidades = new JComboBox();
+		cbUnidades.setBounds(241, 122, 44, 15);
+		contentPane.add(cbUnidades);
 		
 	}
 

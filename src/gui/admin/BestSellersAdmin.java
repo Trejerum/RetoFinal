@@ -10,11 +10,13 @@ import java.time.LocalDate;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-public class BestSellersAdmin extends JFrame {
+public class BestSellersAdmin extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -90,7 +92,7 @@ public class BestSellersAdmin extends JFrame {
 		tfDate.setFont(new Font("Maiandra GD", Font.PLAIN, 24));
 		tfDate.setEditable(false);
 		tfDate.setBackground(UIManager.getColor("Button.background"));
-		tfDate.setBounds(389, 65, 126, 27);
+		tfDate.setBounds(389, 65, 134, 27);
 		contentPane.add(tfDate);
 		tfDate.setColumns(10);
 		LocalDate calendario = LocalDate.now();
@@ -206,6 +208,12 @@ public class BestSellersAdmin extends JFrame {
 		lblSesionIniciada.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblSesionIniciada.setBounds(26, 11, 134, 14);
 		contentPane.add(lblSesionIniciada);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

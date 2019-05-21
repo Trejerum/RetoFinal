@@ -16,7 +16,7 @@ import java.awt.TextField;
 
 import javax.swing.JTextField;
 
-public class BusquedaUser extends JFrame {
+public class BusquedaUser extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -24,11 +24,6 @@ public class BusquedaUser extends JFrame {
 	private static final long serialVersionUID = -9196680677816620968L;
 	private JPanel contentPane;
 	private JTextField tfBusqueda;
-	private JTextField tfResultado1;
-	private JTextField tfResultado2;
-	private JTextField tfResultado3;
-	private JTextField tfResultado4;
-	private JTextField tfResultado5;
 	private JSeparator menu_separator;
 	private JButton btnHome;
 	private JButton btnBestSellers;
@@ -37,11 +32,6 @@ public class BusquedaUser extends JFrame {
 	private JButton btnBuscar;
 	private JLabel lblBuscar;
 	private JSeparator separator;
-	private JLabel label_1;
-	private JLabel label_2;
-	private JLabel label_3;
-	private JLabel label_4;
-	private JLabel label_5;
 	private JButton btnBuscarLupa;
 	private JLabel lblResultados;
 	private JButton btnRecomendados;
@@ -124,31 +114,6 @@ public class BusquedaUser extends JFrame {
 		separator.setBounds(0, 60, 784, 2);
 		contentPane.add(separator);
 		
-		label_1 = new JLabel("1.");
-		label_1.setFont(new Font("Tunga", Font.PLAIN, 20));
-		label_1.setBounds(80, 123, 19, 27);
-		contentPane.add(label_1);
-		
-		label_2 = new JLabel("2.");
-		label_2.setFont(new Font("Tunga", Font.PLAIN, 20));
-		label_2.setBounds(77, 176, 19, 27);
-		contentPane.add(label_2);
-		
-		label_3 = new JLabel("3.");
-		label_3.setFont(new Font("Tunga", Font.PLAIN, 20));
-		label_3.setBounds(78, 229, 19, 27);
-		contentPane.add(label_3);
-		
-		label_4 = new JLabel("4.");
-		label_4.setFont(new Font("Tunga", Font.PLAIN, 20));
-		label_4.setBounds(77, 281, 19, 27);
-		contentPane.add(label_4);
-		
-		label_5 = new JLabel("5.");
-		label_5.setFont(new Font("Tunga", Font.PLAIN, 20));
-		label_5.setBounds(77, 330, 19, 27);
-		contentPane.add(label_5);
-		
 		tfBusqueda = new JTextField();
 		tfBusqueda.setBounds(109, 22, 547, 27);
 		contentPane.add(tfBusqueda);
@@ -168,40 +133,11 @@ public class BusquedaUser extends JFrame {
 		btnRecomendados.setBounds(588, 79, 167, 23);
 		contentPane.add(btnRecomendados);
 		
-		tfResultado1 = new JTextField();
-		tfResultado1.setBackground(new Color(255, 248, 220));
-		tfResultado1.setEditable(false);
-		tfResultado1.setColumns(10);
-		tfResultado1.setBounds(109, 120, 547, 27);
-		contentPane.add(tfResultado1);
-		
-		tfResultado2 = new JTextField();
-		tfResultado2.setBackground(new Color(255, 248, 220));
-		tfResultado2.setEditable(false);
-		tfResultado2.setColumns(10);
-		tfResultado2.setBounds(109, 176, 547, 27);
-		contentPane.add(tfResultado2);
-		
-		tfResultado3 = new JTextField();
-		tfResultado3.setBackground(new Color(255, 248, 220));
-		tfResultado3.setEditable(false);
-		tfResultado3.setColumns(10);
-		tfResultado3.setBounds(109, 229, 547, 27);
-		contentPane.add(tfResultado3);
-		
-		tfResultado4 = new JTextField();
-		tfResultado4.setBackground(new Color(255, 248, 220));
-		tfResultado4.setEditable(false);
-		tfResultado4.setColumns(10);
-		tfResultado4.setBounds(109, 281, 547, 27);
-		contentPane.add(tfResultado4);
-		
-		tfResultado5 = new JTextField();
-		tfResultado5.setBackground(new Color(255, 248, 220));
-		tfResultado5.setEditable(false);
-		tfResultado5.setColumns(10);
-		tfResultado5.setBounds(109, 330, 547, 27);
-		contentPane.add(tfResultado5);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

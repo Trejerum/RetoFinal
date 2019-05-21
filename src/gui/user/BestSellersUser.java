@@ -16,7 +16,7 @@ import java.awt.TextField;
 
 import javax.swing.JTextField;
 
-public class BestSellersUser extends JFrame {
+public class BestSellersUser extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -240,6 +240,52 @@ public class BestSellersUser extends JFrame {
 		lblTtuloAutor_8.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		lblTtuloAutor_8.setBounds(471, 276, 259, 14);
 		contentPane.add(lblTtuloAutor_8);
+		
+		JButton btnComprar1 = new JButton("Comprar");
+		btnComprar1.setBounds(234, 167, 89, 20);
+		contentPane.add(btnComprar1);
+		
+		JButton btnComprar2 = new JButton("Comprar");
+		btnComprar2.setBounds(235, 219, 89, 20);
+		contentPane.add(btnComprar2);
+		
+		JButton btnComprar3 = new JButton("Comprar");
+		btnComprar3.setBounds(235, 273, 89, 20);
+		contentPane.add(btnComprar3);
+		
+		JButton btnComprar4 = new JButton("Comprar");
+		btnComprar4.setBounds(235, 328, 89, 20);
+		contentPane.add(btnComprar4);
+		
+		JButton btnComprar5 = new JButton("Comprar");
+		btnComprar5.setBounds(235, 373, 89, 20);
+		contentPane.add(btnComprar5);
+		
+		JButton btnComprar6 = new JButton("Comprar");
+		btnComprar6.setBounds(608, 170, 89, 20);
+		contentPane.add(btnComprar6);
+		
+		JButton btnComprar7 = new JButton("Comprar");
+		btnComprar7.setBounds(608, 219, 89, 20);
+		contentPane.add(btnComprar7);
+		
+		JButton btnComprar8 = new JButton("Comprar");
+		btnComprar8.setBounds(608, 273, 89, 20);
+		contentPane.add(btnComprar8);
+		
+		JButton btnComprar9 = new JButton("Comprar");
+		btnComprar9.setBounds(608, 325, 89, 20);
+		contentPane.add(btnComprar9);
+		
+		JButton btnComprar10 = new JButton("Comprar");
+		btnComprar10.setBounds(608, 373, 89, 20);
+		contentPane.add(btnComprar10);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }
