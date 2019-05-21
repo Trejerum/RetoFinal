@@ -17,7 +17,7 @@ import java.awt.TextField;
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
 
-public class ConfirmarCompra extends JFrame {
+public class ConfirmarCompra extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -137,6 +137,12 @@ public class ConfirmarCompra extends JFrame {
 		JComboBox cbUnidades = new JComboBox();
 		cbUnidades.setBounds(241, 122, 44, 15);
 		contentPane.add(cbUnidades);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

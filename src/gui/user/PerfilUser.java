@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 
-public class PerfilUser extends JFrame {
+public class PerfilUser extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -249,6 +249,12 @@ public class PerfilUser extends JFrame {
 		
 		
 		
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

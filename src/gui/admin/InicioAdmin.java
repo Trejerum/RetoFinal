@@ -10,8 +10,10 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class InicioAdmin extends JFrame {
+public class InicioAdmin extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -96,5 +98,11 @@ public class InicioAdmin extends JFrame {
 		JLabel lblDiego = new JLabel("Diego");
 		lblDiego.setBounds(156, 15, 55, 12);
 		contentPane.add(lblDiego);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

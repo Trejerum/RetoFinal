@@ -16,7 +16,7 @@ import java.awt.TextField;
 
 import javax.swing.JTextField;
 
-public class ComprasRealizadas extends JFrame {
+public class ComprasRealizadas extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -109,6 +109,12 @@ public class ComprasRealizadas extends JFrame {
 		lblCompras.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
 		lblCompras.setBounds(20, 22, 234, 27);
 		contentPane.add(lblCompras);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

@@ -9,13 +9,16 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
 
-public class AnadirLibro extends JFrame {
+public class AnadirLibro extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -232,6 +235,12 @@ public class AnadirLibro extends JFrame {
 		
 		
 		
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 }

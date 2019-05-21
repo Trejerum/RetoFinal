@@ -9,11 +9,14 @@ import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.SwingConstants;
 
-public class PerfilAdmin extends JFrame {
+public class PerfilAdmin extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -177,6 +180,12 @@ public class PerfilAdmin extends JFrame {
 		
 		
 		
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

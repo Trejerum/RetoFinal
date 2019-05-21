@@ -16,7 +16,7 @@ import java.awt.TextField;
 
 import javax.swing.JTextField;
 
-public class BestSellersUser extends JFrame {
+public class BestSellersUser extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -280,6 +280,12 @@ public class BestSellersUser extends JFrame {
 		JButton btnComprar10 = new JButton("Comprar");
 		btnComprar10.setBounds(608, 373, 89, 20);
 		contentPane.add(btnComprar10);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

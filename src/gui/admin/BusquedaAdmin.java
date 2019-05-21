@@ -10,11 +10,13 @@ import java.time.LocalDate;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.TextField;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 
-public class BusquedaAdmin extends JFrame {
+public class BusquedaAdmin extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -90,6 +92,12 @@ public class BusquedaAdmin extends JFrame {
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 388, 89, 27);
 		contentPane.add(btnVolver);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

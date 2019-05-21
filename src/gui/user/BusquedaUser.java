@@ -16,7 +16,7 @@ import java.awt.TextField;
 
 import javax.swing.JTextField;
 
-public class BusquedaUser extends JFrame {
+public class BusquedaUser extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -132,6 +132,12 @@ public class BusquedaUser extends JFrame {
 		btnRecomendados.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnRecomendados.setBounds(588, 79, 167, 23);
 		contentPane.add(btnRecomendados);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }
