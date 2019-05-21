@@ -18,6 +18,7 @@ import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.UIManager;
+import javax.swing.ListSelectionModel;
 
 public class BusquedaUser extends JFrame implements ActionListener{
 
@@ -140,9 +141,13 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		contentPane.add(btnRecomendados);
 		
 		tablaBusqueda = new JTable();
+		tablaBusqueda.setBorder(new EmptyBorder(2, 2, 4, 4));
+		tablaBusqueda.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		tablaBusqueda.setForeground(new Color(0, 0, 0));
+		tablaBusqueda.setToolTipText("\r\n");
 		tablaBusqueda.setModel(new DefaultTableModel(
 			new Object[][] {
-				{"ISBN", "Titulo", "Editorial", "Precio"},
+				{"", "", "", ""},
 				{null, null, null, null},
 			},
 			new String[] {
