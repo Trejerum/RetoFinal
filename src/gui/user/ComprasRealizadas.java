@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
 import java.awt.Color;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
@@ -15,6 +17,7 @@ import java.awt.Font;
 import java.awt.TextField;
 
 import javax.swing.JTextField;
+import javax.swing.JList;
 
 public class ComprasRealizadas extends JFrame implements ActionListener{
 
@@ -31,6 +34,8 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	private JButton btnBuscar;
 	private JSeparator separator;
 	private JLabel lblCompras;
+	private JList listaComprasRealizadas;
+	DefaultListModel modeloLista;
 
 	/**
 	 * Launch the application.
@@ -52,10 +57,11 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public ComprasRealizadas() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 505);
+		setBounds(100, 100, 800, 495);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(245, 222, 179));
+		contentPane.setBackground(new Color(0, 153, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -66,7 +72,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		
 		btnHome = new JButton("Casa(HOME)");
 		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(245, 245, 220));
+		btnHome.setBackground(new Color(0, 204, 51));
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -75,17 +81,17 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		contentPane.add(btnHome);
 		
 		btnBestSellers = new JButton("Estrella(BestSellers)");
-		btnBestSellers.setBackground(new Color(245, 245, 220));
+		btnBestSellers.setBackground(new Color(0, 204, 51));
 		btnBestSellers.setBounds(154, 407, 157, 61);
 		contentPane.add(btnBestSellers);
 		
 		btnUsuario = new JButton("Monigote(usuario)");
-		btnUsuario.setBackground(new Color(245, 222, 179));
+		btnUsuario.setBackground(new Color(0, 153, 51));
 		btnUsuario.setBounds(617, 407, 167, 61);
 		contentPane.add(btnUsuario);
 		
 		btnCompras = new JButton("Carrito(Compras)");
-		btnCompras.setBackground(new Color(245, 245, 220));
+		btnCompras.setBackground(new Color(0, 204, 51));
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -94,7 +100,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		contentPane.add(btnCompras);
 		
 		btnBuscar = new JButton("Lupa(buscar)");
-		btnBuscar.setBackground(new Color(245, 245, 220));
+		btnBuscar.setBackground(new Color(0, 204, 51));
 		btnBuscar.setBounds(309, 407, 156, 61);
 		contentPane.add(btnBuscar);
 		LocalDate calendario = LocalDate.now();
@@ -109,6 +115,14 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		lblCompras.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
 		lblCompras.setBounds(20, 22, 234, 27);
 		contentPane.add(lblCompras);
+		
+		listaComprasRealizadas = new JList();
+		listaComprasRealizadas.setBounds(49, 108, 667, 263);
+		contentPane.add(listaComprasRealizadas);
+		modeloLista = new DefaultListModel();
+		listaComprasRealizadas.setModel(modeloLista);
+		
+		
 		
 	}
 

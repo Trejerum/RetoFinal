@@ -73,10 +73,11 @@ public class BestSellersUser extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public BestSellersUser() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 550);
+		setBounds(100, 100, 791, 540);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(245, 222, 179));
+		contentPane.setBackground(new Color(0, 153, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -87,7 +88,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		
 		btnHome = new JButton("Casa(HOME)");
 		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(245, 245, 220));
+		btnHome.setBackground(new Color(0, 204, 51));
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -96,17 +97,17 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		contentPane.add(btnHome);
 		
 		btnBestSellers = new JButton("Estrella(BestSellers)");
-		btnBestSellers.setBackground(new Color(245, 222, 179));
+		btnBestSellers.setBackground(new Color(0, 153, 51));
 		btnBestSellers.setBounds(154, 451, 157, 61);
 		contentPane.add(btnBestSellers);
 		
 		btnUsuario = new JButton("Monigote(usuario)");
-		btnUsuario.setBackground(new Color(245, 245, 220));
+		btnUsuario.setBackground(new Color(0, 204, 51));
 		btnUsuario.setBounds(617, 451, 167, 61);
 		contentPane.add(btnUsuario);
 		
 		btnCompras = new JButton("Carrito(Compras)");
-		btnCompras.setBackground(new Color(245, 245, 220));
+		btnCompras.setBackground(new Color(0, 204, 51));
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -115,7 +116,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		contentPane.add(btnCompras);
 		
 		btnBuscar = new JButton("Lupa(buscar)");
-		btnBuscar.setBackground(new Color(245, 245, 220));
+		btnBuscar.setBackground(new Color(0, 204, 51));
 		btnBuscar.setBounds(309, 451, 156, 61);
 		contentPane.add(btnBuscar);
 		
@@ -125,10 +126,10 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		contentPane.add(lblBestSellers);
 		
 		tfDate = new JTextField();
-		tfDate.setForeground(Color.RED);
+		tfDate.setForeground(new Color(0, 0, 153));
 		tfDate.setFont(new Font("Malgun Gothic", Font.PLAIN, 24));
 		tfDate.setEditable(false);
-		tfDate.setBackground(new Color(245, 222, 179));
+		tfDate.setBackground(new Color(0, 153, 51));
 		tfDate.setBounds(389, 65, 135, 27);
 		contentPane.add(tfDate);
 		tfDate.setColumns(10);
