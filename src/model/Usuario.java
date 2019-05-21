@@ -15,13 +15,9 @@ public class Usuario {
 	protected String direccion;
 	protected int telefono;
 	protected String email;
-	protected boolean esAdmin;
+	protected boolean esAdmin = false;
 	protected String contraseña;
 	
-	//Constructors
-	public Usuario() {
-		super();
-	}
 	/**
 	 * 
 	 * @param nombreUsuario : Sirve para diferenciar a cada usuario y es único.
@@ -33,6 +29,7 @@ public class Usuario {
 	 * @param esAdmin : Para saber si es un usuario administrador o no.
 	 * @param contraseña : Sirve para iniciar sesion con su nombre de usuario.
 	 */
+	//Constructors
 	public Usuario(String nombreUsuario, String nombre, String apellidos, String direccion, int telefono, String email,
 			boolean esAdmin, String contraseña) {
 		super();
@@ -44,6 +41,9 @@ public class Usuario {
 		this.email = email;
 		this.esAdmin = esAdmin;
 		this.contraseña = contraseña;
+	}
+	public Usuario() {
+		super();
 	}
 	
 	/**
