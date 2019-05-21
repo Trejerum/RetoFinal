@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+
 public class DataAccessImpl implements DataAccess{
 
 	private Connection con;
@@ -49,7 +50,6 @@ public class DataAccessImpl implements DataAccess{
 
 	public boolean validarUsuario(String nUsuario, String contraseña) throws Exception {
 		boolean validado = false;
-		
 		try {
 			this.connect();
 			String sql = "select contraseña from usuarios where nombreUsuario=?";

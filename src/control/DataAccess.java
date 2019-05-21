@@ -21,4 +21,5 @@ public interface DataAccess {
 	public void modificarLibro(String isbn) throws Exception;
 	
 	public void consultarCompras(String nUsuario) throws Exception;
+
 }
