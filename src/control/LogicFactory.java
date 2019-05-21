@@ -2,7 +2,12 @@ package control;
 
 public class LogicFactory {
 
+	private static Logic logicI;
+	
 	public static Logic getLogic(){
-		return new LogicImpl();
+		if(logicI==null) {
+			logicI=new LogicImpl();
+		}
+		return logicI;
 	}
 }

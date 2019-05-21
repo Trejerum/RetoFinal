@@ -9,8 +9,8 @@ public class LogicImpl implements Logic{
 
 	public boolean validarUsuario(String nUsuario, String contraseña) throws Exception {
 			boolean validado = false;
-			
-		return false;
+			validado=dataAccess.validarUsuario(nUsuario, contraseña);
+		return validado;
 	}
 
 
