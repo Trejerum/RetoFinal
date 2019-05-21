@@ -2,6 +2,8 @@ package control;
 
 import java.util.ArrayList;
 
+import model.Usuario;
+
 public class LogicImpl implements Logic{
 
 	private DataAccess dataAccess = DataAccessFactory.getDataAccess();
@@ -15,7 +17,7 @@ public class LogicImpl implements Logic{
 
 
 	@Override
-	public void registrarUsuario() throws Exception {
+	public void registrarUsuario(Usuario usuario) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
@@ -67,6 +69,11 @@ public class LogicImpl implements Logic{
 	public void consultarCompras(String nUsuario) throws Exception {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public boolean comprobarNUsuario(String nUsuario) throws Exception {
+		Boolean repetido = dataAccess.comprobarNUsuario(nUsuario);
+		return repetido;
 	}
 	
 }

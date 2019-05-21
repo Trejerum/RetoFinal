@@ -121,7 +121,7 @@ public class Login extends JFrame implements ActionListener{
 	
 	public void validarUsuario() {
 		String nUsuario=tfNombreUsurio.getText();
-		String contraseña=pfContraseña.getText();
+		String contraseña=new String(pfContraseña.getPassword());
 		Logic logic = LogicFactory.getLogic();
 		try {
 			boolean validado=logic.validarUsuario(nUsuario, contraseña);
