@@ -13,7 +13,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 
-public class PerfilUser extends JFrame {
+public class PerfilUser extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -46,6 +46,7 @@ public class PerfilUser extends JFrame {
 	private JLabel lblNumeroDeCuenta;
 	private JLabel lblContraseña;
 	private JButton btnEditar;
+	private JButton btnVerComprasRealizadas;
 
 	/**
 	 * Launch the application.
@@ -144,7 +145,7 @@ public class PerfilUser extends JFrame {
 		btnGuardar.setEnabled(false);
 		btnGuardar.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnGuardar.setForeground(new Color(0, 0, 255));
-		btnGuardar.setBounds(417, 187, 167, 31);
+		btnGuardar.setBounds(417, 184, 167, 34);
 		contentPane.add(btnGuardar);
 		
 		tfNCuenta = new JTextField();
@@ -238,9 +239,22 @@ public class PerfilUser extends JFrame {
 		btnEditar.setBounds(418, 98, 167, 73);
 		contentPane.add(btnEditar);
 		
+		btnVerComprasRealizadas = new JButton("Ver compras realizadas");
+		btnVerComprasRealizadas.setForeground(Color.BLUE);
+		btnVerComprasRealizadas.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		btnVerComprasRealizadas.setEnabled(false);
+		btnVerComprasRealizadas.setBounds(417, 229, 167, 23);
+		contentPane.add(btnVerComprasRealizadas);
 		
 		
 		
+		
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }

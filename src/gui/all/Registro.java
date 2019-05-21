@@ -6,6 +6,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -13,7 +15,7 @@ import javax.swing.JSeparator;
 import javax.swing.JPasswordField;
 import javax.swing.UIManager;
 
-public class Registro extends JFrame {
+public class Registro extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -151,5 +153,11 @@ public class Registro extends JFrame {
 		lblRegistro.setFont(new Font("Tahoma", Font.BOLD, 14));
 		lblRegistro.setBounds(38, 113, 80, 23);
 		contentPane.add(lblRegistro);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

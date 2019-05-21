@@ -16,7 +16,7 @@ import java.awt.TextField;
 
 import javax.swing.JTextField;
 
-public class InicioUser extends JFrame {
+public class InicioUser extends JFrame implements ActionListener{
 
 	/**
 	 * 
@@ -134,6 +134,12 @@ public class InicioUser extends JFrame {
 		LocalDate calendario = LocalDate.now();
 		TextField texto = new TextField(calendario.toString());
 		String fecha = texto.getText();
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 }
