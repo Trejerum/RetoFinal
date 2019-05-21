@@ -3,6 +3,7 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
 import java.awt.Color;
@@ -17,6 +18,10 @@ import java.awt.TextField;
 import javax.swing.JTextField;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
+import utilidadesTabla.encabezadoTabla;
+
 import javax.swing.UIManager;
 import javax.swing.ListSelectionModel;
 
@@ -86,7 +91,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		contentPane.add(btnHome);
 		
 		btnBestSellers = new JButton("Estrella(BestSellers)");
-		btnBestSellers.setBackground(new Color(0, 153, 51));
+		btnBestSellers.setBackground(new Color(0, 204, 51));
 		btnBestSellers.setBounds(154, 407, 157, 61);
 		contentPane.add(btnBestSellers);
 		
@@ -105,7 +110,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		contentPane.add(btnCompras);
 		
 		btnBuscar = new JButton("Lupa(buscar)");
-		btnBuscar.setBackground(new Color(0, 204, 51));
+		btnBuscar.setBackground(new Color(0, 153, 51));
 		btnBuscar.setBounds(309, 407, 156, 61);
 		contentPane.add(btnBuscar);
 		
@@ -139,23 +144,34 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		btnRecomendados.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		btnRecomendados.setBounds(588, 79, 167, 23);
 		contentPane.add(btnRecomendados);
+		//TABLA BUSQUEDA
+		Object[][] data = {
+			    {"Kathy", "Smith",
+			     "Snowboarding", new Integer(5), new Boolean(false)},
+			    {"John", "Doe",
+			     "Rowing", new Integer(3), new Boolean(true)},
+			    {"Sue", "Black",
+			     "Knitting", new Integer(2), new Boolean(false)},
+			    {"Jane", "White",
+			     "Speed reading", new Integer(20), new Boolean(true)},
+			    {"Joe", "Brown",
+			     "Pool", new Integer(10), new Boolean(false)}
+			};
+		String[] columnames= {
+				"ISBN", "Titulo", "Editorial", "Precio"
+			  };
 		
-		tablaBusqueda = new JTable();
+		tablaBusqueda = new JTable(data, columnames);
 		tablaBusqueda.setBorder(new EmptyBorder(2, 2, 4, 4));
 		tablaBusqueda.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tablaBusqueda.setForeground(new Color(0, 0, 0));
-		tablaBusqueda.setToolTipText("\r\n");
-		tablaBusqueda.setModel(new DefaultTableModel(
-			new Object[][] {
-				{"", "", "", ""},
-				{null, null, null, null},
-			},
-			new String[] {
-				"ISBN", "Titulo", "Editorial", "Precio"
-			}
-		));
+		tablaBusqueda.setToolTipText("\r\n");	
 		tablaBusqueda.setBounds(23, 143, 565, 211);
 		contentPane.add(tablaBusqueda);
+		JTableHeader jtableheader = tablaBusqueda.getTableHeader();
+		jtableheader.setDefaultRenderer(new encabezadoTabla());
+		tablaBusqueda.setTableHeader(jtableheader);
+		
 		
 		btnComprar = new JButton("Comprar\r\n");
 		btnComprar.addActionListener(new ActionListener() {
