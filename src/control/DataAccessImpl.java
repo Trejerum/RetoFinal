@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
 public class DataAccessImpl implements DataAccess{
@@ -43,5 +44,58 @@ public class DataAccessImpl implements DataAccess{
 			stmt.close();
 		if (con != null)
 			con.close();
+	}
+
+	public boolean validarUsuario(String nUsuario, String contraseña) throws Exception {
+		
+		return false;
+	}
+
+	@Override
+	public void registrarUsuario() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void listarBestsellers() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void insertarLibro() throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void comprarLibro(ArrayList<String> carrito, String nUsuario) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void verRecomendados(String nUsuario) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void buscarLibro(String busqueda) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void modificarLibro(String isbn) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void consultarCompras(String nUsuario) throws Exception {
+		// TODO Auto-generated method stub
+		
 	}
 }
