@@ -2,11 +2,13 @@ package control;
 
 import java.util.ArrayList;
 
+import model.Usuario;
+
 public interface Logic {
 
 	public boolean validarUsuario(String nUsuario, String contraseña) throws Exception;
 	
-	public void registrarUsuario() throws Exception;
+	public void registrarUsuario(Usuario usuario) throws Exception;
 	
 	public void listarBestsellers() throws Exception;
 	
@@ -21,5 +23,7 @@ public interface Logic {
 	public void modificarLibro(String isbn) throws Exception;
 	
 	public void consultarCompras(String nUsuario) throws Exception;
+	
+	public boolean comprobarNUsuario(String nUsuario) throws Exception;
 
 }

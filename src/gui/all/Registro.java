@@ -7,7 +7,7 @@ import javax.swing.border.EmptyBorder;
 
 import control.Logic;
 import control.LogicFactory;
-import gui.user.InicioUser;
+import model.Usuario;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -174,44 +174,61 @@ public class Registro extends JFrame implements ActionListener{
 		pfConfirmar = new JPasswordField();
 		pfConfirmar.setBounds(38, 486, 272, 20);
 		contentPane.add(pfConfirmar);
+		
+		btnRegistrarme.addActionListener(this);
+		btnVolver.addActionListener(this);
 	}
 
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnRegistrarme) {
-			
+			registrarUsuario();
 		}
 		else {
-			
+			volverAtras();
 		}
 	}
 	
 	public void registrarUsuario() {
-		if(pfContraseña.getText().equalsIgnoreCase(pfConfirmar.getText())) {
-			
+		String message;
+		String contraseña = new String(pfContraseña.getPassword());
+		String confirmacion = new String(pfConfirmar.getPassword());
+		if(contraseña.equalsIgnoreCase(confirmacion)&&contraseña!=null) {
+			Usuario usuario = new Usuario();
+			usuario.setNombre(tfNombre.getText());
+			usuario.setApellidos(tfApellido.getText());
+			usuario.setDireccion(tfDireccion.getText());
+			usuario.setEmail(tfEmail.getText());
+			usuario.setTelefono(Integer.parseInt(tfTelefono.getText()));
+			usuario.setNombreUsuario(tfNombreUsuario.getText());
+			usuario.setContraseña(new String(pfContraseña.getPassword()));
+			Logic logic = LogicFactory.getLogic();
+			try {
+				Boolean repetido = logic.comprobarNUsuario(usuario.getNombreUsuario());
+				if(repetido) {
+					message="ERROR. El nombre de usuario ya esta en uso";
+					JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				else {
+					logic.registrarUsuario(usuario);
+				}
+			} catch (Exception ex) {
+				message="Error";
+				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+				ex.printStackTrace();
+				this.dispose();
+				System.exit(0);
+			}
 		}
 		else {
-			JOptionPane.showMessageDialog(this, "ERROR. Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
-		}
-		
-		/*Logic logic = LogicFactory.getLogic();
-		try {
-			boolean validado=logic.validarUsuario(nUsuario, contraseña);
-			if(validado==true) {
-				InicioUser inicio = new InicioUser();
-				inicio.setVisible(true);
-				this.dispose();
-			}
-			else {
-				String message="Error. Nombre de usuario o contraseña incorrecto";
-				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-			}
-		} catch (Exception ex) {
-			String message="Error. No se ha podido validar el usuario";
+			message="ERROR. Las contraseñas no coinciden";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-			ex.printStackTrace();
-			this.dispose();
-			System.exit(0);
-		}*/
+		}
+	}
+	
+	public void volverAtras() {
+		Login login = new Login();
+		login.setVisible(true);
+		this.dispose();
 	}
 }

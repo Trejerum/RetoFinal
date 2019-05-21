@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import model.Usuario;
+
 
 public class DataAccessImpl implements DataAccess{
 
@@ -48,7 +50,7 @@ public class DataAccessImpl implements DataAccess{
 			con.close();
 	}
 
-	public boolean validarUsuario(String nUsuario, String contraseña) throws Exception {
+	public boolean validarUsuario(String nUsuario, String contraseña) throws ClassNotFoundException, SQLException, IOException {
 		boolean validado = false;
 		try {
 			this.connect();
@@ -68,43 +70,83 @@ public class DataAccessImpl implements DataAccess{
 		return validado;
 	}
 	
-	public void registrarUsuario() throws Exception {
-		
+	public void registrarUsuario(Usuario usuario) throws ClassNotFoundException, SQLException, IOException{
+		try {
+			this.connect();
+			String sql = "INSERT INTO usuario ('nombreUsuario', 'contraseña', 'esAdmin') VALUES (?, ?, ?)";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, usuario.getNombreUsuario());
+			stmt.setString(2, usuario.getContraseña());
+			stmt.setBoolean(3, usuario.isEsAdmin());
+			stmt.executeUpdate();
+			
+			sql = "INSERT INTO uconvencional ('nombreUsuario', 'nombre', 'apellidos', 'direccion', 'telefono', 'email') VALUES (?, ?, ?, ?, ?, ?)";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, usuario.getNombreUsuario());
+			stmt.setString(2, usuario.getNombre());
+			stmt.setString(3, usuario.getApellidos());
+			stmt.setString(4, usuario.getDireccion());
+			stmt.setInt(5, usuario.getTelefono());
+			stmt.setString(6, usuario.getEmail());
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
 		
 	}
 
-	public void listarBestsellers() throws Exception {
+	public void listarBestsellers() throws ClassNotFoundException, SQLException, IOException{
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void insertarLibro() throws Exception {
+	public void insertarLibro() throws SQLException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void comprarLibro(ArrayList<String> carrito, String nUsuario) throws Exception {
+	public void comprarLibro(ArrayList<String> carrito, String nUsuario) throws SQLException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void verRecomendados(String nUsuario) throws Exception {
+	public void verRecomendados(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void buscarLibro(String busqueda) throws Exception {
+	public void buscarLibro(String busqueda) throws SQLException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void modificarLibro(String isbn) throws Exception {
+	public void modificarLibro(String isbn) throws SQLException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		
 	}
 
-	public void consultarCompras(String nUsuario) throws Exception {
+	public void consultarCompras(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public boolean comprobarNUsuario(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+		Boolean repetido = false;
+		try {
+			this.connect();
+			String sql = "select nombreUsuario from usuarios where nombreUsuario=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, nUsuario);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				String nombreU = result.getString("nombreUsuario");
+				if(nombreU.equalsIgnoreCase(nUsuario)) {
+					repetido=true;
+				}
+			}
+		}finally {
+			this.disconnect();
+		}
+		return repetido;
 	}
 }
