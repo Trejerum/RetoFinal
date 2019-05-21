@@ -10,6 +10,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import model.Autor;
+import model.Genero;
 import model.Usuario;
 
 
@@ -70,17 +72,25 @@ public class DataAccessImpl implements DataAccess{
 		return validado;
 	}
 	
-	public void registrarUsuario(Usuario usuario) throws ClassNotFoundException, SQLException, IOException{
+	public void registrarUsuario1(Usuario usuario) throws ClassNotFoundException, SQLException, IOException{
 		try {
 			this.connect();
-			String sql = "INSERT INTO usuario ('nombreUsuario', 'contraseña', 'esAdmin') VALUES (?, ?, ?)";
+			String sql = "INSERT INTO usuarios VALUES (?, ?, ?)";
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, usuario.getNombreUsuario());
 			stmt.setString(2, usuario.getContraseña());
 			stmt.setBoolean(3, usuario.isEsAdmin());
 			stmt.executeUpdate();
-			
-			sql = "INSERT INTO uconvencional ('nombreUsuario', 'nombre', 'apellidos', 'direccion', 'telefono', 'email') VALUES (?, ?, ?, ?, ?, ?)";
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+	
+	public void registrarUsuario2(Usuario usuario) throws ClassNotFoundException, SQLException, IOException{
+		try {
+			this.connect();
+			String sql = "INSERT INTO uconvencional VALUES (?, ?, ?, ?, ?, ?)";
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, usuario.getNombreUsuario());
 			stmt.setString(2, usuario.getNombre());
@@ -149,4 +159,43 @@ public class DataAccessImpl implements DataAccess{
 		}
 		return repetido;
 	}
+
+	public ArrayList<Genero> cargarGeneros() throws SQLException, ClassNotFoundException, IOException {
+		ArrayList<Genero> generos = new ArrayList<Genero>();
+		try {
+			this.connect();
+			String sql = "select * from generos";
+			stmt = con.prepareStatement(sql);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				Genero genero = new Genero();
+				genero.setCodGenero(result.getString("codGen"));
+				genero.setNomGenero(result.getString("nombreGen"));
+				generos.add(genero);
+			}
+		}finally {
+			this.disconnect();
+		}
+		return generos;
+	}
+
+	public ArrayList<Autor> cargarAutores() throws SQLException, ClassNotFoundException, IOException {
+		ArrayList<Autor> autores = new ArrayList<Autor>();
+		try {
+			this.connect();
+			String sql = "select * from autores";
+			stmt = con.prepareStatement(sql);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				Autor autor = new Autor();
+				autor.setCodAutor(result.getString("codAutor"));
+				autor.setNomAutor(result.getString("nombreAutor"));
+				autores.add(autor);
+			}
+		}finally {
+			this.disconnect();
+		}
+		return autores;
+	}
+
 }

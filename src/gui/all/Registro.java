@@ -7,6 +7,8 @@ import javax.swing.border.EmptyBorder;
 
 import control.Logic;
 import control.LogicFactory;
+import model.Autor;
+import model.Genero;
 import model.Usuario;
 
 import javax.swing.JLabel;
@@ -15,12 +17,15 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.Color;
 import javax.swing.JTextField;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JPasswordField;
 import javax.swing.UIManager;
+import javax.swing.JList;
 
 public class Registro extends JFrame implements ActionListener{
 
@@ -49,6 +54,12 @@ public class Registro extends JFrame implements ActionListener{
 	private JLabel lblRegistro;
 	private JButton btnVolver;
 	private JPasswordField pfConfirmar;
+	private JList<String> listaGeneros;
+	private JList<String> listaAutores;
+	private JLabel lblAutores;
+	private JLabel lblGeneros;
+	private ArrayList<Genero> generos;
+	private ArrayList<Autor> autores;
 
 	/**
 	 * Launch the application.
@@ -71,7 +82,7 @@ public class Registro extends JFrame implements ActionListener{
 	 */
 	public Registro() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 363, 682);
+		setBounds(100, 100, 629, 682);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -175,6 +186,27 @@ public class Registro extends JFrame implements ActionListener{
 		pfConfirmar.setBounds(38, 486, 272, 20);
 		contentPane.add(pfConfirmar);
 		
+		JLabel lblGustos = new JLabel("Gustos");
+		lblGustos.setFont(new Font("Tahoma", Font.BOLD, 14));
+		lblGustos.setBounds(434, 99, 59, 14);
+		contentPane.add(lblGustos);
+		
+		lblAutores = new JLabel("Autores");
+		lblAutores.setBounds(434, 351, 46, 14);
+		contentPane.add(lblAutores);
+		
+		lblGeneros = new JLabel("Generos");
+		lblGeneros.setBounds(434, 160, 52, 14);
+		contentPane.add(lblGeneros);
+		
+		cargarGenerosAutores();
+		
+		listaGeneros.setBounds(402, 176, 130, 127);
+		contentPane.add(listaGeneros);
+		
+		listaAutores.setBounds(402, 366, 130, 143);
+		contentPane.add(listaAutores);
+		
 		btnRegistrarme.addActionListener(this);
 		btnVolver.addActionListener(this);
 	}
@@ -186,6 +218,43 @@ public class Registro extends JFrame implements ActionListener{
 		}
 		else {
 			volverAtras();
+		}
+	}
+	
+	public void cargarGenerosAutores() {
+		try {
+			Logic logic = LogicFactory.getLogic();
+			generos = new ArrayList<Genero>();
+			autores = new ArrayList<Autor>();
+			generos=logic.cargarGeneros();
+			autores=logic.cargarAutores();
+			ArrayList<String> generosStr = new ArrayList<String>();
+			ArrayList<String> autoresStr = new ArrayList<String>();
+			for (Genero genero : generos) {
+				generosStr.add(genero.getNomGenero());
+			}
+			for (Autor autor : autores) {
+				generosStr.add(autor.getNomAutor());
+			}
+			
+			DefaultListModel<String> modeloGen = new DefaultListModel<String>();
+			for(String s:generosStr) {
+				modeloGen.addElement(s);
+			}
+			DefaultListModel<String> modeloAut = new DefaultListModel<String>();
+			for(String s:autoresStr) {
+				modeloAut.addElement(s);
+			}
+			
+			listaAutores = new JList<String>(modeloAut);
+			listaGeneros = new JList<String>(modeloGen);
+			
+		}catch(Exception e) {
+			String message="Error. No se han podido cargar los generos y autores";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			this.dispose();
+			System.exit(0);
 		}
 	}
 	
@@ -210,7 +279,10 @@ public class Registro extends JFrame implements ActionListener{
 					JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 				}
 				else {
+					message="Se ha registrado correctamente";
 					logic.registrarUsuario(usuario);
+					JOptionPane.showMessageDialog(this, message, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+					
 				}
 			} catch (Exception ex) {
 				message="Error";

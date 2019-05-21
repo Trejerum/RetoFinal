@@ -2,6 +2,8 @@ package control;
 
 import java.util.ArrayList;
 
+import model.Autor;
+import model.Genero;
 import model.Usuario;
 
 public class LogicImpl implements Logic{
@@ -18,8 +20,8 @@ public class LogicImpl implements Logic{
 
 	@Override
 	public void registrarUsuario(Usuario usuario) throws Exception {
-		// TODO Auto-generated method stub
-		
+		dataAccess.registrarUsuario1(usuario);
+		dataAccess.registrarUsuario2(usuario);
 	}
 
 
@@ -75,5 +77,16 @@ public class LogicImpl implements Logic{
 		Boolean repetido = dataAccess.comprobarNUsuario(nUsuario);
 		return repetido;
 	}
+
+	public ArrayList<Genero> cargarGeneros() throws Exception {
+		ArrayList<Genero> generos = dataAccess.cargarGeneros();
+		return generos;
+	}
+
+	public ArrayList<Autor> cargarAutores() throws Exception {
+		ArrayList<Autor> autores = dataAccess.cargarAutores();
+		return autores;
+	}
+
 	
 }

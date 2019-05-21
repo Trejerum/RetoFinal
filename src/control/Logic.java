@@ -2,6 +2,8 @@ package control;
 
 import java.util.ArrayList;
 
+import model.Autor;
+import model.Genero;
 import model.Usuario;
 
 public interface Logic {
@@ -25,5 +27,9 @@ public interface Logic {
 	public void consultarCompras(String nUsuario) throws Exception;
 	
 	public boolean comprobarNUsuario(String nUsuario) throws Exception;
+	
+	public ArrayList<Genero> cargarGeneros() throws Exception;
+	
+	public ArrayList<Autor> cargarAutores() throws Exception;
 
 }
