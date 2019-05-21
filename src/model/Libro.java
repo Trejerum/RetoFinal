@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * La clase Libro contiene diferentes atributos en relación a los libros.
- * @author grupoB
+ * @author equipo B
  *
  */
 public class Libro {
@@ -26,15 +26,15 @@ public class Libro {
 	// Constructors
 	/**
 	 * 
-	 * @param isbn = El ISBN diferencia cada libro de los demás al ser cada ISBN único.
-	 * @param titulo = El título es el nombre que recibe un libro 
-	 * @param descripcion = Breve explicación sobre el libro
-	 * @param editorial = Editorial que ha producido el libro
-	 * @param fechaPublicacion = Fecha en la que se publicó un libro
-	 * @param precio = Precio establecido para un libro
-	 * @param oferta = Indica si un libro tiene oferta o no 
-	 * @param descuento = En caso de haber oferta, el atributo descuento contiene el porcentaje de reducción de precio de un libro.
-	 * @param stock = Indica el número de existencias de un libro en la librería
+	 * @param isbn : El ISBN diferencia cada libro de los demás al ser cada ISBN único.
+	 * @param titulo : El título es el nombre que recibe un libro 
+	 * @param descripcion : Breve explicación sobre el libro
+	 * @param editorial : Editorial que ha producido el libro
+	 * @param fechaPublicacion : Fecha en la que se publicó un libro
+	 * @param precio : Precio establecido para un libro
+	 * @param oferta : Indica si un libro tiene oferta o no 
+	 * @param descuento : En caso de haber oferta, el atributo descuento contiene el porcentaje de reducción de precio de un libro.
+	 * @param stock : Indica el número de existencias de un libro en la librería
 	 */
 	public Libro(String isbn, String titulo, String descripcion, String editorial, LocalDate fechaPublicacion,
 			double precio, boolean oferta, double descuento, int stock) {

@@ -1,7 +1,7 @@
 package model;
 
 /**
- * La clase usuarios va a registrar todos los usuarios de la libreria
+ * La clase usuarios va a registrar todos los usuarios de la librería.
  * @author grupoB
  *
  */
@@ -15,24 +15,21 @@ public class Usuario {
 	protected String direccion;
 	protected int telefono;
 	protected String email;
-	protected boolean esAdmin;
+	protected boolean esAdmin = false;
 	protected String contraseña;
 	
-	//Constructors
-	public Usuario() {
-		super();
-	}
 	/**
 	 * 
-	 * @param nombreUsuario Sirve para diferenciar a cada usuario
-	 * @param nombre Para saber el nombre de la persona
-	 * @param apellidos Para saber el apellido de la persona
-	 * @param direccion Sirve para poder enviarle el libro a su direccion, despues de realizar la compra
-	 * @param telefono Para poder contactar con el usuario
-	 * @param email Para enviarle ofertas de sus libros favoritos
-	 * @param esAdmin Para saber si es un usuario administrador o no
-	 * @param contraseña Sirve para iniciar sesion con su nombre de usuario
+	 * @param nombreUsuario : Sirve para diferenciar a cada usuario y es único.
+	 * @param nombre : Para saber el nombre de la persona.
+	 * @param apellidos : Para saber el apellido de la persona.
+	 * @param direccion : Sirve para poder enviarle el libro a su direccion, despues de realizar la compra.
+	 * @param telefono : Para poder contactar con el usuario.
+	 * @param email : Para enviarle ofertas de sus libros favoritos.
+	 * @param esAdmin : Para saber si es un usuario administrador o no.
+	 * @param contraseña : Sirve para iniciar sesion con su nombre de usuario.
 	 */
+	//Constructors
 	public Usuario(String nombreUsuario, String nombre, String apellidos, String direccion, int telefono, String email,
 			boolean esAdmin, String contraseña) {
 		super();
@@ -44,6 +41,9 @@ public class Usuario {
 		this.email = email;
 		this.esAdmin = esAdmin;
 		this.contraseña = contraseña;
+	}
+	public Usuario() {
+		super();
 	}
 	
 	/**
