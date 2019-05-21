@@ -6,7 +6,7 @@ package model;
  *
  */
 
-public class Usuarios {
+public class Usuario {
 	
 	
 	protected String nombreUsuario;
@@ -19,7 +19,7 @@ public class Usuarios {
 	protected String contraseña;
 	
 	//Constructors
-	public Usuarios() {
+	public Usuario() {
 		super();
 	}
 	/**
@@ -33,7 +33,7 @@ public class Usuarios {
 	 * @param esAdmin Para saber si es un usuario administrador o no
 	 * @param contraseña Sirve para iniciar sesion con su nombre de usuario
 	 */
-	public Usuarios(String nombreUsuario, String nombre, String apellidos, String direccion, int telefono, String email,
+	public Usuario(String nombreUsuario, String nombre, String apellidos, String direccion, int telefono, String email,
 			boolean esAdmin, String contraseña) {
 		super();
 		this.nombreUsuario = nombreUsuario;
