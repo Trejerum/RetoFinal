@@ -221,13 +221,13 @@ public class AnadirLibro extends JFrame {
 		label.setBounds(255, 279, 74, 14);
 		contentPane.add(label);
 		
-		JLabel lblNewLabel = new JLabel("Pulse para poder a\u00F1adir un autor m\u00E1s.");
-		lblNewLabel.setBounds(161, 199, 247, 14);
-		contentPane.add(lblNewLabel);
+		JLabel lblMasAutores = new JLabel("Pulse para poder a\u00F1adir un autor m\u00E1s.");
+		lblMasAutores.setBounds(161, 199, 247, 14);
+		contentPane.add(lblMasAutores);
 		
-		JComboBox comboBox = new JComboBox();
-		comboBox.setBounds(161, 419, 130, 14);
-		contentPane.add(comboBox);
+		JComboBox cbGeneros = new JComboBox();
+		cbGeneros.setBounds(161, 419, 130, 14);
+		contentPane.add(cbGeneros);
 		
 		
 		

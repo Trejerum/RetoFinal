@@ -15,26 +15,27 @@ import java.awt.Font;
 import java.awt.TextField;
 
 import javax.swing.JTextField;
+import javax.swing.JComboBox;
 
-public class BusquedaUser extends JFrame {
+public class ConfirmarCompra extends JFrame {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -9196680677816620968L;
 	private JPanel contentPane;
-	private JTextField tfBusqueda;
 	private JSeparator menu_separator;
 	private JButton btnHome;
 	private JButton btnBestSellers;
 	private JButton btnUsuario;
 	private JButton btnCompras;
 	private JButton btnBuscar;
-	private JLabel lblBuscar;
+	private JLabel lblConfirmarCompra;
 	private JSeparator separator;
-	private JButton btnBuscarLupa;
-	private JLabel lblResultados;
-	private JButton btnRecomendados;
+	private JButton btnCancelar;
+	private JLabel lblLibrosCarrito;
+	private JButton btnConfirmar;
+	private JLabel lblInfoLibro;
 
 	/**
 	 * Launch the application.
@@ -43,7 +44,7 @@ public class BusquedaUser extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BusquedaUser frame = new BusquedaUser();
+					ConfirmarCompra frame = new ConfirmarCompra();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -55,7 +56,7 @@ public class BusquedaUser extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public BusquedaUser() {
+	public ConfirmarCompra() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 505);
 		contentPane = new JPanel();
@@ -84,7 +85,7 @@ public class BusquedaUser extends JFrame {
 		contentPane.add(btnBestSellers);
 		
 		btnUsuario = new JButton("Monigote(usuario)");
-		btnUsuario.setBackground(new Color(245, 245, 220));
+		btnUsuario.setBackground(new Color(245, 222, 179));
 		btnUsuario.setBounds(617, 407, 167, 61);
 		contentPane.add(btnUsuario);
 		
@@ -98,14 +99,14 @@ public class BusquedaUser extends JFrame {
 		contentPane.add(btnCompras);
 		
 		btnBuscar = new JButton("Lupa(buscar)");
-		btnBuscar.setBackground(new Color(245, 222, 179));
+		btnBuscar.setBackground(new Color(245, 245, 220));
 		btnBuscar.setBounds(309, 407, 156, 61);
 		contentPane.add(btnBuscar);
 		
-		lblBuscar = new JLabel("Buscar:");
-		lblBuscar.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
-		lblBuscar.setBounds(10, 20, 89, 27);
-		contentPane.add(lblBuscar);
+		lblConfirmarCompra = new JLabel("Confirmar compra");
+		lblConfirmarCompra.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
+		lblConfirmarCompra.setBounds(10, 20, 349, 27);
+		contentPane.add(lblConfirmarCompra);
 		LocalDate calendario = LocalDate.now();
 		TextField texto = new TextField(calendario.toString());
 		String fecha = texto.getText();
@@ -114,24 +115,28 @@ public class BusquedaUser extends JFrame {
 		separator.setBounds(0, 60, 784, 2);
 		contentPane.add(separator);
 		
-		tfBusqueda = new JTextField();
-		tfBusqueda.setBounds(109, 22, 547, 27);
-		contentPane.add(tfBusqueda);
-		tfBusqueda.setColumns(10);
+		btnCancelar = new JButton("Cancelar");
+		btnCancelar.setBounds(518, 358, 89, 23);
+		contentPane.add(btnCancelar);
 		
-		btnBuscarLupa = new JButton("(Lupa)");
-		btnBuscarLupa.setBounds(666, 22, 89, 27);
-		contentPane.add(btnBuscarLupa);
+		lblLibrosCarrito = new JLabel("Libros en el carrito:");
+		lblLibrosCarrito.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		lblLibrosCarrito.setBounds(28, 73, 146, 27);
+		contentPane.add(lblLibrosCarrito);
 		
-		lblResultados = new JLabel("Resultados:");
-		lblResultados.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
-		lblResultados.setBounds(10, 73, 132, 27);
-		contentPane.add(lblResultados);
+		btnConfirmar = new JButton("Confirmar");
+		btnConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		btnConfirmar.setBounds(617, 358, 134, 23);
+		contentPane.add(btnConfirmar);
 		
-		btnRecomendados = new JButton("Ver recomendados");
-		btnRecomendados.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnRecomendados.setBounds(588, 79, 167, 23);
-		contentPane.add(btnRecomendados);
+		lblInfoLibro = new JLabel("ISBN / T\u00EDtulo / Editorial / Precio ");
+		lblInfoLibro.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblInfoLibro.setBounds(28, 123, 201, 14);
+		contentPane.add(lblInfoLibro);
+		
+		JComboBox cbUnidades = new JComboBox();
+		cbUnidades.setBounds(241, 122, 44, 15);
+		contentPane.add(cbUnidades);
 		
 	}
 }

@@ -18,7 +18,6 @@ public class InicioAdmin extends JFrame {
 	 */
 	private static final long serialVersionUID = -7415743493945038660L;
 	private JPanel contentPane;
-	private JTextField txtDiego;
 	private JLabel lblSesionIniciada;
 	private JButton btnEditarInfo;
 	private JLabel lblLibros;
@@ -49,7 +48,7 @@ public class InicioAdmin extends JFrame {
 	 */
 	public InicioAdmin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 351, 215);
+		setBounds(100, 100, 363, 215);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -60,16 +59,9 @@ public class InicioAdmin extends JFrame {
 		lblSesionIniciada.setBounds(10, 13, 142, 14);
 		contentPane.add(lblSesionIniciada);
 		
-		txtDiego = new JTextField();
-		txtDiego.setFont(new Font("Tahoma", Font.PLAIN, 13));
-		txtDiego.setText("Diego");
-		txtDiego.setBounds(152, 11, 42, 20);
-		contentPane.add(txtDiego);
-		txtDiego.setColumns(10);
-		
 		btnEditarInfo = new JButton("Editar Info.");
 		btnEditarInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnEditarInfo.setBounds(213, 12, 109, 21);
+		btnEditarInfo.setBounds(228, 10, 109, 21);
 		contentPane.add(btnEditarInfo);
 		
 		lblLibros = new JLabel("Libros");
@@ -83,22 +75,26 @@ public class InicioAdmin extends JFrame {
 		
 		btnBestSellers = new JButton("Best sellers");
 		btnBestSellers.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnBestSellers.setBounds(10, 112, 142, 23);
+		btnBestSellers.setBounds(10, 112, 149, 23);
 		contentPane.add(btnBestSellers);
 		
 		btnModificar = new JButton("Modificar");
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnModificar.setBounds(10, 146, 142, 23);
+		btnModificar.setBounds(10, 146, 149, 23);
 		contentPane.add(btnModificar);
 		
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnBuscar.setBounds(180, 112, 142, 23);
+		btnBuscar.setBounds(184, 112, 153, 23);
 		contentPane.add(btnBuscar);
 		
 		btnAñadir = new JButton("A\u00F1adir");
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAñadir.setBounds(180, 148, 142, 23);
+		btnAñadir.setBounds(184, 146, 153, 23);
 		contentPane.add(btnAñadir);
+		
+		JLabel lblDiego = new JLabel("Diego");
+		lblDiego.setBounds(156, 15, 55, 12);
+		contentPane.add(lblDiego);
 	}
 }

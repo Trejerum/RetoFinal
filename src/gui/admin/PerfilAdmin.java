@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
+import javax.swing.SwingConstants;
 
 public class PerfilAdmin extends JFrame {
 
@@ -156,6 +157,7 @@ public class PerfilAdmin extends JFrame {
 		contentPane.add(tfNombre);
 		
 		lblContrasea = new JLabel("Contrase\u00F1a: ");
+		lblContrasea.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblContrasea.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblContrasea.setBounds(65, 309, 79, 14);
 		contentPane.add(lblContrasea);
