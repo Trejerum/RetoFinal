@@ -15,6 +15,9 @@ import java.awt.Font;
 import java.awt.TextField;
 
 import javax.swing.JTextField;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.UIManager;
 
 public class BusquedaUser extends JFrame implements ActionListener{
 
@@ -35,6 +38,8 @@ public class BusquedaUser extends JFrame implements ActionListener{
 	private JButton btnBuscarLupa;
 	private JLabel lblResultados;
 	private JButton btnRecomendados;
+	private JTable tablaBusqueda;
+	private JButton btnComprar;
 
 	/**
 	 * Launch the application.
@@ -59,7 +64,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 505);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(245, 222, 179));
+		contentPane.setBackground(new Color(0, 153, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -70,7 +75,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		
 		btnHome = new JButton("Casa(HOME)");
 		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(245, 245, 220));
+		btnHome.setBackground(new Color(0, 204, 51));
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -79,17 +84,17 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		contentPane.add(btnHome);
 		
 		btnBestSellers = new JButton("Estrella(BestSellers)");
-		btnBestSellers.setBackground(new Color(245, 245, 220));
+		btnBestSellers.setBackground(new Color(0, 153, 51));
 		btnBestSellers.setBounds(154, 407, 157, 61);
 		contentPane.add(btnBestSellers);
 		
 		btnUsuario = new JButton("Monigote(usuario)");
-		btnUsuario.setBackground(new Color(245, 245, 220));
+		btnUsuario.setBackground(new Color(0, 204, 51));
 		btnUsuario.setBounds(617, 407, 167, 61);
 		contentPane.add(btnUsuario);
 		
 		btnCompras = new JButton("Carrito(Compras)");
-		btnCompras.setBackground(new Color(245, 245, 220));
+		btnCompras.setBackground(new Color(0, 204, 51));
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -98,7 +103,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		contentPane.add(btnCompras);
 		
 		btnBuscar = new JButton("Lupa(buscar)");
-		btnBuscar.setBackground(new Color(245, 222, 179));
+		btnBuscar.setBackground(new Color(0, 204, 51));
 		btnBuscar.setBounds(309, 407, 156, 61);
 		contentPane.add(btnBuscar);
 		
@@ -133,7 +138,37 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		btnRecomendados.setBounds(588, 79, 167, 23);
 		contentPane.add(btnRecomendados);
 		
+		tablaBusqueda = new JTable();
+		tablaBusqueda.setModel(new DefaultTableModel(
+			new Object[][] {
+				{"ISBN", "Titulo", "Editorial", "Precio"},
+				{null, null, null, null},
+			},
+			new String[] {
+				"ISBN", "Titulo", "Editorial", "Precio"
+			}
+		));
+		tablaBusqueda.setBounds(23, 143, 565, 211);
+		contentPane.add(tablaBusqueda);
+		
+		btnComprar = new JButton("Comprar\r\n");
+		btnComprar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		btnComprar.setBounds(641, 241, 105, 40);
+		contentPane.add(btnComprar);
+		
 	}
+	
+	/*public void busqueda(String texto) {
+		try {
+			String [] titulos= {"Isbn", "Titulo", "Editorial", "Precio"};
+			
+		}catch(Exception e) {
+			
+		}
+	}*/
 
 	@Override
 	public void actionPerformed(ActionEvent e) {

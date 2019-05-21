@@ -59,7 +59,7 @@ public class InicioUser extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 478);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(245, 222, 179));
+		contentPane.setBackground(new Color(0, 153, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -70,7 +70,7 @@ public class InicioUser extends JFrame implements ActionListener{
 		
 		btnHome = new JButton("Casa(HOME)");
 		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(245, 222, 179));
+		btnHome.setBackground(new Color(0, 153, 51));
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -79,17 +79,17 @@ public class InicioUser extends JFrame implements ActionListener{
 		contentPane.add(btnHome);
 		
 		btnBestSellers = new JButton("Estrella(BestSellers)");
-		btnBestSellers.setBackground(new Color(245, 245, 220));
+		btnBestSellers.setBackground(new Color(0, 204, 51));
 		btnBestSellers.setBounds(155, 378, 156, 61);
 		contentPane.add(btnBestSellers);
 		
 		btnUsuario = new JButton("Monigote(usuario)");
-		btnUsuario.setBackground(new Color(245, 245, 220));
+		btnUsuario.setBackground(new Color(0, 204, 51));
 		btnUsuario.setBounds(617, 378, 167, 61);
 		contentPane.add(btnUsuario);
 		
 		btnCompras = new JButton("Carrito(Compras)");
-		btnCompras.setBackground(new Color(245, 245, 220));
+		btnCompras.setBackground(new Color(0, 204, 51));
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -98,12 +98,12 @@ public class InicioUser extends JFrame implements ActionListener{
 		contentPane.add(btnCompras);
 		
 		btnBuscar = new JButton("Lupa(buscar)");
-		btnBuscar.setBackground(new Color(245, 245, 220));
+		btnBuscar.setBackground(new Color(0, 204, 51));
 		btnBuscar.setBounds(309, 378, 156, 61);
 		contentPane.add(btnBuscar);
 		
 		lblBienvenido = new JLabel("!!Bienvenid@ a la \r\nlibrer\u00EDa virtual!!");
-		lblBienvenido.setForeground(Color.RED);
+		lblBienvenido.setForeground(new Color(153, 0, 0));
 		lblBienvenido.setFont(new Font("Maiandra GD", Font.PLAIN, 40));
 		lblBienvenido.setBounds(85, 72, 590, 98);
 		contentPane.add(lblBienvenido);

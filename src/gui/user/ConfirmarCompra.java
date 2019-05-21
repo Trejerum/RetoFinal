@@ -16,6 +16,7 @@ import java.awt.TextField;
 
 import javax.swing.JTextField;
 import javax.swing.JComboBox;
+import javax.swing.JList;
 
 public class ConfirmarCompra extends JFrame implements ActionListener{
 
@@ -35,7 +36,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 	private JButton btnCancelar;
 	private JLabel lblLibrosCarrito;
 	private JButton btnConfirmar;
-	private JLabel lblInfoLibro;
+	private JList listaCarrito;
 
 	/**
 	 * Launch the application.
@@ -60,7 +61,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 505);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(245, 222, 179));
+		contentPane.setBackground(new Color(0, 153, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -71,7 +72,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 		
 		btnHome = new JButton("Casa(HOME)");
 		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(245, 245, 220));
+		btnHome.setBackground(new Color(0, 204, 51));
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -80,17 +81,17 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 		contentPane.add(btnHome);
 		
 		btnBestSellers = new JButton("Estrella(BestSellers)");
-		btnBestSellers.setBackground(new Color(245, 245, 220));
+		btnBestSellers.setBackground(new Color(0, 204, 51));
 		btnBestSellers.setBounds(154, 407, 157, 61);
 		contentPane.add(btnBestSellers);
 		
 		btnUsuario = new JButton("Monigote(usuario)");
-		btnUsuario.setBackground(new Color(245, 222, 179));
+		btnUsuario.setBackground(new Color(0, 153, 51));
 		btnUsuario.setBounds(617, 407, 167, 61);
 		contentPane.add(btnUsuario);
 		
 		btnCompras = new JButton("Carrito(Compras)");
-		btnCompras.setBackground(new Color(245, 245, 220));
+		btnCompras.setBackground(new Color(0, 204, 51));
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -99,7 +100,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 		contentPane.add(btnCompras);
 		
 		btnBuscar = new JButton("Lupa(buscar)");
-		btnBuscar.setBackground(new Color(245, 245, 220));
+		btnBuscar.setBackground(new Color(0, 204, 51));
 		btnBuscar.setBounds(309, 407, 156, 61);
 		contentPane.add(btnBuscar);
 		
@@ -116,7 +117,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 		contentPane.add(separator);
 		
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(518, 358, 89, 23);
+		btnCancelar.setBounds(670, 358, 89, 23);
 		contentPane.add(btnCancelar);
 		
 		lblLibrosCarrito = new JLabel("Libros en el carrito:");
@@ -126,17 +127,12 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnConfirmar.setBounds(617, 358, 134, 23);
+		btnConfirmar.setBounds(507, 356, 134, 23);
 		contentPane.add(btnConfirmar);
 		
-		lblInfoLibro = new JLabel("ISBN / T\u00EDtulo / Editorial / Precio ");
-		lblInfoLibro.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblInfoLibro.setBounds(28, 123, 201, 14);
-		contentPane.add(lblInfoLibro);
-		
-		JComboBox cbUnidades = new JComboBox();
-		cbUnidades.setBounds(241, 122, 44, 15);
-		contentPane.add(cbUnidades);
+		listaCarrito = new JList();
+		listaCarrito.setBounds(28, 136, 679, 196);
+		contentPane.add(listaCarrito);
 		
 	}
 
