@@ -57,8 +57,9 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public ComprasRealizadas() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 505);
+		setBounds(100, 100, 800, 495);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

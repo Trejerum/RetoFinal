@@ -73,8 +73,9 @@ public class BestSellersUser extends JFrame implements ActionListener{
 	 * Create the frame.
 	 */
 	public BestSellersUser() {
+		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 550);
+		setBounds(100, 100, 791, 540);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
