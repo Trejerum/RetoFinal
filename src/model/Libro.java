@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * La clase Libro contiene diferentes atributos en relación a los libros.
- * @author Equipo B
+ * @author grupoB
  *
  */
 public class Libro {

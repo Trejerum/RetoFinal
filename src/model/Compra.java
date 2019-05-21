@@ -5,8 +5,7 @@ import java.time.LocalDate;
  * La clase compra va a registrar todas las compras que hace un usuario
  * @author grupoB
  * 
- * aaaaa
- *
+ * 
  */
 public class Compra {
 	
