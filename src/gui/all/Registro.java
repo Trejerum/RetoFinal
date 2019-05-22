@@ -7,8 +7,6 @@ import javax.swing.border.EmptyBorder;
 
 import control.Logic;
 import control.LogicFactory;
-import model.Autor;
-import model.Genero;
 import model.Usuario;
 
 import javax.swing.JLabel;
@@ -27,13 +25,10 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.JList;
-import javax.swing.JScrollBar;
 
 public class Registro extends JFrame implements ActionListener{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 900575914733176176L;
 	private JPanel contentPane;
 	private JTextField tfNombre;

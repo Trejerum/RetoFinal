@@ -40,4 +40,6 @@ public interface DataAccess {
 	
 	public ArrayList<String> cargarAutores() throws SQLException, ClassNotFoundException, IOException;
 
+	public Usuario cargarUsuario(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
+
 }

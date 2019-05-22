@@ -10,8 +10,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import model.Autor;
-import model.Genero;
 import model.Usuario;
 
 
@@ -224,6 +222,31 @@ public class DataAccessImpl implements DataAccess{
 			this.disconnect();
 		}
 		return autores;
+	}
+
+	public Usuario cargarUsuario(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+		Usuario usuario = new Usuario();
+		
+		try {
+			this.connect();
+			String sql = "select * from usuarios,uconvencional where usuarios.nombreUsuario=? and usuarios.nombreUsuario=uconvencional.nombreUsuario";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, nUsuario);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				usuario.setNombre(result.getString("Nombre"));
+				usuario.setApellidos(result.getString("Apellidos"));
+				usuario.setDireccion(result.getString("Direccion"));
+				usuario.setTelefono(result.getInt("Telefono"));
+				usuario.setEmail(result.getString("Email"));
+				usuario.setContraseña(result.getString("Contraseña"));
+				usuario.setNombreUsuario(result.getString("nombreUsuario"));
+			}
+		}finally {
+			this.disconnect();
+		}
+		
+		return usuario;
 	}
 
 }

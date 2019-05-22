@@ -1,5 +1,7 @@
 package control;
 
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Autor;
@@ -92,6 +94,13 @@ public class LogicImpl implements Logic{
 	public ArrayList<String> cargarAutores() throws Exception {
 		ArrayList<String> autores = dataAccess.cargarAutores();
 		return autores;
+	}
+
+
+	@Override
+	public Usuario cargarUsuario(String nUsuario) throws Exception {
+		Usuario usuario = dataAccess.cargarUsuario(nUsuario);
+		return usuario;
 	}
 
 	
