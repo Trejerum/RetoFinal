@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gui.all.PanelBusquedaLIbro;
+
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import java.time.LocalDate;
@@ -24,11 +27,6 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 7057016663401901410L;
 	private JPanel contentPane;
 	private JSeparator menu_separator;
-	private JLabel lblBusqueda;
-	private JSeparator separator;
-	private JTextField tfBusqueda;
-	private JButton btnLupa;
-	private JLabel lblResultados;
 	private JButton btnVolver;
 
 	/**
@@ -62,37 +60,17 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 		menu_separator = new JSeparator();
 		menu_separator.setBounds(0, 380, 784, 2);
 		contentPane.add(menu_separator);
-		
-		lblBusqueda = new JLabel("Buscar:");
-		lblBusqueda.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
-		lblBusqueda.setBounds(10, 20, 89, 27);
-		contentPane.add(lblBusqueda);
 		LocalDate calendario = LocalDate.now();
 		TextField texto = new TextField(calendario.toString());
 		String fecha = texto.getText();
-		
-		separator = new JSeparator();
-		separator.setBounds(0, 60, 784, 2);
-		contentPane.add(separator);
-		
-		tfBusqueda = new JTextField();
-		tfBusqueda.setBounds(109, 22, 547, 27);
-		contentPane.add(tfBusqueda);
-		tfBusqueda.setColumns(10);
-		
-		btnLupa = new JButton("(Lupa)");
-		btnLupa.setBounds(666, 22, 89, 27);
-		contentPane.add(btnLupa);
-		
-		lblResultados = new JLabel("Resultados:");
-		lblResultados.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
-		lblResultados.setBounds(10, 73, 132, 27);
-		contentPane.add(lblResultados);
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 388, 89, 27);
 		contentPane.add(btnVolver);
 		
+		PanelBusquedaLIbro panel = new PanelBusquedaLIbro();
+		panel.setBounds(0,0,785,450);
+		contentPane.add(panel);
 	}
 
 	@Override
