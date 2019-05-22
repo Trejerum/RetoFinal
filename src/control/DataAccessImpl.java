@@ -72,7 +72,7 @@ public class DataAccessImpl implements DataAccess{
 		return validado;
 	}
 	
-	public void registrarUsuario1(Usuario usuario) throws ClassNotFoundException, SQLException, IOException{
+	public void regUsUsuarios(Usuario usuario) throws ClassNotFoundException, SQLException, IOException{
 		try {
 			this.connect();
 			String sql = "INSERT INTO usuarios VALUES (?, ?, ?)";
@@ -87,10 +87,10 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 	
-	public void registrarUsuario2(Usuario usuario) throws ClassNotFoundException, SQLException, IOException{
+	public void regUsUConvencional(Usuario usuario) throws ClassNotFoundException, SQLException, IOException{
 		try {
 			this.connect();
-			String sql = "INSERT INTO uconvencional VALUES (?, ?, ?, ?, ?, ?)";
+			String sql = "INSERT INTO uconvencional VALUES (?, ?, ?, ?, ?, ?, null)";
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, usuario.getNombreUsuario());
 			stmt.setString(2, usuario.getNombre());
@@ -98,6 +98,36 @@ public class DataAccessImpl implements DataAccess{
 			stmt.setString(4, usuario.getDireccion());
 			stmt.setInt(5, usuario.getTelefono());
 			stmt.setString(6, usuario.getEmail());
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+	
+	
+	public void regUsGustoAutor(String autor, String usuario) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "INSERT INTO gustoautor select nombreUsuario, codautor from uconvencional, autores where autores.nombreAutor=? and nombreusuario=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, autor);
+			stmt.setString(2, usuario);
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+
+	
+	public void regUsGustoGenero(String genero, String usuario) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "INSERT INTO gustogenero select nombreUsuario, codgen from uconvencional, generos where generos.nombreGen=? and nombreusuario=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, genero);
+			stmt.setString(2, usuario);
 			stmt.executeUpdate();
 		}finally {
 			this.disconnect();

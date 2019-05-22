@@ -17,6 +17,10 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
@@ -131,7 +135,7 @@ public class Login extends JFrame implements ActionListener{
 				this.dispose();
 			}
 			else {
-				String message="Error. Nombre de usuario o contraseña incorrecto";
+				String message="Error. El nombre de usuario o contraseña son incorrectos";
 				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		} catch (Exception ex) {
@@ -148,4 +152,6 @@ public class Login extends JFrame implements ActionListener{
 		registro.setVisible(true);
 		this.dispose();
 	}
+
+	
 }

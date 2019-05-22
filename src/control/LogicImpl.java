@@ -19,9 +19,15 @@ public class LogicImpl implements Logic{
 
 
 	@Override
-	public void registrarUsuario(Usuario usuario) throws Exception {
-		dataAccess.registrarUsuario1(usuario);
-		dataAccess.registrarUsuario2(usuario);
+	public void registrarUsuario(Usuario usuario, ArrayList<String> autoresSelec, ArrayList<String> generosSelec) throws Exception {
+		dataAccess.regUsUsuarios(usuario);
+		dataAccess.regUsUConvencional(usuario);
+		for (String autor : autoresSelec) {
+			dataAccess.regUsGustoAutor(autor, usuario.getNombreUsuario());
+		}
+		for (String genero : generosSelec) {
+			dataAccess.regUsGustoGenero(genero, usuario.getNombreUsuario());
+		}
 	}
 
 

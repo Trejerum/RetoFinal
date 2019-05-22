@@ -24,8 +24,10 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 import javax.swing.JPasswordField;
+import javax.swing.JScrollPane;
 import javax.swing.UIManager;
 import javax.swing.JList;
+import javax.swing.JScrollBar;
 
 public class Registro extends JFrame implements ActionListener{
 
@@ -58,8 +60,7 @@ public class Registro extends JFrame implements ActionListener{
 	private JList<String> listaAutores;
 	private JLabel lblAutores;
 	private JLabel lblGeneros;
-	private ArrayList<Genero> generos;
-	private ArrayList<Autor> autores;
+	private JScrollPane scrollPane;
 
 	/**
 	 * Launch the application.
@@ -201,14 +202,19 @@ public class Registro extends JFrame implements ActionListener{
 		
 		cargarGenerosAutores();
 		
-		listaGeneros.setBounds(402, 176, 130, 127);
-		contentPane.add(listaGeneros);
+		JScrollPane spGeneros = new JScrollPane();
+		spGeneros.setBounds(387, 192, 162, 117);
+		contentPane.add(spGeneros);
+		spGeneros.setViewportView(listaGeneros);
 		
-		listaAutores.setBounds(402, 366, 130, 143);
-		contentPane.add(listaAutores);
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(387, 395, 162, 111);
+		contentPane.add(scrollPane);
+		scrollPane.setViewportView(listaAutores);
 		
 		btnRegistrarme.addActionListener(this);
 		btnVolver.addActionListener(this);
+		
 	}
 
 	
@@ -222,10 +228,11 @@ public class Registro extends JFrame implements ActionListener{
 	}
 	
 	public void cargarGenerosAutores() {
+		
 		try {
 			Logic logic = LogicFactory.getLogic();
-			generos = new ArrayList<Genero>();
-			autores = new ArrayList<Autor>();
+			ArrayList<Genero> generos = new ArrayList<Genero>();
+			ArrayList<Autor> autores = new ArrayList<Autor>();
 			generos=logic.cargarGeneros();
 			autores=logic.cargarAutores();
 			ArrayList<String> generosStr = new ArrayList<String>();
@@ -234,7 +241,7 @@ public class Registro extends JFrame implements ActionListener{
 				generosStr.add(genero.getNomGenero());
 			}
 			for (Autor autor : autores) {
-				generosStr.add(autor.getNomAutor());
+				autoresStr.add(autor.getNomAutor());
 			}
 			
 			DefaultListModel<String> modeloGen = new DefaultListModel<String>();
@@ -245,9 +252,9 @@ public class Registro extends JFrame implements ActionListener{
 			for(String s:autoresStr) {
 				modeloAut.addElement(s);
 			}
-			
-			listaAutores = new JList<String>(modeloAut);
+
 			listaGeneros = new JList<String>(modeloGen);
+			listaAutores = new JList<String>(modeloAut);
 			
 		}catch(Exception e) {
 			String message="Error. No se han podido cargar los generos y autores";
@@ -260,40 +267,47 @@ public class Registro extends JFrame implements ActionListener{
 	
 	public void registrarUsuario() {
 		String message;
-		String contraseña = new String(pfContraseña.getPassword());
-		String confirmacion = new String(pfConfirmar.getPassword());
-		if(contraseña.equalsIgnoreCase(confirmacion)&&contraseña!=null) {
-			Usuario usuario = new Usuario();
-			usuario.setNombre(tfNombre.getText());
-			usuario.setApellidos(tfApellido.getText());
-			usuario.setDireccion(tfDireccion.getText());
-			usuario.setEmail(tfEmail.getText());
-			usuario.setTelefono(Integer.parseInt(tfTelefono.getText()));
-			usuario.setNombreUsuario(tfNombreUsuario.getText());
-			usuario.setContraseña(new String(pfContraseña.getPassword()));
-			Logic logic = LogicFactory.getLogic();
-			try {
-				Boolean repetido = logic.comprobarNUsuario(usuario.getNombreUsuario());
-				if(repetido) {
-					message="ERROR. El nombre de usuario ya esta en uso";
+		try{
+			String contraseña = new String(pfContraseña.getPassword());
+			String confirmacion = new String(pfConfirmar.getPassword());
+			if(contraseña.equalsIgnoreCase(confirmacion)) {
+				Usuario usuario = new Usuario();
+				usuario.setNombre(tfNombre.getText());
+				usuario.setApellidos(tfApellido.getText());
+				usuario.setDireccion(tfDireccion.getText());
+				usuario.setEmail(tfEmail.getText());
+				usuario.setTelefono(Integer.parseInt(tfTelefono.getText()));
+				usuario.setNombreUsuario(tfNombreUsuario.getText());
+				usuario.setContraseña(new String(pfContraseña.getPassword()));
+				ArrayList<String> autoresSelec = (ArrayList<String>) listaAutores.getSelectedValuesList();
+				ArrayList<String> generosSelec = (ArrayList<String>) listaGeneros.getSelectedValuesList();
+				Logic logic = LogicFactory.getLogic();
+				try {
+					Boolean repetido = logic.comprobarNUsuario(usuario.getNombreUsuario());
+					if(repetido) {
+						message="Error. El nombre de usuario ya esta en uso";
+						JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+					}
+					else {
+						message="Se ha registrado correctamente";
+						logic.registrarUsuario(usuario, autoresSelec, generosSelec);
+						JOptionPane.showMessageDialog(this, message, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+						
+					}
+				} catch (Exception ex) {
+					message="Error. No se ha podido registrar el usuario";
 					JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+					ex.printStackTrace();
+					this.dispose();
+					System.exit(0);
 				}
-				else {
-					message="Se ha registrado correctamente";
-					logic.registrarUsuario(usuario);
-					JOptionPane.showMessageDialog(this, message, "Aviso", JOptionPane.INFORMATION_MESSAGE);
-					
-				}
-			} catch (Exception ex) {
-				message="Error";
-				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-				ex.printStackTrace();
-				this.dispose();
-				System.exit(0);
 			}
-		}
-		else {
-			message="ERROR. Las contraseñas no coinciden";
+			else {
+				message="Error. Las contraseñas no coinciden";
+				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		}catch(Exception e) {
+			message="Error. Por favor rellene todas las casillas";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}

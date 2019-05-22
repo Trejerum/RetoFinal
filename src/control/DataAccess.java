@@ -12,9 +12,13 @@ public interface DataAccess {
 	
 	public boolean validarUsuario(String nUsuario, String contraseña) throws SQLException, ClassNotFoundException, IOException;
 	
-	public void registrarUsuario1(Usuario usuario) throws SQLException, ClassNotFoundException, IOException;
+	public void regUsUsuarios(Usuario usuario) throws SQLException, ClassNotFoundException, IOException;
 	
-	public void registrarUsuario2(Usuario usuario) throws SQLException, ClassNotFoundException, IOException;
+	public void regUsUConvencional(Usuario usuario) throws SQLException, ClassNotFoundException, IOException;
+	
+	public void regUsGustoAutor(String autor, String usuario) throws SQLException, ClassNotFoundException, IOException;
+	
+	public void regUsGustoGenero(String genero, String usuario) throws SQLException, ClassNotFoundException, IOException;
 	
 	public void listarBestsellers() throws SQLException, ClassNotFoundException, IOException;
 	

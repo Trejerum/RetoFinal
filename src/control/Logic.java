@@ -10,7 +10,7 @@ public interface Logic {
 
 	public boolean validarUsuario(String nUsuario, String contraseña) throws Exception;
 	
-	public void registrarUsuario(Usuario usuario) throws Exception;
+	public void registrarUsuario(Usuario usuario, ArrayList<String> autoresSelec, ArrayList<String> generosSelec) throws Exception;
 	
 	public void listarBestsellers() throws Exception;
 	
