@@ -28,8 +28,8 @@ public interface Logic {
 	
 	public boolean comprobarNUsuario(String nUsuario) throws Exception;
 	
-	public ArrayList<Genero> cargarGeneros() throws Exception;
+	public ArrayList<String> cargarGeneros() throws Exception;
 	
-	public ArrayList<Autor> cargarAutores() throws Exception;
+	public ArrayList<String> cargarAutores() throws Exception;
 
 }

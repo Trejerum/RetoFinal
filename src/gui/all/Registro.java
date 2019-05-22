@@ -231,18 +231,10 @@ public class Registro extends JFrame implements ActionListener{
 		
 		try {
 			Logic logic = LogicFactory.getLogic();
-			ArrayList<Genero> generos = new ArrayList<Genero>();
-			ArrayList<Autor> autores = new ArrayList<Autor>();
-			generos=logic.cargarGeneros();
-			autores=logic.cargarAutores();
 			ArrayList<String> generosStr = new ArrayList<String>();
 			ArrayList<String> autoresStr = new ArrayList<String>();
-			for (Genero genero : generos) {
-				generosStr.add(genero.getNomGenero());
-			}
-			for (Autor autor : autores) {
-				autoresStr.add(autor.getNomAutor());
-			}
+			generosStr=logic.cargarGeneros();
+			autoresStr=logic.cargarAutores();
 			
 			DefaultListModel<String> modeloGen = new DefaultListModel<String>();
 			for(String s:generosStr) {

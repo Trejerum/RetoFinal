@@ -190,17 +190,16 @@ public class DataAccessImpl implements DataAccess{
 		return repetido;
 	}
 
-	public ArrayList<Genero> cargarGeneros() throws SQLException, ClassNotFoundException, IOException {
-		ArrayList<Genero> generos = new ArrayList<Genero>();
+	public ArrayList<String> cargarGeneros() throws SQLException, ClassNotFoundException, IOException {
+		ArrayList<String> generos = new ArrayList<String>();
 		try {
 			this.connect();
 			String sql = "select * from generos";
 			stmt = con.prepareStatement(sql);
 			ResultSet result = stmt.executeQuery();
 			while(result.next()) {
-				Genero genero = new Genero();
-				genero.setCodGenero(result.getString("codGen"));
-				genero.setNomGenero(result.getString("nombreGen"));
+				String genero;
+				genero=result.getString("nombreGen");
 				generos.add(genero);
 			}
 		}finally {
@@ -209,17 +208,16 @@ public class DataAccessImpl implements DataAccess{
 		return generos;
 	}
 
-	public ArrayList<Autor> cargarAutores() throws SQLException, ClassNotFoundException, IOException {
-		ArrayList<Autor> autores = new ArrayList<Autor>();
+	public ArrayList<String> cargarAutores() throws SQLException, ClassNotFoundException, IOException {
+		ArrayList<String> autores = new ArrayList<String>();
 		try {
 			this.connect();
 			String sql = "select * from autores";
 			stmt = con.prepareStatement(sql);
 			ResultSet result = stmt.executeQuery();
 			while(result.next()) {
-				Autor autor = new Autor();
-				autor.setCodAutor(result.getString("codAutor"));
-				autor.setNomAutor(result.getString("nombreAutor"));
+				String autor;
+				autor=result.getString("nombreAutor");
 				autores.add(autor);
 			}
 		}finally {

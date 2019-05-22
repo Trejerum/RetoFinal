@@ -36,8 +36,8 @@ public interface DataAccess {
 	
 	public boolean comprobarNUsuario(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 	
-	public ArrayList<Genero> cargarGeneros() throws SQLException, ClassNotFoundException, IOException;
+	public ArrayList<String> cargarGeneros() throws SQLException, ClassNotFoundException, IOException;
 	
-	public ArrayList<Autor> cargarAutores() throws SQLException, ClassNotFoundException, IOException;
+	public ArrayList<String> cargarAutores() throws SQLException, ClassNotFoundException, IOException;
 
 }

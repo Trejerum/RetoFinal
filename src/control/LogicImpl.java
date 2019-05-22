@@ -84,13 +84,13 @@ public class LogicImpl implements Logic{
 		return repetido;
 	}
 
-	public ArrayList<Genero> cargarGeneros() throws Exception {
-		ArrayList<Genero> generos = dataAccess.cargarGeneros();
+	public ArrayList<String> cargarGeneros() throws Exception {
+		ArrayList<String> generos = dataAccess.cargarGeneros();
 		return generos;
 	}
 
-	public ArrayList<Autor> cargarAutores() throws Exception {
-		ArrayList<Autor> autores = dataAccess.cargarAutores();
+	public ArrayList<String> cargarAutores() throws Exception {
+		ArrayList<String> autores = dataAccess.cargarAutores();
 		return autores;
 	}
 
