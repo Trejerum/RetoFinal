@@ -273,6 +273,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 	}
 	
 	public void guardarCambios() {
+		String message;
 		try {
 			Logic logic = LogicFactory.getLogic();
 			Usuario usuario = new Usuario();
@@ -280,12 +281,31 @@ public class PerfilUser extends JFrame implements ActionListener{
 			usuario.setApellidos(tfApellidos.getText());
 			usuario.setDireccion(tfDireccion.getText());
 			usuario.setEmail(tfEmail.getText());
-			usuario.setTelefono(tfTelefono.getText());	//TODO resolver error (cambiar el tipo a int)
+			usuario.setTelefono(Integer.parseInt(tfTelefono.getText()));
 			usuario.setContraseña(tfContraseña.getText());
 			usuario.setNombreUsuario(tfUsuario.getText());
+			logic.guardarCambios(usuario, nUsuario);
+			message="Modificacion realizada correctamente";
+			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+			nUsuario=usuario.getNombreUsuario();
+			tfNombre.setEditable(false);
+			tfApellidos.setEditable(false);
+			tfDireccion.setEditable(false);
+			tfEmail.setEditable(false);
+			tfTelefono.setEditable(false);
+			tfUsuario.setEditable(false);
+			tfContraseña.setEditable(false);
+			tfNombre.setForeground(new Color(0, 0, 0));
+			tfApellidos.setForeground(new Color(0, 0, 0));
+			tfDireccion.setForeground(new Color(0, 0, 0));
+			tfEmail.setForeground(new Color(0, 0, 0));
+			tfTelefono.setForeground(new Color(0, 0, 0));
+			tfUsuario.setForeground(new Color(0, 0, 0));
+			tfContraseña.setForeground(new Color(0, 0, 0));
+			btnGuardar.setEnabled(false);
 			
 		}catch(Exception e) {
-			String message="Error. No se ha podido realizar el guardado";
+			message="Error. No se ha podido realizar el guardado";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}

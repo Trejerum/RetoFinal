@@ -1,11 +1,7 @@
 package control;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Autor;
-import model.Genero;
 import model.Usuario;
 
 public class LogicImpl implements Logic{
@@ -19,8 +15,6 @@ public class LogicImpl implements Logic{
 		return validado;
 	}
 
-
-	@Override
 	public void registrarUsuario(Usuario usuario, ArrayList<String> autoresSelec, ArrayList<String> generosSelec) throws Exception {
 		dataAccess.regUsUsuarios(usuario);
 		dataAccess.regUsUConvencional(usuario);
@@ -32,50 +26,36 @@ public class LogicImpl implements Logic{
 		}
 	}
 
-
-	@Override
 	public void listarBestsellers() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-
-	@Override
 	public void insertarLibro() throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-
-	@Override
 	public void comprarLibro(ArrayList<String> carrito, String nUsuario) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-
-	@Override
 	public void verRecomendados(String nUsuario) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-
-	@Override
 	public void buscarLibro(String busqueda) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-
-	@Override
 	public void modificarLibro(String isbn) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
 
-
-	@Override
 	public void consultarCompras(String nUsuario) throws Exception {
 		// TODO Auto-generated method stub
 		
@@ -96,11 +76,15 @@ public class LogicImpl implements Logic{
 		return autores;
 	}
 
-
-	@Override
 	public Usuario cargarUsuario(String nUsuario) throws Exception {
 		Usuario usuario = dataAccess.cargarUsuario(nUsuario);
 		return usuario;
+	}
+
+	public void guardarCambios(Usuario usuario, String nUsuario) throws Exception {
+		dataAccess.guardarCambiosUCon(usuario, nUsuario);
+		dataAccess.guardarCambiosUs(usuario, nUsuario);
+		
 	}
 
 	

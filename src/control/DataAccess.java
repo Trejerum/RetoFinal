@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import model.Autor;
-import model.Genero;
 import model.Usuario;
 
 public interface DataAccess {
@@ -41,5 +39,9 @@ public interface DataAccess {
 	public ArrayList<String> cargarAutores() throws SQLException, ClassNotFoundException, IOException;
 
 	public Usuario cargarUsuario(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
+
+	public void guardarCambiosUCon(Usuario usuario, String nUsuario) throws SQLException, ClassNotFoundException, IOException;
+	
+	public void guardarCambiosUs(Usuario usuario, String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 
 }

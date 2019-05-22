@@ -278,7 +278,7 @@ public class Registro extends JFrame implements ActionListener{
 					else {
 						message="Se ha registrado correctamente";
 						logic.registrarUsuario(usuario, autoresSelec, generosSelec);
-						JOptionPane.showMessageDialog(this, message, "Aviso", JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
 						
 					}
 				} catch (Exception ex) {

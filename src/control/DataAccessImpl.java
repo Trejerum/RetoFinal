@@ -249,4 +249,41 @@ public class DataAccessImpl implements DataAccess{
 		return usuario;
 	}
 
+	public void guardarCambiosUCon(Usuario usuario, String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "update uConvencional set nombreUsuario=?, nombre=?, apellidos=?, email=?, telefono=?, direccion=?, numCuenta=null where nombreUsuario=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, usuario.getNombreUsuario());
+			stmt.setString(2, usuario.getNombre());
+			stmt.setString(3, usuario.getApellidos());
+			stmt.setString(4, usuario.getEmail());
+			stmt.setInt(5, usuario.getTelefono());
+			stmt.setString(6, usuario.getDireccion());
+			stmt.setString(7, nUsuario);
+			stmt.executeUpdate();
+			
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+
+	public void guardarCambiosUs(Usuario usuario, String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "update usuarios set nombreUsuario=?, contraseña=?, esAdmin=? where nombreUsuario=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, usuario.getNombreUsuario());
+			stmt.setString(2, usuario.getContraseña());
+			stmt.setBoolean(3, usuario.isEsAdmin());
+			stmt.setString(4, nUsuario);
+			stmt.executeUpdate();
+			
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+
 }

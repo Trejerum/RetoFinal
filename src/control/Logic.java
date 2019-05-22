@@ -2,8 +2,6 @@ package control;
 
 import java.util.ArrayList;
 
-import model.Autor;
-import model.Genero;
 import model.Usuario;
 
 public interface Logic {
@@ -33,5 +31,8 @@ public interface Logic {
 	public ArrayList<String> cargarAutores() throws Exception;
 
 	public Usuario cargarUsuario(String nUsuario) throws Exception;
+	
+	public void guardarCambios(Usuario usuario, String nUsuario) throws Exception;
+	
 
 }
