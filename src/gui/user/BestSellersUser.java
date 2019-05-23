@@ -4,6 +4,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import gui.all.ResultadoBestSellers;
+
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JButton;
@@ -23,7 +26,6 @@ public class BestSellersUser extends JFrame implements ActionListener{
 	 */
 	private static final long serialVersionUID = -7292890646500760064L;
 	private JPanel contentPane;
-	private JTextField tfDate;
 	private JSeparator menu_separator;
 	private JButton btnHome;
 	private JButton btnBestSellers;
@@ -31,7 +33,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 	private JButton btnCompras;
 	private JButton btnBuscar;
 	
-	private JSeparator separator;
+	
 
 	/**
 	 * Launch the application.
@@ -100,24 +102,11 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		btnBuscar.setBounds(309, 451, 156, 61);
 		contentPane.add(btnBuscar);
 		
+		ResultadoBestSellers panel = new ResultadoBestSellers();
+		panel.setBounds(0, 0, 791, 540);
+		contentPane.add(panel);
 		
 		
-		tfDate = new JTextField();
-		tfDate.setForeground(new Color(0, 0, 153));
-		tfDate.setFont(new Font("Malgun Gothic", Font.PLAIN, 24));
-		tfDate.setEditable(false);
-		tfDate.setBackground(new Color(0, 153, 51));
-		tfDate.setBounds(389, 65, 135, 27);
-		contentPane.add(tfDate);
-		tfDate.setColumns(10);
-		LocalDate calendario = LocalDate.now();
-		TextField texto = new TextField(calendario.toString());
-		String fecha = texto.getText();
-		tfDate.setText(fecha);
-		
-		separator = new JSeparator();
-		separator.setBounds(0, 114, 784, 2);
-		contentPane.add(separator);
 		
 	}
 
