@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import gui.all.PanelBusquedaLIbro;
+import gui.all.PanelBusquedaLibro;
 
 import javax.swing.JSeparator;
 import java.awt.Color;
@@ -127,7 +127,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		btnComprar.setBounds(641, 259, 105, 40);
 		contentPane.add(btnComprar);
 		
-		PanelBusquedaLIbro panel = new PanelBusquedaLIbro();
+		PanelBusquedaLibro panel = new PanelBusquedaLibro();
 		panel.setBounds(0,0,785,450);
 		contentPane.add(panel);
 		

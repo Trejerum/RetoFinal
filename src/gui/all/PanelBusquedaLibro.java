@@ -18,7 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import model.Libro;
 
-public class PanelBusquedaLIbro extends JPanel {
+public class PanelBusquedaLibro extends JPanel {
 	private JTable tablaBusqueda;
 	private JPanel contentPane;
 	private JTextField tfBusqueda;
@@ -32,7 +32,7 @@ public class PanelBusquedaLIbro extends JPanel {
 	 * Create the panel.
 	 */
 	
-	public PanelBusquedaLIbro() {
+	public PanelBusquedaLibro() {
 		setBackground(new Color(0, 153, 51));
 		setForeground(new Color(0, 0, 0));
 		

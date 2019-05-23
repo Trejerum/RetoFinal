@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import gui.all.PanelBusquedaLIbro;
+import gui.all.PanelBusquedaLibro;
 
 import javax.swing.JSeparator;
 import javax.swing.JButton;
@@ -68,7 +68,7 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 		btnVolver.setBounds(10, 388, 89, 27);
 		contentPane.add(btnVolver);
 		
-		PanelBusquedaLIbro panel = new PanelBusquedaLIbro();
+		PanelBusquedaLibro panel = new PanelBusquedaLibro();
 		panel.setBounds(0,0,785,450);
 		contentPane.add(panel);
 	}
