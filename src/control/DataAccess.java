@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.Libro;
 import model.Usuario;
 
 public interface DataAccess {
@@ -26,7 +27,7 @@ public interface DataAccess {
 	
 	public void verRecomendados(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 	
-	public void buscarLibro(String busqueda) throws SQLException, ClassNotFoundException, IOException;
+	public ArrayList<Libro> buscarLibro(String busqueda) throws SQLException, ClassNotFoundException, IOException;
 	
 	public void modificarLibro(String isbn) throws SQLException, ClassNotFoundException, IOException;
 	

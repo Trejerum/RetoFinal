@@ -16,6 +16,7 @@ public class Libro {
 	private String descripcion;
 	private String editorial;
 	private LocalDate fechaPublicacion;
+	private String genero;
 	private double precio;
 	private boolean oferta;
 	private double descuento;
@@ -31,6 +32,7 @@ public class Libro {
 	 * @param descripcion : Breve explicación sobre el libro
 	 * @param editorial : Editorial que ha producido el libro
 	 * @param fechaPublicacion : Fecha en la que se publicó un libro
+	 * @param genero: El genero del libro
 	 * @param precio : Precio establecido para un libro
 	 * @param oferta : Indica si un libro tiene oferta o no 
 	 * @param descuento : En caso de haber oferta, el atributo descuento contiene el porcentaje de reducción de precio de un libro.
@@ -113,6 +115,14 @@ public class Libro {
 	}
 	public void setStock(int stock) {
 		this.stock = stock;
+	}
+
+	public String getGenero() {
+		return genero;
+	}
+
+	public void setGenero(String genero) {
+		this.genero = genero;
 	}
 	
 	

@@ -2,6 +2,7 @@ package control;
 
 import java.util.ArrayList;
 
+import model.Libro;
 import model.Usuario;
 
 public interface Logic {
@@ -18,7 +19,7 @@ public interface Logic {
 	
 	public void verRecomendados(String nUsuario) throws Exception;
 	
-	public void buscarLibro(String busqueda) throws Exception;
+	public ArrayList<Libro> buscarLibro(String busqueda) throws Exception;
 	
 	public void modificarLibro(String isbn) throws Exception;
 	

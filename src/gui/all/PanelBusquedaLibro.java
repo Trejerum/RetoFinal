@@ -2,30 +2,39 @@ package gui.all;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.TextField;
-import java.time.LocalDate;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import control.Logic;
+import control.LogicFactory;
 import model.Libro;
+import javax.swing.ListSelectionModel;
 
-public class PanelBusquedaLibro extends JPanel {
+public class PanelBusquedaLibro extends JPanel implements ActionListener{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7581356853066506062L;
+
 	private JTable tablaBusqueda;
-	private JPanel contentPane;
 	private JTextField tfBusqueda;
-	private JLabel lblBuscar;
 	private JSeparator menu_separator;
 	private JLabel lblResultados;
 	private JButton btnBuscarLupa;
+	private JScrollPane scrollPane;
+	private JButton btnVerDescripcion;
+	private JLabel lblBuscar;
 	
 	
 	/**
@@ -57,13 +66,15 @@ public class PanelBusquedaLibro extends JPanel {
 		lblResultados.setBounds(10, 73, 132, 27);
 		add(lblResultados);
 		
-		JScrollPane scrollPane = new JScrollPane();
+		scrollPane = new JScrollPane();
 		scrollPane.setBounds(42, 122, 561, 236);
 		add(scrollPane);
 		
 		tablaBusqueda = new JTable();
+		tablaBusqueda.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		tablaBusqueda.setModel(new DefaultTableModel(
 			new Object[][] {
+				
 			},
 			new String[] {
 				"ISBN", "Titulo", "Genero", "Editorial", "Precio"
@@ -71,13 +82,60 @@ public class PanelBusquedaLibro extends JPanel {
 		));
 		scrollPane.setViewportView(tablaBusqueda);
 		
-		JButton btnVerDescripcion = new JButton("Ver descripcion");
+		btnVerDescripcion = new JButton("Ver descripcion");
 		btnVerDescripcion.setBounds(641, 202, 105, 40);
 		add(btnVerDescripcion);
 		
-		JLabel lblBuscar = new JLabel("Buscar:");
+		lblBuscar = new JLabel("Buscar:");
 		lblBuscar.setFont(new Font("Maiandra GD", Font.PLAIN, 23));
 		lblBuscar.setBounds(10, 22, 89, 27);
 		add(lblBuscar);
+		
+		btnBuscarLupa.addActionListener(this);
+		btnVerDescripcion.addActionListener(this);
 	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==btnBuscarLupa) {
+			buscar();
+		}
+		else {
+			mostrarDescripcion();
+		}
+	}
+	
+	public void buscar() {
+		try {
+			Logic logic = LogicFactory.getLogic();
+			ArrayList<Libro> libros= new ArrayList<Libro>();
+			String busqueda = tfBusqueda.getText();
+			libros=logic.buscarLibro(busqueda);
+			DefaultTableModel modelo = new DefaultTableModel(
+						new Object[][] {
+							
+						},
+						new String[] {
+								"ISBN", "Titulo", "Genero", "Editorial", "Precio"
+						}
+					);
+			for (Libro libro : libros) {
+				Object rowdata[]= {libro.getIsbn(), libro.getTitulo(), libro.getGenero(), libro.getEditorial(), libro.getPrecio()};
+				modelo.addRow(rowdata);
+			}
+			tablaBusqueda.setModel(modelo);
+			
+		}catch(Exception e) {
+			String message="Error. No se han podido encontrar libros";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+	
+	public void mostrarDescripcion() {
+		
+	}
+	
+	
 }
