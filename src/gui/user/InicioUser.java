@@ -1,29 +1,22 @@
 package gui.user;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.TextField;
-
-import javax.swing.JTextField;
 
 public class InicioUser extends JFrame implements ActionListener{
 
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = 2752882210597083244L;
 	private JPanel contentPane;
-	private JTextField txtNombreusuario;
+	private JLabel lblNombreusuario;
 	private JSeparator menu_separator;
 	private JButton btnHome;
 	private JButton btnBestSellers;
@@ -35,33 +28,19 @@ public class InicioUser extends JFrame implements ActionListener{
 	private JLabel lblAcabasDeEntrar;
 	private JLabel lbllaEstrellaSirve;
 	private JLabel lblLaLupa;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InicioUser frame = new InicioUser();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private String nUsuario;
 
 	/**
 	 * Create the frame.
 	 */
-	public InicioUser() {
+	public InicioUser(String usuario) {
+		nUsuario=usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 791, 468);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 51));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -110,18 +89,17 @@ public class InicioUser extends JFrame implements ActionListener{
 		contentPane.add(lblBienvenido);
 		
 		lblHola = new JLabel("Hola ");
-		lblHola.setFont(new Font("Maiandra GD", Font.PLAIN, 15));
-		lblHola.setBounds(72, 198, 46, 16);
+		lblHola.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblHola.setBounds(85, 200, 46, 16);
 		contentPane.add(lblHola);
 		
-		txtNombreusuario = new JTextField();
-		txtNombreusuario.setEditable(false);
-		txtNombreusuario.setText("nombreUsuario");
-		txtNombreusuario.setBounds(110, 196, 98, 20);
-		contentPane.add(txtNombreusuario);
-		txtNombreusuario.setColumns(10);
+		lblNombreusuario = new JLabel();
+		lblNombreusuario.setBackground(new Color(0, 153, 51));
+		lblNombreusuario.setText("nombreUsuario");
+		lblNombreusuario.setBounds(110, 198, 98, 20);
+		contentPane.add(lblNombreusuario);
 		
-		lblAcabasDeEntrar = new JLabel("acabas de entrar a la liber\u00EDa virtual. Esta aplicaci\u00F3n tiene diferentes funciones:");
+		lblAcabasDeEntrar = new JLabel("Acabas de entrar a la liber\u00EDa virtual. Esta aplicaci\u00F3n tiene diferentes funciones:");
 		lblAcabasDeEntrar.setBounds(74, 226, 511, 36);
 		contentPane.add(lblAcabasDeEntrar);
 		
@@ -130,17 +108,39 @@ public class InicioUser extends JFrame implements ActionListener{
 		contentPane.add(lbllaEstrellaSirve);
 		
 		lblLaLupa = new JLabel("- La lupa sirve para hacer una busqueda sobre algun libro que le pueda interesar o para ver tus libros recomendados");
-		lblLaLupa.setBounds(87, 297, 590, 27);
+		lblLaLupa.setBounds(87, 297, 638, 27);
 		contentPane.add(lblLaLupa);
-		LocalDate calendario = LocalDate.now();
-		TextField texto = new TextField(calendario.toString());
-		String fecha = texto.getText();
 		
+		btnBestSellers.addActionListener(this);
+		btnBuscar.addActionListener(this);
+		btnCompras.addActionListener(this);
+		btnUsuario.addActionListener(this);
+		
+		lblNombreusuario.setText(nUsuario);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource()==btnBestSellers) {
+			BestSellersUser bestSellers = new BestSellersUser();
+			bestSellers.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnBuscar){
+			BusquedaUser busqueda = new BusquedaUser();
+			busqueda.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnCompras) {
+			ComprasRealizadas compras = new ComprasRealizadas();
+			compras.setVisible(true);
+			this.dispose();
+		}
+		else {
+			PerfilUser perfil = new PerfilUser(nUsuario);
+			perfil.setVisible(true);
+			this.dispose();
+		}
 		
 	}
 }

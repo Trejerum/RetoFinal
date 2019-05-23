@@ -4,7 +4,14 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import control.Logic;
+import control.LogicFactory;
+import gui.user.InicioUser;
+
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.Color;
 import javax.swing.JTextField;
@@ -27,8 +34,6 @@ public class Login extends JFrame implements ActionListener{
 	private JLabel lblNombreUsuario;
 	private JLabel lblContraseña;
 	private JButton btnIniciarSesion;
-	private JLabel lblRegistrarse;
-	private JLabel lblAqui;
 
 	/**
 	 * Launch the application.
@@ -91,25 +96,58 @@ public class Login extends JFrame implements ActionListener{
 		btnIniciarSesion.setBounds(105, 324, 148, 23);
 		contentPane.add(btnIniciarSesion);
 		
-		lblRegistrarse = new JLabel("Si no tienes una cuenta, reg\u00EDstrese gratuitamente ");
-		lblRegistrarse.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblRegistrarse.setBounds(51, 369, 241, 14);
-		contentPane.add(lblRegistrarse);
-		
-		lblAqui = new JLabel("aqu\u00ED");
-		lblAqui.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		lblAqui.setForeground(Color.RED);
-		lblAqui.setBounds(291, 369, 27, 14);
-		contentPane.add(lblAqui);
-		
 		pfContraseña = new JPasswordField();
 		pfContraseña.setBounds(54, 283, 252, 20);
 		contentPane.add(pfContraseña);
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+		
+		JButton btnRegistrarse = new JButton("REGISTRARSE");
+		btnRegistrarse.setBounds(105, 358, 148, 23);
+		contentPane.add(btnRegistrarse);
+		
+		btnIniciarSesion.addActionListener(this);
+		btnRegistrarse.addActionListener(this);
 		
 	}
+	
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==btnIniciarSesion) {
+			validarUsuario();
+		}
+		else {
+			registrarUsuario();
+		}
+		
+	}
+	
+	public void validarUsuario() {
+		String nUsuario=tfNombreUsurio.getText();
+		String contraseña=new String(pfContraseña.getPassword());
+		Logic logic = LogicFactory.getLogic();
+		try {
+			boolean validado=logic.validarUsuario(nUsuario, contraseña);
+			if(validado==true) {
+				InicioUser inicio = new InicioUser(nUsuario);
+				inicio.setVisible(true);
+				this.dispose();
+			}
+			else {
+				String message="Error. El nombre de usuario o contraseña son incorrectos";
+				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			}
+		} catch (Exception ex) {
+			String message="Error. No se ha podido validar el usuario";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			ex.printStackTrace();
+			this.dispose();
+			System.exit(0);
+		}
+	}
+	
+	public void registrarUsuario() {
+		Registro registro = new Registro();
+		registro.setVisible(true);
+		this.dispose();
+	}
+
+	
 }
