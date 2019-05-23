@@ -91,8 +91,11 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 		lblBuscar.setBounds(10, 22, 89, 27);
 		add(lblBuscar);
 		
+		buscar();
+		
 		btnBuscarLupa.addActionListener(this);
 		btnVerDescripcion.addActionListener(this);
+		
 	}
 
 

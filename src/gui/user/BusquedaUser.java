@@ -1,6 +1,4 @@
 package gui.user;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -29,33 +27,15 @@ public class BusquedaUser extends JFrame implements ActionListener{
 	private JButton btnBuscar;
 	private JPanel contentPane;
 	private JSeparator separator;
-	private JButton btnBuscarLupa;
-	
 	private JButton btnRecomendados;
 	private JButton btnComprar;
-	
-
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					BusquedaUser frame = new BusquedaUser();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private String nUsuario;
 
 	/**
 	 * Create the frame.
 	 */
-	public BusquedaUser() {
+	public BusquedaUser(String usuario) {
+		nUsuario=usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 789, 495);
@@ -70,10 +50,6 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		btnHome = new JButton("Casa(HOME)");
 		btnHome.setForeground(new Color(0, 0, 0));
 		btnHome.setBackground(new Color(0, 204, 51));
-		btnHome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnHome.setBounds(0, 407, 156, 61);
 		contentPane.add(btnHome);
 		
@@ -89,10 +65,6 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		
 		btnCompras = new JButton("Carrito(Compras)");
 		btnCompras.setBackground(new Color(0, 204, 51));
-		btnCompras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnCompras.setBounds(463, 407, 156, 61);
 		contentPane.add(btnCompras);
 		
@@ -101,17 +73,9 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		btnBuscar.setBounds(310, 407, 156, 61);
 		contentPane.add(btnBuscar);
 		
-		
-		
-		
 		separator = new JSeparator();
 		separator.setBounds(0, 407, 784, 2);
 		contentPane.add(separator);
-		
-		
-		
-		
-		
 		
 		btnRecomendados = new JButton("Ver recomendados");
 		btnRecomendados.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -120,10 +84,6 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		
 		//BOTON COMPRAR
 		btnComprar = new JButton("Comprar\r\n");
-		btnComprar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnComprar.setBounds(641, 259, 105, 40);
 		contentPane.add(btnComprar);
 		
@@ -131,25 +91,51 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		panel.setBounds(0,0,785,450);
 		contentPane.add(panel);
 		
+		btnBestSellers.addActionListener(this);
+		btnHome.addActionListener(this);
+		btnUsuario.addActionListener(this);
+		btnRecomendados.addActionListener(this);
+		btnBuscar.addActionListener(this);
+		btnComprar.addActionListener(this);
 		
 		
-		//Llenar la tabla
 	}
-	
-	
-
-	/*public void busqueda(String texto) {
-		try {
-			String [] titulos= {"Isbn", "Titulo", "Editorial", "Precio"};
-			
-		}catch(Exception e) {
-			
-		}
-	}*/
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getSource()==btnHome) {
+			InicioUser inicio = new InicioUser(nUsuario);
+			inicio.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnBestSellers) {
+			BestSellersUser bestSellers = new BestSellersUser();
+			bestSellers.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnComprar) {
+			comprar();
+		}
+		else if(e.getSource()==btnCompras) {
+			ComprasRealizadas compras = new ComprasRealizadas();
+			compras.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnRecomendados) {
+			verRecomendados();
+		}
+		else{
+			PerfilUser perfil = new PerfilUser(nUsuario);
+			perfil.setVisible(true);
+			this.dispose();
+		}
+	}
+	
+	public void comprar() {
+		//TODO
+	}
+	
+	public void verRecomendados() {
+		//TODO
 	}
 }

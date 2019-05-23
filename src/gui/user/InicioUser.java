@@ -127,7 +127,7 @@ public class InicioUser extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		else if(e.getSource()==btnBuscar){
-			BusquedaUser busqueda = new BusquedaUser();
+			BusquedaUser busqueda = new BusquedaUser(nUsuario);
 			busqueda.setVisible(true);
 			this.dispose();
 		}
