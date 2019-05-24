@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import model.Libro;
 import model.Usuario;
 
 
@@ -153,8 +154,33 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
-	public void buscarLibro(String busqueda) throws SQLException, ClassNotFoundException, IOException {
-		// TODO Auto-generated method stub
+	public ArrayList<Libro> buscarLibro(String busqueda) throws SQLException, ClassNotFoundException, IOException {
+		ArrayList<Libro> libros = new ArrayList<Libro>();
+		try {
+			this.connect();
+			String sql="select distinct libros.isbn, titulo, genero, editorial, precio "
+					+ "from libros, autores, autoreslibro "
+					+ "where titulo like ?"
+					+ "or libros.isbn = ? "
+					+ "or (nombreAutor like ? and autoreslibro.codAutor = autores.codAutor and libros.isbn = autoreslibro.isbn)";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, "%" + busqueda + "%");
+			stmt.setString(2, busqueda);
+			stmt.setString(3, "%" + busqueda + "%");
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				Libro libro = new Libro();
+				libro.setTitulo(result.getString("titulo"));
+				libro.setIsbn(result.getString("isbn"));
+				libro.setGenero(result.getString("genero"));
+				libro.setEditorial(result.getString("editorial"));
+				libro.setPrecio(result.getDouble("precio"));
+				libros.add(libro);
+			}
+		}finally {
+			this.disconnect();
+		}
+		return libros;
 		
 	}
 

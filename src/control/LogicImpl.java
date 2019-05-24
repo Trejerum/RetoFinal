@@ -2,6 +2,7 @@ package control;
 
 import java.util.ArrayList;
 
+import model.Libro;
 import model.Usuario;
 
 public class LogicImpl implements Logic{
@@ -46,9 +47,9 @@ public class LogicImpl implements Logic{
 		
 	}
 
-	public void buscarLibro(String busqueda) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Libro> buscarLibro(String busqueda) throws Exception {
+		ArrayList<Libro> libros = dataAccess.buscarLibro(busqueda);
+		return libros;		
 	}
 
 	public void modificarLibro(String isbn) throws Exception {

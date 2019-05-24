@@ -117,7 +117,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		contentPane.add(lblCompras);
 		
 		listaComprasRealizadas = new JList();
-		listaComprasRealizadas.setBounds(49, 108, 667, 263);
+		listaComprasRealizadas.setBounds(53, 107, 667, 263);
 		contentPane.add(listaComprasRealizadas);
 		modeloLista = new DefaultListModel();
 		listaComprasRealizadas.setModel(modeloLista);

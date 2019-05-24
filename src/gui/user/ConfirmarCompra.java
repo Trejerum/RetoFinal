@@ -36,7 +36,6 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 	private JButton btnCancelar;
 	private JLabel lblLibrosCarrito;
 	private JButton btnConfirmar;
-	private JList listaCarrito;
 
 	/**
 	 * Launch the application.
@@ -131,9 +130,6 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 		btnConfirmar.setBounds(507, 356, 134, 23);
 		contentPane.add(btnConfirmar);
 		
-		listaCarrito = new JList();
-		listaCarrito.setBounds(28, 136, 679, 196);
-		contentPane.add(listaCarrito);
 		
 	}
 
