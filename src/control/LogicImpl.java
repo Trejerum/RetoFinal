@@ -2,6 +2,7 @@ package control;
 
 import java.util.ArrayList;
 
+import model.Autor;
 import model.Libro;
 import model.Usuario;
 
@@ -37,7 +38,7 @@ public class LogicImpl implements Logic{
 		
 	}
 
-	public void comprarLibro(ArrayList<String> carrito, String nUsuario) throws Exception {
+	public void comprarLibro(String isbn, String nUsuario) throws Exception {
 		// TODO Auto-generated method stub
 		
 	}
@@ -86,6 +87,17 @@ public class LogicImpl implements Logic{
 		dataAccess.guardarCambiosUCon(usuario, nUsuario);
 		dataAccess.guardarCambiosUs(usuario, nUsuario);
 		
+	}
+
+	public Libro cargarLibro(String isbn) throws Exception {
+		Libro libro = dataAccess.cargarLibro(isbn);
+		return libro;
+		
+	}
+
+	public ArrayList<Autor> cargarAutoresLibro(String isbn) throws Exception {
+		ArrayList<Autor> autores = dataAccess.cargarAutoresLibro(isbn);
+		return autores;
 	}
 
 	

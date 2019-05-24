@@ -68,9 +68,9 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 		btnVolver.setBounds(10, 388, 89, 27);
 		contentPane.add(btnVolver);
 		
-		PanelBusquedaLibro panel = new PanelBusquedaLibro();
+		/*PanelBusquedaLibro panel = new PanelBusquedaLibro();
 		panel.setBounds(0,0,785,450);
-		contentPane.add(panel);
+		contentPane.add(panel);*/
 	}
 
 	@Override

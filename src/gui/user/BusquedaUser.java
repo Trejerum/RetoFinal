@@ -84,10 +84,10 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		
 		//BOTON COMPRAR
 		btnComprar = new JButton("Comprar\r\n");
-		btnComprar.setBounds(641, 259, 105, 40);
+		btnComprar.setBounds(641, 259, 132, 40);
 		contentPane.add(btnComprar);
 		
-		PanelBusquedaLibro panel = new PanelBusquedaLibro();
+		PanelBusquedaLibro panel = new PanelBusquedaLibro(nUsuario);
 		panel.setBounds(0,0,785,450);
 		contentPane.add(panel);
 		
