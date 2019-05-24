@@ -14,7 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-public class ResultadoBestSellers extends JPanel {
+public class PanelBestSellers extends JPanel {
 	private JLabel lblBestSellers;
 	private JTextField tfDate;
 	private JSeparator separator;
@@ -27,7 +27,7 @@ public class ResultadoBestSellers extends JPanel {
 	/**
 	 * Create the panel.
 	 */
-	public ResultadoBestSellers() {
+	public PanelBestSellers() {
 		setBackground(new Color(0, 153, 51));
 		setLayout(null);
 		
@@ -55,7 +55,7 @@ public class ResultadoBestSellers extends JPanel {
 		add(separator);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(87, 146, 609, 270);
+		scrollPane.setBounds(85, 127, 609, 270);
 		add(scrollPane);
 		
 		tablaBestSellers = new JTable();

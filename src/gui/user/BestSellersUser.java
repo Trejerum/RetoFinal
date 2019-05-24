@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import gui.all.ResultadoBestSellers;
+import gui.all.PanelBestSellers;
 
 import javax.swing.JSeparator;
 import java.awt.Color;
@@ -102,8 +102,8 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		btnBuscar.setBounds(309, 451, 156, 61);
 		contentPane.add(btnBuscar);
 		
-		ResultadoBestSellers panel = new ResultadoBestSellers();
-		panel.setBounds(0, 0, 791, 540);
+		PanelBestSellers panel = new PanelBestSellers();
+		panel.setBounds(0, 0, 791, 512);
 		contentPane.add(panel);
 		
 		

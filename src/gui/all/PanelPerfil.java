@@ -30,7 +30,6 @@ public class PanelPerfil extends JPanel implements ActionListener {
 	private JTextField tfEmail;
 	private JTextField tfNombre;
 	private JTextField tfContraseña;
-	private JLabel lblEditarInfo;
 	private JSeparator separator;
 	private JLabel lblNombreDeUsuario;
 	private JLabel lblNombre;
@@ -40,17 +39,15 @@ public class PanelPerfil extends JPanel implements ActionListener {
 	private JLabel lblTelefono;
 	private JLabel lblEmail;
 	private JLabel lblContrasea;
-	private JButton btnCancelar;
-	private String nUsuario;
 	private JButton btnEditar;
 	/**
 	 * Create the panel.
 	 */
-	public PanelPerfil(String usuario) {
+	public PanelPerfil() {
 		setBackground(new Color(0, 153, 51));
 		
 		setLayout(null);
-		nUsuario=usuario;
+		//nUsuario=usuario;
 		JLabel label = new JLabel("Perfil");
 		label.setFont(new Font("Maiandra GD", Font.PLAIN, 30));
 		label.setBounds(24, 11, 68, 37);
@@ -160,92 +157,15 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		
 		btnEditar.addActionListener(this);
 		
-		cargarDatos();
-	}
-	
-	
-	public void editar() {
-		tfNombre.setEditable(true);
-		tfApellidos.setEditable(true);
-		tfDireccion.setEditable(true);
-		tfEmail.setEditable(true);
-		tfTelefono.setEditable(true);
-		tfUsuario.setEditable(true);
-		tfContraseña.setEditable(true);
-		tfNombre.setForeground(new Color(0, 0, 205));
-		tfApellidos.setForeground(new Color(0, 0, 205));
-		tfDireccion.setForeground(new Color(0, 0, 205));
-		tfEmail.setForeground(new Color(0, 0, 205));
-		tfTelefono.setForeground(new Color(0, 0, 205));
-		tfUsuario.setForeground(new Color(0, 0, 205));
-		tfContraseña.setForeground(new Color(0, 0, 205));
-		btnGuardar.setEnabled(true);
-	}
-	
-	public void guardarCambios() {
-		String message;
-		try {
-			Logic logic = LogicFactory.getLogic();
-			Usuario usuario = new Usuario();
-			usuario.setNombre(tfNombre.getText());
-			usuario.setApellidos(tfApellidos.getText());
-			usuario.setDireccion(tfDireccion.getText());
-			usuario.setEmail(tfEmail.getText());
-			usuario.setTelefono(Integer.parseInt(tfTelefono.getText()));
-			usuario.setContraseña(tfContraseña.getText());
-			usuario.setNombreUsuario(tfUsuario.getText());
-			logic.guardarCambios(usuario, nUsuario);
-			message="Modificacion realizada correctamente";
-			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
-			nUsuario=usuario.getNombreUsuario();
-			tfNombre.setEditable(false);
-			tfApellidos.setEditable(false);
-			tfDireccion.setEditable(false);
-			tfEmail.setEditable(false);
-			tfTelefono.setEditable(false);
-			tfUsuario.setEditable(false);
-			tfContraseña.setEditable(false);
-			tfNombre.setForeground(new Color(0, 0, 0));
-			tfApellidos.setForeground(new Color(0, 0, 0));
-			tfDireccion.setForeground(new Color(0, 0, 0));
-			tfEmail.setForeground(new Color(0, 0, 0));
-			tfTelefono.setForeground(new Color(0, 0, 0));
-			tfUsuario.setForeground(new Color(0, 0, 0));
-			tfContraseña.setForeground(new Color(0, 0, 0));
-			btnGuardar.setEnabled(false);
-			
-		}catch(Exception e) {
-			message="Error. No se ha podido realizar el guardado";
-			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-	
-	public void cargarDatos() {
-		String message;
-		try {
-			Logic logic = LogicFactory.getLogic();
-			Usuario usuario = new Usuario();
-			usuario = logic.cargarUsuario(nUsuario);
-			
-		}catch(Exception e) {
-			message="Error. No se pudo cargar el usuario";
-			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}
-	}
-
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==btnEditar) {
-			editar();
-		}
-		else {
-			guardarCambios();
-		}
 		
 	}
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
 }
 
 	
