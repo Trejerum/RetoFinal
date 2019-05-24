@@ -40,14 +40,15 @@ public class PanelPerfil extends JPanel implements ActionListener {
 	private JLabel lblEmail;
 	private JLabel lblContrasea;
 	private JButton btnEditar;
+	private String nUsuario;
 	/**
 	 * Create the panel.
 	 */
-	public PanelPerfil() {
+	public PanelPerfil(String usuario) {
 		setBackground(new Color(0, 153, 51));
 		
 		setLayout(null);
-		//nUsuario=usuario;
+		nUsuario=usuario;
 		JLabel label = new JLabel("Perfil");
 		label.setFont(new Font("Maiandra GD", Font.PLAIN, 30));
 		label.setBounds(24, 11, 68, 37);
@@ -64,8 +65,8 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		
 		tfUsuario = new JTextField();
 		tfUsuario.setEditable(false);
-		tfUsuario.setForeground(new Color(0, 0, 205));
-		tfUsuario.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfUsuario.setForeground(Color.BLACK);
+		tfUsuario.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfUsuario.setBounds(161, 99, 145, 14);
 		add(tfUsuario);
 		tfUsuario.setColumns(10);
@@ -88,8 +89,9 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		add(lblApellidos);
 		
 		tfApellidos = new JTextField();
-		tfApellidos.setForeground(new Color(0, 0, 205));
-		tfApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfApellidos.setEditable(false);
+		tfApellidos.setForeground(Color.BLACK);
+		tfApellidos.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfApellidos.setColumns(10);
 		tfApellidos.setBounds(161, 131, 145, 14);
 		add(tfApellidos);
@@ -100,8 +102,9 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		add(lblDireccin);
 		
 		tfDireccion = new JTextField();
-		tfDireccion.setForeground(new Color(0, 0, 205));
-		tfDireccion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfDireccion.setEditable(false);
+		tfDireccion.setForeground(Color.BLACK);
+		tfDireccion.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfDireccion.setColumns(10);
 		tfDireccion.setBounds(161, 167, 145, 14);
 		add(tfDireccion);
@@ -112,8 +115,9 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		add(lblTelefono);
 		
 		tfTelefono = new JTextField();
-		tfTelefono.setForeground(new Color(0, 0, 205));
-		tfTelefono.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfTelefono.setEditable(false);
+		tfTelefono.setForeground(Color.BLACK);
+		tfTelefono.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfTelefono.setColumns(10);
 		tfTelefono.setBounds(161, 203, 145, 14);
 		add(tfTelefono);
@@ -124,15 +128,17 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		add(lblEmail);
 		
 		tfEmail = new JTextField();
-		tfEmail.setForeground(new Color(0, 0, 205));
-		tfEmail.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfEmail.setEditable(false);
+		tfEmail.setForeground(Color.BLACK);
+		tfEmail.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfEmail.setColumns(10);
 		tfEmail.setBounds(161, 239, 145, 14);
 		add(tfEmail);
 		
 		tfNombre = new JTextField();
-		tfNombre.setForeground(new Color(0, 0, 205));
-		tfNombre.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfNombre.setEditable(false);
+		tfNombre.setForeground(Color.BLACK);
+		tfNombre.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfNombre.setColumns(10);
 		tfNombre.setBounds(161, 275, 145, 14);
 		add(tfNombre);
@@ -144,8 +150,9 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		add(lblContrasea);
 		
 		tfContraseña = new JTextField();
-		tfContraseña.setForeground(new Color(0, 0, 205));
-		tfContraseña.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfContraseña.setEditable(false);
+		tfContraseña.setForeground(Color.BLACK);
+		tfContraseña.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfContraseña.setColumns(10);
 		tfContraseña.setBounds(161, 311, 145, 14);
 		add(tfContraseña);
@@ -156,13 +163,96 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		add(btnEditar);
 		
 		btnEditar.addActionListener(this);
+		btnGuardar.addActionListener(this);
 		
+		cargarDatos();
 		
 	}
+	public void cargarDatos() {
+		String message;
+		try {
+			Logic logic = LogicFactory.getLogic();
+			Usuario usuario = new Usuario();
+			usuario = logic.cargarUsuario(nUsuario);
+			tfNombre.setText(usuario.getNombre());
+			tfApellidos.setText(usuario.getApellidos());
+			tfDireccion.setText(usuario.getDireccion());
+			tfEmail.setText(usuario.getEmail());
+			tfUsuario.setText(usuario.getNombreUsuario());
+			tfContraseña.setText(usuario.getContraseña());
+			tfTelefono.setText(String.valueOf(usuario.getTelefono()));
+			
+		}catch(Exception e) {
+			message="Error. No se pudo cargar el usuario";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource()==btnEditar) {
+			editar();
+		}else {
+			guardarCambios();
+		}
 		
+	}
+	public void guardarCambios() {
+		String message;
+		try {
+			Logic logic = LogicFactory.getLogic();
+			Usuario usuario = new Usuario();
+			usuario.setNombre(tfNombre.getText());
+			usuario.setApellidos(tfApellidos.getText());
+			usuario.setDireccion(tfDireccion.getText());
+			usuario.setEmail(tfEmail.getText());
+			usuario.setTelefono(Integer.parseInt(tfTelefono.getText()));
+			usuario.setContraseña(tfContraseña.getText());
+			usuario.setNombreUsuario(tfUsuario.getText());
+			logic.guardarCambios(usuario, nUsuario);
+			message="Modificacion realizada correctamente";
+			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+			nUsuario=usuario.getNombreUsuario();
+			tfNombre.setEditable(false);
+			tfApellidos.setEditable(false);
+			tfDireccion.setEditable(false);
+			tfEmail.setEditable(false);
+			tfTelefono.setEditable(false);
+			tfUsuario.setEditable(false);
+			tfContraseña.setEditable(false);
+			tfNombre.setForeground(new Color(0, 0, 0));
+			tfApellidos.setForeground(new Color(0, 0, 0));
+			tfDireccion.setForeground(new Color(0, 0, 0));
+			tfEmail.setForeground(new Color(0, 0, 0));
+			tfTelefono.setForeground(new Color(0, 0, 0));
+			tfUsuario.setForeground(new Color(0, 0, 0));
+			tfContraseña.setForeground(new Color(0, 0, 0));
+			btnGuardar.setEnabled(false);
+			
+		}catch(Exception e) {
+			message="Error. No se ha podido realizar el guardado";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+	
+	private void editar() {
+		tfNombre.setEditable(true);
+		tfApellidos.setEditable(true);
+		tfDireccion.setEditable(true);
+		tfEmail.setEditable(true);
+		tfTelefono.setEditable(true);
+		tfUsuario.setEditable(true);
+		tfNombre.setForeground(new Color(0, 0 , 205));
+		tfApellidos.setForeground(new Color(0, 0 , 205));
+		tfDireccion.setForeground(new Color(0, 0 , 205));
+		tfEmail.setForeground(new Color(0, 0 , 205));
+		tfTelefono.setForeground(new Color(0, 0 , 205));
+		tfUsuario.setForeground(new Color(0, 0 , 205));
+		tfContraseña.setForeground(new Color(0, 0 , 205));
+		btnGuardar.setEnabled(true);
+				
 	}
 	
 

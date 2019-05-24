@@ -7,17 +7,12 @@ import javax.swing.border.EmptyBorder;
 
 import gui.all.PanelPerfil;
 
-import javax.swing.JSeparator;
-import java.awt.Color;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JTextField;
 import javax.swing.UIManager;
-import javax.swing.SwingConstants;
 
 public class PerfilAdmin extends JFrame implements ActionListener{
 
@@ -27,6 +22,7 @@ public class PerfilAdmin extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 6023274207853491447L;
 	private JPanel contentPane;
 	private JButton btnVolver;
+	public String usuario;
 
 	/**
 	 * Launch the application.
@@ -61,17 +57,21 @@ public class PerfilAdmin extends JFrame implements ActionListener{
 		btnVolver.setBounds(430, 307, 131, 31);
 		contentPane.add(btnVolver);
 		
-		PanelPerfil panel = new PanelPerfil();
+		PanelPerfil panel = new PanelPerfil(usuario);
 		panel.setBounds(0, 0, 593, 361);
 		contentPane.add(panel);
 		
-		
+		btnVolver.addActionListener(this);
 		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource()==btnVolver) {
+			InicioAdmin inicioAdmin = new InicioAdmin();
+			inicioAdmin.setVisible(true);
+			this.dispose();
+		}
 		
 	}
 }

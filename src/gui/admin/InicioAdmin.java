@@ -12,6 +12,8 @@ import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.Color;
+import javax.swing.UIManager;
 
 public class InicioAdmin extends JFrame implements ActionListener{
 
@@ -28,6 +30,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	private JButton btnModificar;
 	private JButton btnBuscar;
 	private JButton btnAñadir;
+	private JLabel lblAdmin;
 
 	/**
 	 * Launch the application.
@@ -81,6 +84,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		contentPane.add(btnBestSellers);
 		
 		btnModificar = new JButton("Modificar");
+		btnModificar.setBackground(UIManager.getColor("Button.background"));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnModificar.setBounds(10, 146, 149, 23);
 		contentPane.add(btnModificar);
@@ -95,9 +99,9 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		btnAñadir.setBounds(184, 146, 153, 23);
 		contentPane.add(btnAñadir);
 		
-		JLabel lblDiego = new JLabel("Diego");
-		lblDiego.setBounds(156, 15, 55, 12);
-		contentPane.add(lblDiego);
+		lblAdmin = new JLabel("Diego");
+		lblAdmin.setBounds(156, 15, 55, 12);
+		contentPane.add(lblAdmin);
 	}
 
 	@Override
