@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 import control.Logic;
 import control.LogicFactory;
 import gui.user.BusquedaUser;
+import gui.user.ConfirmarCompra;
 import model.Autor;
 import model.Libro;
 
@@ -38,6 +39,7 @@ public class Descripcion extends JFrame implements ActionListener{
 	private JButton btnComprar;
 	private JButton btnVolverAtras;
 	private String nUsuario;
+	private String selectedIsbn;
 
 	/**
 	 * Create the frame.
@@ -45,6 +47,7 @@ public class Descripcion extends JFrame implements ActionListener{
 	 * @param usuario 
 	 */
 	public Descripcion(String isbn, String usuario) {
+		selectedIsbn=isbn;
 		nUsuario=usuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 658, 453);
@@ -143,7 +146,9 @@ public class Descripcion extends JFrame implements ActionListener{
 	}
 	
 	public void comprar() {
-		
+		ConfirmarCompra confirmar = new ConfirmarCompra(selectedIsbn, nUsuario);
+		confirmar.setVisible(true);
+		this.dispose();
 	}
 	
 	public void volverAtras() {

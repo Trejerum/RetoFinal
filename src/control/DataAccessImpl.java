@@ -7,12 +7,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Properties;
-
-import javax.print.attribute.standard.DateTimeAtCompleted;
 
 import model.Autor;
 import model.Libro;
@@ -153,8 +149,9 @@ public class DataAccessImpl implements DataAccess{
 	public void comprarLibro(String isbn, String nUsuario) throws SQLException, ClassNotFoundException, IOException {
 		try {
 			this.connect();
-			String sql="";
+			String sql="INSERT INTO compras (idCompra, nombreUsuario, isbn, numUnidades, fechaCompra, importeTotal, numCuenta) VALUES (?, ?, ?, ?, ?, ?, ?)";
 			stmt = con.prepareStatement(sql);
+			
 			
 		}finally {
 			this.disconnect();
@@ -280,6 +277,7 @@ public class DataAccessImpl implements DataAccess{
 				usuario.setEmail(result.getString("Email"));
 				usuario.setContraseña(result.getString("Contraseña"));
 				usuario.setNombreUsuario(result.getString("nombreUsuario"));
+				usuario.setNumCuenta(result.getInt("NumCuenta"));
 			}
 		}finally {
 			this.disconnect();
@@ -291,7 +289,7 @@ public class DataAccessImpl implements DataAccess{
 	public void guardarCambiosUCon(Usuario usuario, String nUsuario) throws SQLException, ClassNotFoundException, IOException {
 		try {
 			this.connect();
-			String sql = "update uConvencional set nombreUsuario=?, nombre=?, apellidos=?, email=?, telefono=?, direccion=?, numCuenta=null where nombreUsuario=?";
+			String sql = "update uConvencional set nombreUsuario=?, nombre=?, apellidos=?, email=?, telefono=?, direccion=?, numCuenta=? where nombreUsuario=?";
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, usuario.getNombreUsuario());
 			stmt.setString(2, usuario.getNombre());
@@ -299,7 +297,8 @@ public class DataAccessImpl implements DataAccess{
 			stmt.setString(4, usuario.getEmail());
 			stmt.setInt(5, usuario.getTelefono());
 			stmt.setString(6, usuario.getDireccion());
-			stmt.setString(7, nUsuario);
+			stmt.setInt(7, usuario.getNumCuenta());
+			stmt.setString(8, nUsuario);
 			stmt.executeUpdate();
 			
 		}finally {

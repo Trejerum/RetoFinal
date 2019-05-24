@@ -3,9 +3,12 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import gui.all.Descripcion;
 import gui.all.PanelBusquedaLibro;
 
 import javax.swing.JSeparator;
+import javax.swing.SwingUtilities;
+
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -30,6 +33,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 	private JButton btnRecomendados;
 	private JButton btnComprar;
 	private String nUsuario;
+	private PanelBusquedaLibro panel;
 
 	/**
 	 * Create the frame.
@@ -87,7 +91,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		btnComprar.setBounds(641, 259, 132, 40);
 		contentPane.add(btnComprar);
 		
-		PanelBusquedaLibro panel = new PanelBusquedaLibro(nUsuario);
+		panel = new PanelBusquedaLibro(nUsuario);
 		panel.setBounds(0,0,785,450);
 		contentPane.add(panel);
 		
@@ -132,7 +136,10 @@ public class BusquedaUser extends JFrame implements ActionListener{
 	}
 	
 	public void comprar() {
-		//TODO
+		String isbn = panel.getIsbn();
+		ConfirmarCompra confirmarCompra = new ConfirmarCompra(isbn, nUsuario);
+		confirmarCompra.setVisible(true);
+		this.dispose();
 	}
 	
 	public void verRecomendados() {

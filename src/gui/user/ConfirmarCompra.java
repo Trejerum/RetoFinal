@@ -6,11 +6,24 @@ import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+
+import control.Logic;
+import control.LogicFactory;
+import model.Compra;
+import model.Libro;
+import model.Usuario;
+
+import javax.swing.JSpinner;
 
 public class ConfirmarCompra extends JFrame implements ActionListener{
 
@@ -23,11 +36,25 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 	private JSeparator separator;
 	private JButton btnCancelar;
 	private JButton btnConfirmar;
+	private JTable table;
+	private String nUsuario;
+	private DefaultTableModel modelo;
+	private JLabel lblInformacion;
+	private JLabel lblNombreDeUsuario;
+	private JLabel lblNumeroDeCuenta;
+	private JLabel lblFechaCompra;
+	private JSpinner spinner;
+	private JScrollPane scrollPane;
+	private JLabel lblValorUsuario;
+	private JLabel lblValorCuenta;
+	private JLabel lblValorFecha;
 
 	/**
 	 * Create the frame.
+	 * @param nUsuario 
 	 */
-	public ConfirmarCompra(String isbn) {
+	public ConfirmarCompra(String isbn, String usuario) {
+		nUsuario=usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 648, 384);
@@ -55,13 +82,105 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 		btnConfirmar.setBounds(377, 308, 134, 23);
 		contentPane.add(btnConfirmar);
 		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(36, 202, 427, 57);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		modelo = new DefaultTableModel(
+				new Object[][] {
+					
+				},
+				new String[] {
+						"ISBN", "Titulo", "Precio", "Descuento", "Precio Final"
+				}
+			);
+		table.setModel(modelo);
+		scrollPane.setViewportView(table);
+		
+		spinner = new JSpinner();
+		spinner.setBounds(473, 226, 42, 20);
+		contentPane.add(spinner);
+		
+		lblInformacion = new JLabel("Informacion: ");
+		lblInformacion.setBounds(36, 77, 89, 14);
+		contentPane.add(lblInformacion);
+		
+		lblNombreDeUsuario = new JLabel("Nombre de usuario: ");
+		lblNombreDeUsuario.setBounds(53, 104, 150, 14);
+		contentPane.add(lblNombreDeUsuario);
+		
+		lblNumeroDeCuenta = new JLabel("Numero de cuenta:");
+		lblNumeroDeCuenta.setBounds(53, 129, 118, 14);
+		contentPane.add(lblNumeroDeCuenta);
+		
+		lblFechaCompra = new JLabel("Fecha compra: ");
+		lblFechaCompra.setBounds(53, 154, 100, 14);
+		contentPane.add(lblFechaCompra);
+		
+		lblValorUsuario = new JLabel("New label");
+		lblValorUsuario.setBounds(170, 104, 100, 14);
+		contentPane.add(lblValorUsuario);
+		
+		lblValorCuenta = new JLabel("New label");
+		lblValorCuenta.setBounds(170, 129, 100, 14);
+		contentPane.add(lblValorCuenta);
+		
+		lblValorFecha = new JLabel("New label");
+		lblValorFecha.setBounds(147, 154, 89, 14);
+		contentPane.add(lblValorFecha);
+		
+		cargarDatos(isbn);
+		
+		btnCancelar.addActionListener(this);
+		btnConfirmar.addActionListener(this);
 		
 		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getSource()==btnCancelar) {
+			BusquedaUser busqueda = new BusquedaUser(nUsuario);
+			busqueda.setVisible(true);
+			this.dispose();
+		}
+		else {
+			comprar();
+		}
+	}
+	
+	public void cargarDatos(String isbn) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		try {
+			Logic logic = LogicFactory.getLogic();
+			Libro libro = logic.cargarLibro(isbn);
+			double precioFinal = libro.getPrecio() - libro.getPrecio() * (libro.getDescuento()/100);
+			Object rowdata[]= {libro.getIsbn(), libro.getTitulo(), libro.getPrecio(), libro.getDescuento(), libro.getPrecio()};
+			modelo.addRow(rowdata);
+			table.setModel(modelo);
+			Usuario usuario = logic.cargarUsuario(nUsuario);
+			lblValorCuenta.setText(String.valueOf(usuario.getNumCuenta()));
+			lblValorUsuario.setText(nUsuario);
+			LocalDate fecha=LocalDate.now();
+			lblValorFecha.setText(fecha.format(formatter));
+		}catch(Exception e) {
+			String message = "Error. No se han podido cargar los datos";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+	
+	public void comprar() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		try {
+			Compra compra = new Compra();
+			compra.setFechaCompra(LocalDate.parse((CharSequence) lblValorFecha, formatter));
+			System.out.println(compra.getFechaCompra());				//TODO arreglar
+			Logic logic = LogicFactory.getLogic();
+			//logic.comprarLibro(compra);
+		}catch(Exception e) {
+			
+		}
 	}
 }
