@@ -5,13 +5,18 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import gui.all.PanelBusquedaLibro;
+
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import java.time.LocalDate;
+import javax.swing.JLabel;
+import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 public class BusquedaAdmin extends JFrame implements ActionListener{
@@ -23,6 +28,8 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private JSeparator menu_separator;
 	private JButton btnVolver;
+	private static String nisbn;
+	private static String nUsuario;
 
 	/**
 	 * Launch the application.
@@ -31,7 +38,7 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					BusquedaAdmin frame = new BusquedaAdmin();
+					BusquedaAdmin frame = new BusquedaAdmin(nUsuario, nisbn);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -43,7 +50,9 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 	/**
 	 * Create the frame.
 	 */
-	public BusquedaAdmin() {
+	public BusquedaAdmin(String isbn, String usuario) {
+		nisbn = isbn;
+		nUsuario = usuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 460);
 		contentPane = new JPanel();
@@ -63,9 +72,9 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 		btnVolver.setBounds(10, 388, 89, 27);
 		contentPane.add(btnVolver);
 		
-		/*PanelBusquedaLibro panel = new PanelBusquedaLibro();
+		PanelBusquedaLibro panel = new PanelBusquedaLibro(isbn);
 		panel.setBounds(0,0,785,450);
-		contentPane.add(panel);*/
+		contentPane.add(panel);
 	}
 
 	@Override
