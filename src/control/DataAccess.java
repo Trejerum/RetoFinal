@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import model.Autor;
 import model.Libro;
 import model.Usuario;
 
@@ -23,7 +24,7 @@ public interface DataAccess {
 	
 	public void insertarLibro() throws SQLException, ClassNotFoundException, IOException;
 	
-	public void comprarLibro(ArrayList<String> carrito, String nUsuario) throws SQLException, ClassNotFoundException, IOException;
+	public void comprarLibro(String isbn, String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 	
 	public void verRecomendados(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 	
@@ -44,5 +45,9 @@ public interface DataAccess {
 	public void guardarCambiosUCon(Usuario usuario, String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 	
 	public void guardarCambiosUs(Usuario usuario, String nUsuario) throws SQLException, ClassNotFoundException, IOException;
+
+	public Libro cargarLibro(String isbn) throws SQLException, ClassNotFoundException, IOException;
+
+	public ArrayList<Autor> cargarAutoresLibro(String isbn) throws SQLException, ClassNotFoundException, IOException;
 
 }

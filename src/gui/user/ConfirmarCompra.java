@@ -1,6 +1,4 @@
 package gui.user;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -9,14 +7,23 @@ import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.TextField;
+import javax.swing.JOptionPane;
 
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JList;
+import java.awt.Font;
+import javax.swing.JTable;
+import javax.swing.JScrollPane;
+import javax.swing.table.DefaultTableModel;
+
+import control.Logic;
+import control.LogicFactory;
+import model.Compra;
+import model.Libro;
+import model.Usuario;
+
+import javax.swing.JSpinner;
 
 public class ConfirmarCompra extends JFrame implements ActionListener{
 
@@ -25,117 +32,155 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 	 */
 	private static final long serialVersionUID = -9196680677816620968L;
 	private JPanel contentPane;
-	private JSeparator menu_separator;
-	private JButton btnHome;
-	private JButton btnBestSellers;
-	private JButton btnUsuario;
-	private JButton btnCompras;
-	private JButton btnBuscar;
 	private JLabel lblConfirmarCompra;
 	private JSeparator separator;
 	private JButton btnCancelar;
-	private JLabel lblLibrosCarrito;
 	private JButton btnConfirmar;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ConfirmarCompra frame = new ConfirmarCompra();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JTable table;
+	private String nUsuario;
+	private DefaultTableModel modelo;
+	private JLabel lblInformacion;
+	private JLabel lblNombreDeUsuario;
+	private JLabel lblNumeroDeCuenta;
+	private JLabel lblFechaCompra;
+	private JSpinner spinner;
+	private JScrollPane scrollPane;
+	private JLabel lblValorUsuario;
+	private JLabel lblValorCuenta;
+	private JLabel lblValorFecha;
 
 	/**
 	 * Create the frame.
+	 * @param nUsuario 
 	 */
-	public ConfirmarCompra() {
+	public ConfirmarCompra(String isbn, String usuario) {
+		nUsuario=usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 791, 495);
+		setBounds(100, 100, 648, 384);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		menu_separator = new JSeparator();
-		menu_separator.setBounds(0, 405, 784, 2);
-		contentPane.add(menu_separator);
-		
-		btnHome = new JButton("Casa(HOME)");
-		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(0, 204, 51));
-		btnHome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnHome.setBounds(0, 407, 156, 61);
-		contentPane.add(btnHome);
-		
-		btnBestSellers = new JButton("Estrella(BestSellers)");
-		btnBestSellers.setBackground(new Color(0, 204, 51));
-		btnBestSellers.setBounds(154, 407, 157, 61);
-		contentPane.add(btnBestSellers);
-		
-		btnUsuario = new JButton("Monigote(usuario)");
-		btnUsuario.setBackground(new Color(0, 153, 51));
-		btnUsuario.setBounds(617, 407, 167, 61);
-		contentPane.add(btnUsuario);
-		
-		btnCompras = new JButton("Carrito(Compras)");
-		btnCompras.setBackground(new Color(0, 204, 51));
-		btnCompras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnCompras.setBounds(463, 407, 156, 61);
-		contentPane.add(btnCompras);
-		
-		btnBuscar = new JButton("Lupa(buscar)");
-		btnBuscar.setBackground(new Color(0, 204, 51));
-		btnBuscar.setBounds(309, 407, 156, 61);
-		contentPane.add(btnBuscar);
-		
 		lblConfirmarCompra = new JLabel("Confirmar compra");
 		lblConfirmarCompra.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
 		lblConfirmarCompra.setBounds(10, 20, 349, 27);
 		contentPane.add(lblConfirmarCompra);
-		LocalDate calendario = LocalDate.now();
-		TextField texto = new TextField(calendario.toString());
-		String fecha = texto.getText();
 		
 		separator = new JSeparator();
 		separator.setBounds(0, 60, 784, 2);
 		contentPane.add(separator);
 		
 		btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(670, 358, 89, 23);
+		btnCancelar.setBounds(543, 308, 89, 23);
 		contentPane.add(btnCancelar);
-		
-		lblLibrosCarrito = new JLabel("Libros en el carrito:");
-		lblLibrosCarrito.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		lblLibrosCarrito.setBounds(28, 73, 146, 27);
-		contentPane.add(lblLibrosCarrito);
 		
 		btnConfirmar = new JButton("Confirmar");
 		btnConfirmar.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		btnConfirmar.setBounds(507, 356, 134, 23);
+		btnConfirmar.setBounds(377, 308, 134, 23);
 		contentPane.add(btnConfirmar);
+		
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(36, 202, 427, 57);
+		contentPane.add(scrollPane);
+		
+		table = new JTable();
+		modelo = new DefaultTableModel(
+				new Object[][] {
+					
+				},
+				new String[] {
+						"ISBN", "Titulo", "Precio", "Descuento", "Precio Final"
+				}
+			);
+		table.setModel(modelo);
+		scrollPane.setViewportView(table);
+		
+		spinner = new JSpinner();
+		spinner.setBounds(473, 226, 42, 20);
+		contentPane.add(spinner);
+		
+		lblInformacion = new JLabel("Informacion: ");
+		lblInformacion.setBounds(36, 77, 89, 14);
+		contentPane.add(lblInformacion);
+		
+		lblNombreDeUsuario = new JLabel("Nombre de usuario: ");
+		lblNombreDeUsuario.setBounds(53, 104, 150, 14);
+		contentPane.add(lblNombreDeUsuario);
+		
+		lblNumeroDeCuenta = new JLabel("Numero de cuenta:");
+		lblNumeroDeCuenta.setBounds(53, 129, 118, 14);
+		contentPane.add(lblNumeroDeCuenta);
+		
+		lblFechaCompra = new JLabel("Fecha compra: ");
+		lblFechaCompra.setBounds(53, 154, 100, 14);
+		contentPane.add(lblFechaCompra);
+		
+		lblValorUsuario = new JLabel("New label");
+		lblValorUsuario.setBounds(170, 104, 100, 14);
+		contentPane.add(lblValorUsuario);
+		
+		lblValorCuenta = new JLabel("New label");
+		lblValorCuenta.setBounds(170, 129, 100, 14);
+		contentPane.add(lblValorCuenta);
+		
+		lblValorFecha = new JLabel("New label");
+		lblValorFecha.setBounds(147, 154, 89, 14);
+		contentPane.add(lblValorFecha);
+		
+		cargarDatos(isbn);
+		
+		btnCancelar.addActionListener(this);
+		btnConfirmar.addActionListener(this);
 		
 		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
+		if(e.getSource()==btnCancelar) {
+			BusquedaUser busqueda = new BusquedaUser(nUsuario);
+			busqueda.setVisible(true);
+			this.dispose();
+		}
+		else {
+			comprar();
+		}
+	}
+	
+	public void cargarDatos(String isbn) {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		try {
+			Logic logic = LogicFactory.getLogic();
+			Libro libro = logic.cargarLibro(isbn);
+			double precioFinal = libro.getPrecio() - libro.getPrecio() * (libro.getDescuento()/100);
+			Object rowdata[]= {libro.getIsbn(), libro.getTitulo(), libro.getPrecio(), libro.getDescuento(), libro.getPrecio()};
+			modelo.addRow(rowdata);
+			table.setModel(modelo);
+			Usuario usuario = logic.cargarUsuario(nUsuario);
+			lblValorCuenta.setText(String.valueOf(usuario.getNumCuenta()));
+			lblValorUsuario.setText(nUsuario);
+			LocalDate fecha=LocalDate.now();
+			lblValorFecha.setText(fecha.format(formatter));
+		}catch(Exception e) {
+			String message = "Error. No se han podido cargar los datos";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+	}
+	
+	public void comprar() {
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		try {
+			Compra compra = new Compra();
+			compra.setFechaCompra(LocalDate.parse((CharSequence) lblValorFecha, formatter));
+			System.out.println(compra.getFechaCompra());				//TODO arreglar
+			Logic logic = LogicFactory.getLogic();
+			//logic.comprarLibro(compra);
+		}catch(Exception e) {
+			
+		}
 	}
 }

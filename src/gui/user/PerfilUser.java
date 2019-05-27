@@ -76,7 +76,6 @@ public class PerfilUser extends JFrame implements ActionListener{
 		btnCompras.addActionListener(this);
 		btnHome.addActionListener(this);
 		
-		//cargarDatos();
 		
 		
 	}

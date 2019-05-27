@@ -56,6 +56,8 @@ public class Registro extends JFrame implements ActionListener{
 	private JLabel lblAutores;
 	private JLabel lblGeneros;
 	private JScrollPane scrollPane;
+	private JTextField tfNumCuenta;
+	private JLabel lblNumeroDeCuenta;
 
 	/**
 	 * Launch the application.
@@ -78,7 +80,7 @@ public class Registro extends JFrame implements ActionListener{
 	 */
 	public Registro() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 629, 682);
+		setBounds(100, 100, 629, 734);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -139,30 +141,30 @@ public class Registro extends JFrame implements ActionListener{
 		tfEmail.setColumns(10);
 		
 		lblNombreUsuario = new JLabel("Nombre de usuario");
-		lblNombreUsuario.setBounds(38, 379, 162, 14);
+		lblNombreUsuario.setBounds(38, 414, 162, 14);
 		contentPane.add(lblNombreUsuario);
 		
 		tfNombreUsuario = new JTextField();
-		tfNombreUsuario.setBounds(38, 395, 272, 20);
+		tfNombreUsuario.setBounds(38, 439, 272, 20);
 		contentPane.add(tfNombreUsuario);
 		tfNombreUsuario.setColumns(10);
 		
 		lblContraseña = new JLabel("Contrase\u00F1a");
-		lblContraseña.setBounds(38, 426, 120, 14);
+		lblContraseña.setBounds(38, 470, 120, 14);
 		contentPane.add(lblContraseña);
 		
 		btnRegistrarme = new JButton("REGISTRARME");
 		btnRegistrarme.setBackground(UIManager.getColor("Button.background"));
 		btnRegistrarme.setForeground(new Color(0, 0, 128));
-		btnRegistrarme.setBounds(101, 538, 130, 35);
+		btnRegistrarme.setBounds(101, 603, 130, 35);
 		contentPane.add(btnRegistrarme);
 		
 		separator = new JSeparator();
-		separator.setBounds(38, 366, 272, 2);
+		separator.setBounds(38, 401, 272, 2);
 		contentPane.add(separator);
 		
 		pfContraseña = new JPasswordField();
-		pfContraseña.setBounds(38, 441, 272, 20);
+		pfContraseña.setBounds(38, 495, 272, 20);
 		contentPane.add(pfContraseña);
 		
 		lblRegistro = new JLabel("REGISTRO");
@@ -171,15 +173,15 @@ public class Registro extends JFrame implements ActionListener{
 		contentPane.add(lblRegistro);
 		
 		btnVolver = new JButton("VOLVER ATRAS");
-		btnVolver.setBounds(101, 596, 130, 23);
+		btnVolver.setBounds(101, 649, 130, 23);
 		contentPane.add(btnVolver);
 		
 		JLabel lblConfirmar = new JLabel("Confirmar contrase\u00F1a");
-		lblConfirmar.setBounds(38, 472, 147, 14);
+		lblConfirmar.setBounds(38, 526, 147, 14);
 		contentPane.add(lblConfirmar);
 		
 		pfConfirmar = new JPasswordField();
-		pfConfirmar.setBounds(38, 486, 272, 20);
+		pfConfirmar.setBounds(38, 551, 272, 20);
 		contentPane.add(pfConfirmar);
 		
 		JLabel lblGustos = new JLabel("Gustos");
@@ -206,6 +208,15 @@ public class Registro extends JFrame implements ActionListener{
 		scrollPane.setBounds(387, 395, 162, 111);
 		contentPane.add(scrollPane);
 		scrollPane.setViewportView(listaAutores);
+		
+		tfNumCuenta = new JTextField();
+		tfNumCuenta.setBounds(38, 370, 272, 20);
+		contentPane.add(tfNumCuenta);
+		tfNumCuenta.setColumns(10);
+		
+		lblNumeroDeCuenta = new JLabel("Numero de cuenta");
+		lblNumeroDeCuenta.setBounds(38, 351, 120, 14);
+		contentPane.add(lblNumeroDeCuenta);
 		
 		btnRegistrarme.addActionListener(this);
 		btnVolver.addActionListener(this);
@@ -266,6 +277,7 @@ public class Registro extends JFrame implements ActionListener{
 				usuario.setTelefono(Integer.parseInt(tfTelefono.getText()));
 				usuario.setNombreUsuario(tfNombreUsuario.getText());
 				usuario.setContraseña(new String(pfContraseña.getPassword()));
+				usuario.setNumCuenta(Integer.parseInt(tfNumCuenta.getText()));
 				ArrayList<String> autoresSelec = (ArrayList<String>) listaAutores.getSelectedValuesList();
 				ArrayList<String> generosSelec = (ArrayList<String>) listaGeneros.getSelectedValuesList();
 				Logic logic = LogicFactory.getLogic();

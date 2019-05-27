@@ -21,8 +21,7 @@ public class Libro {
 	private boolean oferta;
 	private double descuento;
 	private int stock;
-	//private ArrayList<String> autores = new ArrayList<String>(); 
-	//private ArrayList<String> generos = new ArrayList<String>();
+	private ArrayList<String> autores = new ArrayList<String>(); 
 	
 	// Constructors
 	/**

@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -20,6 +21,7 @@ import control.Logic;
 import control.LogicFactory;
 import model.Libro;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 
 public class PanelBusquedaLibro extends JPanel implements ActionListener{
 	/**
@@ -35,13 +37,16 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 	private JScrollPane scrollPane;
 	private JButton btnVerDescripcion;
 	private JLabel lblBuscar;
+	private String nUsuario;
 	
 	
 	/**
 	 * Create the panel.
+	 * @param nUsuario 
 	 */
 	
-	public PanelBusquedaLibro() {
+	public PanelBusquedaLibro(String usuario) {
+		nUsuario=usuario;
 		setBackground(new Color(0, 153, 51));
 		setForeground(new Color(0, 0, 0));
 		
@@ -83,7 +88,7 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 		scrollPane.setViewportView(tablaBusqueda);
 		
 		btnVerDescripcion = new JButton("Ver descripcion");
-		btnVerDescripcion.setBounds(641, 202, 105, 40);
+		btnVerDescripcion.setBounds(641, 202, 132, 40);
 		add(btnVerDescripcion);
 		
 		lblBuscar = new JLabel("Buscar:");
@@ -137,7 +142,20 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 	}
 	
 	public void mostrarDescripcion() {
-		
+		int columna=0;
+		int fila = tablaBusqueda.getSelectedRow();
+		String isbn = tablaBusqueda.getModel().getValueAt(fila, columna).toString();
+		Descripcion descripcion = new Descripcion(isbn, nUsuario);
+		descripcion.setVisible(true);
+		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+		frame.dispose();
+	}
+	
+	public String getIsbn() {
+		int columna=0;
+		int fila = tablaBusqueda.getSelectedRow();
+		String isbn = tablaBusqueda.getModel().getValueAt(fila, columna).toString();
+		return isbn;
 	}
 	
 	

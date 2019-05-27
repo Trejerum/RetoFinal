@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import model.Autor;
 import model.Libro;
 import model.Usuario;
 
@@ -89,7 +90,7 @@ public class DataAccessImpl implements DataAccess{
 	public void regUsUConvencional(Usuario usuario) throws ClassNotFoundException, SQLException, IOException{
 		try {
 			this.connect();
-			String sql = "INSERT INTO uconvencional VALUES (?, ?, ?, ?, ?, ?, null)";
+			String sql = "INSERT INTO uconvencional VALUES (?, ?, ?, ?, ?, ?, ?)";
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, usuario.getNombreUsuario());
 			stmt.setString(2, usuario.getNombre());
@@ -97,6 +98,7 @@ public class DataAccessImpl implements DataAccess{
 			stmt.setString(4, usuario.getDireccion());
 			stmt.setInt(5, usuario.getTelefono());
 			stmt.setString(6, usuario.getEmail());
+			stmt.setInt(7, usuario.getNumCuenta());
 			stmt.executeUpdate();
 		}finally {
 			this.disconnect();
@@ -144,8 +146,16 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
-	public void comprarLibro(ArrayList<String> carrito, String nUsuario) throws SQLException, ClassNotFoundException, IOException {
-		// TODO Auto-generated method stub
+	public void comprarLibro(String isbn, String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql="INSERT INTO compras (idCompra, nombreUsuario, isbn, numUnidades, fechaCompra, importeTotal, numCuenta) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			stmt = con.prepareStatement(sql);
+			
+			
+		}finally {
+			this.disconnect();
+		}
 		
 	}
 
@@ -267,6 +277,7 @@ public class DataAccessImpl implements DataAccess{
 				usuario.setEmail(result.getString("Email"));
 				usuario.setContraseña(result.getString("Contraseña"));
 				usuario.setNombreUsuario(result.getString("nombreUsuario"));
+				usuario.setNumCuenta(result.getInt("NumCuenta"));
 			}
 		}finally {
 			this.disconnect();
@@ -278,7 +289,7 @@ public class DataAccessImpl implements DataAccess{
 	public void guardarCambiosUCon(Usuario usuario, String nUsuario) throws SQLException, ClassNotFoundException, IOException {
 		try {
 			this.connect();
-			String sql = "update uConvencional set nombreUsuario=?, nombre=?, apellidos=?, email=?, telefono=?, direccion=?, numCuenta=null where nombreUsuario=?";
+			String sql = "update uConvencional set nombreUsuario=?, nombre=?, apellidos=?, email=?, telefono=?, direccion=?, numCuenta=? where nombreUsuario=?";
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, usuario.getNombreUsuario());
 			stmt.setString(2, usuario.getNombre());
@@ -286,7 +297,8 @@ public class DataAccessImpl implements DataAccess{
 			stmt.setString(4, usuario.getEmail());
 			stmt.setInt(5, usuario.getTelefono());
 			stmt.setString(6, usuario.getDireccion());
-			stmt.setString(7, nUsuario);
+			stmt.setInt(7, usuario.getNumCuenta());
+			stmt.setString(8, nUsuario);
 			stmt.executeUpdate();
 			
 		}finally {
@@ -310,6 +322,56 @@ public class DataAccessImpl implements DataAccess{
 			this.disconnect();
 		}
 		
+	}
+
+	@Override
+	public Libro cargarLibro(String isbn) throws SQLException, ClassNotFoundException, IOException {
+		Libro libro = new Libro();
+		try {
+			this.connect();
+			String sql="select distinct libros.isbn, titulo, genero, descripcion, editorial,fechadepublicacion, precio, oferta, descuento "
+					+ "from libros "
+					+ "where isbn = ? ";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, isbn);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				libro.setTitulo(result.getString("titulo"));
+				libro.setIsbn(result.getString("isbn"));
+				libro.setGenero(result.getString("genero"));
+				libro.setDescripcion(result.getString("descripcion"));
+				libro.setEditorial(result.getString("editorial"));
+				libro.setFechaPublicacion(result.getDate("fechaDePublicacion").toLocalDate());
+				libro.setPrecio(result.getDouble("precio"));
+				libro.setOferta(Boolean.parseBoolean(result.getString("oferta")));
+				libro.setDescuento(result.getDouble("descuento"));
+			}
+		}finally {
+			this.disconnect();
+		}
+		return libro;
+		
+	}
+
+	@Override
+	public ArrayList<Autor> cargarAutoresLibro(String isbn) throws SQLException, ClassNotFoundException, IOException {
+		ArrayList<Autor> autores = new ArrayList<Autor>();
+		try {
+			this.connect();
+			String sql="select nombreAutor, autoreslibro.codAutor from autores, autoreslibro where autores.codAutor=autoreslibro.codAutor and autoresLibro.isbn=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, isbn);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				Autor autor = new Autor();
+				autor.setNomAutor(result.getString("nombreAutor"));
+				autor.setCodAutor(result.getString("codautor"));
+				autores.add(autor);
+			}
+		}finally {
+			this.disconnect();
+		}
+		return autores;
 	}
 
 }

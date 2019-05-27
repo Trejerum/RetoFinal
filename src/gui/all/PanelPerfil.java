@@ -41,6 +41,8 @@ public class PanelPerfil extends JPanel implements ActionListener {
 	private JLabel lblContrasea;
 	private JButton btnEditar;
 	private String nUsuario;
+	private JLabel lblNumeroDeCuenta;
+	private JTextField tfNumCuenta;
 	/**
 	 * Create the panel.
 	 */
@@ -146,7 +148,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		lblContrasea = new JLabel("Contrase\u00F1a: ");
 		lblContrasea.setHorizontalAlignment(SwingConstants.RIGHT);
 		lblContrasea.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblContrasea.setBounds(65, 309, 79, 14);
+		lblContrasea.setBounds(68, 340, 79, 14);
 		add(lblContrasea);
 		
 		tfContraseña = new JTextField();
@@ -154,7 +156,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		tfContraseña.setForeground(Color.BLACK);
 		tfContraseña.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		tfContraseña.setColumns(10);
-		tfContraseña.setBounds(161, 311, 145, 14);
+		tfContraseña.setBounds(161, 342, 145, 14);
 		add(tfContraseña);
 		
 		btnEditar = new JButton("Editar");
@@ -164,6 +166,17 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		
 		btnEditar.addActionListener(this);
 		btnGuardar.addActionListener(this);
+		
+		lblNumeroDeCuenta = new JLabel("Numero de cuenta:");
+		lblNumeroDeCuenta.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblNumeroDeCuenta.setBounds(24, 308, 142, 14);
+		add(lblNumeroDeCuenta);
+		
+		tfNumCuenta = new JTextField();
+		tfNumCuenta.setEditable(false);
+		tfNumCuenta.setBounds(161, 310, 145, 14);
+		add(tfNumCuenta);
+		tfNumCuenta.setColumns(10);
 		
 		cargarDatos();
 		
@@ -181,6 +194,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 			tfUsuario.setText(usuario.getNombreUsuario());
 			tfContraseña.setText(usuario.getContraseña());
 			tfTelefono.setText(String.valueOf(usuario.getTelefono()));
+			tfNumCuenta.setText(String.valueOf(usuario.getNumCuenta()));
 			
 		}catch(Exception e) {
 			message="Error. No se pudo cargar el usuario";
@@ -210,6 +224,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 			usuario.setTelefono(Integer.parseInt(tfTelefono.getText()));
 			usuario.setContraseña(tfContraseña.getText());
 			usuario.setNombreUsuario(tfUsuario.getText());
+			usuario.setNumCuenta(Integer.parseInt(tfNumCuenta.getText()));
 			logic.guardarCambios(usuario, nUsuario);
 			message="Modificacion realizada correctamente";
 			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
@@ -220,6 +235,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 			tfEmail.setEditable(false);
 			tfTelefono.setEditable(false);
 			tfUsuario.setEditable(false);
+			tfNumCuenta.setEditable(false);
 			tfContraseña.setEditable(false);
 			tfNombre.setForeground(new Color(0, 0, 0));
 			tfApellidos.setForeground(new Color(0, 0, 0));
@@ -228,6 +244,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 			tfTelefono.setForeground(new Color(0, 0, 0));
 			tfUsuario.setForeground(new Color(0, 0, 0));
 			tfContraseña.setForeground(new Color(0, 0, 0));
+			tfNumCuenta.setForeground(new Color(0, 0 , 0));
 			btnGuardar.setEnabled(false);
 			
 		}catch(Exception e) {
@@ -244,6 +261,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		tfEmail.setEditable(true);
 		tfTelefono.setEditable(true);
 		tfUsuario.setEditable(true);
+		tfNumCuenta.setEditable(true);
 		tfNombre.setForeground(new Color(0, 0 , 205));
 		tfApellidos.setForeground(new Color(0, 0 , 205));
 		tfDireccion.setForeground(new Color(0, 0 , 205));
@@ -251,6 +269,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		tfTelefono.setForeground(new Color(0, 0 , 205));
 		tfUsuario.setForeground(new Color(0, 0 , 205));
 		tfContraseña.setForeground(new Color(0, 0 , 205));
+		tfNumCuenta.setForeground(new Color(0, 0 , 205));
 		btnGuardar.setEnabled(true);
 				
 	}

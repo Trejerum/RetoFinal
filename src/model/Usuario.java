@@ -15,6 +15,7 @@ public class Usuario {
 	protected String direccion;
 	protected int telefono;
 	protected String email;
+	protected int numCuenta;
 	protected boolean esAdmin = false;
 	protected String contraseña;
 	
@@ -99,6 +100,13 @@ public class Usuario {
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
+	public int getNumCuenta() {
+		return numCuenta;
+	}
+	public void setNumCuenta(int numCuenta) {
+		this.numCuenta = numCuenta;
+	}
+	
 	
 	
 	
