@@ -103,5 +103,11 @@ public class LogicImpl implements Logic{
 		return autores;
 	}
 
+	@Override
+	public boolean esAdmin(String nUsuario) throws Exception {
+		Boolean esAdmin=dataAccess.esAdmin(nUsuario);
+		return esAdmin;
+	}
+
 	
 }

@@ -52,5 +52,7 @@ public interface DataAccess {
 	public ArrayList<Autor> cargarAutoresLibro(String isbn) throws SQLException, ClassNotFoundException, IOException;
 	
 	public void aumentarVentas(String isbn, int cantidad) throws SQLException, ClassNotFoundException, IOException;
+	
+	public boolean esAdmin(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 
 }

@@ -7,6 +7,7 @@ import javax.swing.border.EmptyBorder;
 
 import control.Logic;
 import control.LogicFactory;
+import gui.admin.InicioAdmin;
 import gui.user.InicioUser;
 
 import javax.swing.JLabel;
@@ -122,13 +123,22 @@ public class Login extends JFrame implements ActionListener{
 	public void validarUsuario() {
 		String nUsuario=tfNombreUsurio.getText();
 		String contraseña=new String(pfContraseña.getPassword());
+		Boolean esAdmin = false;
 		Logic logic = LogicFactory.getLogic();
 		try {
 			boolean validado=logic.validarUsuario(nUsuario, contraseña);
-			if(validado==true) {
-				InicioUser inicio = new InicioUser(nUsuario);
-				inicio.setVisible(true);
-				this.dispose();
+			esAdmin=logic.esAdmin(nUsuario);
+			if(validado) {
+				if(esAdmin) {
+					InicioAdmin admin = new InicioAdmin();
+					admin.setVisible(true);
+					this.dispose();
+				}
+				else {
+					InicioUser inicio = new InicioUser(nUsuario);
+					inicio.setVisible(true);
+					this.dispose();
+				}
 			}
 			else {
 				String message="Error. El nombre de usuario o contraseña son incorrectos";

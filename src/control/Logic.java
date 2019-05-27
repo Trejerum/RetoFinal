@@ -41,7 +41,6 @@ public interface Logic {
 
 	public ArrayList<Autor> cargarAutoresLibro(String isbn) throws Exception;
 	
-	
-	
+	public boolean esAdmin(String nUsuario) throws Exception;
 
 }

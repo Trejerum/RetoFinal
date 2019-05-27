@@ -463,4 +463,21 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
+	public boolean esAdmin(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+		boolean esAdmin=false;
+		try {
+			this.connect();
+			String sql = "Select esAdmin from usuarios where nombreUsuario=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, nUsuario);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				esAdmin=result.getBoolean("esAdmin");
+			}
+		}finally {
+			this.disconnect();
+		}
+		return esAdmin;
+	}
+
 }
