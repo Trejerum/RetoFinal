@@ -1,6 +1,4 @@
 package gui.admin;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -53,26 +51,10 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	private JLabel label;
 
 	/**
-	 * Launch the application.
-	 */
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					AnadirLibro frame = new AnadirLibro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
 	 * Create the frame.
+	 * @param nUsuario 
 	 */
-	public AnadirLibro() {
+	public AnadirLibro(String nUsuario) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 571, 597);
 		contentPane = new JPanel();

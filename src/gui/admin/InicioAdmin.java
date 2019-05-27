@@ -80,7 +80,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		btnAñadir.setBounds(184, 146, 153, 23);
 		contentPane.add(btnAñadir);
 		
-		lblAdmin = new JLabel("Diego");
+		lblAdmin = new JLabel("Admin");
 		lblAdmin.setBounds(156, 15, 55, 12);
 		contentPane.add(lblAdmin);
 		
@@ -99,7 +99,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		else if(e.getSource()==btnEditarInfo) {
-			PerfilAdmin perfil = new PerfilAdmin();
+			PerfilAdmin perfil = new PerfilAdmin(nUsuario);
 			perfil.setVisible(true);
 			this.dispose();
 		}
@@ -109,7 +109,14 @@ public class InicioAdmin extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		else if(e.getSource()==btnAñadir) {
-			
+			AnadirLibro añadir = new AnadirLibro(nUsuario);
+			añadir.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnBestSellers) {
+			BestSellersAdmin bestSellers = new BestSellersAdmin(nUsuario);
+			bestSellers.setVisible(true);
+			this.dispose();
 		}
 		
 	}

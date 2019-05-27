@@ -25,8 +25,9 @@ public class PerfilAdmin extends JFrame implements ActionListener{
 
 	/**
 	 * Create the frame.
+	 * @param nUsuario 
 	 */
-	public PerfilAdmin() {
+	public PerfilAdmin(String nUsuario) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 609, 399);
 		contentPane = new JPanel();
