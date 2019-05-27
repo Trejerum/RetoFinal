@@ -1,18 +1,14 @@
 package gui.admin;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.Color;
 import javax.swing.UIManager;
 
 public class InicioAdmin extends JFrame implements ActionListener{
@@ -31,24 +27,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	private JButton btnBuscar;
 	private JButton btnAñadir;
 	private JLabel lblAdmin;
-	private String usuario;
-	private String isbn;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InicioAdmin frame = new InicioAdmin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private String nUsuario;
 
 	/**
 	 * Create the frame.
@@ -113,11 +92,24 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) {			//TODO Completar action listeners
 		if(e.getSource()==btnModificar) {
-			ListaLibros listaLibros = new ListaLibros(usuario, isbn);
+			ListaLibros listaLibros = new ListaLibros(nUsuario);
 			listaLibros.setVisible(true);
 			this.dispose();
+		}
+		else if(e.getSource()==btnEditarInfo) {
+			PerfilAdmin perfil = new PerfilAdmin();
+			perfil.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnBuscar) {
+			BusquedaAdmin busqueda = new BusquedaAdmin(nUsuario);
+			busqueda.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnAñadir) {
+			
 		}
 		
 	}

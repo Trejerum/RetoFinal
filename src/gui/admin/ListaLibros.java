@@ -1,8 +1,5 @@
 package gui.admin;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
@@ -34,16 +30,14 @@ public class ListaLibros extends JFrame implements ActionListener{
 	private JLabel lblSeleccionaUnLibro;
 	private JScrollPane scrollPane;
 	private String nusuario;
-	private String nisbn;
 	private JTable tablaLibros;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public ListaLibros(String usuario, String isbn) {
+	public ListaLibros(String usuario) {
 		nusuario = usuario;
-		nisbn = isbn;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 452, 530);
