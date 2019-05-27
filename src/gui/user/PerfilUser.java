@@ -75,8 +75,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 		btnBuscar.addActionListener(this);
 		btnCompras.addActionListener(this);
 		btnHome.addActionListener(this);
-		
-		
+		btnUsuario.addActionListener(this);
 		
 	}
 
@@ -99,6 +98,11 @@ public class PerfilUser extends JFrame implements ActionListener{
 		else if(e.getSource()==btnHome) {
 			InicioUser inicio = new InicioUser(nUsuario);
 			inicio.setVisible(true);
+			this.dispose();
+		}
+		else {
+			PerfilUser perfil = new PerfilUser(nUsuario);
+			perfil.setVisible(true);
 			this.dispose();
 		}
 	}

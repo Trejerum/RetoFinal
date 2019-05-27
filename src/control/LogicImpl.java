@@ -42,12 +42,13 @@ public class LogicImpl implements Logic{
 
 	public void comprarLibro(Compra compra) throws Exception {
 		dataAccess.comprarLibro(compra);
+		dataAccess.aumentarVentas(compra.getIsbn(), compra.getUnidades());
 		
 	}
 
-	public void verRecomendados(String nUsuario) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Libro> verRecomendados(String nUsuario) throws Exception {
+		ArrayList<Libro> libros = dataAccess.verRecomendados(nUsuario);
+		return libros;
 	}
 
 	public ArrayList<Libro> buscarLibro(String busqueda) throws Exception {

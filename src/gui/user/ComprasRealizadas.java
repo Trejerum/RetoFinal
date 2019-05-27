@@ -20,7 +20,6 @@ import javax.swing.table.DefaultTableModel;
 import control.Logic;
 import control.LogicFactory;
 import model.Compra;
-import model.Libro;
 
 public class ComprasRealizadas extends JFrame implements ActionListener{
 
@@ -39,10 +38,12 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	private JLabel lblCompras;
 	private String nUsuario;
 	private JTable table;
+	private DefaultTableModel modelo;
 
 	/**
 	 * Create the frame.
 	 */
+	@SuppressWarnings("serial")
 	public ComprasRealizadas(String usuario) {
 		nUsuario=usuario;
 		setResizable(false);
@@ -74,12 +75,12 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		contentPane.add(btnBestSellers);
 		
 		btnUsuario = new JButton("Monigote(usuario)");
-		btnUsuario.setBackground(new Color(0, 153, 51));
+		btnUsuario.setBackground(new Color(0, 204, 51));
 		btnUsuario.setBounds(617, 407, 167, 61);
 		contentPane.add(btnUsuario);
 		
 		btnCompras = new JButton("Carrito(Compras)");
-		btnCompras.setBackground(new Color(0, 204, 51));
+		btnCompras.setBackground(new Color(0, 153, 51));
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -107,20 +108,31 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		
 		table = new JTable();
 		table.setRowSelectionAllowed(false);
-		table.setEnabled(false);
-		table.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"IdCompra", "Nombre Usuario", "ISBN", "Cantidad", "Fecha", "Importe", "NumCuenta"
+		modelo = new DefaultTableModel(
+				new Object[][] {
+				},
+				new String[] {
+					"IdCompra", "Nombre Usuario", "ISBN", "Cantidad", "Fecha", "Importe", "NumCuenta"
+				}
+			) {
+			
+			//Make the cells non editable
+			@Override
+			public boolean isCellEditable(int row, int column) {
+				//For make the cells editable return true
+				return false;
 			}
-		));
+		};
+		table.setModel(modelo);
 		scrollPane.setViewportView(table);
 		
 		btnBestSellers.addActionListener(this);
 		btnHome.addActionListener(this);
 		btnUsuario.addActionListener(this);
 		btnBuscar.addActionListener(this);
+		btnCompras.addActionListener(this);
+		
+		cargarCompras();
 		
 	}
 
@@ -153,15 +165,6 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		try {
 			Logic logic = LogicFactory.getLogic();
 			compras = logic.consultarCompras(nUsuario);
-			
-			DefaultTableModel modelo = new DefaultTableModel(
-					new Object[][] {
-						
-					},
-					new String[] {
-							"IdCompra", "Nombre Usuario", "ISBN", "Cantidad", "Fecha", "Importe", "NumCuenta"
-					}
-				);
 		for (Compra compra : compras) {
 			Object rowdata[]= {compra.getIdCompra(), compra.getNombreUsuario(), compra.getIsbn(), compra.getUnidades(), compra.getFechaCompra(), compra.getImporteTotal(), compra.getNumCuenta()};
 			modelo.addRow(rowdata);

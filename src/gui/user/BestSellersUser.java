@@ -89,7 +89,6 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		btnHome.addActionListener(this);
 		btnUsuario.addActionListener(this);
 		
-		
 	}
 
 	@Override
@@ -109,9 +108,14 @@ public class BestSellersUser extends JFrame implements ActionListener{
 			compras.setVisible(true);
 			this.dispose();
 		}
-		else {
+		else if(e.getSource()==btnUsuario){
 			PerfilUser perfil = new PerfilUser(nUsuario);
 			perfil.setVisible(true);
+			this.dispose();
+		}
+		else {
+			BestSellersUser best = new BestSellersUser(nUsuario);
+			best.setVisible(true);
 			this.dispose();
 		}
 		

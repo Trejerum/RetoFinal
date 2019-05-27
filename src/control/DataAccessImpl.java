@@ -183,9 +183,39 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
-	public void verRecomendados(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Libro> verRecomendados(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+		ArrayList<Libro> libros = new ArrayList<Libro>();
+		try {
+			this.connect();
+			String sql = "select DISTINCT libros.isbn, libros.editorial , titulo, precio, libros.genero \r\n" + 
+					"from libros, usuarios,gustoAutor, gustoGenero, autoresLibro, generos \r\n" + 
+					"where ( usuarios.nombreUsuario =? \r\n" + 
+					"and usuarios.nombreUsuario =gustoautor.nombreUsuario \r\n" + 
+					"and autoreslibro.codAutor = gustoautor.codAutor \r\n" + 
+					"and autoreslibro.isbn = libros.isbn \r\n" + 
+					")\r\n" + 
+					" or ( usuarios.nombreUsuario = ? \r\n" + 
+					"and usuarios.nombreUsuario = gustogenero.nombreUsuario \r\n" + 
+					"and gustogenero.codGen = generos.codGen \r\n" + 
+					"and generos.nombreGen = libros.genero )\r\n" + 
+					"";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, nUsuario);
+			stmt.setString(2, nUsuario);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				Libro libro = new Libro();
+				libro.setIsbn(result.getString("isbn"));
+				libro.setTitulo(result.getString("titulo"));
+				libro.setEditorial(result.getString("editorial"));
+				libro.setGenero(result.getString("genero"));
+				libro.setPrecio(result.getDouble("precio"));
+				libros.add(libro);
+			}
+		}finally {
+			this.disconnect();
+		}
+		return libros;
 	}
 
 	public ArrayList<Libro> buscarLibro(String busqueda) throws SQLException, ClassNotFoundException, IOException {
@@ -416,6 +446,21 @@ public class DataAccessImpl implements DataAccess{
 			this.disconnect();
 		}
 		return autores;
+	}
+
+	@Override
+	public void aumentarVentas(String isbn, int cantidad) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "update libros set numVentas= numVentas + ? where isbn=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setInt(1, cantidad);
+			stmt.setString(2, isbn);
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+		
 	}
 
 }

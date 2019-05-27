@@ -1,17 +1,19 @@
 package gui.user;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import gui.all.Descripcion;
+import control.Logic;
+import control.LogicFactory;
 import gui.all.PanelBusquedaLibro;
+import model.Libro;
 
 import javax.swing.JSeparator;
-import javax.swing.SwingUtilities;
-
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 
@@ -99,9 +101,9 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		btnHome.addActionListener(this);
 		btnUsuario.addActionListener(this);
 		btnRecomendados.addActionListener(this);
-		btnBuscar.addActionListener(this);
 		btnComprar.addActionListener(this);
-		
+		btnCompras.addActionListener(this);
+		btnBuscar.addActionListener(this);
 		
 	}
 
@@ -128,9 +130,14 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		else if(e.getSource()==btnRecomendados) {
 			verRecomendados();
 		}
-		else{
+		else if(e.getSource()==btnUsuario){
 			PerfilUser perfil = new PerfilUser(nUsuario);
 			perfil.setVisible(true);
+			this.dispose();
+		}
+		else {
+			BusquedaUser buscar = new BusquedaUser(nUsuario);
+			buscar.setVisible(true);
 			this.dispose();
 		}
 	}
@@ -143,6 +150,15 @@ public class BusquedaUser extends JFrame implements ActionListener{
 	}
 	
 	public void verRecomendados() {
-		//TODO
+		ArrayList<Libro> libros=new ArrayList<Libro>();
+		try {
+			Logic logic = LogicFactory.getLogic();
+			libros=logic.verRecomendados(nUsuario);
+			panel.verRecomendados(libros);
+		}catch(Exception e) {
+			String message = "Error. No se han podido cargar los datos";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 }

@@ -27,7 +27,7 @@ public interface DataAccess {
 	
 	public void comprarLibro(Compra compra) throws SQLException, ClassNotFoundException, IOException;
 	
-	public void verRecomendados(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
+	public ArrayList<Libro> verRecomendados(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 	
 	public ArrayList<Libro> buscarLibro(String busqueda) throws SQLException, ClassNotFoundException, IOException;
 	
@@ -50,5 +50,7 @@ public interface DataAccess {
 	public Libro cargarLibro(String isbn) throws SQLException, ClassNotFoundException, IOException;
 
 	public ArrayList<Autor> cargarAutoresLibro(String isbn) throws SQLException, ClassNotFoundException, IOException;
+	
+	public void aumentarVentas(String isbn, int cantidad) throws SQLException, ClassNotFoundException, IOException;
 
 }

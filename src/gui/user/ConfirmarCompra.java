@@ -197,6 +197,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener, ChangeLis
 			compra.setIsbn(isbnCompra);
 			compra.setUnidades((Integer) spinner.getValue()); 
 			logic.comprarLibro(compra);
+			
 			message = "Compra realizada correctamente";
 			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
 		}catch(Exception e) {

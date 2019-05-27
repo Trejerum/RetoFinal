@@ -19,7 +19,7 @@ public interface Logic {
 	
 	public void comprarLibro(Compra compra) throws Exception;
 	
-	public void verRecomendados(String nUsuario) throws Exception;
+	public ArrayList<Libro> verRecomendados(String nUsuario) throws Exception;
 	
 	public ArrayList<Libro> buscarLibro(String busqueda) throws Exception;
 	
@@ -40,6 +40,7 @@ public interface Logic {
 	public Libro cargarLibro(String isbn) throws Exception;
 
 	public ArrayList<Autor> cargarAutoresLibro(String isbn) throws Exception;
+	
 	
 	
 

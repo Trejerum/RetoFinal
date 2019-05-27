@@ -127,7 +127,7 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 						new String[] {
 								"ISBN", "Titulo", "Genero", "Editorial", "Precio"
 						}
-					);
+			);
 			for (Libro libro : libros) {
 				Object rowdata[]= {libro.getIsbn(), libro.getTitulo(), libro.getGenero(), libro.getEditorial(), libro.getPrecio()};
 				modelo.addRow(rowdata);
@@ -149,6 +149,22 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 		descripcion.setVisible(true);
 		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
 		frame.dispose();
+	}
+	
+	public void verRecomendados(ArrayList<Libro> libros) {
+		DefaultTableModel modelo = new DefaultTableModel(
+				new Object[][] {
+					
+				},
+				new String[] {
+						"ISBN", "Titulo", "Genero", "Editorial", "Precio"
+				}
+				);
+		for (Libro libro : libros) {
+			Object rowdata[]= {libro.getIsbn(), libro.getTitulo(), libro.getGenero(), libro.getEditorial(), libro.getPrecio()};
+			modelo.addRow(rowdata);
+		}
+		tablaBusqueda.setModel(modelo);
 	}
 	
 	public String getIsbn() {
