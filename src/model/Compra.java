@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Date;
 import java.time.LocalDate;
 /**
  * La clase Compra va a registrar información sobre cada compra que realice un usuario.
@@ -12,9 +13,10 @@ public class Compra {
 	private int idCompra;
 	private String isbn;
 	private String nombreUsuario;
-	private LocalDate fechaCompra;
+	private Date fechaCompra;
 	private int numCuenta;
 	private int unidades;
+	private int importeTotal;
 	
 	//Constructors
 	/**
@@ -25,8 +27,9 @@ public class Compra {
 	 * @param numCuenta : Para poder realizar la compra, es neccesario poner un numero de cuenta para poder pagar
 	 * @param isbn : Sirve para diferenciar un libro de otro
 	 * @param unidades : Número de ejemplares que se comprarán de un mismo libro. 
+	 * @param importeTotal : Importe total de la compra realizada.
 	 */
-	public Compra(int idCompra, String nombreUsuario, LocalDate fechaCompra, int numCuenta, String isbn, int unidades) {
+	public Compra(int idCompra, String nombreUsuario, Date fechaCompra, int numCuenta, String isbn, int unidades, int importeTotal) {
 		super();
 		this.idCompra = idCompra;
 		this.nombreUsuario = nombreUsuario;
@@ -34,6 +37,7 @@ public class Compra {
 		this.numCuenta = numCuenta;
 		this.isbn = isbn;
 		this.unidades = unidades;
+		this.importeTotal = importeTotal;
 	}
 	
 	public Compra() {
@@ -57,10 +61,10 @@ public class Compra {
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
-	public LocalDate getFechaCompra() {
+	public Date getFechaCompra() {
 		return fechaCompra;
 	}
-	public void setFechaCompra(LocalDate fechaCompra) {
+	public void setFechaCompra(Date fechaCompra) {
 		this.fechaCompra = fechaCompra;
 	}
 	public int getNumCuenta() {
@@ -80,6 +84,14 @@ public class Compra {
 	}
 	public void setUnidades(int unidades) {
 		this.unidades = unidades;
+	}
+
+	public int getImporteTotal() {
+		return importeTotal;
+	}
+
+	public void setImporteTotal(int importeTotal) {
+		this.importeTotal = importeTotal;
 	}
 	
 	

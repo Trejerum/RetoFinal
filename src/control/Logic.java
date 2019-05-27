@@ -3,6 +3,7 @@ package control;
 import java.util.ArrayList;
 
 import model.Autor;
+import model.Compra;
 import model.Libro;
 import model.Usuario;
 
@@ -12,11 +13,11 @@ public interface Logic {
 	
 	public void registrarUsuario(Usuario usuario, ArrayList<String> autoresSelec, ArrayList<String> generosSelec) throws Exception;
 	
-	public void listarBestsellers() throws Exception;
+	public ArrayList<Libro> listarBestsellers() throws Exception;
 	
 	public void insertarLibro() throws Exception;
 	
-	public void comprarLibro(String isbn, String nUsuario) throws Exception;
+	public void comprarLibro(Compra compra) throws Exception;
 	
 	public void verRecomendados(String nUsuario) throws Exception;
 	
@@ -24,7 +25,7 @@ public interface Logic {
 	
 	public void modificarLibro(String isbn) throws Exception;
 	
-	public void consultarCompras(String nUsuario) throws Exception;
+	public ArrayList<Compra> consultarCompras(String nUsuario) throws Exception;
 	
 	public boolean comprobarNUsuario(String nUsuario) throws Exception;
 	

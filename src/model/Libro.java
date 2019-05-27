@@ -21,6 +21,7 @@ public class Libro {
 	private boolean oferta;
 	private double descuento;
 	private int stock;
+	private int numVentas;
 	private ArrayList<String> autores = new ArrayList<String>(); 
 	
 	// Constructors
@@ -122,6 +123,22 @@ public class Libro {
 
 	public void setGenero(String genero) {
 		this.genero = genero;
+	}
+
+	public int getNumVentas() {
+		return numVentas;
+	}
+
+	public void setNumVentas(int numVentas) {
+		this.numVentas = numVentas;
+	}
+
+	public ArrayList<String> getAutores() {
+		return autores;
+	}
+
+	public void setAutores(ArrayList<String> autores) {
+		this.autores = autores;
 	}
 	
 	

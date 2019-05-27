@@ -5,18 +5,13 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import gui.all.PanelBusquedaLibro;
-
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import java.time.LocalDate;
-import javax.swing.JLabel;
-import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 public class BusquedaAdmin extends JFrame implements ActionListener{

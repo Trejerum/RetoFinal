@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Autor;
+import model.Compra;
 import model.Libro;
 import model.Usuario;
 
@@ -20,11 +21,11 @@ public interface DataAccess {
 	
 	public void regUsGustoGenero(String genero, String usuario) throws SQLException, ClassNotFoundException, IOException;
 	
-	public void listarBestsellers() throws SQLException, ClassNotFoundException, IOException;
+	public ArrayList<Libro> listarBestsellers() throws SQLException, ClassNotFoundException, IOException;
 	
 	public void insertarLibro() throws SQLException, ClassNotFoundException, IOException;
 	
-	public void comprarLibro(String isbn, String nUsuario) throws SQLException, ClassNotFoundException, IOException;
+	public void comprarLibro(Compra compra) throws SQLException, ClassNotFoundException, IOException;
 	
 	public void verRecomendados(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 	
@@ -32,7 +33,7 @@ public interface DataAccess {
 	
 	public void modificarLibro(String isbn) throws SQLException, ClassNotFoundException, IOException;
 	
-	public void consultarCompras(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
+	public ArrayList<Compra> consultarCompras(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 	
 	public boolean comprobarNUsuario(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 	

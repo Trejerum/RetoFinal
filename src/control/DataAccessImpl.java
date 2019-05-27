@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import model.Autor;
+import model.Compra;
 import model.Libro;
 import model.Usuario;
 
@@ -136,8 +137,26 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
-	public void listarBestsellers() throws ClassNotFoundException, SQLException, IOException{
-		// TODO Auto-generated method stub
+	public ArrayList<Libro> listarBestsellers() throws ClassNotFoundException, SQLException, IOException{
+		ArrayList<Libro> libros = new ArrayList<Libro>();
+		try {
+			this.connect();
+			String sql="select titulo, isbn, genero, editorial, numventas from libros order by numventas desc limit 10";
+			stmt = con.prepareStatement(sql);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				Libro libro = new Libro();
+				libro.setTitulo(result.getString("titulo"));
+				libro.setIsbn(result.getString("isbn"));
+				libro.setGenero(result.getString("genero"));
+				libro.setEditorial(result.getString("editorial"));
+				libro.setNumVentas(result.getInt("numVentas"));
+				libros.add(libro);
+			}
+		}finally {
+			this.disconnect();
+		}
+		return libros;
 		
 	}
 
@@ -146,13 +165,18 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
-	public void comprarLibro(String isbn, String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+	public void comprarLibro(Compra compra) throws SQLException, ClassNotFoundException, IOException {
 		try {
 			this.connect();
-			String sql="INSERT INTO compras (idCompra, nombreUsuario, isbn, numUnidades, fechaCompra, importeTotal, numCuenta) VALUES (?, ?, ?, ?, ?, ?, ?)";
+			String sql="INSERT INTO compras (nombreUsuario, isbn, numUnidades, fechaCompra, importeTotal, numCuenta) VALUES (?, ?, ?, ?, ?, ?)";
 			stmt = con.prepareStatement(sql);
-			
-			
+			stmt.setString(1, compra.getNombreUsuario());
+			stmt.setString(2, compra.getIsbn());
+			stmt.setInt(3, compra.getUnidades());
+			stmt.setDate(4, compra.getFechaCompra());
+			stmt.setDouble(5, compra.getImporteTotal());
+			stmt.setInt(6, compra.getNumCuenta());
+			stmt.executeUpdate();
 		}finally {
 			this.disconnect();
 		}
@@ -199,9 +223,29 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
-	public void consultarCompras(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Compra> consultarCompras(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+		ArrayList<Compra> compras = new ArrayList<Compra>();
+		try {
+			this.connect();
+			String sql = "select *  from compras where nombreusuario=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, nUsuario);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				Compra compra = new Compra();
+				compra.setNombreUsuario(nUsuario);
+				compra.setIdCompra(result.getInt("idcompra"));
+				compra.setImporteTotal(result.getInt("importeTotal"));
+				compra.setIsbn(result.getString("isbn"));
+				compra.setNumCuenta(result.getInt("numCuenta"));
+				compra.setUnidades(result.getInt("numunidades"));
+				compra.setFechaCompra(result.getDate("fechaCompra"));
+				compras.add(compra);
+			}
+		}finally {
+			this.disconnect();
+		}
+		return compras;
 	}
 	
 	public boolean comprobarNUsuario(String nUsuario) throws SQLException, ClassNotFoundException, IOException {

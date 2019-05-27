@@ -3,6 +3,7 @@ package control;
 import java.util.ArrayList;
 
 import model.Autor;
+import model.Compra;
 import model.Libro;
 import model.Usuario;
 
@@ -28,8 +29,9 @@ public class LogicImpl implements Logic{
 		}
 	}
 
-	public void listarBestsellers() throws Exception {
-		// TODO Auto-generated method stub
+	public ArrayList<Libro> listarBestsellers() throws Exception {
+		ArrayList<Libro> libros = dataAccess.listarBestsellers();
+		return libros;
 		
 	}
 
@@ -38,8 +40,8 @@ public class LogicImpl implements Logic{
 		
 	}
 
-	public void comprarLibro(String isbn, String nUsuario) throws Exception {
-		// TODO Auto-generated method stub
+	public void comprarLibro(Compra compra) throws Exception {
+		dataAccess.comprarLibro(compra);
 		
 	}
 
@@ -58,9 +60,9 @@ public class LogicImpl implements Logic{
 		
 	}
 
-	public void consultarCompras(String nUsuario) throws Exception {
-		// TODO Auto-generated method stub
-		
+	public ArrayList<Compra> consultarCompras(String nUsuario) throws Exception {
+		ArrayList<Compra> compras = dataAccess.consultarCompras(nUsuario);
+		return compras;
 	}
 
 	public boolean comprobarNUsuario(String nUsuario) throws Exception {

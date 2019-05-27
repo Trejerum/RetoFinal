@@ -1,6 +1,4 @@
 package gui.user;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -11,13 +9,7 @@ import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.awt.event.ActionEvent;
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.TextField;
-
-import javax.swing.JTextField;
 
 public class BestSellersUser extends JFrame implements ActionListener{
 
@@ -32,29 +24,14 @@ public class BestSellersUser extends JFrame implements ActionListener{
 	private JButton btnUsuario;
 	private JButton btnCompras;
 	private JButton btnBuscar;
+	private String nUsuario;
 	
-	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					BestSellersUser frame = new BestSellersUser();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public BestSellersUser() {
+	public BestSellersUser(String usuario) {
+		nUsuario=usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 791, 540);
@@ -106,13 +83,37 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		panel.setBounds(0, 0, 791, 512);
 		contentPane.add(panel);
 		
+		btnBestSellers.addActionListener(this);
+		btnBuscar.addActionListener(this);
+		btnCompras.addActionListener(this);
+		btnHome.addActionListener(this);
+		btnUsuario.addActionListener(this);
 		
 		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource()==btnHome) {
+			InicioUser inicio = new InicioUser(nUsuario);
+			inicio.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnBuscar){
+			BusquedaUser busqueda = new BusquedaUser(nUsuario);
+			busqueda.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnCompras) {
+			ComprasRealizadas compras = new ComprasRealizadas(nUsuario);
+			compras.setVisible(true);
+			this.dispose();
+		}
+		else {
+			PerfilUser perfil = new PerfilUser(nUsuario);
+			perfil.setVisible(true);
+			this.dispose();
+		}
 		
 	}
 }

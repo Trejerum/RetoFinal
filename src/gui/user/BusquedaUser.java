@@ -113,7 +113,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		else if(e.getSource()==btnBestSellers) {
-			BestSellersUser bestSellers = new BestSellersUser();
+			BestSellersUser bestSellers = new BestSellersUser(nUsuario);
 			bestSellers.setVisible(true);
 			this.dispose();
 		}
@@ -121,7 +121,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 			comprar();
 		}
 		else if(e.getSource()==btnCompras) {
-			ComprasRealizadas compras = new ComprasRealizadas();
+			ComprasRealizadas compras = new ComprasRealizadas(nUsuario);
 			compras.setVisible(true);
 			this.dispose();
 		}

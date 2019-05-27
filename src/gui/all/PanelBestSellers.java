@@ -4,15 +4,20 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.TextField;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
-import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import control.Logic;
+import control.LogicFactory;
+import model.Libro;
 
 public class PanelBestSellers extends JPanel {
 	private JLabel lblBestSellers;
@@ -67,7 +72,35 @@ public class PanelBestSellers extends JPanel {
 				"N\u00BA", "Titulo", "Autor", "Ventas"
 			}
 		));
+		tablaBestSellers.setEnabled(false);
 		scrollPane.setViewportView(tablaBestSellers);
 		
+		cargarLibros();
+	}
+	
+	public void cargarLibros() {
+		try {
+			Logic logic = LogicFactory.getLogic();
+			ArrayList<Libro> libros= new ArrayList<Libro>();
+			libros=logic.listarBestsellers();
+			DefaultTableModel modelo = new DefaultTableModel(
+						new Object[][] {
+							
+						},
+						new String[] {
+								"ISBN", "Titulo", "Genero", "Editorial", "Ventas"
+						}
+					);
+			for (Libro libro : libros) {
+				Object rowdata[]= {libro.getIsbn(), libro.getTitulo(), libro.getGenero(), libro.getEditorial(), libro.getNumVentas()};
+				modelo.addRow(rowdata);
+			}
+			tablaBestSellers.setModel(modelo);
+			
+		}catch(Exception e) {
+			String message="Error. No se han podido encontrar libros";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,23 +1,26 @@
 package gui.user;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
 import java.awt.Color;
 
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
-import java.awt.Font;
-import java.awt.TextField;
+import javax.swing.JOptionPane;
 
-import javax.swing.JTextField;
-import javax.swing.JList;
+import java.awt.Font;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import control.Logic;
+import control.LogicFactory;
+import model.Compra;
+import model.Libro;
 
 public class ComprasRealizadas extends JFrame implements ActionListener{
 
@@ -34,29 +37,14 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	private JButton btnBuscar;
 	private JSeparator separator;
 	private JLabel lblCompras;
-	private JList listaComprasRealizadas;
-	DefaultListModel modeloLista;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ComprasRealizadas frame = new ComprasRealizadas();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private String nUsuario;
+	private JTable table;
 
 	/**
 	 * Create the frame.
 	 */
-	public ComprasRealizadas() {
+	public ComprasRealizadas(String usuario) {
+		nUsuario=usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 789, 495);
@@ -103,9 +91,6 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		btnBuscar.setBackground(new Color(0, 204, 51));
 		btnBuscar.setBounds(309, 407, 156, 61);
 		contentPane.add(btnBuscar);
-		LocalDate calendario = LocalDate.now();
-		TextField texto = new TextField(calendario.toString());
-		String fecha = texto.getText();
 		
 		separator = new JSeparator();
 		separator.setBounds(0, 60, 784, 2);
@@ -116,19 +101,77 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		lblCompras.setBounds(20, 22, 234, 27);
 		contentPane.add(lblCompras);
 		
-		listaComprasRealizadas = new JList();
-		listaComprasRealizadas.setBounds(53, 107, 667, 263);
-		contentPane.add(listaComprasRealizadas);
-		modeloLista = new DefaultListModel();
-		listaComprasRealizadas.setModel(modeloLista);
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(37, 85, 694, 295);
+		contentPane.add(scrollPane);
 		
+		table = new JTable();
+		table.setRowSelectionAllowed(false);
+		table.setEnabled(false);
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"IdCompra", "Nombre Usuario", "ISBN", "Cantidad", "Fecha", "Importe", "NumCuenta"
+			}
+		));
+		scrollPane.setViewportView(table);
 		
+		btnBestSellers.addActionListener(this);
+		btnHome.addActionListener(this);
+		btnUsuario.addActionListener(this);
+		btnBuscar.addActionListener(this);
 		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource()==btnHome) {
+			InicioUser inicio = new InicioUser(nUsuario);
+			inicio.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnBuscar){
+			BusquedaUser busqueda = new BusquedaUser(nUsuario);
+			busqueda.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnCompras) {
+			ComprasRealizadas compras = new ComprasRealizadas(nUsuario);
+			compras.setVisible(true);
+			this.dispose();
+		}
+		else {
+			PerfilUser perfil = new PerfilUser(nUsuario);
+			perfil.setVisible(true);
+			this.dispose();
+		}
+	}
+	
+	public void cargarCompras() {
+		ArrayList<Compra> compras = new ArrayList<Compra>();
+		try {
+			Logic logic = LogicFactory.getLogic();
+			compras = logic.consultarCompras(nUsuario);
+			
+			DefaultTableModel modelo = new DefaultTableModel(
+					new Object[][] {
+						
+					},
+					new String[] {
+							"IdCompra", "Nombre Usuario", "ISBN", "Cantidad", "Fecha", "Importe", "NumCuenta"
+					}
+				);
+		for (Compra compra : compras) {
+			Object rowdata[]= {compra.getIdCompra(), compra.getNombreUsuario(), compra.getIsbn(), compra.getUnidades(), compra.getFechaCompra(), compra.getImporteTotal(), compra.getNumCuenta()};
+			modelo.addRow(rowdata);
+		}
+		table.setModel(modelo);
 		
+		}catch(Exception e) {
+			String message = "Error. No se han podido cargar los datos";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 }

@@ -1,6 +1,4 @@
 package gui.all;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -58,22 +56,6 @@ public class Registro extends JFrame implements ActionListener{
 	private JScrollPane scrollPane;
 	private JTextField tfNumCuenta;
 	private JLabel lblNumeroDeCuenta;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Registro frame = new Registro();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.

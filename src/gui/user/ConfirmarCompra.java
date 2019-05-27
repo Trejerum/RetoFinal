@@ -2,10 +2,13 @@ package gui.user;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.awt.event.ActionEvent;
@@ -25,7 +28,7 @@ import model.Usuario;
 
 import javax.swing.JSpinner;
 
-public class ConfirmarCompra extends JFrame implements ActionListener{
+public class ConfirmarCompra extends JFrame implements ActionListener, ChangeListener {
 
 	/**
 	 * 
@@ -36,7 +39,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 	private JSeparator separator;
 	private JButton btnCancelar;
 	private JButton btnConfirmar;
-	private JTable table;
+	private JTable tabla;
 	private String nUsuario;
 	private DefaultTableModel modelo;
 	private JLabel lblInformacion;
@@ -48,6 +51,10 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 	private JLabel lblValorUsuario;
 	private JLabel lblValorCuenta;
 	private JLabel lblValorFecha;
+	private String isbnCompra;
+	private double precioFinal;
+	private double precioLibro;
+	private double descuentoLibro;
 
 	/**
 	 * Create the frame.
@@ -55,6 +62,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 	 */
 	public ConfirmarCompra(String isbn, String usuario) {
 		nUsuario=usuario;
+		isbnCompra=isbn;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 648, 384);
@@ -86,7 +94,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 		scrollPane.setBounds(36, 202, 427, 57);
 		contentPane.add(scrollPane);
 		
-		table = new JTable();
+		tabla = new JTable();
 		modelo = new DefaultTableModel(
 				new Object[][] {
 					
@@ -95,8 +103,8 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 						"ISBN", "Titulo", "Precio", "Descuento", "Precio Final"
 				}
 			);
-		table.setModel(modelo);
-		scrollPane.setViewportView(table);
+		tabla.setModel(modelo);
+		scrollPane.setViewportView(tabla);
 		
 		spinner = new JSpinner();
 		spinner.setBounds(473, 226, 42, 20);
@@ -134,6 +142,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 		
 		btnCancelar.addActionListener(this);
 		btnConfirmar.addActionListener(this);
+		spinner.addChangeListener(this);
 		
 		
 	}
@@ -155,10 +164,13 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 		try {
 			Logic logic = LogicFactory.getLogic();
 			Libro libro = logic.cargarLibro(isbn);
-			double precioFinal = libro.getPrecio() - libro.getPrecio() * (libro.getDescuento()/100);
-			Object rowdata[]= {libro.getIsbn(), libro.getTitulo(), libro.getPrecio(), libro.getDescuento(), libro.getPrecio()};
+			precioLibro = libro.getPrecio();
+			spinner.setValue(1);
+			descuentoLibro = libro.getDescuento();
+			precioFinal = libro.getPrecio() - libro.getPrecio() * (libro.getDescuento()/100);
+			Object rowdata[]= {libro.getIsbn(), libro.getTitulo(), libro.getPrecio(), libro.getDescuento(), precioFinal};
 			modelo.addRow(rowdata);
-			table.setModel(modelo);
+			tabla.setModel(modelo);
 			Usuario usuario = logic.cargarUsuario(nUsuario);
 			lblValorCuenta.setText(String.valueOf(usuario.getNumCuenta()));
 			lblValorUsuario.setText(nUsuario);
@@ -173,14 +185,38 @@ public class ConfirmarCompra extends JFrame implements ActionListener{
 	
 	public void comprar() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		String message;
 		try {
-			Compra compra = new Compra();
-			compra.setFechaCompra(LocalDate.parse((CharSequence) lblValorFecha, formatter));
-			System.out.println(compra.getFechaCompra());				//TODO arreglar
 			Logic logic = LogicFactory.getLogic();
-			//logic.comprarLibro(compra);
+			Usuario usuario = logic.cargarUsuario(nUsuario);
+			Compra compra = new Compra();
+			Date fecha = convertToDate(LocalDate.parse(lblValorFecha.getText(), formatter));
+			compra.setFechaCompra(fecha);
+			compra.setNombreUsuario(nUsuario);
+			compra.setNumCuenta(usuario.getNumCuenta());
+			compra.setIsbn(isbnCompra);
+			compra.setUnidades((Integer) spinner.getValue()); 
+			logic.comprarLibro(compra);
+			message = "Compra realizada correctamente";
+			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
 		}catch(Exception e) {
-			
+			message = "Error. No se ha podido realizar la compra";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
 		}
+	}
+	
+	public Date convertToDate(LocalDate fechaAConvertir) {
+	    return Date.valueOf(fechaAConvertir);
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		if((Integer) spinner.getValue()<=0) {
+			spinner.setValue(1);
+		}
+		int cantidad = (Integer) spinner.getValue();
+		precioFinal = precioLibro * cantidad - (precioLibro * cantidad) * (descuentoLibro/100);
+		modelo.setValueAt(precioFinal, 0, 4);
 	}
 }
