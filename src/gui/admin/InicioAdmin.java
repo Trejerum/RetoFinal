@@ -31,6 +31,8 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	private JButton btnBuscar;
 	private JButton btnAñadir;
 	private JLabel lblAdmin;
+	private String usuario;
+	private String isbn;
 
 	/**
 	 * Launch the application.
@@ -102,11 +104,21 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		lblAdmin = new JLabel("Diego");
 		lblAdmin.setBounds(156, 15, 55, 12);
 		contentPane.add(lblAdmin);
+		
+		btnModificar.addActionListener(this);
+		btnBuscar.addActionListener(this);
+		btnAñadir.addActionListener(this);
+		btnBestSellers.addActionListener(this);
+		btnEditarInfo.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource()==btnModificar) {
+			ListaLibros listaLibros = new ListaLibros(usuario, isbn);
+			listaLibros.setVisible(true);
+			this.dispose();
+		}
 		
 	}
 }
