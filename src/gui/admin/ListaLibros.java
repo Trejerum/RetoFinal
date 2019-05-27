@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JScrollPane;
 import javax.swing.JList;
@@ -17,6 +18,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import control.Logic;
+import control.LogicFactory;
+import model.Libro;
 
 public class ListaLibros extends JFrame implements ActionListener{
 
@@ -70,24 +75,57 @@ public class ListaLibros extends JFrame implements ActionListener{
 		btnModificar.setBounds(334, 253, 89, 23);
 		contentPane.add(btnModificar);
 		
+		buscar();
+		
 		btnModificar.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnModificar) {
-			validarSeleccion();
+			getISBN();
 		}
 		
 	}
 
-	private void validarSeleccion() {
+	private void getISBN() {
 		try {
-			//String isbn = tablaLibros;
+			int columna = 0;
+			int fila = tablaLibros.getSelectedRow();
+			String isbn = tablaLibros.getModel().getValueAt(columna, fila).toString();
+			ModificarLibro modificarLibro = new ModificarLibro(isbn, nusuario);
+			modificarLibro.setVisible(true);
+			this.dispose();
 		}catch(Exception e) {
 			String message="Selecciona el libro en la Lista";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);	
 		}
 		
+	}
+	
+
+	public void buscar() {
+		try {
+			Logic logic = LogicFactory.getLogic();
+			ArrayList<Libro> libros= new ArrayList<Libro>();
+			DefaultTableModel modelo = new DefaultTableModel(
+						new Object[][] {
+							
+						},
+						new String[] {
+								"ISBN", "Titulo"
+						}
+					);
+			for (Libro libro : libros) {
+				Object rowdata[]= {libro.getIsbn(), libro.getTitulo()};
+				modelo.addRow(rowdata);
+			}
+			tablaLibros.setModel(modelo);
+			
+		}catch(Exception e) {
+			String message="Error. No se han podido encontrar libros";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 }

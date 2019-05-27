@@ -5,6 +5,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import control.Logic;
+import control.LogicFactory;
+import model.Libro;
+
 import javax.swing.JSeparator;
 import java.awt.Color;
 
@@ -74,6 +78,8 @@ public class ModificarLibro extends JFrame implements ActionListener{
 	private JButton btnEliminarAutor;
 	DefaultListModel<String> modeloLista = new DefaultListModel<String>();
 	private JList<String> listAutores;
+	private String nisbn;
+	private String nusuario;
 	
 
 
@@ -82,6 +88,8 @@ public class ModificarLibro extends JFrame implements ActionListener{
 	 */
 
 	public ModificarLibro(String usuario, String isbn) {
+		nisbn = isbn;
+		nusuario = usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 712);
@@ -450,4 +458,26 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		listAutores.setEnabled(true);
 			
 	}
+	
+	public void cargarDatos() {
+		String message;
+		try {
+			Logic logic = LogicFactory.getLogic();
+			Libro libro = new Libro();
+			libro = logic.cargarLibro(nisbn);
+			tfIsbn.setText(libro.getIsbn());
+			tfTitulo.setText(libro.getTitulo());
+			//listAutores.add(libro.getAutor());
+			tfFechaPubli.setText(libro.getFechaPublicacion().toString());
+			tfPrecio.setText(String.valueOf(libro.getPrecio()));
+			tfDescuento.setText(String.valueOf(libro.getDescuento()));
+			tfGenero.setText(libro.getGenero());
+			tfDescripcion.setText(libro.getDescripcion());
+		}catch(Exception e) {
+			message="Error. No se pudo cargar el libro";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+	    }
+	}
+	
 }
