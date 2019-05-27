@@ -115,8 +115,8 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnModificar) {
-			ModificarLibro modificarLibro = new ModificarLibro(usuario, isbn);
-			modificarLibro.setVisible(true);
+			ListaLibros listaLibros = new ListaLibros(usuario, isbn);
+			listaLibros.setVisible(true);
 			this.dispose();
 		}
 		
