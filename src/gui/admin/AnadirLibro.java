@@ -6,6 +6,7 @@ import javax.swing.text.DateFormatter;
 
 import control.Logic;
 import control.LogicFactory;
+import model.Autor;
 import model.Libro;
 
 import javax.swing.JSeparator;
@@ -85,6 +86,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	private JRadioButton rdbtnSi;
 	private JRadioButton rdbtnNo;
 	private ButtonGroup rbgOferta;
+	private String nUsuario;
 
 
 	/**
@@ -92,6 +94,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	 */
 
 	public AnadirLibro(String usuario) {
+		nUsuario=usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 712);
@@ -332,7 +335,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnVolver) {
-			InicioAdmin inicioAdmin = new InicioAdmin();
+			InicioAdmin inicioAdmin = new InicioAdmin(nUsuario);
 			inicioAdmin.setVisible(true);
 			this.dispose();
 		}else if(e.getSource()==btnAnadir) {
@@ -368,9 +371,10 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		Libro libro = new Libro();
 		libro.setIsbn(tfIsbn.getText());
 		libro.setTitulo(tfTitulo.getText());
-		ArrayList<String> autores = new ArrayList<String>();
+		ArrayList<Autor> autores = new ArrayList<Autor>();
 		for (int i = 0; i < modeloLista.getSize(); i++) {
-			autores.add(i, modeloLista.getElementAt(i));
+			Autor autor = new Autor();
+			autor.setNomAutor(modeloLista.getElementAt(i));
 		}
 		DateTimeFormatter format = DateTimeFormatter.ISO_LOCAL_DATE;
 		LocalDate fechaPubli = LocalDate.parse(tfFechaPubli.getText(), format);
@@ -388,7 +392,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		
 		Logic logic = LogicFactory.getLogic();
 		try {
-			logic.insertarLibro(libro);
+			logic.insertarLibro(libro, autores);
 		} catch (Exception e) {
 			// TODO: handle exception
 		}

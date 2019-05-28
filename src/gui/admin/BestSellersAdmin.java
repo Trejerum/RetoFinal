@@ -90,7 +90,7 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 		try {
 			Logic logic = LogicFactory.getLogic();
 			Usuario usuario = new Usuario();
-			usuario = logic.cargarUsuario(nUsuario);
+			usuario = logic.cargarUsuario(nUsuario, logic.esAdmin(nUsuario));
 			lblnameAdmin.setText(usuario.getNombre());
 		} catch (Exception e) {
 			message="Error. No se pudo cargar el usuario";
@@ -103,7 +103,7 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnVolver) {
-			InicioAdmin inicio = new InicioAdmin();
+			InicioAdmin inicio = new InicioAdmin(nUsuario);
 			inicio.setVisible(true);
 			this.dispose();
 		}else if(e.getSource()==btnBuscarLibro) {

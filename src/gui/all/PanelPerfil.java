@@ -183,10 +183,11 @@ public class PanelPerfil extends JPanel implements ActionListener {
 	}
 	public void cargarDatos() {
 		String message;
+		
 		try {
 			Logic logic = LogicFactory.getLogic();
 			Usuario usuario = new Usuario();
-			usuario = logic.cargarUsuario(nUsuario);
+			usuario = logic.cargarUsuario(nUsuario, logic.esAdmin(nUsuario));
 			tfNombre.setText(usuario.getNombre());
 			tfApellidos.setText(usuario.getApellidos());
 			tfDireccion.setText(usuario.getDireccion());
