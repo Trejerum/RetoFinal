@@ -6,6 +6,9 @@ import javax.swing.border.EmptyBorder;
 import gui.all.PanelPerfil;
 import javax.swing.JSeparator;
 import java.awt.Color;
+import java.awt.Image;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -41,28 +44,53 @@ public class PerfilUser extends JFrame implements ActionListener{
 		menu_separator.setBounds(0, 417, 620, 2);
 		contentPane.add(menu_separator);
 		
-		btnHome = new JButton("Casa(HOME)");
+		// Botón HOME
+		btnHome = new JButton("");
+		Image house = new ImageIcon(this.getClass().getResource("/home2.png")).getImage();
+		Image newhouse = house.getScaledInstance(27, 27, java.awt.Image.SCALE_SMOOTH);
+		btnHome.setIcon(new ImageIcon(newhouse));
+		
 		btnHome.setForeground(new Color(0, 0, 0));
 		btnHome.setBackground(new Color(0, 204, 51));
 		btnHome.setBounds(0, 417, 128, 61);
 		contentPane.add(btnHome);
 		
-		btnBestSellers = new JButton("Estrella(BestSellers)");
+		// Botón BestSellers
+		btnBestSellers = new JButton("");
+		Image estrella = new ImageIcon(this.getClass().getResource("/favorites.png")).getImage();
+		Image newestrella = estrella.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
+		btnBestSellers.setIcon(new ImageIcon(newestrella));
+		
 		btnBestSellers.setBackground(new Color(0, 204, 51));
 		btnBestSellers.setBounds(126, 417, 124, 61);
 		contentPane.add(btnBestSellers);
 		
-		btnUsuario = new JButton("Monigote(usuario)");
+		// Botón Usuario
+		btnUsuario = new JButton("");
+		Image monigote = new ImageIcon(this.getClass().getResource("/users.png")).getImage();
+		Image newmonigote = monigote.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
+		btnUsuario.setIcon(new ImageIcon(newmonigote));
+		
 		btnUsuario.setBackground(new Color(0, 153, 51));
 		btnUsuario.setBounds(493, 417, 128, 61);
 		contentPane.add(btnUsuario);
 		
-		btnCompras = new JButton("Carrito(Compras)");
+		// Botón Compras
+		btnCompras = new JButton("");
+		Image carrito = new ImageIcon(this.getClass().getResource("/shopping-cart.png")).getImage();
+		Image newcarrito = carrito.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
+		btnCompras.setIcon(new ImageIcon(newcarrito));
+		
 		btnCompras.setBackground(new Color(0, 204, 51));
 		btnCompras.setBounds(370, 417, 128, 61);
 		contentPane.add(btnCompras);
 		
-		btnBuscar = new JButton("Lupa(buscar)");
+		// Botón Buscar
+		btnBuscar = new JButton("");
+		Image lupa = new ImageIcon(this.getClass().getResource("/loupe2.png")).getImage();
+		Image newlupa = lupa.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
+		btnBuscar.setIcon(new ImageIcon(newlupa));
+		
 		btnBuscar.setBackground(new Color(0, 204, 51));
 		btnBuscar.setBounds(248, 417, 124, 61);
 		contentPane.add(btnBuscar);
