@@ -229,7 +229,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		
 		tfDescripcion = new JTextArea();
 		tfDescripcion.setEditable(false);
-		tfDescripcion.setBounds(161, 554, 247, 84);
+		tfDescripcion.setBounds(157, 554, 247, 84);
 		contentPane.add(tfDescripcion);
 		
 		lblFormateFecha = new JLabel("(dd-mm-yyyy)");
@@ -435,12 +435,11 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		btnPasarAutor.setEnabled(false);
 		btnPasarGenero.setEnabled(false);
 		btnEliminarAutor.setEnabled(false);
-		listAutores.setEnabled(true);
+		listAutores.setEnabled(false);
 		
 	}
 
 	private void modificarLibro() {
-		tfIsbn.setEditable(true);
 		tfTitulo.setEditable(true);
 		tfPrecio.setEditable(true);
 		tfFechaPubli.setEditable(true);
@@ -465,8 +464,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		String message;
 		try {
 			Logic logic = LogicFactory.getLogic();
-			Libro libro = new Libro();
-			libro = logic.cargarLibro(isbn);
+			Libro libro = logic.cargarLibro(isbn);
 			tfIsbn.setText(libro.getIsbn());
 			tfTitulo.setText(libro.getTitulo());
 			//listAutores.add(libro.getAutor());
@@ -481,5 +479,4 @@ public class ModificarLibro extends JFrame implements ActionListener{
 			e.printStackTrace();
 	    }
 	}
-	
 }

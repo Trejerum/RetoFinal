@@ -95,7 +95,8 @@ public class ListaLibros extends JFrame implements ActionListener{
 	public void getISBN() {
 			int columna = 0;
 			int fila = tablaLibros.getSelectedRow();
-			String isbn = tablaLibros.getModel().getValueAt(columna, fila).toString();
+			String isbn = tablaLibros.getModel().getValueAt(fila, columna).toString();
+			System.out.println(isbn);
 			ModificarLibro modificarLibro = new ModificarLibro(isbn, nusuario);
 			modificarLibro.setVisible(true);
 			this.dispose();
