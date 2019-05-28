@@ -35,8 +35,8 @@ public class LogicImpl implements Logic{
 		
 	}
 
-	public void insertarLibro() throws Exception {
-		// TODO Auto-generated method stub
+	public void insertarLibro(Libro libro) throws Exception {
+		dataAccess.insertarLibro(libro);
 		
 	}
 
@@ -56,8 +56,8 @@ public class LogicImpl implements Logic{
 		return libros;		
 	}
 
-	public void modificarLibro(String isbn) throws Exception {
-		// TODO Auto-generated method stub
+	public void modificarLibro(Libro libro) throws Exception {
+		dataAccess.modificarLibro(libro);
 		
 	}
 
@@ -86,9 +86,9 @@ public class LogicImpl implements Logic{
 		return usuario;
 	}
 
-	public void guardarCambios(Usuario usuario, String nUsuario) throws Exception {
-		dataAccess.guardarCambiosUCon(usuario, nUsuario);
-		dataAccess.guardarCambiosUs(usuario, nUsuario);
+	public void guardarCambios(Usuario usuario) throws Exception {
+		dataAccess.guardarCambiosUCon(usuario);
+		dataAccess.guardarCambiosUs(usuario);
 		
 	}
 

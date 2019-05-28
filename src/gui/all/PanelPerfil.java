@@ -225,7 +225,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 			usuario.setContraseña(tfContraseña.getText());
 			usuario.setNombreUsuario(tfUsuario.getText());
 			usuario.setNumCuenta(Integer.parseInt(tfNumCuenta.getText()));
-			logic.guardarCambios(usuario, nUsuario);
+			logic.guardarCambios(usuario);
 			message="Modificacion realizada correctamente";
 			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
 			nUsuario=usuario.getNombreUsuario();

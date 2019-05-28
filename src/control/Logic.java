@@ -15,7 +15,7 @@ public interface Logic {
 	
 	public ArrayList<Libro> listarBestsellers() throws Exception;
 	
-	public void insertarLibro() throws Exception;
+	public void insertarLibro(Libro libro) throws Exception;
 	
 	public void comprarLibro(Compra compra) throws Exception;
 	
@@ -23,7 +23,7 @@ public interface Logic {
 	
 	public ArrayList<Libro> buscarLibro(String busqueda) throws Exception;
 	
-	public void modificarLibro(String isbn) throws Exception;
+	public void modificarLibro(Libro libro) throws Exception;
 	
 	public ArrayList<Compra> consultarCompras(String nUsuario) throws Exception;
 	
@@ -35,7 +35,7 @@ public interface Logic {
 
 	public Usuario cargarUsuario(String nUsuario) throws Exception;
 	
-	public void guardarCambios(Usuario usuario, String nUsuario) throws Exception;
+	public void guardarCambios(Usuario usuario) throws Exception;
 
 	public Libro cargarLibro(String isbn) throws Exception;
 
