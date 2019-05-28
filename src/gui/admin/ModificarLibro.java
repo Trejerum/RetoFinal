@@ -342,7 +342,9 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		btnPasarAutor.addActionListener(this);
 		btnEliminarAutor.addActionListener(this);
 		
-		//cargarDatos();
+		
+		
+		cargarDatos(isbn);
 	}
 
 	@Override
@@ -459,16 +461,16 @@ public class ModificarLibro extends JFrame implements ActionListener{
 			
 	}
 	
-	public void cargarDatos() {
+	public void cargarDatos(String isbn) {
 		String message;
 		try {
 			Logic logic = LogicFactory.getLogic();
 			Libro libro = new Libro();
-			libro = logic.cargarLibro(nisbn);
+			libro = logic.cargarLibro(isbn);
 			tfIsbn.setText(libro.getIsbn());
 			tfTitulo.setText(libro.getTitulo());
 			//listAutores.add(libro.getAutor());
-			tfFechaPubli.setText(libro.getFechaPublicacion().toString());
+			//tfFechaPubli.setText(libro.getFechaPublicacion().toString());
 			tfPrecio.setText(String.valueOf(libro.getPrecio()));
 			tfDescuento.setText(String.valueOf(libro.getDescuento()));
 			tfGenero.setText(libro.getGenero());

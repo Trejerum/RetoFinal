@@ -4,7 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import control.Logic;
+import control.LogicFactory;
 import gui.all.Login;
+import model.Usuario;
 
 import javax.swing.JSeparator;
 import javax.swing.JButton;
@@ -101,6 +104,14 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		lblAdmin = new JLabel("Diego");
 		lblAdmin.setBounds(156, 15, 55, 12);
 		contentPane.add(lblAdmin);
+		try {
+			Logic logic = LogicFactory.getLogic();
+			Usuario usuario = new Usuario();
+			usuario = logic.cargarUsuario(nUsuario);
+			lblAdmin.setText(usuario.getNombre());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		btnModificar.addActionListener(this);
 		btnBuscar.addActionListener(this);
