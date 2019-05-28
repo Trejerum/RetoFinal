@@ -128,7 +128,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		else if(e.getSource()==btnEditarInfo) {
-			PerfilAdmin perfil = new PerfilAdmin(nUsuario);
+			PerfilAdmin perfil = new PerfilAdmin();
 			perfil.setVisible(true);
 			this.dispose();
 		}

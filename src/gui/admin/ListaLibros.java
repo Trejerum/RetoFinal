@@ -31,14 +31,15 @@ public class ListaLibros extends JFrame implements ActionListener{
 	private JScrollPane scrollPane;
 	private String nusuario;
 	private JTable tablaLibros;
+	private JButton btnVolver;
 
 
 	/**
 	 * Create the frame.
 	 */
 	public ListaLibros(String usuario) {
-		nusuario = usuario;
 		setResizable(false);
+		nusuario = usuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 452, 530);
 		contentPane = new JPanel();
@@ -66,34 +67,39 @@ public class ListaLibros extends JFrame implements ActionListener{
 		scrollPane.setViewportView(tablaLibros);
 		
 		btnModificar = new JButton("Modificar");
-		btnModificar.setBounds(334, 253, 89, 23);
+		btnModificar.setBounds(334, 229, 89, 23);
 		contentPane.add(btnModificar);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(350, 468, 90, 25);
+		contentPane.add(btnVolver);
 		
 		buscar();
 		
 		btnModificar.addActionListener(this);
+		btnVolver.addActionListener(this);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnModificar) {
 			getISBN();
+		}else if(e.getSource()==btnVolver) {
+			InicioAdmin inicio = new InicioAdmin();
+			inicio.setVisible(true);
+			this.dispose();
 		}
 		
 	}
 
-	private void getISBN() {
-		try {
+	public void getISBN() {
 			int columna = 0;
 			int fila = tablaLibros.getSelectedRow();
-			String isbn = tablaLibros.getModel().getValueAt(columna, fila).toString();
+			String isbn = tablaLibros.getModel().getValueAt(fila, columna).toString();
+			System.out.println(isbn);
 			ModificarLibro modificarLibro = new ModificarLibro(isbn, nusuario);
 			modificarLibro.setVisible(true);
 			this.dispose();
-		}catch(Exception e) {
-			String message="Selecciona el libro en la Lista";
-			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);	
-		}
 		
 	}
 	
@@ -102,6 +108,8 @@ public class ListaLibros extends JFrame implements ActionListener{
 		try {
 			Logic logic = LogicFactory.getLogic();
 			ArrayList<Libro> libros= new ArrayList<Libro>();
+			String busqueda = "";
+			libros=logic.buscarLibro(busqueda);
 			DefaultTableModel modelo = new DefaultTableModel(
 						new Object[][] {
 							
@@ -109,7 +117,7 @@ public class ListaLibros extends JFrame implements ActionListener{
 						new String[] {
 								"ISBN", "Titulo"
 						}
-					);
+			);
 			for (Libro libro : libros) {
 				Object rowdata[]= {libro.getIsbn(), libro.getTitulo()};
 				modelo.addRow(rowdata);
@@ -121,5 +129,12 @@ public class ListaLibros extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
+	}
+	
+	public String getIsbn() {
+		int columna=0;
+		int fila = tablaLibros.getSelectedRow();
+		String isbn = tablaLibros.getModel().getValueAt(fila, columna).toString();
+		return isbn;
 	}
 }
