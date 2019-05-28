@@ -93,8 +93,8 @@ public class LogicImpl implements Logic{
 		return autores;
 	}
 
-	public Usuario cargarUsuario(String nUsuario) throws Exception {
-		Usuario usuario = dataAccess.cargarUsuario(nUsuario);
+	public Usuario cargarUsuario(String nUsuario, boolean esAdmin) throws Exception {
+		Usuario usuario = dataAccess.cargarUsuario(nUsuario, esAdmin);
 		return usuario;
 	}
 
@@ -115,7 +115,6 @@ public class LogicImpl implements Logic{
 		return autores;
 	}
 
-	@Override
 	public boolean esAdmin(String nUsuario) throws Exception {
 		Boolean esAdmin=dataAccess.esAdmin(nUsuario);
 		return esAdmin;

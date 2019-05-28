@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import model.Autor;
-import model.AutoresLibro;
 import model.Compra;
 import model.Genero;
 import model.Libro;
@@ -376,12 +375,17 @@ public class DataAccessImpl implements DataAccess{
 		return autores;
 	}
 
-	public Usuario cargarUsuario(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+	public Usuario cargarUsuario(String nUsuario, boolean esAdmin) throws SQLException, ClassNotFoundException, IOException {
 		Usuario usuario = new Usuario();
-		
+		String sql;
 		try {
 			this.connect();
-			String sql = "select * from usuarios,uconvencional where usuarios.nombreUsuario=? and usuarios.nombreUsuario=uconvencional.nombreUsuario";
+			if(!esAdmin) {
+				sql = "select * from usuarios,uconvencional where usuarios.nombreUsuario=? and usuarios.nombreUsuario=uconvencional.nombreUsuario";
+			}
+			else {
+				sql = "select * from usuarios,uadministrador where usuarios.nombreUsuario=? and usuarios.nombreUsuario=uadministrador.nombreUsuario";
+			}
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, nUsuario);
 			ResultSet result = stmt.executeQuery();

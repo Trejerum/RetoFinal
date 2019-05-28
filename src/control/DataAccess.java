@@ -42,7 +42,7 @@ public interface DataAccess {
 	
 	public ArrayList<String> cargarAutores() throws SQLException, ClassNotFoundException, IOException;
 
-	public Usuario cargarUsuario(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
+	public Usuario cargarUsuario(String nUsuario, boolean esAdmin) throws SQLException, ClassNotFoundException, IOException;
 
 	public void guardarCambiosUCon(Usuario usuario) throws SQLException, ClassNotFoundException, IOException;
 	

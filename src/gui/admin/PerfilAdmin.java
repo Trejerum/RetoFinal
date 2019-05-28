@@ -20,13 +20,14 @@ public class PerfilAdmin extends JFrame implements ActionListener{
 	private static final long serialVersionUID = 6023274207853491447L;
 	private JPanel contentPane;
 	private JButton btnVolver;
-	public String usuario;
+	private String nUsuario;
 
 
 	/**
 	 * Create the frame.
 	 */
-	public PerfilAdmin() {
+	public PerfilAdmin(String usuario) {
+		nUsuario=usuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 632, 439);
 		contentPane = new JPanel();
@@ -51,7 +52,7 @@ public class PerfilAdmin extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnVolver) {
-			InicioAdmin inicioAdmin = new InicioAdmin();
+			InicioAdmin inicioAdmin = new InicioAdmin(nUsuario);
 			inicioAdmin.setVisible(true);
 			this.dispose();
 		}

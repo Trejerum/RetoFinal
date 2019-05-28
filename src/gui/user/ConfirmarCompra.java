@@ -171,7 +171,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener, ChangeLis
 			Object rowdata[]= {libro.getIsbn(), libro.getTitulo(), libro.getPrecio(), libro.getDescuento(), precioFinal};
 			modelo.addRow(rowdata);
 			tabla.setModel(modelo);
-			Usuario usuario = logic.cargarUsuario(nUsuario);
+			Usuario usuario = logic.cargarUsuario(nUsuario, logic.esAdmin(nUsuario));
 			lblValorCuenta.setText(String.valueOf(usuario.getNumCuenta()));
 			lblValorUsuario.setText(nUsuario);
 			LocalDate fecha=LocalDate.now();
@@ -188,7 +188,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener, ChangeLis
 		String message;
 		try {
 			Logic logic = LogicFactory.getLogic();
-			Usuario usuario = logic.cargarUsuario(nUsuario);
+			Usuario usuario = logic.cargarUsuario(nUsuario, logic.esAdmin(nUsuario));
 			Compra compra = new Compra();
 			Date fecha = convertToDate(LocalDate.parse(lblValorFecha.getText(), formatter));
 			compra.setFechaCompra(fecha);

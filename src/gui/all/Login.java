@@ -130,7 +130,7 @@ public class Login extends JFrame implements ActionListener{
 			esAdmin=logic.esAdmin(nUsuario);
 			if(validado) {
 				if(esAdmin) {
-					InicioAdmin admin = new InicioAdmin();
+					InicioAdmin admin = new InicioAdmin(nUsuario);
 					admin.setVisible(true);
 					this.dispose();
 				}

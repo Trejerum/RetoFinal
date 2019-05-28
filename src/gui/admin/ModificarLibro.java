@@ -1,6 +1,4 @@
 package gui.admin;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -79,7 +77,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 	DefaultListModel<String> modeloLista = new DefaultListModel<String>();
 	private JList<String> listAutores;
 	private String nisbn;
-	private String nusuario;
+	private String nUsuario;
 	
 
 
@@ -89,7 +87,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 
 	public ModificarLibro(String usuario, String isbn) {
 		nisbn = isbn;
-		nusuario = usuario;
+		nUsuario = usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 712);
@@ -350,7 +348,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnVolver) {
-			InicioAdmin inicioAdmin = new InicioAdmin();
+			InicioAdmin inicioAdmin = new InicioAdmin(nUsuario);
 			inicioAdmin.setVisible(true);
 			this.dispose();
 		}else if(e.getSource()==btnModificarLibro) {

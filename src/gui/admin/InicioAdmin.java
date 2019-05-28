@@ -36,24 +36,11 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	private JButton btnAñadir;
 	private JLabel lblAdmin;
 	private String nUsuario;
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InicioAdmin frame = new InicioAdmin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	/**
 	 * Create the frame.
 	 */
-	public InicioAdmin() {
+	public InicioAdmin(String usuario) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 363, 215);
 		contentPane = new JPanel();
@@ -106,9 +93,9 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		contentPane.add(lblAdmin);
 		try {
 			Logic logic = LogicFactory.getLogic();
-			Usuario usuario = new Usuario();
-			usuario = logic.cargarUsuario(nUsuario);
-			lblAdmin.setText(usuario.getNombre());
+			Usuario usuario1 = new Usuario();
+			usuario1 = logic.cargarUsuario(nUsuario, logic.esAdmin(nUsuario));
+			lblAdmin.setText(usuario1.getNombre());
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -128,7 +115,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		else if(e.getSource()==btnEditarInfo) {
-			PerfilAdmin perfil = new PerfilAdmin();
+			PerfilAdmin perfil = new PerfilAdmin(nUsuario);
 			perfil.setVisible(true);
 			this.dispose();
 		}

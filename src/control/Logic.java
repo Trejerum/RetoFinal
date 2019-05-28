@@ -33,7 +33,7 @@ public interface Logic {
 	
 	public ArrayList<String> cargarAutores() throws Exception;
 
-	public Usuario cargarUsuario(String nUsuario) throws Exception;
+	public Usuario cargarUsuario(String nUsuario, boolean esAdmin) throws Exception;
 	
 	public void guardarCambios(Usuario usuario) throws Exception;
 
