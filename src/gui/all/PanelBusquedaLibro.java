@@ -22,8 +22,11 @@ import control.LogicFactory;
 import model.Libro;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
-public class PanelBusquedaLibro extends JPanel implements ActionListener{
+public class PanelBusquedaLibro extends JPanel implements ActionListener, KeyListener{
 	/**
 	 * 
 	 */
@@ -100,7 +103,7 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 		
 		btnBuscarLupa.addActionListener(this);
 		btnVerDescripcion.addActionListener(this);
-		
+		tfBusqueda.addKeyListener(this);
 	}
 
 
@@ -172,5 +175,26 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 		int fila = tablaBusqueda.getSelectedRow();
 		String isbn = tablaBusqueda.getModel().getValueAt(fila, columna).toString();
 		return isbn;
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		buscar();
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }
