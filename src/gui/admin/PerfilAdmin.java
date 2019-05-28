@@ -28,21 +28,21 @@ public class PerfilAdmin extends JFrame implements ActionListener{
 	 */
 	public PerfilAdmin() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 609, 399);
+		setBounds(100, 100, 632, 439);
 		contentPane = new JPanel();
 		contentPane.setBackground(UIManager.getColor("Button.background"));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		btnVolver = new JButton("Volver");
-		btnVolver.setFont(new Font("Arial", Font.PLAIN, 15));
-		btnVolver.setBounds(430, 307, 131, 31);
-		contentPane.add(btnVolver);
-		
 		PanelPerfil panel = new PanelPerfil(usuario);
-		panel.setBounds(0, 0, 593, 361);
+		panel.setBounds(0, 0, 616, 401);
 		contentPane.add(panel);
+		
+		btnVolver = new JButton("Volver");
+		btnVolver.setBounds(475, 359, 131, 31);
+		panel.add(btnVolver);
+		btnVolver.setFont(new Font("Arial", Font.PLAIN, 15));
 		
 		btnVolver.addActionListener(this);
 		

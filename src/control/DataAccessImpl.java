@@ -3,15 +3,19 @@ package control;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
 
 import model.Autor;
+import model.AutoresLibro;
 import model.Compra;
+import model.Genero;
 import model.Libro;
 import model.Usuario;
 
@@ -160,8 +164,27 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
-	public void insertarLibro() throws SQLException, ClassNotFoundException, IOException {
-		// TODO Auto-generated method stub
+	public void insertarLibro(Libro libro) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "Insert into libros(isbn, titulo, genero, descripcion, editorial, fechadepublicacion, precio, oferta, descuento, stock, numVentas)"
+					+ "values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, libro.getIsbn());
+			stmt.setString(2, libro.getTitulo());
+			stmt.setString(3, libro.getGenero());
+			stmt.setString(4, libro.getDescripcion());
+			stmt.setString(5, libro.getEditorial());
+			stmt.setDate(6, convertirLocalDateADate(libro.getFechaPublicacion()));
+			stmt.setDouble(7, libro.getPrecio());
+			stmt.setBoolean(8, libro.isOferta());
+			stmt.setDouble(9, libro.getDescuento());
+			stmt.setInt(10, libro.getStock());
+			stmt.setInt(11, libro.getNumVentas());
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
 		
 	}
 
@@ -248,8 +271,27 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
-	public void modificarLibro(String isbn) throws SQLException, ClassNotFoundException, IOException {
-		// TODO Auto-generated method stub
+	public void modificarLibro(Libro libro) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "update libros set titulo=?, genero=?, descripcion=?, editorial=?, fechadepublicacion=?, "
+					+ "precio=?, oferta=?, descuento=?, stock=?, numVentas=? where libros.isbn=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, libro.getTitulo());
+			stmt.setString(2, libro.getGenero());
+			stmt.setString(3, libro.getDescripcion());
+			stmt.setString(4, libro.getEditorial());
+			stmt.setDate(5, convertirLocalDateADate(libro.getFechaPublicacion()));
+			stmt.setDouble(6, libro.getPrecio());
+			stmt.setBoolean(7, libro.isOferta());
+			stmt.setDouble(8, libro.getDescuento());
+			stmt.setInt(9, libro.getStock());
+			stmt.setInt(10, libro.getNumVentas());
+			stmt.setString(11, libro.getIsbn());
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
 		
 	}
 
@@ -360,19 +402,18 @@ public class DataAccessImpl implements DataAccess{
 		return usuario;
 	}
 
-	public void guardarCambiosUCon(Usuario usuario, String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+	public void guardarCambiosUCon(Usuario usuario) throws SQLException, ClassNotFoundException, IOException {
 		try {
 			this.connect();
-			String sql = "update uConvencional set nombreUsuario=?, nombre=?, apellidos=?, email=?, telefono=?, direccion=?, numCuenta=? where nombreUsuario=?";
+			String sql = "update uConvencional set nombre=?, apellidos=?, email=?, telefono=?, direccion=?, numCuenta=? where nombreUsuario=?";
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, usuario.getNombreUsuario());
-			stmt.setString(2, usuario.getNombre());
-			stmt.setString(3, usuario.getApellidos());
-			stmt.setString(4, usuario.getEmail());
-			stmt.setInt(5, usuario.getTelefono());
-			stmt.setString(6, usuario.getDireccion());
-			stmt.setInt(7, usuario.getNumCuenta());
-			stmt.setString(8, nUsuario);
+			stmt.setString(1, usuario.getNombre());
+			stmt.setString(2, usuario.getApellidos());
+			stmt.setString(3, usuario.getEmail());
+			stmt.setInt(4, usuario.getTelefono());
+			stmt.setString(5, usuario.getDireccion());
+			stmt.setInt(6, usuario.getNumCuenta());
+			stmt.setString(7, usuario.getNombreUsuario());
 			stmt.executeUpdate();
 			
 		}finally {
@@ -381,15 +422,14 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
-	public void guardarCambiosUs(Usuario usuario, String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+	public void guardarCambiosUs(Usuario usuario) throws SQLException, ClassNotFoundException, IOException {
 		try {
 			this.connect();
-			String sql = "update usuarios set nombreUsuario=?, contraseña=?, esAdmin=? where nombreUsuario=?";
+			String sql = "update usuarios set contraseña=?, esAdmin=? where nombreUsuario=?";
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, usuario.getNombreUsuario());
-			stmt.setString(2, usuario.getContraseña());
-			stmt.setBoolean(3, usuario.isEsAdmin());
-			stmt.setString(4, nUsuario);
+			stmt.setString(1, usuario.getContraseña());
+			stmt.setBoolean(2, usuario.isEsAdmin());
+			stmt.setString(3, usuario.getNombreUsuario());
 			stmt.executeUpdate();
 			
 		}finally {
@@ -398,7 +438,6 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
-	@Override
 	public Libro cargarLibro(String isbn) throws SQLException, ClassNotFoundException, IOException {
 		Libro libro = new Libro();
 		try {
@@ -427,7 +466,6 @@ public class DataAccessImpl implements DataAccess{
 		
 	}
 
-	@Override
 	public ArrayList<Autor> cargarAutoresLibro(String isbn) throws SQLException, ClassNotFoundException, IOException {
 		ArrayList<Autor> autores = new ArrayList<Autor>();
 		try {
@@ -448,7 +486,6 @@ public class DataAccessImpl implements DataAccess{
 		return autores;
 	}
 
-	@Override
 	public void aumentarVentas(String isbn, int cantidad) throws SQLException, ClassNotFoundException, IOException {
 		try {
 			this.connect();
@@ -479,5 +516,86 @@ public class DataAccessImpl implements DataAccess{
 		}
 		return esAdmin;
 	}
+	
+	public Date convertirLocalDateADate(LocalDate fechaAConvertir) {
+	    return Date.valueOf(fechaAConvertir);
+	}
 
+	public void insertarLibroAutores(Autor autor, String isbn) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "insert into autoresLibro(isbn, codAutor) values (?, ?)";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, isbn);
+			stmt.setString(2, autor.getCodAutor());
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+	}
+
+	public void insertarAutor(Autor autor) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "insert into autores(codAutor, nombreAutor) values (? ,?)";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, autor.getCodAutor());
+			stmt.setString(2, autor.getNomAutor());
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+
+	public boolean existeAutor(Autor autor) throws SQLException, ClassNotFoundException, IOException {
+		Boolean existeAutor=false;
+		try {
+			this.connect();
+			String sql = "select autores.nombreAutor from autores where autores.nombreAutor=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, autor.getNomAutor());
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				if(result.getString("nombreAutor").equalsIgnoreCase(autor.getNomAutor())) {
+					existeAutor=true;
+				}
+			}
+		}finally {
+			this.disconnect();
+		}
+		return existeAutor;
+	}
+
+	public void insertarGenero(Genero genero) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "insert into generos(codGen, nombreGen) values (?, ?)";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, genero.getCodGenero());
+			stmt.setString(2, genero.getNomGenero());
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+	}
+
+	public boolean existeGenero(String genero) throws SQLException, ClassNotFoundException, IOException {
+		Boolean existeGenero=false;
+		try {
+			this.connect();
+			String sql = "select codGen from generos where codGen=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, genero);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				if(result.getString("codGen").equalsIgnoreCase(genero)) {
+					existeGenero=true;
+				}
+			}
+		}finally {
+			this.disconnect();
+		}
+		return existeGenero;
+	}
 }

@@ -173,6 +173,4 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 		String isbn = tablaBusqueda.getModel().getValueAt(fila, columna).toString();
 		return isbn;
 	}
-	
-	
 }

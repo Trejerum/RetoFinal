@@ -182,9 +182,14 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 			compras.setVisible(true);
 			this.dispose();
 		}
-		else {
+		else if(e.getSource()==btnUsuario){
 			PerfilUser perfil = new PerfilUser(nUsuario);
 			perfil.setVisible(true);
+			this.dispose();
+		}
+		else {
+			BestSellersUser bestSellers = new BestSellersUser(nUsuario);
+			bestSellers.setVisible(true);
 			this.dispose();
 		}
 	}

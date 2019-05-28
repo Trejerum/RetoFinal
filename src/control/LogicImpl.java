@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.Autor;
 import model.Compra;
+import model.Genero;
 import model.Libro;
 import model.Usuario;
 
@@ -35,9 +36,20 @@ public class LogicImpl implements Logic{
 		
 	}
 
-	public void insertarLibro() throws Exception {
-		// TODO Auto-generated method stub
-		
+	public void insertarLibro(Libro libro, ArrayList<Autor> autores) throws Exception {
+		dataAccess.insertarLibro(libro);
+		for (Autor autor : autores) {
+			dataAccess.insertarLibroAutores(autor, libro.getIsbn());
+			if(!dataAccess.existeAutor(autor)) {
+				dataAccess.insertarAutor(autor);
+			}
+		}
+		Genero genero = new Genero();
+		genero.setCodGenero(libro.getGenero().substring(0, 2));
+		genero.setNomGenero(libro.getGenero());
+		if(!dataAccess.existeGenero(genero.getCodGenero())) {
+			dataAccess.insertarGenero(genero);
+		}
 	}
 
 	public void comprarLibro(Compra compra) throws Exception {
@@ -56,8 +68,8 @@ public class LogicImpl implements Logic{
 		return libros;		
 	}
 
-	public void modificarLibro(String isbn) throws Exception {
-		// TODO Auto-generated method stub
+	public void modificarLibro(Libro libro) throws Exception {
+		dataAccess.modificarLibro(libro);
 		
 	}
 
@@ -86,9 +98,9 @@ public class LogicImpl implements Logic{
 		return usuario;
 	}
 
-	public void guardarCambios(Usuario usuario, String nUsuario) throws Exception {
-		dataAccess.guardarCambiosUCon(usuario, nUsuario);
-		dataAccess.guardarCambiosUs(usuario, nUsuario);
+	public void guardarCambios(Usuario usuario) throws Exception {
+		dataAccess.guardarCambiosUCon(usuario);
+		dataAccess.guardarCambiosUs(usuario);
 		
 	}
 

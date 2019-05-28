@@ -1,22 +1,24 @@
 package gui.admin;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import control.Logic;
+import control.LogicFactory;
 import gui.all.PanelBestSellers;
+import model.Usuario;
 
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import java.time.LocalDate;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JTextField;
 import javax.swing.UIManager;
 
 public class BestSellersAdmin extends JFrame implements ActionListener{
@@ -30,27 +32,15 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 	private JButton btnVolver;
 	private JButton btnBuscarLibro;
 	private JLabel lblSesionIniciada;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					BestSellersAdmin frame = new BestSellersAdmin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JLabel lblnameAdmin;
+	private PanelBestSellers panel;
+	private String nUsuario;
 
 	/**
 	 * Create the frame.
 	 */
-	public BestSellersAdmin() {
+	public BestSellersAdmin(String usuario) {
+		nUsuario = usuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 526);
 		contentPane = new JPanel();
@@ -81,18 +71,46 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 		lblSesionIniciada.setBounds(26, 11, 134, 14);
 		contentPane.add(lblSesionIniciada);
 		
-		PanelBestSellers panel = new PanelBestSellers();
+		panel = new PanelBestSellers();
 		panel.setBounds(0, 0, 784, 488);
 		contentPane.add(panel);
 		
-		JLabel lblnameAdmin = new JLabel("");
+		lblnameAdmin = new JLabel("");
 		lblnameAdmin.setBounds(170, 11, 87, 16);
 		panel.add(lblnameAdmin);
+		
+		btnVolver.addActionListener(this);
+		btnBuscarLibro.addActionListener(this);
+		
+		cargarDatos();
+	}
+
+	private void cargarDatos() {
+		String message;
+		try {
+			Logic logic = LogicFactory.getLogic();
+			Usuario usuario = new Usuario();
+			usuario = logic.cargarUsuario(nUsuario);
+			lblnameAdmin.setText(usuario.getNombre());
+		} catch (Exception e) {
+			message="Error. No se pudo cargar el usuario";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
+		if(e.getSource()==btnVolver) {
+			InicioAdmin inicio = new InicioAdmin();
+			inicio.setVisible(true);
+			this.dispose();
+		}else if(e.getSource()==btnBuscarLibro) {
+			BusquedaAdmin buscar = new BusquedaAdmin(nUsuario);
+			buscar.setVisible(true);
+			this.dispose();
+		}
 		
 	}
 }
