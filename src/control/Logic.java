@@ -15,7 +15,7 @@ public interface Logic {
 	
 	public ArrayList<Libro> listarBestsellers() throws Exception;
 	
-	public void insertarLibro(Libro libro) throws Exception;
+	public void insertarLibro(Libro libro, ArrayList<Autor> autores) throws Exception;
 	
 	public void comprarLibro(Compra compra) throws Exception;
 	

@@ -5,8 +5,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import model.Autor;
-import model.AutoresLibro;
 import model.Compra;
+import model.Genero;
 import model.Libro;
 import model.Usuario;
 
@@ -56,6 +56,14 @@ public interface DataAccess {
 	
 	public boolean esAdmin(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
 	
-	public void insertarLibroAutores(AutoresLibro autores) throws SQLException, ClassNotFoundException, IOException;
+	public void insertarLibroAutores(Autor autor, String isbn) throws SQLException, ClassNotFoundException, IOException;
 
+	public void insertarAutor(Autor autor) throws SQLException, ClassNotFoundException, IOException;
+	
+	public boolean existeAutor(Autor autor) throws SQLException, ClassNotFoundException, IOException;
+	
+	public void insertarGenero(Genero genero) throws SQLException, ClassNotFoundException, IOException;
+	
+	public boolean existeGenero(String genero) throws SQLException, ClassNotFoundException, IOException;
+	
 }

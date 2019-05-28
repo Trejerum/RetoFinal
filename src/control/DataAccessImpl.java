@@ -15,6 +15,7 @@ import java.util.Properties;
 import model.Autor;
 import model.AutoresLibro;
 import model.Compra;
+import model.Genero;
 import model.Libro;
 import model.Usuario;
 
@@ -520,14 +521,81 @@ public class DataAccessImpl implements DataAccess{
 	    return Date.valueOf(fechaAConvertir);
 	}
 
-	public void insertarLibroAutores(AutoresLibro autores) throws SQLException, ClassNotFoundException, IOException {
+	public void insertarLibroAutores(Autor autor, String isbn) throws SQLException, ClassNotFoundException, IOException {
 		try {
 			this.connect();
-			String sql = "";
+			String sql = "insert into autoresLibro(isbn, codAutor) values (?, ?)";
 			stmt = con.prepareStatement(sql);
+			stmt.setString(1, isbn);
+			stmt.setString(2, autor.getCodAutor());
+			stmt.executeUpdate();
 		}finally {
 			this.disconnect();
 		}
 	}
 
+	public void insertarAutor(Autor autor) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "insert into autores(codAutor, nombreAutor) values (? ,?)";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, autor.getCodAutor());
+			stmt.setString(2, autor.getNomAutor());
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+
+	public boolean existeAutor(Autor autor) throws SQLException, ClassNotFoundException, IOException {
+		Boolean existeAutor=false;
+		try {
+			this.connect();
+			String sql = "select autores.nombreAutor from autores where autores.nombreAutor=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, autor.getNomAutor());
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				if(result.getString("nombreAutor").equalsIgnoreCase(autor.getNomAutor())) {
+					existeAutor=true;
+				}
+			}
+		}finally {
+			this.disconnect();
+		}
+		return existeAutor;
+	}
+
+	public void insertarGenero(Genero genero) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "insert into generos(codGen, nombreGen) values (?, ?)";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, genero.getCodGenero());
+			stmt.setString(2, genero.getNomGenero());
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+	}
+
+	public boolean existeGenero(String genero) throws SQLException, ClassNotFoundException, IOException {
+		Boolean existeGenero=false;
+		try {
+			this.connect();
+			String sql = "select codGen from generos where codGen=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, genero);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				if(result.getString("codGen").equalsIgnoreCase(genero)) {
+					existeGenero=true;
+				}
+			}
+		}finally {
+			this.disconnect();
+		}
+		return existeGenero;
+	}
 }

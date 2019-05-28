@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.Autor;
 import model.Compra;
+import model.Genero;
 import model.Libro;
 import model.Usuario;
 
@@ -35,9 +36,20 @@ public class LogicImpl implements Logic{
 		
 	}
 
-	public void insertarLibro(Libro libro) throws Exception {
+	public void insertarLibro(Libro libro, ArrayList<Autor> autores) throws Exception {
 		dataAccess.insertarLibro(libro);
-		
+		for (Autor autor : autores) {
+			dataAccess.insertarLibroAutores(autor, libro.getIsbn());
+			if(!dataAccess.existeAutor(autor)) {
+				dataAccess.insertarAutor(autor);
+			}
+		}
+		Genero genero = new Genero();
+		genero.setCodGenero(libro.getGenero().substring(0, 2));
+		genero.setNomGenero(libro.getGenero());
+		if(!dataAccess.existeGenero(genero.getCodGenero())) {
+			dataAccess.insertarGenero(genero);
+		}
 	}
 
 	public void comprarLibro(Compra compra) throws Exception {
