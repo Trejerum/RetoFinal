@@ -3,9 +3,17 @@ package gui.admin;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import control.Logic;
+import control.LogicFactory;
+import gui.all.Login;
+import model.Usuario;
+
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+
+import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +36,19 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	private JButton btnAñadir;
 	private JLabel lblAdmin;
 	private String nUsuario;
+	
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					InicioAdmin frame = new InicioAdmin();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 
 	/**
 	 * Create the frame.
@@ -80,9 +101,17 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		btnAñadir.setBounds(184, 146, 153, 23);
 		contentPane.add(btnAñadir);
 		
-		lblAdmin = new JLabel("Admin");
+		lblAdmin = new JLabel("Diego");
 		lblAdmin.setBounds(156, 15, 55, 12);
 		contentPane.add(lblAdmin);
+		try {
+			Logic logic = LogicFactory.getLogic();
+			Usuario usuario = new Usuario();
+			usuario = logic.cargarUsuario(nUsuario);
+			lblAdmin.setText(usuario.getNombre());
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		btnModificar.addActionListener(this);
 		btnBuscar.addActionListener(this);
@@ -92,7 +121,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {			//TODO Completar action listeners
+	public void actionPerformed(ActionEvent e) {			
 		if(e.getSource()==btnModificar) {
 			ListaLibros listaLibros = new ListaLibros(nUsuario);
 			listaLibros.setVisible(true);
@@ -109,11 +138,10 @@ public class InicioAdmin extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		else if(e.getSource()==btnAñadir) {
-			AnadirLibro añadir = new AnadirLibro(nUsuario);
-			añadir.setVisible(true);
+			AnadirLibro anadirLibro = new AnadirLibro(nUsuario);
+			anadirLibro.setVisible(true);
 			this.dispose();
-		}
-		else if(e.getSource()==btnBestSellers) {
+		}else if(e.getSource()==btnBestSellers) {
 			BestSellersAdmin bestSellers = new BestSellersAdmin(nUsuario);
 			bestSellers.setVisible(true);
 			this.dispose();
