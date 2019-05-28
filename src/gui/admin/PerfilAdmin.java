@@ -36,7 +36,7 @@ public class PerfilAdmin extends JFrame implements ActionListener{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		PanelPerfil panel = new PanelPerfil(usuario);
+		PanelPerfil panel = new PanelPerfil(nUsuario);
 		panel.setBounds(0, 0, 616, 401);
 		contentPane.add(panel);
 		

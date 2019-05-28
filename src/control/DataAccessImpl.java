@@ -397,7 +397,6 @@ public class DataAccessImpl implements DataAccess{
 				usuario.setEmail(result.getString("Email"));
 				usuario.setContraseña(result.getString("Contraseña"));
 				usuario.setNombreUsuario(result.getString("nombreUsuario"));
-				usuario.setNumCuenta(result.getInt("NumCuenta"));
 			}
 		}finally {
 			this.disconnect();
