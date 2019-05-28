@@ -2,6 +2,7 @@ package gui.admin;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.text.DateFormatter;
 
 import control.Logic;
 import control.LogicFactory;
@@ -10,12 +11,18 @@ import model.Libro;
 import javax.swing.JSeparator;
 import java.awt.Color;
 
+import javax.swing.ButtonGroup;
+import javax.swing.ButtonModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -25,6 +32,7 @@ import javax.swing.JComboBox;
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 
 public class AnadirLibro extends JFrame implements ActionListener{
 
@@ -49,8 +57,6 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	private JLabel lblFechaPubli;
 	private JLabel lblOferta;
 	private JButton btnVolver;
-	private JCheckBox chckbxOfertaSi;
-	private JCheckBox chckbxOfertaNo;
 	private JLabel lblDescuento;
 	private JLabel lblStock;
 	private JLabel lblGenero;
@@ -76,8 +82,9 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	DefaultListModel<String> modeloLista = new DefaultListModel<String>();
 	private JList<String> listAutores;
 	private String nisbn;
-	private String nusuario;
-	
+	private JRadioButton rdbtnSi;
+	private JRadioButton rdbtnNo;
+	private ButtonGroup rbgOferta;
 
 
 	/**
@@ -85,7 +92,6 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	 */
 
 	public AnadirLibro(String usuario) {
-		nusuario = usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 712);
@@ -153,14 +159,14 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		tfFechaPubli.setForeground(new Color(0, 0, 205));
 		tfFechaPubli.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfFechaPubli.setColumns(10);
-		tfFechaPubli.setBounds(162, 282, 86, 20);
+		tfFechaPubli.setBounds(157, 280, 86, 20);
 		contentPane.add(tfFechaPubli);
 		
 		tfPrecio = new JTextField();
 		tfPrecio.setForeground(new Color(0, 0, 205));
 		tfPrecio.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfPrecio.setColumns(10);
-		tfPrecio.setBounds(162, 331, 145, 20);
+		tfPrecio.setBounds(157, 331, 145, 20);
 		contentPane.add(tfPrecio);
 		
 		lblOferta = new JLabel("Oferta:");
@@ -172,14 +178,6 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		btnVolver.setFont(new Font("Arial", Font.PLAIN, 15));
 		btnVolver.setBounds(635, 626, 122, 37);
 		contentPane.add(btnVolver);
-		
-		chckbxOfertaSi = new JCheckBox("S\u00ED");
-		chckbxOfertaSi.setBounds(162, 369, 50, 23);
-		contentPane.add(chckbxOfertaSi);
-		
-		chckbxOfertaNo = new JCheckBox("No");
-		chckbxOfertaNo.setBounds(209, 369, 50, 23);
-		contentPane.add(chckbxOfertaNo);
 		
 		tfDescuento = new JTextField();
 		tfDescuento.setForeground(new Color(0, 0, 205));
@@ -308,6 +306,17 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		modeloLista = new DefaultListModel<String>();
 		listAutores.setModel(modeloLista);
 		
+		rdbtnSi = new JRadioButton("Si");
+		rdbtnSi.setBounds(157, 367, 33, 23);
+		contentPane.add(rdbtnSi);
+		
+		rdbtnNo = new JRadioButton("No");
+		rdbtnNo.setBounds(204, 367, 39, 23);
+		contentPane.add(rdbtnNo);
+		
+		rbgOferta = new ButtonGroup();
+		rbgOferta.add(rdbtnSi);
+		rbgOferta.add(rdbtnNo);
 		
 		btnVolver.addActionListener(this);
 		btnAnadir.addActionListener(this);
@@ -327,7 +336,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 			inicioAdmin.setVisible(true);
 			this.dispose();
 		}else if(e.getSource()==btnAnadir) {
-			//anadirLibro();
+			anadirLibro();
 		}else if(e.getSource()==btnMasAutores) {
 			comprobarCampos();
 		}else if(e.getSource()== btnMasGeneros)  {
@@ -354,15 +363,37 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		}
 	}
 
-	/*
+	
 	private void anadirLibro() {
-		Logic logic = LogicFactory.getLogic();
 		Libro libro = new Libro();
+		libro.setIsbn(tfIsbn.getText());
+		libro.setTitulo(tfTitulo.getText());
+		ArrayList<String> autores = new ArrayList<String>();
+		for (int i = 0; i < modeloLista.getSize(); i++) {
+			autores.add(i, modeloLista.getElementAt(i));
+		}
+		DateTimeFormatter format = DateTimeFormatter.ISO_LOCAL_DATE;
+		LocalDate fechaPubli = LocalDate.parse(tfFechaPubli.getText(), format);
+		libro.setFechaPublicacion(fechaPubli);
+		libro.setPrecio(Double.parseDouble(tfPrecio.getText()));
+		boolean oferta = false;
+		if(rbgOferta.getSelection() == rdbtnSi) {
+			oferta = true;
+		}
+		libro.setOferta(oferta);
+		libro.setDescuento(Double.parseDouble(tfDescuento.getText()));
+		libro.setStock(Integer.parseInt(tfStock.getText()));
+		libro.setGenero(tfGenero.getText());
+		libro.setDescripcion(tfDescripcion.getText());
 		
-		
-		
+		Logic logic = LogicFactory.getLogic();
+		try {
+			logic.insertarLibro(libro);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
-	*/
+	
 	private void eliminarAutor() {
 		try {
 			int eliminar = listAutores.getSelectedIndex();
@@ -432,5 +463,4 @@ public class AnadirLibro extends JFrame implements ActionListener{
 			e.printStackTrace();
 	    }
 	}
-	
 }
