@@ -1,15 +1,25 @@
 package gui.user;
 import javax.swing.JFrame;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.TextField;
+
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import javax.swing.JSeparator;
 import java.awt.Color;
+
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.Image;
 
 public class InicioUser extends JFrame implements ActionListener{
 
@@ -29,7 +39,50 @@ public class InicioUser extends JFrame implements ActionListener{
 	private JLabel lbllaEstrellaSirve;
 	private JLabel lblLaLupa;
 	private String nUsuario;
+	
+	
 
+	 
+	/**
+	 * 
+	 * Clase que extiende de JPanel y permite poner una imagen como fondo.
+	 * 
+	 * @author Guille Rodriguez Gonzalez ( http://www.driverlandia.com )
+	 * @version 1.0 | 05-2014
+	 * 
+	 */
+	 
+	public class JPanelBackground extends JPanel {
+	 
+		// Atributo que guardara la imagen de Background que le pasemos.
+		private Image background;
+	 
+		// Metodo que es llamado automaticamente por la maquina virtual Java cada vez que repinta
+		public void paintComponent(Graphics g) {
+	 
+			/* Obtenemos el tamaño del panel para hacer que se ajuste a este
+			cada vez que redimensionemos la ventana y se lo pasamos al drawImage */
+			int width = this.getSize().width;
+			int height = this.getSize().height;
+	 
+			// Mandamos que pinte la imagen en el panel
+			if (this.background != null) {
+				g.drawImage(this.background, 0, 0, width, height, null);
+			}
+	 
+			super.paintComponent(g);
+		}
+	 
+		// Metodo donde le pasaremos la dirección de la imagen a cargar.
+		public void setBackground(String imagePath) {
+			
+			// Construimos la imagen y se la asignamos al atributo background.
+			this.setOpaque(false);
+			this.background = new ImageIcon(imagePath).getImage();
+			repaint();
+		}
+	 
+	}
 	/**
 	 * Create the frame.
 	 */
@@ -48,7 +101,12 @@ public class InicioUser extends JFrame implements ActionListener{
 		menu_separator.setBounds(1, 377, 784, 2);
 		contentPane.add(menu_separator);
 		
-		btnHome = new JButton("Casa(HOME)");
+		// Botón HOME
+		btnHome = new JButton("");
+		Image house = new ImageIcon(this.getClass().getResource("/home2.png")).getImage();
+		Image newhouse = house.getScaledInstance(27, 27, java.awt.Image.SCALE_SMOOTH);
+		btnHome.setIcon(new ImageIcon(newhouse));
+		
 		btnHome.setForeground(new Color(0, 0, 0));
 		btnHome.setBackground(new Color(0, 153, 51));
 		btnHome.addActionListener(new ActionListener() {
@@ -58,17 +116,32 @@ public class InicioUser extends JFrame implements ActionListener{
 		btnHome.setBounds(0, 378, 157, 61);
 		contentPane.add(btnHome);
 		
-		btnBestSellers = new JButton("Estrella(BestSellers)");
+		// Botón BestSellers
+		btnBestSellers = new JButton("");
+		Image estrella = new ImageIcon(this.getClass().getResource("/favorites.png")).getImage();
+		Image newestrella = estrella.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
+		btnBestSellers.setIcon(new ImageIcon(newestrella));
+		
 		btnBestSellers.setBackground(new Color(0, 204, 51));
 		btnBestSellers.setBounds(155, 378, 156, 61);
 		contentPane.add(btnBestSellers);
 		
-		btnUsuario = new JButton("Monigote(usuario)");
+		// Botón Usuario
+		btnUsuario = new JButton("");
+		Image monigote = new ImageIcon(this.getClass().getResource("/users.png")).getImage();
+		Image newmonigote = monigote.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
+		btnUsuario.setIcon(new ImageIcon(newmonigote));
+		
 		btnUsuario.setBackground(new Color(0, 204, 51));
 		btnUsuario.setBounds(617, 378, 167, 61);
 		contentPane.add(btnUsuario);
 		
-		btnCompras = new JButton("Carrito(Compras)");
+		//Botón Compras
+		btnCompras = new JButton("");
+		Image carrito = new ImageIcon(this.getClass().getResource("/shopping-cart.png")).getImage();
+		Image newcarrito = carrito.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
+		btnCompras.setIcon(new ImageIcon(newcarrito));
+		
 		btnCompras.setBackground(new Color(0, 204, 51));
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -77,7 +150,12 @@ public class InicioUser extends JFrame implements ActionListener{
 		btnCompras.setBounds(463, 378, 156, 61);
 		contentPane.add(btnCompras);
 		
-		btnBuscar = new JButton("Lupa(buscar)");
+		//Botón BUSCAR
+		btnBuscar = new JButton("");
+		Image lupa = new ImageIcon(this.getClass().getResource("/loupe2.png")).getImage();
+		Image newlupa = lupa.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
+		btnBuscar.setIcon(new ImageIcon(newlupa));
+		
 		btnBuscar.setBackground(new Color(0, 204, 51));
 		btnBuscar.setBounds(309, 378, 156, 61);
 		contentPane.add(btnBuscar);
@@ -115,6 +193,14 @@ public class InicioUser extends JFrame implements ActionListener{
 		btnBuscar.addActionListener(this);
 		btnCompras.addActionListener(this);
 		btnUsuario.addActionListener(this);
+		
+		JPanelBackground jPanelBackground = new JPanelBackground();
+		jPanelBackground.setBackground("./images/libros.jpg");
+		jPanelBackground.setBounds(1, 0, 784, 439);
+		contentPane.add(jPanelBackground);
+		LocalDate calendario = LocalDate.now();
+		TextField texto = new TextField(calendario.toString());
+		String fecha = texto.getText();
 		
 		lblNombreusuario.setText(nUsuario);
 	}
