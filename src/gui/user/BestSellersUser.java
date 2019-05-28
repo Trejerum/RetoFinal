@@ -4,15 +4,24 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import gui.all.PanelBestSellers;
+import gui.user.InicioUser.JPanelBackground;
 
 import javax.swing.JSeparator;
 import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.TextField;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.awt.event.ActionEvent;
+import java.awt.Graphics;
+import java.awt.Image;
+ 
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 public class BestSellersUser extends JFrame implements ActionListener{
 
@@ -29,7 +38,42 @@ public class BestSellersUser extends JFrame implements ActionListener{
 	private JButton btnBuscar;
 	private String nUsuario;
 	
-
+	/**
+	 * Clase que extiende de JPanel y permite poner una imagen como fondo.
+	 */
+	 
+	public class JPanelBackground extends JPanel {
+	 
+		// Atributo que guardara la imagen de Background que le pasemos.
+		private Image background;
+	 
+		// Metodo que es llamado automaticamente por la maquina virtual Java cada vez que repinta
+		public void paintComponent(Graphics g) {
+	 
+			/* Obtenemos el tamaño del panel para hacer que se ajuste a este
+			cada vez que redimensionemos la ventana y se lo pasamos al drawImage */
+			int width = this.getSize().width;
+			int height = this.getSize().height;
+	 
+			// Mandamos que pinte la imagen en el panel
+			if (this.background != null) {
+				g.drawImage(this.background, 0, 0, width, height, null);
+			}
+	 
+			super.paintComponent(g);
+		}
+	 
+		// Metodo donde le pasaremos la dirección de la imagen a cargar.
+		public void setBackground(String imagePath) {
+			
+			// Construimos la imagen y se la asignamos al atributo background.
+			this.setOpaque(false);
+			this.background = new ImageIcon(imagePath).getImage();
+			repaint();
+		}
+	 
+	}
+	
 	/**
 	 * Aquí de sefinen los botones del menú.
 	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
@@ -40,8 +84,8 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 791, 540);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 153, 51));
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		contentPane.setBackground(new Color(135, 206, 235));
+		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
@@ -127,6 +171,16 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		btnCompras.addActionListener(this);
 		btnHome.addActionListener(this);
 		btnUsuario.addActionListener(this);
+		
+
+		JPanelBackground jPanelBackground = new JPanelBackground();
+		jPanelBackground.setBackground("./images/fondo1.jpg");
+		jPanelBackground.setBounds(1, 0, 784, 439);
+		contentPane.add(jPanelBackground);
+		LocalDate calendario = LocalDate.now();
+		TextField texto = new TextField(calendario.toString());
+		String fecha = texto.getText();
+
 		
 	}
 

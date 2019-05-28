@@ -8,13 +8,17 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.SystemColor;
+import java.awt.TextField;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -22,7 +26,13 @@ import javax.swing.table.DefaultTableModel;
 
 import control.Logic;
 import control.LogicFactory;
+import gui.user.BestSellersUser.JPanelBackground;
 import model.Compra;
+import java.awt.Graphics;
+import java.awt.Image;
+ 
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
 
 public class ComprasRealizadas extends JFrame implements ActionListener{
 
@@ -43,6 +53,43 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	private JTable table;
 	private DefaultTableModel modelo;
 
+	/**
+	 * Clase que extiende de JPanel y permite poner una imagen como fondo.
+	 */
+	 
+	public class JPanelBackground extends JPanel {
+	 
+		// Atributo que guardara la imagen de Background que le pasemos.
+		private Image background;
+	 
+		// Metodo que es llamado automaticamente por la maquina virtual Java cada vez que repinta
+		public void paintComponent(Graphics g) {
+	 
+			/* Obtenemos el tamaño del panel para hacer que se ajuste a este
+			cada vez que redimensionemos la ventana y se lo pasamos al drawImage */
+			int width = this.getSize().width;
+			int height = this.getSize().height;
+	 
+			// Mandamos que pinte la imagen en el panel
+			if (this.background != null) {
+				g.drawImage(this.background, 0, 0, width, height, null);
+			}
+	 
+			super.paintComponent(g);
+		}
+	 
+		// Metodo donde le pasaremos la dirección de la imagen a cargar.
+		public void setBackground(String imagePath) {
+			
+			// Construimos la imagen y se la asignamos al atributo background.
+			this.setOpaque(false);
+			this.background = new ImageIcon(imagePath).getImage();
+			repaint();
+		}
+	 
+	}
+	
+	
 	/**
 	 * Create the frame.
 	 */
@@ -69,7 +116,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		btnHome.setIcon(new ImageIcon(newhouse));
 		
 		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(0, 204, 51));
+		btnHome.setBackground(SystemColor.activeCaption);
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -83,7 +130,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		Image newestrella = estrella.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnBestSellers.setIcon(new ImageIcon(newestrella));
 		
-		btnBestSellers.setBackground(new Color(0, 204, 51));
+		btnBestSellers.setBackground(SystemColor.activeCaption);
 		btnBestSellers.setBounds(154, 407, 157, 61);
 		contentPane.add(btnBestSellers);
 		
@@ -93,7 +140,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		Image newmonigote = monigote.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		btnUsuario.setIcon(new ImageIcon(newmonigote));
 		
-		btnUsuario.setBackground(new Color(0, 204, 51));
+		btnUsuario.setBackground(SystemColor.activeCaption);
 		btnUsuario.setBounds(617, 407, 167, 61);
 		contentPane.add(btnUsuario);
 		
@@ -103,7 +150,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		Image newcarrito = carrito.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnCompras.setIcon(new ImageIcon(newcarrito));
 		
-		btnCompras.setBackground(new Color(0, 153, 51));
+		btnCompras.setBackground(new Color(176, 196, 222));
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -118,7 +165,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		btnBuscar.setIcon(new ImageIcon(newlupa));
 		
 		
-		btnBuscar.setBackground(new Color(0, 204, 51));
+		btnBuscar.setBackground(SystemColor.activeCaption);
 		btnBuscar.setBounds(309, 407, 156, 61);
 		contentPane.add(btnBuscar);
 		
@@ -127,8 +174,9 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		contentPane.add(separator);
 		
 		lblCompras = new JLabel("Compras realizadas:");
+		lblCompras.setForeground(new Color(0, 0, 128));
 		lblCompras.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
-		lblCompras.setBounds(20, 22, 234, 27);
+		lblCompras.setBounds(37, 16, 234, 27);
 		contentPane.add(lblCompras);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -163,6 +211,14 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		
 		cargarCompras();
 		
+
+		JPanelBackground jPanelBackground = new JPanelBackground();
+		jPanelBackground.setBackground("./images/fondo3.jpg");
+		jPanelBackground.setBounds(1, 0, 784, 439);
+		contentPane.add(jPanelBackground);
+		LocalDate calendario = LocalDate.now();
+		TextField texto = new TextField(calendario.toString());
+		String fecha = texto.getText();
 	}
 
 	@Override

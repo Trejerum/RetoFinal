@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.SystemColor;
 
 public class InicioUser extends JFrame implements ActionListener{
 
@@ -44,12 +45,7 @@ public class InicioUser extends JFrame implements ActionListener{
 
 	 
 	/**
-	 * 
 	 * Clase que extiende de JPanel y permite poner una imagen como fondo.
-	 * 
-	 * @author Guille Rodriguez Gonzalez ( http://www.driverlandia.com )
-	 * @version 1.0 | 05-2014
-	 * 
 	 */
 	 
 	public class JPanelBackground extends JPanel {
@@ -84,7 +80,8 @@ public class InicioUser extends JFrame implements ActionListener{
 	 
 	}
 	/**
-	 * Create the frame.
+	 * Aquí de sefinen los botones del menú.
+	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
 	 */
 	public InicioUser(String usuario) {
 		nUsuario=usuario;
@@ -92,7 +89,7 @@ public class InicioUser extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 791, 468);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 153, 51));
+		contentPane.setBackground(new Color(135, 206, 235));
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -108,7 +105,7 @@ public class InicioUser extends JFrame implements ActionListener{
 		btnHome.setIcon(new ImageIcon(newhouse));
 		
 		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(0, 153, 51));
+		btnHome.setBackground(new Color(176, 196, 222));
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -122,7 +119,7 @@ public class InicioUser extends JFrame implements ActionListener{
 		Image newestrella = estrella.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnBestSellers.setIcon(new ImageIcon(newestrella));
 		
-		btnBestSellers.setBackground(new Color(0, 204, 51));
+		btnBestSellers.setBackground(SystemColor.activeCaption);
 		btnBestSellers.setBounds(155, 378, 156, 61);
 		contentPane.add(btnBestSellers);
 		
@@ -132,7 +129,7 @@ public class InicioUser extends JFrame implements ActionListener{
 		Image newmonigote = monigote.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		btnUsuario.setIcon(new ImageIcon(newmonigote));
 		
-		btnUsuario.setBackground(new Color(0, 204, 51));
+		btnUsuario.setBackground(SystemColor.activeCaption);
 		btnUsuario.setBounds(617, 378, 167, 61);
 		contentPane.add(btnUsuario);
 		
@@ -142,7 +139,7 @@ public class InicioUser extends JFrame implements ActionListener{
 		Image newcarrito = carrito.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnCompras.setIcon(new ImageIcon(newcarrito));
 		
-		btnCompras.setBackground(new Color(0, 204, 51));
+		btnCompras.setBackground(SystemColor.activeCaption);
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -156,36 +153,42 @@ public class InicioUser extends JFrame implements ActionListener{
 		Image newlupa = lupa.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		btnBuscar.setIcon(new ImageIcon(newlupa));
 		
-		btnBuscar.setBackground(new Color(0, 204, 51));
+		btnBuscar.setBackground(SystemColor.activeCaption);
 		btnBuscar.setBounds(309, 378, 156, 61);
 		contentPane.add(btnBuscar);
 		
-		lblBienvenido = new JLabel("!!Bienvenid@ a la \r\nlibrer\u00EDa virtual!!");
-		lblBienvenido.setForeground(new Color(153, 0, 0));
+		lblBienvenido = new JLabel("\u00A1\u00A1Bienvenid@ a la \r\nlibrer\u00EDa virtual!!");
+		lblBienvenido.setForeground(new Color(0, 0, 128));
 		lblBienvenido.setFont(new Font("Maiandra GD", Font.PLAIN, 40));
 		lblBienvenido.setBounds(85, 72, 590, 98);
 		contentPane.add(lblBienvenido);
 		
 		lblHola = new JLabel("Hola ");
+		lblHola.setForeground(new Color(0, 0, 128));
 		lblHola.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblHola.setBounds(85, 200, 46, 16);
 		contentPane.add(lblHola);
 		
 		lblNombreusuario = new JLabel();
+		lblNombreusuario.setForeground(new Color(0, 0, 128));
 		lblNombreusuario.setBackground(new Color(0, 153, 51));
 		lblNombreusuario.setText("nombreUsuario");
 		lblNombreusuario.setBounds(110, 198, 98, 20);
 		contentPane.add(lblNombreusuario);
 		
 		lblAcabasDeEntrar = new JLabel("Acabas de entrar a la liber\u00EDa virtual. Esta aplicaci\u00F3n tiene diferentes funciones:");
+		lblAcabasDeEntrar.setForeground(new Color(0, 0, 128));
 		lblAcabasDeEntrar.setBounds(74, 226, 511, 36);
 		contentPane.add(lblAcabasDeEntrar);
 		
 		lbllaEstrellaSirve = new JLabel("- La estrella sirve para ver los libros que se encuentran entre los Best Sellers");
+		lbllaEstrellaSirve.setForeground(new Color(0, 0, 128));
 		lbllaEstrellaSirve.setBounds(87, 261, 490, 36);
 		contentPane.add(lbllaEstrellaSirve);
 		
 		lblLaLupa = new JLabel("- La lupa sirve para hacer una busqueda sobre algun libro que le pueda interesar o para ver tus libros recomendados");
+		lblLaLupa.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		lblLaLupa.setForeground(new Color(0, 0, 128));
 		lblLaLupa.setBounds(87, 297, 638, 27);
 		contentPane.add(lblLaLupa);
 		
@@ -195,7 +198,7 @@ public class InicioUser extends JFrame implements ActionListener{
 		btnUsuario.addActionListener(this);
 		
 		JPanelBackground jPanelBackground = new JPanelBackground();
-		jPanelBackground.setBackground("./images/libros.jpg");
+		jPanelBackground.setBackground("./images/fondo1.jpg");
 		jPanelBackground.setBounds(1, 0, 784, 439);
 		contentPane.add(jPanelBackground);
 		LocalDate calendario = LocalDate.now();
