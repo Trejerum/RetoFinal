@@ -44,12 +44,12 @@ public class PanelPerfil extends JPanel implements ActionListener {
 	private String nUsuario;
 	private JLabel lblNumeroDeCuenta;
 	private JTextField tfNumCuenta;
-<<<<<<< HEAD
+
 	private boolean esAdmin;
-=======
+
 	private String passwd;
 	private String contraseña = "*";
->>>>>>> refs/remotes/origin/dev-ander
+
 	/**
 	 * Create the panel.
 	 */
@@ -286,14 +286,14 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		tfEmail.setEditable(true);
 		tfTelefono.setEditable(true);
 		tfUsuario.setEditable(true);
-<<<<<<< HEAD
+
 		if(!esAdmin) {
 			tfNumCuenta.setEditable(true);
 		}
-=======
+
 		tfNumCuenta.setEditable(true);
 		pfContraseña.setEditable(true);
->>>>>>> refs/remotes/origin/dev-ander
+
 		tfNombre.setForeground(new Color(0, 0 , 205));
 		tfApellidos.setForeground(new Color(0, 0 , 205));
 		tfDireccion.setForeground(new Color(0, 0 , 205));
