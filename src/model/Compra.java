@@ -16,7 +16,7 @@ public class Compra {
 	private Date fechaCompra;
 	private int numCuenta;
 	private int unidades;
-	private int importeTotal;
+	private double importeTotal;
 	
 	//Constructors
 	/**
@@ -86,11 +86,11 @@ public class Compra {
 		this.unidades = unidades;
 	}
 
-	public int getImporteTotal() {
+	public double getImporteTotal() {
 		return importeTotal;
 	}
 
-	public void setImporteTotal(int importeTotal) {
+	public void setImporteTotal(double importeTotal) {
 		this.importeTotal = importeTotal;
 	}
 	
