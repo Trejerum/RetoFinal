@@ -2,10 +2,12 @@ package gui.all;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -62,7 +64,11 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener, KeyLis
 		menu_separator.setBounds(10, 60, 784, 2);
 		add(menu_separator);
 		
-		btnBuscarLupa = new JButton("(Lupa)");
+		btnBuscarLupa = new JButton("");
+		Image lupa = new ImageIcon(this.getClass().getResource("/loupe2.png")).getImage();
+		Image newlupa = lupa.getScaledInstance(14, 14, java.awt.Image.SCALE_SMOOTH);
+		btnBuscarLupa.setIcon(new ImageIcon(newlupa));
+		
 		btnBuscarLupa.setBounds(666, 22, 89, 27);
 		add(btnBuscarLupa);
 		

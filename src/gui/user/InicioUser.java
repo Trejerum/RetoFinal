@@ -11,7 +11,7 @@ import javax.swing.border.EmptyBorder;
 
 import javax.swing.JSeparator;
 import java.awt.Color;
-
+import gui.all.JPanelBackground;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -43,7 +43,7 @@ public class InicioUser extends JFrame implements ActionListener{
 	private JLabel lblElCarrito;
 	private JLabel lblPerfil;
 	
-	
+
 
 	 
 	/**
@@ -82,6 +82,10 @@ public class InicioUser extends JFrame implements ActionListener{
 	 
 	}
 	
+	/**
+	 * Aquí de sefinen los botones del menú.
+	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
+	 */
 	public InicioUser(String usuario) {
 		nUsuario=usuario;
 		setResizable(false);
