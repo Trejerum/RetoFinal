@@ -84,7 +84,7 @@ public class ListaLibros extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnModificar) {
 			String isbn = getIsbn();
-			ModificarLibro modificarLibro = new ModificarLibro(isbn, nUsuario);
+			ModificarLibro modificarLibro = new ModificarLibro(nUsuario, isbn);
 			modificarLibro.setVisible(true);
 			this.dispose();
 		}else if(e.getSource()==btnVolver) {

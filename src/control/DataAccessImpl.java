@@ -555,12 +555,12 @@ public class DataAccessImpl implements DataAccess{
 		Boolean existeAutor=false;
 		try {
 			this.connect();
-			String sql = "select autores.nombreAutor from autores where autores.nombreAutor=?";
+			String sql = "select autores.codAutor from autores where autores.codAutor=?";
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, autor.getNomAutor());
+			stmt.setString(1, autor.getCodAutor());
 			ResultSet result = stmt.executeQuery();
 			while(result.next()) {
-				if(result.getString("nombreAutor").equalsIgnoreCase(autor.getNomAutor())) {
+				if(result.getString("codAutor").equalsIgnoreCase(autor.getNomAutor())) {
 					existeAutor=true;
 				}
 			}

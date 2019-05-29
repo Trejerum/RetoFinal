@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.Autor;
 import model.Compra;
+import model.Genero;
 import model.Libro;
 import model.Usuario;
 
@@ -42,5 +43,13 @@ public interface Logic {
 	public ArrayList<Autor> cargarAutoresLibro(String isbn) throws Exception;
 	
 	public boolean esAdmin(String nUsuario) throws Exception;
+	
+	public void insertarAutor(Autor autor) throws Exception;
+	
+	public boolean existeAutor(Autor autor) throws Exception;
+	
+	public void insertarGenero(Genero genero) throws Exception;
+	
+	public boolean existeGenero(String genero) throws Exception;
 
 }

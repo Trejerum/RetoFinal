@@ -120,5 +120,29 @@ public class LogicImpl implements Logic{
 		return esAdmin;
 	}
 
+	@Override
+	public void insertarAutor(Autor autor) throws Exception {
+		dataAccess.insertarAutor(autor);
+		
+	}
+
+	@Override
+	public boolean existeAutor(Autor autor) throws Exception {
+		boolean existeAutor = dataAccess.existeAutor(autor);
+		return existeAutor;
+	}
+
+	@Override
+	public void insertarGenero(Genero genero) throws Exception {
+		dataAccess.insertarGenero(genero);
+		
+	}
+
+	@Override
+	public boolean existeGenero(String genero) throws Exception {
+		boolean existeGen = dataAccess.existeGenero(genero);
+		return existeGen;
+	}
+
 	
 }
