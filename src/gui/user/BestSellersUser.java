@@ -10,6 +10,7 @@ import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.SystemColor;
 import java.awt.TextField;
 
 import javax.swing.ImageIcon;
@@ -75,7 +76,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 	}
 	
 	/**
-	 * Aquí de sefinen los botones del menú.
+	 * Aquí se definen los botones del menú.
 	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
 	 */
 	public BestSellersUser(String usuario) {
@@ -100,7 +101,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		btnHome.setIcon(new ImageIcon(newhouse));
 
 		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(0, 204, 51));
+		btnHome.setBackground(SystemColor.activeCaption);
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -115,7 +116,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		Image newestrella = estrella.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnBestSellers.setIcon(new ImageIcon(newestrella));
 		
-		btnBestSellers.setBackground(new Color(0, 153, 51));
+		btnBestSellers.setBackground(new Color(176, 196, 222));
 		btnBestSellers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -130,7 +131,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		Image newmonigote = monigote.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		btnUsuario.setIcon(new ImageIcon(newmonigote));
 		
-		btnUsuario.setBackground(new Color(0, 204, 51));
+		btnUsuario.setBackground(SystemColor.activeCaption);
 		btnUsuario.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 			}
@@ -144,7 +145,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		Image newcarrito = carrito.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnCompras.setIcon(new ImageIcon(newcarrito));
 		
-		btnCompras.setBackground(new Color(0, 204, 51));
+		btnCompras.setBackground(SystemColor.activeCaption);
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -158,7 +159,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		Image newlupa = lupa.getScaledInstance(29, 29, java.awt.Image.SCALE_SMOOTH);
 		btnBuscar.setIcon(new ImageIcon(newlupa));
 		
-		btnBuscar.setBackground(new Color(0, 204, 51));
+		btnBuscar.setBackground(SystemColor.activeCaption);
 		btnBuscar.setBounds(309, 451, 156, 61);
 		contentPane.add(btnBuscar);
 		
@@ -174,7 +175,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		
 
 		JPanelBackground jPanelBackground = new JPanelBackground();
-		jPanelBackground.setBackground("./images/fondo1.jpg");
+		jPanelBackground.setBackground("./images/libros.jpg");
 		jPanelBackground.setBounds(1, 0, 784, 439);
 		contentPane.add(jPanelBackground);
 		LocalDate calendario = LocalDate.now();

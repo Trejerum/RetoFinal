@@ -7,6 +7,7 @@ import gui.all.PanelPerfil;
 import javax.swing.JSeparator;
 import java.awt.Color;
 import java.awt.Image;
+import java.awt.SystemColor;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -51,7 +52,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 		btnHome.setIcon(new ImageIcon(newhouse));
 		
 		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(0, 204, 51));
+		btnHome.setBackground(SystemColor.activeCaption);
 		btnHome.setBounds(0, 417, 128, 61);
 		contentPane.add(btnHome);
 		
@@ -61,7 +62,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 		Image newestrella = estrella.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnBestSellers.setIcon(new ImageIcon(newestrella));
 		
-		btnBestSellers.setBackground(new Color(0, 204, 51));
+		btnBestSellers.setBackground(SystemColor.activeCaption);
 		btnBestSellers.setBounds(126, 417, 124, 61);
 		contentPane.add(btnBestSellers);
 		
@@ -71,7 +72,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 		Image newmonigote = monigote.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		btnUsuario.setIcon(new ImageIcon(newmonigote));
 		
-		btnUsuario.setBackground(new Color(0, 153, 51));
+		btnUsuario.setBackground(new Color(176, 196, 222));
 		btnUsuario.setBounds(493, 417, 128, 61);
 		contentPane.add(btnUsuario);
 		
@@ -81,7 +82,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 		Image newcarrito = carrito.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnCompras.setIcon(new ImageIcon(newcarrito));
 		
-		btnCompras.setBackground(new Color(0, 204, 51));
+		btnCompras.setBackground(SystemColor.activeCaption);
 		btnCompras.setBounds(370, 417, 128, 61);
 		contentPane.add(btnCompras);
 		
@@ -91,11 +92,12 @@ public class PerfilUser extends JFrame implements ActionListener{
 		Image newlupa = lupa.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		btnBuscar.setIcon(new ImageIcon(newlupa));
 		
-		btnBuscar.setBackground(new Color(0, 204, 51));
+		btnBuscar.setBackground(SystemColor.activeCaption);
 		btnBuscar.setBounds(248, 417, 124, 61);
 		contentPane.add(btnBuscar);
 		
 		PanelPerfil panel = new PanelPerfil(usuario);
+		panel.setBackground(new Color(176,196,222));
 		panel.setBounds(0,0,710,450);
 		contentPane.add(panel);
 		

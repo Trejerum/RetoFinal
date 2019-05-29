@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.SystemColor;
 
 public class BusquedaUser extends JFrame implements ActionListener{
 
@@ -63,7 +64,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		btnHome.setIcon(new ImageIcon(newhouse));
 		
 		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(0, 204, 51));
+		btnHome.setBackground(SystemColor.activeCaption);
 		btnHome.setBounds(0, 407, 156, 61);
 		contentPane.add(btnHome);
 		
@@ -73,7 +74,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		Image newestrella = estrella.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnBestSellers.setIcon(new ImageIcon(newestrella));
 		
-		btnBestSellers.setBackground(new Color(0, 204, 51));
+		btnBestSellers.setBackground(SystemColor.activeCaption);
 		btnBestSellers.setBounds(154, 407, 157, 61);
 		contentPane.add(btnBestSellers);
 		
@@ -83,7 +84,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		Image newmonigote = monigote.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		btnUsuario.setIcon(new ImageIcon(newmonigote));
 		
-		btnUsuario.setBackground(new Color(0, 204, 51));
+		btnUsuario.setBackground(SystemColor.activeCaption);
 		btnUsuario.setBounds(617, 407, 167, 61);
 		contentPane.add(btnUsuario);
 		
@@ -93,7 +94,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		Image newcarrito = carrito.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnCompras.setIcon(new ImageIcon(newcarrito));
 		
-		btnCompras.setBackground(new Color(0, 204, 51));
+		btnCompras.setBackground(SystemColor.activeCaption);
 		btnCompras.setBounds(463, 407, 156, 61);
 		contentPane.add(btnCompras);
 		
@@ -103,7 +104,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		Image newlupa = lupa.getScaledInstance(29, 29, java.awt.Image.SCALE_SMOOTH);
 		btnBuscar.setIcon(new ImageIcon(newlupa));
 		
-		btnBuscar.setBackground(new Color(0, 153, 51));
+		btnBuscar.setBackground(new Color(176, 196, 222));
 		btnBuscar.setBounds(310, 407, 156, 61);
 		contentPane.add(btnBuscar);
 		
@@ -122,6 +123,7 @@ public class BusquedaUser extends JFrame implements ActionListener{
 		contentPane.add(btnComprar);
 		
 		panel = new PanelBusquedaLibro(nUsuario);
+		panel.setBackground(new Color(176,196,222));
 		panel.setBounds(0,0,785,450);
 		contentPane.add(panel);
 		

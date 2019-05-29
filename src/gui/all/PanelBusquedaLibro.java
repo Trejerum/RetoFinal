@@ -22,6 +22,7 @@ import control.LogicFactory;
 import model.Libro;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 
 public class PanelBusquedaLibro extends JPanel implements ActionListener{
 	/**
@@ -47,7 +48,7 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 	
 	public PanelBusquedaLibro(String usuario) {
 		nUsuario=usuario;
-		setBackground(new Color(0, 153, 51));
+		setBackground(UIManager.getColor("Button.background"));
 		setForeground(new Color(0, 0, 0));
 		
 		setLayout(null);

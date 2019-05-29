@@ -33,6 +33,7 @@ import java.awt.Image;
  
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 public class ComprasRealizadas extends JFrame implements ActionListener{
 
@@ -91,7 +92,8 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	
 	
 	/**
-	 * Create the frame.
+	 *	Aquí se definen los botones del menú.
+	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
 	 */
 	@SuppressWarnings("serial")
 	public ComprasRealizadas(String usuario) {
@@ -100,7 +102,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 789, 495);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 153, 51));
+		contentPane.setBackground(SystemColor.control);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
