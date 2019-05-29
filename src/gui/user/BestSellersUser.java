@@ -3,8 +3,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import gui.all.JPanelBackground;
 import gui.all.PanelBestSellers;
-import gui.user.InicioUser.JPanelBackground;
 
 import javax.swing.JSeparator;
 import java.awt.Color;
@@ -38,43 +38,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 	private JButton btnCompras;
 	private JButton btnBuscar;
 	private String nUsuario;
-	
-	/**
-	 * Clase que extiende de JPanel y permite poner una imagen como fondo.
-	 */
-	 
-	public class JPanelBackground extends JPanel {
-	 
-		// Atributo que guardara la imagen de Background que le pasemos.
-		private Image background;
-	 
-		// Metodo que es llamado automaticamente por la maquina virtual Java cada vez que repinta
-		public void paintComponent(Graphics g) {
-	 
-			/* Obtenemos el tamaño del panel para hacer que se ajuste a este
-			cada vez que redimensionemos la ventana y se lo pasamos al drawImage */
-			int width = this.getSize().width;
-			int height = this.getSize().height;
-	 
-			// Mandamos que pinte la imagen en el panel
-			if (this.background != null) {
-				g.drawImage(this.background, 0, 0, width, height, null);
-			}
-	 
-			super.paintComponent(g);
-		}
-	 
-		// Metodo donde le pasaremos la dirección de la imagen a cargar.
-		public void setBackground(String imagePath) {
-			
-			// Construimos la imagen y se la asignamos al atributo background.
-			this.setOpaque(false);
-			this.background = new ImageIcon(imagePath).getImage();
-			repaint();
-		}
-	 
-	}
-	
+		
 	/**
 	 * Aquí se definen los botones del menú.
 	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
@@ -85,7 +49,6 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 791, 540);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(135, 206, 235));
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -164,6 +127,7 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		contentPane.add(btnBuscar);
 		
 		PanelBestSellers panel = new PanelBestSellers();
+		panel.setBackground(new Color(176, 196, 222));
 		panel.setBounds(0, 0, 791, 512);
 		contentPane.add(panel);
 		
@@ -172,17 +136,9 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		btnCompras.addActionListener(this);
 		btnHome.addActionListener(this);
 		btnUsuario.addActionListener(this);
-		
-
-		JPanelBackground jPanelBackground = new JPanelBackground();
-		jPanelBackground.setBackground("./images/libros.jpg");
-		jPanelBackground.setBounds(1, 0, 784, 439);
-		contentPane.add(jPanelBackground);
 		LocalDate calendario = LocalDate.now();
 		TextField texto = new TextField(calendario.toString());
 		String fecha = texto.getText();
-
-		
 	}
 
 	@Override

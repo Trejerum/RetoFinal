@@ -2,10 +2,13 @@ package gui.all;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.TextField;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -30,11 +33,12 @@ public class PanelBestSellers extends JPanel {
 	private static final long serialVersionUID = 5934182603239436311L;
 	private JTable tablaBestSellers;
 
+	 
+	
 	/**
 	 * Create the panel.
 	 */
 	public PanelBestSellers() {
-		setBackground(UIManager.getColor("Button.background"));
 		setLayout(null);
 		
 		lblBestSellers = new JLabel("Best Sellers:");
