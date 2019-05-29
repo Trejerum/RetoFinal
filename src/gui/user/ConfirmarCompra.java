@@ -200,6 +200,11 @@ public class ConfirmarCompra extends JFrame implements ActionListener, ChangeLis
 			
 			message = "Compra realizada correctamente";
 			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+			
+			InicioUser inicio = new InicioUser(nUsuario);
+			inicio.setVisible(true);
+			this.dispose();
+			
 		}catch(Exception e) {
 			message = "Error. No se ha podido realizar la compra";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);

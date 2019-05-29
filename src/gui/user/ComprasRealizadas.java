@@ -5,21 +5,35 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.SystemColor;
+import java.awt.TextField;
+
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import control.Logic;
 import control.LogicFactory;
+import gui.all.JPanelBackground;
 import model.Compra;
+import java.awt.Graphics;
+import java.awt.Image;
+ 
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 public class ComprasRealizadas extends JFrame implements ActionListener{
 
@@ -40,8 +54,11 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	private JTable table;
 	private DefaultTableModel modelo;
 
+	
+	
 	/**
-	 * Create the frame.
+	 *	Aquí se definen los botones del menú.
+	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
 	 */
 	@SuppressWarnings("serial")
 	public ComprasRealizadas(String usuario) {
@@ -50,7 +67,7 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 789, 495);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 153, 51));
+		contentPane.setBackground(SystemColor.control);
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -59,9 +76,14 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		menu_separator.setBounds(0, 405, 784, 2);
 		contentPane.add(menu_separator);
 		
-		btnHome = new JButton("Casa(HOME)");
+		// Botón HOME
+		btnHome = new JButton("");
+		Image house = new ImageIcon(this.getClass().getResource("/home2.png")).getImage();
+		Image newhouse = house.getScaledInstance(27, 27, java.awt.Image.SCALE_SMOOTH);
+		btnHome.setIcon(new ImageIcon(newhouse));
+		
 		btnHome.setForeground(new Color(0, 0, 0));
-		btnHome.setBackground(new Color(0, 204, 51));
+		btnHome.setBackground(SystemColor.activeCaption);
 		btnHome.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -69,18 +91,33 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		btnHome.setBounds(0, 407, 156, 61);
 		contentPane.add(btnHome);
 		
-		btnBestSellers = new JButton("Estrella(BestSellers)");
-		btnBestSellers.setBackground(new Color(0, 204, 51));
+		// Botón BestSellers
+		btnBestSellers = new JButton("");
+		Image estrella = new ImageIcon(this.getClass().getResource("/favorites.png")).getImage();
+		Image newestrella = estrella.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
+		btnBestSellers.setIcon(new ImageIcon(newestrella));
+		
+		btnBestSellers.setBackground(SystemColor.activeCaption);
 		btnBestSellers.setBounds(154, 407, 157, 61);
 		contentPane.add(btnBestSellers);
 		
-		btnUsuario = new JButton("Monigote(usuario)");
-		btnUsuario.setBackground(new Color(0, 204, 51));
+		// Botón Usuario
+		btnUsuario = new JButton("");
+		Image monigote = new ImageIcon(this.getClass().getResource("/users.png")).getImage();
+		Image newmonigote = monigote.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
+		btnUsuario.setIcon(new ImageIcon(newmonigote));
+		
+		btnUsuario.setBackground(SystemColor.activeCaption);
 		btnUsuario.setBounds(617, 407, 167, 61);
 		contentPane.add(btnUsuario);
 		
-		btnCompras = new JButton("Carrito(Compras)");
-		btnCompras.setBackground(new Color(0, 153, 51));
+		//Botón Compras
+		btnCompras = new JButton("");
+		Image carrito = new ImageIcon(this.getClass().getResource("/shopping-cart.png")).getImage();
+		Image newcarrito = carrito.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
+		btnCompras.setIcon(new ImageIcon(newcarrito));
+		
+		btnCompras.setBackground(new Color(176, 196, 222));
 		btnCompras.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
@@ -88,8 +125,14 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		btnCompras.setBounds(463, 407, 156, 61);
 		contentPane.add(btnCompras);
 		
-		btnBuscar = new JButton("Lupa(buscar)");
-		btnBuscar.setBackground(new Color(0, 204, 51));
+		//Botón BUSCAR
+		btnBuscar = new JButton("");
+		Image lupa = new ImageIcon(this.getClass().getResource("/loupe2.png")).getImage();
+		Image newlupa = lupa.getScaledInstance(29, 29, java.awt.Image.SCALE_SMOOTH);
+		btnBuscar.setIcon(new ImageIcon(newlupa));
+		
+		
+		btnBuscar.setBackground(SystemColor.activeCaption);
 		btnBuscar.setBounds(309, 407, 156, 61);
 		contentPane.add(btnBuscar);
 		
@@ -98,8 +141,9 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		contentPane.add(separator);
 		
 		lblCompras = new JLabel("Compras realizadas:");
+		lblCompras.setForeground(new Color(0, 0, 128));
 		lblCompras.setFont(new Font("Maiandra GD", Font.PLAIN, 27));
-		lblCompras.setBounds(20, 22, 234, 27);
+		lblCompras.setBounds(37, 16, 234, 27);
 		contentPane.add(lblCompras);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -134,6 +178,14 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		
 		cargarCompras();
 		
+
+		JPanelBackground jPanelBackground = new JPanelBackground();
+		jPanelBackground.setBackground("./images/fondo3.jpg");
+		jPanelBackground.setBounds(1, 0, 784, 439);
+		contentPane.add(jPanelBackground);
+		LocalDate calendario = LocalDate.now();
+		TextField texto = new TextField(calendario.toString());
+		String fecha = texto.getText();
 	}
 
 	@Override

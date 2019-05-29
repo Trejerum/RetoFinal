@@ -2,10 +2,12 @@ package gui.all;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,7 +25,13 @@ import model.Libro;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingUtilities;
 
-public class PanelBusquedaLibro extends JPanel implements ActionListener{
+import javax.swing.UIManager;
+
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
+public class PanelBusquedaLibro extends JPanel implements ActionListener, KeyListener{
 	/**
 	 * 
 	 */
@@ -47,7 +55,7 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 	
 	public PanelBusquedaLibro(String usuario) {
 		nUsuario=usuario;
-		setBackground(new Color(0, 153, 51));
+		setBackground(UIManager.getColor("Button.background"));
 		setForeground(new Color(0, 0, 0));
 		
 		setLayout(null);
@@ -56,7 +64,11 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 		menu_separator.setBounds(10, 60, 784, 2);
 		add(menu_separator);
 		
-		btnBuscarLupa = new JButton("(Lupa)");
+		btnBuscarLupa = new JButton("");
+		Image lupa = new ImageIcon(this.getClass().getResource("/loupe2.png")).getImage();
+		Image newlupa = lupa.getScaledInstance(14, 14, java.awt.Image.SCALE_SMOOTH);
+		btnBuscarLupa.setIcon(new ImageIcon(newlupa));
+		
 		btnBuscarLupa.setBounds(666, 22, 89, 27);
 		add(btnBuscarLupa);
 		
@@ -100,7 +112,7 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 		
 		btnBuscarLupa.addActionListener(this);
 		btnVerDescripcion.addActionListener(this);
-		
+		tfBusqueda.addKeyListener(this);
 	}
 
 
@@ -172,5 +184,26 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener{
 		int fila = tablaBusqueda.getSelectedRow();
 		String isbn = tablaBusqueda.getModel().getValueAt(fila, columna).toString();
 		return isbn;
+	}
+
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		buscar();
+		
+	}
+
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 }

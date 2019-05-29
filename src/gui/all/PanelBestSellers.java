@@ -2,15 +2,19 @@ package gui.all;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.TextField;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
+import javax.swing.UIManager;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -29,11 +33,12 @@ public class PanelBestSellers extends JPanel {
 	private static final long serialVersionUID = 5934182603239436311L;
 	private JTable tablaBestSellers;
 
+	 
+	
 	/**
 	 * Create the panel.
 	 */
 	public PanelBestSellers() {
-		setBackground(new Color(0, 153, 51));
 		setLayout(null);
 		
 		lblBestSellers = new JLabel("Best Sellers:");
@@ -45,7 +50,7 @@ public class PanelBestSellers extends JPanel {
 		tfDate.setForeground(new Color(0, 0, 153));
 		tfDate.setFont(new Font("Malgun Gothic", Font.PLAIN, 24));
 		tfDate.setEditable(false);
-		tfDate.setBackground(new Color(0, 153, 51));
+		tfDate.setBackground(UIManager.getColor("Button.background"));
 		tfDate.setBounds(389, 65, 135, 27);
 		add(tfDate);
 		tfDate.setColumns(10);
