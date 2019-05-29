@@ -24,7 +24,6 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 	private JPanel contentPane;
 	private JSeparator menu_separator;
 	private JButton btnVolver;
-	private JButton btnBuscarLibro;
 	private JLabel lblSesionIniciada;
 	private JLabel lblnameAdmin;
 	private PanelBestSellers panel;
@@ -52,11 +51,6 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 		btnVolver.setBounds(65, 439, 167, 31);
 		contentPane.add(btnVolver);
 		
-		btnBuscarLibro = new JButton("Buscar libro");
-		btnBuscarLibro.setFont(new Font("Arial", Font.PLAIN, 15));
-		btnBuscarLibro.setBounds(241, 439, 167, 31);
-		contentPane.add(btnBuscarLibro);
-		
 		lblSesionIniciada = new JLabel("Sesi\u00F3n iniciada como: ");
 		lblSesionIniciada.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblSesionIniciada.setBounds(26, 11, 134, 14);
@@ -71,7 +65,6 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 		panel.add(lblnameAdmin);
 		
 		btnVolver.addActionListener(this);
-		btnBuscarLibro.addActionListener(this);
 		
 		cargarDatos();
 	}
@@ -96,10 +89,6 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 		if(e.getSource()==btnVolver) {
 			InicioAdmin inicio = new InicioAdmin(nUsuario);
 			inicio.setVisible(true);
-			this.dispose();
-		}else if(e.getSource()==btnBuscarLibro) {
-			BusquedaAdmin buscar = new BusquedaAdmin(nUsuario);
-			buscar.setVisible(true);
 			this.dispose();
 		}
 		

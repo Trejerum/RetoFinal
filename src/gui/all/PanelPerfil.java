@@ -53,7 +53,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public PanelPerfil(String usuario) {
-		setBackground(new Color(0, 153, 51));
+		setBackground(new Color(240, 240, 240));
 		
 		setLayout(null);
 		nUsuario=usuario;

@@ -37,7 +37,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	public InicioAdmin(String usuario) {
 		nUsuario=usuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 410, 313);
+		setBounds(100, 100, 410, 350);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -85,12 +85,17 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		
 		btnCerrarSesion = new JButton("Cerrar Sesion");
 		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnCerrarSesion.setBounds(122, 218, 142, 46);
+		btnCerrarSesion.setBounds(123, 242, 142, 46);
 		contentPane.add(btnCerrarSesion);
 		
 		lblAdmin = new JLabel(nUsuario);
 		lblAdmin.setBounds(156, 15, 55, 12);
 		contentPane.add(lblAdmin);
+		
+		JButton btnMantAutores = new JButton("Mantenimiento autores");
+		btnMantAutores.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnMantAutores.setBounds(10, 197, 149, 23);
+		contentPane.add(btnMantAutores);
 		
 		btnModificar.addActionListener(this);
 		btnBuscar.addActionListener(this);

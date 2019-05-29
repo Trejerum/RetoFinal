@@ -5,9 +5,12 @@ import javax.swing.border.EmptyBorder;
 import control.Logic;
 import control.LogicFactory;
 import model.Autor;
+import model.Genero;
 import model.Libro;
 import javax.swing.JSeparator;
 import java.awt.Color;
+
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -18,7 +21,10 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Enumeration;
+
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.UIManager;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
@@ -29,9 +35,6 @@ import javax.swing.JRadioButton;
 
 public class AnadirLibro extends JFrame implements ActionListener{
 
-	/**
-	 * TODO Comprobar si el autor esta ya en la lista
-	 */
 	private static final long serialVersionUID = -146475275276116997L;
 	private JPanel contentPane;
 	private JTextField tfIsbn;
@@ -40,11 +43,11 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	private JTextField tfPrecio;
 	private JTextField tfDescuento;
 	private JTextField tfStock;
-	private JLabel lblAnadirLibro;
+	private JLabel lblModificarLibro;
 	private JSeparator separator;
 	private JLabel lblIsbn;
 	private JLabel lblPrecio;
-	private JButton btnAnadir;
+	private JButton btnAñadirLibro;
 	private JLabel lblApellidos;
 	private JLabel lblAutor;
 	private JLabel lblFechaPubli;
@@ -54,14 +57,12 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	private JLabel lblStock;
 	private JLabel lblGenero;
 	private JLabel lblDescripcion;
-	private JTextArea tfDescripcion;
+	private JTextArea taDescripcion;
 	private JLabel lblFormateFecha;
 	private JComboBox<String> cbGenero;
 	private JButton btnMasAutores;
-	private JTextField tfCodAutor;
 	private JTextField tfNombreAutor;
 	private JLabel lblNombre;
-	private JLabel lblCodigoDeAutor;
 	private JTextField tfGenero;
 	private JLabel lblNuevoGenero;
 	private JLabel lblNuevoAutor;
@@ -73,12 +74,14 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	private JButton btnPasarAutor;
 	private JButton btnEliminarAutor;
 	DefaultListModel<String> modeloLista = new DefaultListModel<String>();
-	private JList<String> listAutores;
-	private String nisbn;
+	private JList<String> listaAutores;
+	private String nUsuario;
+	private JLabel lbleditorial;
+	private JTextField tfEditorial;
 	private JRadioButton rdbtnSi;
 	private JRadioButton rdbtnNo;
-	private ButtonGroup rbgOferta;
-	private String nUsuario;
+	private ButtonGroup rdbtnGrp;
+	private JTextField tfNumVentas;
 
 
 	/**
@@ -86,7 +89,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	 */
 
 	public AnadirLibro(String usuario) {
-		nUsuario=usuario;
+		nUsuario = usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 712);
@@ -96,10 +99,10 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		lblAnadirLibro = new JLabel("A\u00F1adir libro");
-		lblAnadirLibro.setFont(new Font("Maiandra GD", Font.PLAIN, 30));
-		lblAnadirLibro.setBounds(20, 13, 255, 37);
-		contentPane.add(lblAnadirLibro);
+		lblModificarLibro = new JLabel("A\u00F1adir Libro");
+		lblModificarLibro.setFont(new Font("Maiandra GD", Font.PLAIN, 30));
+		lblModificarLibro.setBounds(20, 13, 255, 37);
+		contentPane.add(lblModificarLibro);
 		
 		separator = new JSeparator();
 		separator.setBounds(0, 56, 816, 2);
@@ -107,13 +110,13 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		
 		lblIsbn = new JLabel("*ISBN:");
 		lblIsbn.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblIsbn.setBounds(88, 119, 50, 20);
+		lblIsbn.setBounds(88, 90, 50, 20);
 		contentPane.add(lblIsbn);
 		
 		tfIsbn = new JTextField();
 		tfIsbn.setForeground(new Color(0, 0, 205));
 		tfIsbn.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tfIsbn.setBounds(157, 119, 145, 20);
+		tfIsbn.setBounds(148, 90, 145, 20);
 		contentPane.add(tfIsbn);
 		tfIsbn.setColumns(10);
 		
@@ -122,22 +125,23 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		lblPrecio.setBounds(88, 331, 61, 20);
 		contentPane.add(lblPrecio);
 		
-		btnAnadir = new JButton("A\u00F1adir");
-		btnAnadir.setFont(new Font("Arial", Font.PLAIN, 15));
-		btnAnadir.setForeground(new Color(0, 0, 255));
-		btnAnadir.setBounds(593, 69, 167, 31);
-		contentPane.add(btnAnadir);
+		btnAñadirLibro = new JButton("Añadir Libro");
+		btnAñadirLibro.setFont(new Font("Arial", Font.PLAIN, 15));
+		btnAñadirLibro.setForeground(new Color(0, 0, 255));
+		btnAñadirLibro.setBounds(593, 69, 167, 31);
+		contentPane.add(btnAñadirLibro);
 		
 		lblApellidos = new JLabel("*T\u00EDtulo:");
 		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblApellidos.setBounds(81, 172, 56, 20);
+		lblApellidos.setBounds(82, 134, 56, 20);
 		contentPane.add(lblApellidos);
 		
 		tfTitulo = new JTextField();
+		tfTitulo.setEditable(true);
 		tfTitulo.setForeground(new Color(0, 0, 205));
 		tfTitulo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfTitulo.setColumns(10);
-		tfTitulo.setBounds(157, 176, 145, 20);
+		tfTitulo.setBounds(148, 134, 197, 20);
 		contentPane.add(tfTitulo);
 		
 		lblAutor = new JLabel("*Autor:");
@@ -151,17 +155,19 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		contentPane.add(lblFechaPubli);
 		
 		tfFechaPubli = new JTextField();
+		tfFechaPubli.setEditable(true);
 		tfFechaPubli.setForeground(new Color(0, 0, 205));
 		tfFechaPubli.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfFechaPubli.setColumns(10);
-		tfFechaPubli.setBounds(157, 280, 86, 20);
+		tfFechaPubli.setBounds(162, 282, 86, 20);
 		contentPane.add(tfFechaPubli);
 		
 		tfPrecio = new JTextField();
+		tfPrecio.setEditable(true);
 		tfPrecio.setForeground(new Color(0, 0, 205));
 		tfPrecio.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfPrecio.setColumns(10);
-		tfPrecio.setBounds(157, 331, 145, 20);
+		tfPrecio.setBounds(162, 331, 145, 20);
 		contentPane.add(tfPrecio);
 		
 		lblOferta = new JLabel("Oferta:");
@@ -175,6 +181,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		contentPane.add(btnVolver);
 		
 		tfDescuento = new JTextField();
+		tfDescuento.setEditable(true);
 		tfDescuento.setForeground(new Color(0, 0, 205));
 		tfDescuento.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfDescuento.setColumns(10);
@@ -192,6 +199,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		contentPane.add(lblStock);
 		
 		tfStock = new JTextField();
+		tfStock.setEditable(true);
 		tfStock.setForeground(new Color(0, 0, 205));
 		tfStock.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfStock.setColumns(10);
@@ -200,17 +208,13 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		
 		lblGenero = new JLabel("*G\u00E9nero:");
 		lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblGenero.setBounds(74, 485, 68, 20);
+		lblGenero.setBounds(81, 497, 68, 20);
 		contentPane.add(lblGenero);
 		
 		lblDescripcion = new JLabel("Descripci\u00F3n:");
 		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblDescripcion.setBounds(63, 557, 79, 14);
 		contentPane.add(lblDescripcion);
-		
-		tfDescripcion = new JTextArea();
-		tfDescripcion.setBounds(161, 554, 247, 84);
-		contentPane.add(tfDescripcion);
 		
 		lblFormateFecha = new JLabel("(dd-mm-yyyy)");
 		lblFormateFecha.setFont(new Font("Tahoma", Font.PLAIN, 11));
@@ -219,76 +223,72 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		
 		btnMasAutores = new JButton("+");
 		btnMasAutores.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnMasAutores.setBounds(526, 164, 50, 20);
+		btnMasAutores.setBounds(510, 172, 50, 20);
 		contentPane.add(btnMasAutores);
 		
 		cbGenero = new JComboBox<String>();
-		cbGenero.setEditable(true);
-		cbGenero.setBounds(380, 485, 120, 20);
+		cbGenero.setEnabled(true);
+		cbGenero.setBounds(380, 499, 120, 20);
 		contentPane.add(cbGenero);
 		cbGenero.setSelectedIndex(-1);
 		
-		lblCodigoDeAutor = new JLabel("Codigo de Autor");
-		lblCodigoDeAutor.setBounds(380, 119, 91, 14);
-		contentPane.add(lblCodigoDeAutor);
-		
-		tfCodAutor = new JTextField();
-		tfCodAutor.setBounds(380, 139, 120, 20);
-		contentPane.add(tfCodAutor);
-		tfCodAutor.setColumns(10);
-		
 		lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(380, 170, 46, 14);
+		lblNombre.setBounds(380, 152, 46, 14);
 		contentPane.add(lblNombre);
 		
 		tfNombreAutor = new JTextField();
-		tfNombreAutor.setBounds(380, 190, 120, 20);
+		tfNombreAutor.setBounds(380, 172, 120, 20);
 		contentPane.add(tfNombreAutor);
 		tfNombreAutor.setColumns(10);
 		
 		tfGenero = new JTextField();
-		tfGenero.setBounds(162, 485, 145, 20);
+		tfGenero.setEditable(true);
+		tfGenero.setBounds(162, 499, 145, 20);
 		contentPane.add(tfGenero);
 		tfGenero.setColumns(10);
 		
 		lblNuevoGenero = new JLabel("NUEVO GENERO");
 		lblNuevoGenero.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNuevoGenero.setBounds(420, 394, 123, 14);
+		lblNuevoGenero.setBounds(414, 402, 123, 14);
 		contentPane.add(lblNuevoGenero);
 		
 		lblNuevoAutor = new JLabel("NUEVO AUTOR");
 		lblNuevoAutor.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNuevoAutor.setBounds(420, 99, 129, 15);
+		lblNuevoAutor.setBounds(414, 123, 129, 15);
 		contentPane.add(lblNuevoAutor);
 		
 		lblNombre_1 = new JLabel("Nombre");
-		lblNombre_1.setBounds(380, 420, 46, 14);
+		lblNombre_1.setBounds(380, 434, 46, 14);
 		contentPane.add(lblNombre_1);
 		
 		tfNombreGenero = new JTextField();
-		tfNombreGenero.setBounds(380, 445, 120, 20);
+		tfNombreGenero.setBounds(380, 454, 120, 20);
 		contentPane.add(tfNombreGenero);
 		tfNombreGenero.setColumns(10);
 		
 		btnMasGeneros = new JButton("+");
 		btnMasGeneros.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnMasGeneros.setBounds(515, 445, 50, 20);
+		btnMasGeneros.setBounds(510, 454, 50, 20);
 		contentPane.add(btnMasGeneros);
 		
 		cbAutor = new JComboBox<String>();
-		cbAutor.setBounds(380, 250, 120, 20);
+		cbAutor.setEnabled(true);
+		cbAutor.setBounds(380, 250, 163, 20);
 		cbAutor.setSelectedIndex(-1);
 		contentPane.add(cbAutor);
 		
 		btnPasarGenero = new JButton("<<<");
-		btnPasarGenero.setBounds(314, 485, 61, 20);
+		btnPasarGenero.setEnabled(true);
+		btnPasarGenero.setBounds(314, 499, 61, 20);
 		contentPane.add(btnPasarGenero);
 		
 		btnPasarAutor = new JButton("<<<");
+		btnPasarAutor.setEnabled(true);
 		btnPasarAutor.setBounds(314, 250, 61, 20);
 		contentPane.add(btnPasarAutor);
 		
 		btnEliminarAutor = new JButton(">>>");
+		btnEliminarAutor.setEnabled(true);
 		btnEliminarAutor.setBounds(316, 220, 56, 20);
 		contentPane.add(btnEliminarAutor);
 		
@@ -296,44 +296,94 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		scrollPane.setBounds(157, 207, 145, 63);
 		contentPane.add(scrollPane);
 		
-		listAutores = new JList<String>();
-		scrollPane.setViewportView(listAutores);
+		listaAutores = new JList<String>();
+		listaAutores.setEnabled(true);
+		scrollPane.setViewportView(listaAutores);
 		modeloLista = new DefaultListModel<String>();
-		listAutores.setModel(modeloLista);
+		listaAutores.setModel(modeloLista);
+		
+		JLabel lblSeleccionarAutores = new JLabel("Seleccionar Autores:");
+		lblSeleccionarAutores.setBounds(380, 226, 120, 14);
+		contentPane.add(lblSeleccionarAutores);
+		
+		JLabel lblAdirAutor = new JLabel("A\u00F1adir autor");
+		lblAdirAutor.setBounds(570, 177, 91, 14);
+		contentPane.add(lblAdirAutor);
+		
+		JLabel lblAadirGenero = new JLabel("A\u00F1adir genero");
+		lblAadirGenero.setBounds(575, 457, 86, 14);
+		contentPane.add(lblAadirGenero);
+		
+		JLabel lblSeleccionarGenero = new JLabel("Seleccionar genero: ");
+		lblSeleccionarGenero.setBounds(380, 485, 120, 14);
+		contentPane.add(lblSeleccionarGenero);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(157, 540, 419, 111);
+		contentPane.add(scrollPane_1);
+		
+		taDescripcion = new JTextArea();
+		scrollPane_1.setViewportView(taDescripcion);
+		taDescripcion.setEditable(true);
+		taDescripcion.setLineWrap(true);
+		
+		lbleditorial = new JLabel("*Editorial:");
+		lbleditorial.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lbleditorial.setBounds(74, 173, 86, 14);
+		contentPane.add(lbleditorial);
+		
+		tfEditorial = new JTextField();
+		tfEditorial.setForeground(new Color(0, 0, 205));
+		tfEditorial.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfEditorial.setEditable(true);
+		tfEditorial.setBounds(148, 172, 167, 20);
+		contentPane.add(tfEditorial);
+		tfEditorial.setColumns(10);
 		
 		rdbtnSi = new JRadioButton("Si");
-		rdbtnSi.setBounds(157, 367, 33, 23);
+		rdbtnSi.setBounds(162, 369, 40, 23);
 		contentPane.add(rdbtnSi);
 		
 		rdbtnNo = new JRadioButton("No");
-		rdbtnNo.setBounds(204, 367, 39, 23);
+		rdbtnNo.setBounds(218, 369, 109, 23);
 		contentPane.add(rdbtnNo);
 		
-		rbgOferta = new ButtonGroup();
-		rbgOferta.add(rdbtnSi);
-		rbgOferta.add(rdbtnNo);
+		rdbtnGrp = new ButtonGroup();
+		rdbtnGrp.add(rdbtnNo);
+		rdbtnGrp.add(rdbtnSi);
+		
+		JLabel lblnumventas = new JLabel("*NumVentas: ");
+		lblnumventas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblnumventas.setBounds(63, 472, 104, 14);
+		contentPane.add(lblnumventas);
+		
+		tfNumVentas = new JTextField();
+		tfNumVentas.setEditable(true);
+		tfNumVentas.setBounds(162, 468, 86, 20);
+		contentPane.add(tfNumVentas);
+		tfNumVentas.setColumns(10);
 		
 		btnVolver.addActionListener(this);
-		btnAnadir.addActionListener(this);
+		btnAñadirLibro.addActionListener(this);
 		btnMasAutores.addActionListener(this);
 		btnMasGeneros.addActionListener(this);
 		btnPasarAutor.addActionListener(this);
 		btnEliminarAutor.addActionListener(this);
 		btnPasarGenero.addActionListener(this);
 		
-		//cargarDatos();
+		cargarDatos();
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnVolver) {
-			InicioAdmin inicioAdmin = new InicioAdmin(nUsuario);
-			inicioAdmin.setVisible(true);
+			InicioAdmin inicio = new InicioAdmin(nUsuario);
+			inicio.setVisible(true);
 			this.dispose();
-		}else if(e.getSource()==btnAnadir) {
-			anadirLibro();
+		}else if(e.getSource()==btnAñadirLibro) {
+			AñadirLibro();
 		}else if(e.getSource()==btnMasAutores) {
-			comprobarCampos();
+			comprobarAutor();
 		}else if(e.getSource()== btnMasGeneros)  {
 			comprobarGenero();
 		}else if(e.getSource() == btnPasarAutor) {
@@ -346,56 +396,12 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		
 	}
 
-	private void pasarGenero() {
-		try{
-			String genero = cbGenero.getSelectedItem().toString();
-			tfGenero.setText(genero);
-			cbGenero.setSelectedIndex(-1);
-			
-		}catch (Exception e) {
-			String message="Selecciona el genero en la Combo Box";
-			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-		}
-	}
-
-	
-	private void anadirLibro() {
-		Libro libro = new Libro();
-		libro.setIsbn(tfIsbn.getText());
-		libro.setTitulo(tfTitulo.getText());
-		ArrayList<Autor> autores = new ArrayList<Autor>();
-		for (int i = 0; i < modeloLista.getSize(); i++) {
-			Autor autor = new Autor();
-			autor.setNomAutor(modeloLista.getElementAt(i));
-		}
-		DateTimeFormatter format = DateTimeFormatter.ISO_LOCAL_DATE;
-		LocalDate fechaPubli = LocalDate.parse(tfFechaPubli.getText(), format);
-		libro.setFechaPublicacion(fechaPubli);
-		libro.setPrecio(Double.parseDouble(tfPrecio.getText()));
-		boolean oferta = false;
-		if(rbgOferta.getSelection() == rdbtnSi) {
-			oferta = true;
-		}
-		libro.setOferta(oferta);
-		libro.setDescuento(Double.parseDouble(tfDescuento.getText()));
-		libro.setStock(Integer.parseInt(tfStock.getText()));
-		libro.setGenero(tfGenero.getText());
-		libro.setDescripcion(tfDescripcion.getText());
-		
-		Logic logic = LogicFactory.getLogic();
-		try {
-			logic.insertarLibro(libro, autores);
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	}
-	
 	private void eliminarAutor() {
 		try {
-			int eliminar = listAutores.getSelectedIndex();
+			int eliminar = listaAutores.getSelectedIndex();
 			modeloLista.remove(eliminar);
 		}catch (Exception e) {
-			String message="Selecciona el autor en la lista";
+			String message="Selecciona el autor en la Lista";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);	
 		}
 	}
@@ -403,7 +409,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	private void pasarAutor() {
 		try{
 			String autor = cbAutor.getSelectedItem().toString();
-			modeloLista.addElement(autor);
+			modeloLista.addElement("-" + autor);
 			cbAutor.setSelectedIndex(-1);
 			
 		}catch (Exception e) {
@@ -411,52 +417,161 @@ public class AnadirLibro extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
+	
+	private void pasarGenero() {
+		try {
+			String genero = cbGenero.getSelectedItem().toString();
+			tfGenero.setText(genero);
+		}catch(Exception e) {
+			String message="Selecciona el genero en la Combo Box";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
 
 	private void comprobarGenero() {
-		if(tfNombreGenero.getText().length() == 0) {
-			String message="El campo genero debe estar lleno";
+		String message;
+		try{
+			if(tfNombreGenero.getText().length() == 0) {
+				message="El campo genero debe estar lleno";
+				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+				
+			}else {
+				Genero genero = new Genero();
+				genero.setNomGenero(tfNombreGenero.getText());
+				if(genero.getNomGenero().length()<4) {
+					genero.setCodGenero(genero.getNomGenero().substring(0, genero.getNomGenero().length()));
+				}
+				else {
+					genero.setCodGenero(genero.getNomGenero().substring(0, 3));
+				}
+				Logic logic = LogicFactory.getLogic();
+				if(!logic.existeGenero(genero.getCodGenero())) {
+					logic.insertarGenero(genero);
+					message="Genero insertado correctamente";
+					JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+					message="El genero ya existe";
+					JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				cbGenero.addItem(genero.getNomGenero());
+				tfNombreGenero.setText("");
+			}
+		}catch(Exception e) {
+			message="No se ha podido comprobar el autor";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-		}else {
-			String genero = tfNombreGenero.getText();
-			cbGenero.addItem(genero);
-			cbGenero.setSelectedIndex(-1);
-			tfNombreGenero.setText("");
+			e.printStackTrace();
+		}
+	}
+
+	private void comprobarAutor() {
+		String message;
+		try{
+			if(tfNombreAutor.getText().length() == 0) {
+				message="El campo autor debe estar lleno";
+				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			}else {
+				Autor autor = new Autor(); 
+				autor.setNomAutor(tfNombreAutor.getText());
+				if(autor.getNomAutor().length()<4) {
+					autor.setCodAutor(autor.getNomAutor().substring(0, autor.getNomAutor().length()));
+				}
+				else {
+					autor.setCodAutor(autor.getNomAutor().substring(0, 3).toUpperCase());
+				}
+				Logic logic = LogicFactory.getLogic();
+				if(!logic.existeAutor(autor)) {
+					logic.insertarAutor(autor);
+					message="Autor insertado correctamente";
+					JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+					message="El autor ya existe";
+					JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				cbAutor.addItem(autor.getNomAutor());
+				tfNombreAutor.setText("");
+				
+			}
+		}catch(Exception e) {
+			message="No se ha podido comprobar el autor";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
 		}
 		
 	}
 
-	private void comprobarCampos() {
-		if(tfCodAutor.getText().length() == 0 || tfNombreAutor.getText().length() == 0) {
-			String message="Los campos deben estar llenos";
+	private void AñadirLibro() {
+		String message;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+		try {
+			Logic logic = LogicFactory.getLogic();
+			Libro libro = new Libro();
+			libro.setIsbn(tfIsbn.getText());
+			libro.setTitulo(tfTitulo.getText());
+			libro.setEditorial(tfEditorial.getText());
+			libro.setDescripcion(taDescripcion.getText());
+			libro.setFechaPublicacion(LocalDate.parse(tfFechaPubli.getText(), formatter));
+			libro.setGenero(tfGenero.getText());
+			libro.setPrecio(Double.parseDouble(tfPrecio.getText()));
+			libro.setStock(Integer.parseInt(tfStock.getText()));
+			libro.setDescuento(Double.parseDouble(tfDescuento.getText()));
+			Enumeration<AbstractButton> botones = rdbtnGrp.getElements();
+			while (botones.hasMoreElements()) {
+				AbstractButton b = (AbstractButton) botones.nextElement();
+				if(b.isSelected()) {
+					libro.setOferta(Boolean.parseBoolean(b.getText()));
+				}
+			}
+			libro.setNumVentas(Integer.parseInt(tfNumVentas.getText()));
+			ArrayList<Autor> autores = new ArrayList<Autor>();
+			
+			ListModel<String> modelo = listaAutores.getModel();
+			for (int i = 0; i < modelo.getSize() ; i++) {
+				Autor autor = logic.cargarAutor(modelo.getElementAt(i).substring(1));
+				autores.add(autor);
+			}
+			logic.insertarLibro(libro, autores);
+			message="Libro añadido correctamente";
+			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
+		}catch(Exception e) {
+			message="Error. No se ha podido añadir el libro";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-		}else {
-			String autor = tfNombreAutor.getText();
-			cbAutor.addItem(autor);
-			cbAutor.setSelectedIndex(-1);
-			tfNombreAutor.setText("");
-			tfCodAutor.setText("");
 		}
-		
 	}
 	
 	public void cargarDatos() {
 		String message;
 		try {
 			Logic logic = LogicFactory.getLogic();
-			Libro libro = new Libro();
-			libro = logic.cargarLibro(nisbn);
-			tfIsbn.setText(libro.getIsbn());
-			tfTitulo.setText(libro.getTitulo());
-			//listAutores.add(libro.getAutor());
-			tfFechaPubli.setText(libro.getFechaPublicacion().toString());
-			tfPrecio.setText(String.valueOf(libro.getPrecio()));
-			tfDescuento.setText(String.valueOf(libro.getDescuento()));
-			tfGenero.setText(libro.getGenero());
-			tfDescripcion.setText(libro.getDescripcion());
+			ArrayList<String> autores = logic.cargarAutores();
+			ArrayList<String> generos = logic.cargarGeneros();
+			for (String string : generos) {
+				cbGenero.addItem(string);
+			}
+			for (String string : autores) {
+				cbAutor.addItem(string);
+			}
 		}catch(Exception e) {
 			message="Error. No se pudo cargar el libro";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
 	    }
+	}
+	
+	public void vaciarTf() {
+		tfIsbn.setText("");
+		tfTitulo.setText("");
+		listaAutores.setModel(modeloLista);
+		tfPrecio.setText("");
+		tfDescuento.setText("");
+		tfGenero.setText("");
+		taDescripcion.setText("");
+		tfFechaPubli.setText("");
+		tfStock.setText("");
+		tfEditorial.setText("");
+		tfNumVentas.setText("");
+		rdbtnSi.setSelected(false);
+		rdbtnNo.setSelected(false);
 	}
 }

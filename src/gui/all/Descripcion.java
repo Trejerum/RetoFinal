@@ -114,6 +114,9 @@ public class Descripcion extends JFrame implements ActionListener{
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		try {
 			Logic logic = LogicFactory.getLogic();
+			if(logic.esAdmin(nUsuario)) {
+				btnComprar.setVisible(false);
+			}
 			Libro libro = logic.cargarLibro(isbn);
 			ArrayList<Autor> autores = logic.cargarAutoresLibro(isbn);
 			String fechaStr = libro.getFechaPublicacion().format(formatter);
