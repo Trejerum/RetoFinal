@@ -454,15 +454,14 @@ public class ModificarLibro extends JFrame implements ActionListener{
 			if(tfNombreGenero.getText().length() == 0) {
 				message="El campo genero debe estar lleno";
 				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-				
 			}else {
 				Genero genero = new Genero();
 				genero.setNomGenero(tfNombreGenero.getText());
 				if(genero.getNomGenero().length()<4) {
-					genero.setCodGenero(genero.getNomGenero().substring(0, genero.getNomGenero().length()));
+					genero.setCodGenero(genero.getNomGenero().substring(0, genero.getNomGenero().length()).toUpperCase());
 				}
 				else {
-					genero.setCodGenero(genero.getNomGenero().substring(0, 3));
+					genero.setCodGenero(genero.getNomGenero().substring(0, 3).toUpperCase());
 				}
 				Logic logic = LogicFactory.getLogic();
 				if(!logic.existeGenero(genero.getCodGenero())) {
@@ -494,7 +493,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 				Autor autor = new Autor(); 
 				autor.setNomAutor(tfNombreAutor.getText());
 				if(autor.getNomAutor().length()<4) {
-					autor.setCodAutor(autor.getNomAutor().substring(0, autor.getNomAutor().length()));
+					autor.setCodAutor(autor.getNomAutor().substring(0, autor.getNomAutor().length()).toUpperCase());
 				}
 				else {
 					autor.setCodAutor(autor.getNomAutor().substring(0, 3).toUpperCase());
