@@ -2,24 +2,16 @@ package gui.user;
 import javax.swing.JFrame;
 import java.awt.Graphics;
 import java.awt.Image;
-import java.awt.TextField;
-
 import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import javax.swing.JSeparator;
 import java.awt.Color;
-import gui.all.JPanelBackground;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.Image;
 import java.awt.SystemColor;
 
 public class InicioUser extends JFrame implements ActionListener{
@@ -52,6 +44,10 @@ public class InicioUser extends JFrame implements ActionListener{
 	 
 	public class JPanelBackground extends JPanel {
 	 
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = -2080546194939200239L;
 		// Atributo que guardara la imagen de Background que le pasemos.
 		private Image background;
 	 

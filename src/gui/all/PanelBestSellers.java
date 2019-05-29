@@ -2,13 +2,9 @@ package gui.all;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.TextField;
 import java.time.LocalDate;
 import java.util.ArrayList;
-
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,7 +14,6 @@ import javax.swing.UIManager;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import control.Logic;
 import control.LogicFactory;
 import model.Libro;

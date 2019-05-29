@@ -2,23 +2,17 @@ package gui.admin;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import control.Logic;
 import control.LogicFactory;
 import gui.all.PanelBestSellers;
 import model.Usuario;
-
 import javax.swing.JSeparator;
 import javax.swing.JButton;
-import java.time.LocalDate;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.UIManager;
 
 public class BestSellersAdmin extends JFrame implements ActionListener{
@@ -52,9 +46,6 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 		menu_separator = new JSeparator();
 		menu_separator.setBounds(0, 420, 784, 2);
 		contentPane.add(menu_separator);
-		LocalDate calendario = LocalDate.now();
-		TextField texto = new TextField(calendario.toString());
-		String fecha = texto.getText();
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Arial", Font.PLAIN, 15));

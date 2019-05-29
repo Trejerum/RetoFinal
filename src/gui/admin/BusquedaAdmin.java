@@ -2,13 +2,9 @@ package gui.admin;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import gui.all.PanelBusquedaLibro;
-
 import javax.swing.JSeparator;
 import javax.swing.JButton;
-import java.time.LocalDate;
-import java.awt.TextField;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,9 +37,6 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 		menu_separator = new JSeparator();
 		menu_separator.setBounds(0, 380, 784, 2);
 		contentPane.add(menu_separator);
-		LocalDate calendario = LocalDate.now();
-		TextField texto = new TextField(calendario.toString());
-		String fecha = texto.getText();
 		
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(10, 388, 89, 27);
