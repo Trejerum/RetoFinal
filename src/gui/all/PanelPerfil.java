@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -29,7 +30,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 	private JTextField tfTelefono;
 	private JTextField tfEmail;
 	private JTextField tfNombre;
-	private JTextField tfContraseña;
+	private JTextField pfContraseña;
 	private JSeparator separator;
 	private JLabel lblNombreDeUsuario;
 	private JLabel lblNombre;
@@ -43,6 +44,8 @@ public class PanelPerfil extends JPanel implements ActionListener {
 	private String nUsuario;
 	private JLabel lblNumeroDeCuenta;
 	private JTextField tfNumCuenta;
+	private String passwd;
+	private String contraseña = "*";
 	/**
 	 * Create the panel.
 	 */
@@ -151,13 +154,13 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		lblContrasea.setBounds(68, 340, 79, 14);
 		add(lblContrasea);
 		
-		tfContraseña = new JTextField();
-		tfContraseña.setEditable(false);
-		tfContraseña.setForeground(Color.BLACK);
-		tfContraseña.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		tfContraseña.setColumns(10);
-		tfContraseña.setBounds(161, 342, 145, 14);
-		add(tfContraseña);
+		pfContraseña = new JTextField();
+		pfContraseña.setEditable(false);
+		pfContraseña.setForeground(Color.BLACK);
+		pfContraseña.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		pfContraseña.setColumns(10);
+		pfContraseña.setBounds(161, 342, 145, 14);
+		add(pfContraseña);
 		
 		btnEditar = new JButton("Editar");
 		btnEditar.setFont(new Font("Tahoma", Font.PLAIN, 16));
@@ -193,7 +196,9 @@ public class PanelPerfil extends JPanel implements ActionListener {
 			tfDireccion.setText(usuario.getDireccion());
 			tfEmail.setText(usuario.getEmail());
 			tfUsuario.setText(usuario.getNombreUsuario());
-			tfContraseña.setText(usuario.getContraseña());
+			passwd = usuario.getContraseña();
+			comprobarContraseña(passwd);
+			pfContraseña.setText(contraseña);
 			tfTelefono.setText(String.valueOf(usuario.getTelefono()));
 			tfNumCuenta.setText(String.valueOf(usuario.getNumCuenta()));
 			
@@ -223,12 +228,13 @@ public class PanelPerfil extends JPanel implements ActionListener {
 			usuario.setDireccion(tfDireccion.getText());
 			usuario.setEmail(tfEmail.getText());
 			usuario.setTelefono(Integer.parseInt(tfTelefono.getText()));
-			usuario.setContraseña(tfContraseña.getText());
+			usuario.setContraseña(pfContraseña.getText());
 			usuario.setNombreUsuario(tfUsuario.getText());
 			usuario.setNumCuenta(Integer.parseInt(tfNumCuenta.getText()));
 			logic.guardarCambios(usuario);
 			message="Modificacion realizada correctamente";
 			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+			cargarDatos();
 			nUsuario=usuario.getNombreUsuario();
 			tfNombre.setEditable(false);
 			tfApellidos.setEditable(false);
@@ -237,16 +243,19 @@ public class PanelPerfil extends JPanel implements ActionListener {
 			tfTelefono.setEditable(false);
 			tfUsuario.setEditable(false);
 			tfNumCuenta.setEditable(false);
-			tfContraseña.setEditable(false);
+			pfContraseña.setEditable(false);
+			pfContraseña.setText(contraseña);
 			tfNombre.setForeground(new Color(0, 0, 0));
 			tfApellidos.setForeground(new Color(0, 0, 0));
 			tfDireccion.setForeground(new Color(0, 0, 0));
 			tfEmail.setForeground(new Color(0, 0, 0));
 			tfTelefono.setForeground(new Color(0, 0, 0));
 			tfUsuario.setForeground(new Color(0, 0, 0));
-			tfContraseña.setForeground(new Color(0, 0, 0));
+			pfContraseña.setForeground(new Color(0, 0, 0));
 			tfNumCuenta.setForeground(new Color(0, 0 , 0));
 			btnGuardar.setEnabled(false);
+			
+			
 			
 		}catch(Exception e) {
 			message="Error. No se ha podido realizar el guardado";
@@ -263,20 +272,23 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		tfTelefono.setEditable(true);
 		tfUsuario.setEditable(true);
 		tfNumCuenta.setEditable(true);
+		pfContraseña.setEditable(true);
 		tfNombre.setForeground(new Color(0, 0 , 205));
 		tfApellidos.setForeground(new Color(0, 0 , 205));
 		tfDireccion.setForeground(new Color(0, 0 , 205));
 		tfEmail.setForeground(new Color(0, 0 , 205));
 		tfTelefono.setForeground(new Color(0, 0 , 205));
 		tfUsuario.setForeground(new Color(0, 0 , 205));
-		tfContraseña.setForeground(new Color(0, 0 , 205));
+		pfContraseña.setForeground(new Color(0, 0 , 205));
 		tfNumCuenta.setForeground(new Color(0, 0 , 205));
 		btnGuardar.setEnabled(true);
-				
+		pfContraseña.setText(passwd);
 	}
 	
-
+	private void comprobarContraseña(String passwd) {
+		contraseña = "";
+		for (int i = 0; i < passwd.length(); i++) {
+			contraseña += "*";
+		}
+	}
 }
-
-	
-
