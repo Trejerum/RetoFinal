@@ -563,6 +563,9 @@ public class DataAccessImpl implements DataAccess{
 				if(result.getString("codAutor").equalsIgnoreCase(autor.getNomAutor())) {
 					existeAutor=true;
 				}
+				if(result.getString("codAutor").isEmpty()) {
+					existeAutor=false;
+				}
 			}
 		}finally {
 			this.disconnect();
@@ -600,5 +603,42 @@ public class DataAccessImpl implements DataAccess{
 			this.disconnect();
 		}
 		return existeGenero;
+	}
+
+	public Autor cargarAutor(String nAutor) throws SQLException, ClassNotFoundException, IOException {
+		Autor autor = new Autor();
+		try {
+			this.connect();
+			String sql = "select codAutor from autores where nombreAutor=?";
+			autor.setNomAutor(nAutor);
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, nAutor);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				autor.setCodAutor(result.getString("codAutor"));
+			}
+		}finally {
+			this.disconnect();
+		}
+		return autor;
+	}
+
+	public void guardarDatosLibro(Libro libro) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql="update libros set isbn=?, titulo=?, descripcion=?, "
+					+ "fechadepublicacion=?, editorial=?, genero=?, precio=?, oferta=?, descuento=?, stock=?, numVentas=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, libro.getIsbn());
+			stmt.setString(2, libro.getTitulo());
+			stmt.setString(3, libro.getDescripcion());
+			stmt.setDate(4, convertirLocalDateADate(libro.getFechaPublicacion()));
+			stmt.setString(5, libro.getEditorial());
+			stmt.setString(6, libro.getGenero());
+			stmt.setDouble(7, libro.getPrecio());
+		}finally {
+			this.disconnect();
+		}
+		
 	}
 }

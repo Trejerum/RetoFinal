@@ -51,5 +51,11 @@ public interface Logic {
 	public void insertarGenero(Genero genero) throws Exception;
 	
 	public boolean existeGenero(String genero) throws Exception;
+	
+	public Autor cargarAutor(String autor) throws Exception;
+	
+	public void guardarDatosLibro(Libro libro, Autor autor) throws Exception;
+	
+	
 
 }

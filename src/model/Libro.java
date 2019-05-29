@@ -22,7 +22,6 @@ public class Libro {
 	private double descuento;
 	private int stock;
 	private int numVentas;
-	private ArrayList<String> autores = new ArrayList<String>(); 
 	
 	// Constructors
 	/**
@@ -131,14 +130,6 @@ public class Libro {
 
 	public void setNumVentas(int numVentas) {
 		this.numVentas = numVentas;
-	}
-
-	public ArrayList<String> getAutores() {
-		return autores;
-	}
-
-	public void setAutores(ArrayList<String> autores) {
-		this.autores = autores;
 	}
 	
 	

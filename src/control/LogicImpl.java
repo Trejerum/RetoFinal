@@ -144,5 +144,15 @@ public class LogicImpl implements Logic{
 		return existeGen;
 	}
 
+	@Override
+	public Autor cargarAutor(String nAutor) throws Exception {
+		Autor autor = dataAccess.cargarAutor(nAutor);
+		return autor;
+	}
+	
+	public void guardarDatosLibro(Libro libro, Autor autor) throws Exception {
+		dataAccess.guardarDatosLibro(libro);
+	}
+
 	
 }
