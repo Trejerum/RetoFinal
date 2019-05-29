@@ -186,31 +186,33 @@ public class InicioUser extends JFrame implements ActionListener{
 		lblAcabasDeEntrar = new JLabel("Acabas de entrar a la liber\u00EDa virtual. Esta aplicaci\u00F3n tiene diferentes funciones:");
 		lblAcabasDeEntrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblAcabasDeEntrar.setForeground(new Color(0, 0, 128));
-		lblAcabasDeEntrar.setBounds(74, 226, 511, 36);
+		lblAcabasDeEntrar.setBounds(74, 226, 511, 25);
 		contentPane.add(lblAcabasDeEntrar);
 		
 		lbllaEstrellaSirve = new JLabel("- La estrella sirve para ver los libros que se encuentran entre los Best Sellers");
 		lbllaEstrellaSirve.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lbllaEstrellaSirve.setForeground(new Color(0, 0, 128));
-		lbllaEstrellaSirve.setBounds(85, 260, 490, 25);
+		lbllaEstrellaSirve.setBounds(85, 250, 490, 25);
 		contentPane.add(lbllaEstrellaSirve);
 		
 		lblLaLupa = new JLabel("- La lupa sirve para hacer una busqueda sobre algun libro que le pueda interesar o para ver tus libros recomendados");
 		lblLaLupa.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblLaLupa.setForeground(new Color(0, 0, 128));
-		lblLaLupa.setBounds(85, 285, 638, 25);
+		lblLaLupa.setBounds(85, 275, 638, 25);
 		contentPane.add(lblLaLupa);
 		
 		lblNombreusuario.setText(nUsuario);
 		
 		lblElCarrito = new JLabel("- El carrito sirve para ver tus compras realizadas");
+		lblElCarrito.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblElCarrito.setForeground(new Color(0, 0, 128));
-		lblElCarrito.setBounds(85, 310, 638, 25);
+		lblElCarrito.setBounds(85, 300, 638, 25);
 		contentPane.add(lblElCarrito);
 		
 		lblPerfil = new JLabel("- Las personas sirven para acceder a tu perfil y desde ahi puedes modificar tus datos personales");
+		lblPerfil.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblPerfil.setForeground(new Color(0, 0, 128));
-		lblPerfil.setBounds(85, 335, 574, 25);
+		lblPerfil.setBounds(85, 325, 574, 25);
 		contentPane.add(lblPerfil);
 		
 		/*

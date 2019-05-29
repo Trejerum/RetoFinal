@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 
 import control.Logic;
 import control.LogicFactory;
+import gui.admin.BusquedaAdmin;
 import gui.user.BusquedaUser;
 import gui.user.ConfirmarCompra;
 import model.Autor;
@@ -152,8 +153,21 @@ public class Descripcion extends JFrame implements ActionListener{
 	}
 	
 	public void volverAtras() {
-		BusquedaUser busqueda = new BusquedaUser(nUsuario);
-		busqueda.setVisible(true);
-		this.dispose();
+		try {
+			Logic logic = LogicFactory.getLogic();
+			if(logic.esAdmin(nUsuario)) {
+				BusquedaAdmin buscar = new BusquedaAdmin(nUsuario);
+				buscar.setVisible(true);
+				this.dispose();
+			}else {
+				BusquedaUser busqueda = new BusquedaUser(nUsuario);
+				busqueda.setVisible(true);
+				this.dispose();
+			}	
+		} catch (Exception e) {
+			String message = "Error. No se ha podido volver atras";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 }
