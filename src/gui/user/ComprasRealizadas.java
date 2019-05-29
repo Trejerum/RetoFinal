@@ -4,36 +4,23 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JSeparator;
 import java.awt.Color;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.SystemColor;
-import java.awt.TextField;
-
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-
 import control.Logic;
 import control.LogicFactory;
 import gui.all.JPanelBackground;
 import model.Compra;
-import java.awt.Graphics;
-import java.awt.Image;
- 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
 
 public class ComprasRealizadas extends JFrame implements ActionListener{
 
@@ -183,9 +170,6 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		jPanelBackground.setBackground("./images/fondo3.jpg");
 		jPanelBackground.setBounds(1, 0, 784, 439);
 		contentPane.add(jPanelBackground);
-		LocalDate calendario = LocalDate.now();
-		TextField texto = new TextField(calendario.toString());
-		String fecha = texto.getText();
 	}
 
 	@Override

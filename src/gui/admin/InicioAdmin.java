@@ -3,16 +3,10 @@ package gui.admin;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import control.Logic;
-import control.LogicFactory;
 import gui.all.Login;
-import model.Usuario;
-
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
