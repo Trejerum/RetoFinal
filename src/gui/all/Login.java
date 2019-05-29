@@ -18,14 +18,17 @@ import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
+/**
+ * Esta clase sirve para iniciar sesion en la aplicacion
+ * @author GrupoB
+ *
+ */
+public class Login extends JFrame implements ActionListener, KeyListener{
 
-public class Login extends JFrame implements ActionListener{
-
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1420215672832566793L;
 	private JPanel contentPane;
 	private JTextField tfNombreUsurio;
@@ -35,6 +38,7 @@ public class Login extends JFrame implements ActionListener{
 	private JLabel lblNombreUsuario;
 	private JLabel lblContraseña;
 	private JButton btnIniciarSesion;
+	private JButton btnRegistrarse;
 
 	/**
 	 * Launch the application.
@@ -62,7 +66,10 @@ public class Login extends JFrame implements ActionListener{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+		/**
+		 * Aqui definimos el formulario de Login, con labels y textFields, donde el usuario debe introducir
+		 * su nombre de usuario y contraseña para acceder a la apliacion
+		 */
 		lblLibreria = new JLabel("Librer\u00EDa Virtual");
 		lblLibreria.setForeground(Color.RED);
 		lblLibreria.setFont(new Font("Maiandra GD", Font.PLAIN, 33));
@@ -90,10 +97,6 @@ public class Login extends JFrame implements ActionListener{
 		contentPane.add(lblContraseña);
 		
 		btnIniciarSesion = new JButton("INICIAR SESI\u00D3N");
-		btnIniciarSesion.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnIniciarSesion.setBounds(105, 324, 148, 23);
 		contentPane.add(btnIniciarSesion);
 		
@@ -101,15 +104,19 @@ public class Login extends JFrame implements ActionListener{
 		pfContraseña.setBounds(54, 283, 252, 20);
 		contentPane.add(pfContraseña);
 		
-		JButton btnRegistrarse = new JButton("REGISTRARSE");
+		btnRegistrarse = new JButton("REGISTRARSE");
 		btnRegistrarse.setBounds(105, 358, 148, 23);
 		contentPane.add(btnRegistrarse);
-		
+		/**
+		 * Definimos los Action listener
+		 */
 		btnIniciarSesion.addActionListener(this);
 		btnRegistrarse.addActionListener(this);
-		
+		pfContraseña.addKeyListener(this);
 	}
-	
+	/**
+	 * Funciones para el ActionPerformed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnIniciarSesion) {
 			validarUsuario();
@@ -119,7 +126,9 @@ public class Login extends JFrame implements ActionListener{
 		}
 		
 	}
-	
+	/**
+	 * Esta funcion sirve para comprobar si es administrador o usuario convencional y para saber si las claves introducidas son correctas 
+	 */
 	public void validarUsuario() {
 		String nUsuario=tfNombreUsurio.getText();
 		String contraseña=new String(pfContraseña.getPassword());
@@ -152,11 +161,37 @@ public class Login extends JFrame implements ActionListener{
 			System.exit(0);
 		}
 	}
-	
+	/**
+	 *Esta funcion te lleva a la pantalla de registro
+	 */
 	public void registrarUsuario() {
 		Registro registro = new Registro();
 		registro.setVisible(true);
 		this.dispose();
+	}
+
+	@Override
+	/*
+	 * Este keyPressed sirve para poder entrar con la tecla enter una vez introducio los valores
+	 * @see java.awt.event.KeyListener#keyPressed(java.awt.event.KeyEvent)
+	 */
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode()==KeyEvent.VK_ENTER) {
+			validarUsuario();
+		}
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	

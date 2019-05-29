@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import gui.all.Login;
 import gui.all.PanelPerfil;
 import javax.swing.JSeparator;
 import java.awt.Color;
@@ -26,6 +27,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 	private JButton btnCompras;
 	private JButton btnBuscar;
 	private String nUsuario;
+	private JButton btnCerrarSesion;
 
 	/**
 	 * Create the frame.
@@ -98,14 +100,19 @@ public class PerfilUser extends JFrame implements ActionListener{
 		
 		PanelPerfil panel = new PanelPerfil(usuario);
 		panel.setBackground(new Color(176,196,222));
-		panel.setBounds(0,0,710,450);
+		panel.setBounds(0,0,620,478);
 		contentPane.add(panel);
+		
+		btnCerrarSesion = new JButton("Cerrar sesion");
+		btnCerrarSesion.setBounds(494, 30, 117, 23);
+		panel.add(btnCerrarSesion);
 		
 		btnBestSellers.addActionListener(this);
 		btnBuscar.addActionListener(this);
 		btnCompras.addActionListener(this);
 		btnHome.addActionListener(this);
 		btnUsuario.addActionListener(this);
+		btnCerrarSesion.addActionListener(this);
 		
 	}
 
@@ -128,6 +135,10 @@ public class PerfilUser extends JFrame implements ActionListener{
 		else if(e.getSource()==btnHome) {
 			InicioUser inicio = new InicioUser(nUsuario);
 			inicio.setVisible(true);
+			this.dispose();
+		}else if(e.getSource()==btnCerrarSesion) {
+			Login login = new Login();
+			login.setVisible(true);
 			this.dispose();
 		}
 		else {

@@ -40,6 +40,8 @@ public class InicioUser extends JFrame implements ActionListener{
 	private JLabel lbllaEstrellaSirve;
 	private JLabel lblLaLupa;
 	private String nUsuario;
+	private JLabel lblElCarrito;
+	private JLabel lblPerfil;
 	
 	
 
@@ -79,10 +81,7 @@ public class InicioUser extends JFrame implements ActionListener{
 		}
 	 
 	}
-	/**
-	 * Aquí de sefinen los botones del menú.
-	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
-	 */
+	
 	public InicioUser(String usuario) {
 		nUsuario=usuario;
 		setResizable(false);
@@ -97,7 +96,10 @@ public class InicioUser extends JFrame implements ActionListener{
 		menu_separator = new JSeparator();
 		menu_separator.setBounds(1, 377, 784, 2);
 		contentPane.add(menu_separator);
-		
+		/**
+		 * Aquí de sefinen los botones del menú.
+		 * Se introducen los valores de tamaño, color de fondo y se indica una imagen que hace de icono.
+		 */
 		// Botón HOME
 		btnHome = new JButton("");
 		Image house = new ImageIcon(this.getClass().getResource("/home2.png")).getImage();
@@ -152,11 +154,12 @@ public class InicioUser extends JFrame implements ActionListener{
 		Image lupa = new ImageIcon(this.getClass().getResource("/loupe2.png")).getImage();
 		Image newlupa = lupa.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		btnBuscar.setIcon(new ImageIcon(newlupa));
-		
 		btnBuscar.setBackground(SystemColor.activeCaption);
 		btnBuscar.setBounds(309, 378, 156, 61);
 		contentPane.add(btnBuscar);
-		
+		/**
+		 * Aqui se definen las labels que aparecen en pantalla
+		 */
 		lblBienvenido = new JLabel("\u00A1\u00A1Bienvenid@ a la \r\nlibrer\u00EDa virtual!!");
 		lblBienvenido.setForeground(new Color(0, 0, 128));
 		lblBienvenido.setFont(new Font("Maiandra GD", Font.PLAIN, 40));
@@ -177,38 +180,57 @@ public class InicioUser extends JFrame implements ActionListener{
 		contentPane.add(lblNombreusuario);
 		
 		lblAcabasDeEntrar = new JLabel("Acabas de entrar a la liber\u00EDa virtual. Esta aplicaci\u00F3n tiene diferentes funciones:");
+		lblAcabasDeEntrar.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblAcabasDeEntrar.setForeground(new Color(0, 0, 128));
 		lblAcabasDeEntrar.setBounds(74, 226, 511, 36);
 		contentPane.add(lblAcabasDeEntrar);
 		
 		lbllaEstrellaSirve = new JLabel("- La estrella sirve para ver los libros que se encuentran entre los Best Sellers");
+		lbllaEstrellaSirve.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lbllaEstrellaSirve.setForeground(new Color(0, 0, 128));
-		lbllaEstrellaSirve.setBounds(87, 261, 490, 36);
+		lbllaEstrellaSirve.setBounds(85, 260, 490, 25);
 		contentPane.add(lbllaEstrellaSirve);
 		
 		lblLaLupa = new JLabel("- La lupa sirve para hacer una busqueda sobre algun libro que le pueda interesar o para ver tus libros recomendados");
 		lblLaLupa.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblLaLupa.setForeground(new Color(0, 0, 128));
-		lblLaLupa.setBounds(87, 297, 638, 27);
+		lblLaLupa.setBounds(85, 285, 638, 25);
 		contentPane.add(lblLaLupa);
 		
+		lblNombreusuario.setText(nUsuario);
+		
+		lblElCarrito = new JLabel("- El carrito sirve para ver tus compras realizadas");
+		lblElCarrito.setForeground(new Color(0, 0, 128));
+		lblElCarrito.setBounds(85, 310, 638, 25);
+		contentPane.add(lblElCarrito);
+		
+		lblPerfil = new JLabel("- Las personas sirven para acceder a tu perfil y desde ahi puedes modificar tus datos personales");
+		lblPerfil.setForeground(new Color(0, 0, 128));
+		lblPerfil.setBounds(85, 335, 574, 25);
+		contentPane.add(lblPerfil);
+		
+		/*
+		 * Aqui definimos los Action Listener
+		 */
 		btnBestSellers.addActionListener(this);
 		btnBuscar.addActionListener(this);
 		btnCompras.addActionListener(this);
 		btnUsuario.addActionListener(this);
-		
+		/**
+		 * Aqui debajo se declara el fondo
+		 */
 		JPanelBackground jPanelBackground = new JPanelBackground();
 		jPanelBackground.setBackground("./images/fondo1.jpg");
 		jPanelBackground.setBounds(1, 0, 784, 439);
 		contentPane.add(jPanelBackground);
-		LocalDate calendario = LocalDate.now();
-		TextField texto = new TextField(calendario.toString());
-		String fecha = texto.getText();
 		
-		lblNombreusuario.setText(nUsuario);
+		
 	}
 
 	@Override
+	/**
+	 * Aqui ponemos las funciones a cada actionPerfomed
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnBestSellers) {
 			BestSellersUser bestSellers = new BestSellersUser(nUsuario);
