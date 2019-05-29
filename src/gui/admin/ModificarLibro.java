@@ -2,16 +2,12 @@ package gui.admin;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import control.Logic;
 import control.LogicFactory;
 import model.Autor;
-import model.Genero;
 import model.Libro;
-
 import javax.swing.JSeparator;
 import java.awt.Color;
-
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -20,7 +16,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.JCheckBox;
@@ -78,7 +73,6 @@ public class ModificarLibro extends JFrame implements ActionListener{
 	private JButton btnEliminarAutor;
 	DefaultListModel<String> modeloLista = new DefaultListModel<String>();
 	private JList<String> listaAutores;
-	private String nisbn;
 	private String nUsuario;
 	
 
@@ -88,7 +82,6 @@ public class ModificarLibro extends JFrame implements ActionListener{
 	 */
 
 	public ModificarLibro(String usuario, String isbn) {
-		nisbn = isbn;
 		nUsuario = usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
