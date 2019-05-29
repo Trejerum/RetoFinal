@@ -65,5 +65,9 @@ public interface DataAccess {
 	public void insertarGenero(Genero genero) throws SQLException, ClassNotFoundException, IOException;
 	
 	public boolean existeGenero(String genero) throws SQLException, ClassNotFoundException, IOException;
+
+	public Autor cargarAutor(String dAutor) throws SQLException, ClassNotFoundException, IOException;
+
+	public void guardarDatosLibro(Libro libro) throws SQLException, ClassNotFoundException, IOException;
 	
 }
