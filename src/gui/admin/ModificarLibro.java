@@ -1,12 +1,12 @@
 package gui.admin;
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import control.Logic;
 import control.LogicFactory;
+import model.Autor;
+import model.Genero;
 import model.Libro;
 
 import javax.swing.JSeparator;
@@ -18,6 +18,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 import javax.swing.JTextField;
 import javax.swing.UIManager;
@@ -57,15 +59,13 @@ public class ModificarLibro extends JFrame implements ActionListener{
 	private JLabel lblStock;
 	private JLabel lblGenero;
 	private JLabel lblDescripcion;
-	private JTextArea tfDescripcion;
+	private JTextArea taDescripcion;
 	private JLabel lblFormateFecha;
 	private JComboBox<String> cbGenero;
 	private JButton btnMasAutores;
 	private JButton btnGuardar;
-	private JTextField tfCodAutor;
 	private JTextField tfNombreAutor;
 	private JLabel lblNombre;
-	private JLabel lblCodigoDeAutor;
 	private JTextField tfGenero;
 	private JLabel lblNuevoGenero;
 	private JLabel lblNuevoAutor;
@@ -77,9 +77,9 @@ public class ModificarLibro extends JFrame implements ActionListener{
 	private JButton btnPasarAutor;
 	private JButton btnEliminarAutor;
 	DefaultListModel<String> modeloLista = new DefaultListModel<String>();
-	private JList<String> listAutores;
+	private JList<String> listaAutores;
 	private String nisbn;
-	private String nusuario;
+	private String nUsuario;
 	
 
 
@@ -89,7 +89,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 
 	public ModificarLibro(String usuario, String isbn) {
 		nisbn = isbn;
-		nusuario = usuario;
+		nUsuario = usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 783, 712);
@@ -142,7 +142,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		tfTitulo.setForeground(new Color(0, 0, 205));
 		tfTitulo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		tfTitulo.setColumns(10);
-		tfTitulo.setBounds(157, 176, 145, 20);
+		tfTitulo.setBounds(157, 176, 197, 20);
 		contentPane.add(tfTitulo);
 		
 		lblAutor = new JLabel("*Autor:");
@@ -227,11 +227,6 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		lblDescripcion.setBounds(63, 557, 79, 14);
 		contentPane.add(lblDescripcion);
 		
-		tfDescripcion = new JTextArea();
-		tfDescripcion.setEditable(false);
-		tfDescripcion.setBounds(157, 554, 247, 84);
-		contentPane.add(tfDescripcion);
-		
 		lblFormateFecha = new JLabel("(dd-mm-yyyy)");
 		lblFormateFecha.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblFormateFecha.setBounds(253, 284, 74, 14);
@@ -239,7 +234,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		
 		btnMasAutores = new JButton("+");
 		btnMasAutores.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnMasAutores.setBounds(526, 164, 50, 20);
+		btnMasAutores.setBounds(510, 172, 50, 20);
 		contentPane.add(btnMasAutores);
 		
 		btnGuardar = new JButton("Guardar cambios");
@@ -254,21 +249,12 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		contentPane.add(cbGenero);
 		cbGenero.setSelectedIndex(-1);
 		
-		lblCodigoDeAutor = new JLabel("Codigo de Autor");
-		lblCodigoDeAutor.setBounds(380, 119, 91, 14);
-		contentPane.add(lblCodigoDeAutor);
-		
-		tfCodAutor = new JTextField();
-		tfCodAutor.setBounds(380, 139, 120, 20);
-		contentPane.add(tfCodAutor);
-		tfCodAutor.setColumns(10);
-		
 		lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(380, 170, 46, 14);
+		lblNombre.setBounds(380, 152, 46, 14);
 		contentPane.add(lblNombre);
 		
 		tfNombreAutor = new JTextField();
-		tfNombreAutor.setBounds(380, 190, 120, 20);
+		tfNombreAutor.setBounds(380, 172, 120, 20);
 		contentPane.add(tfNombreAutor);
 		tfNombreAutor.setColumns(10);
 		
@@ -285,7 +271,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		
 		lblNuevoAutor = new JLabel("NUEVO AUTOR");
 		lblNuevoAutor.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNuevoAutor.setBounds(420, 99, 129, 15);
+		lblNuevoAutor.setBounds(414, 123, 129, 15);
 		contentPane.add(lblNuevoAutor);
 		
 		lblNombre_1 = new JLabel("Nombre");
@@ -293,18 +279,18 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		contentPane.add(lblNombre_1);
 		
 		tfNombreGenero = new JTextField();
-		tfNombreGenero.setBounds(380, 445, 120, 20);
+		tfNombreGenero.setBounds(380, 437, 120, 20);
 		contentPane.add(tfNombreGenero);
 		tfNombreGenero.setColumns(10);
 		
 		btnMasGeneros = new JButton("+");
 		btnMasGeneros.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnMasGeneros.setBounds(515, 445, 50, 20);
+		btnMasGeneros.setBounds(510, 437, 50, 20);
 		contentPane.add(btnMasGeneros);
 		
 		cbAutor = new JComboBox<String>();
 		cbAutor.setEnabled(false);
-		cbAutor.setBounds(380, 250, 120, 20);
+		cbAutor.setBounds(380, 250, 163, 20);
 		cbAutor.setSelectedIndex(-1);
 		contentPane.add(cbAutor);
 		
@@ -327,11 +313,36 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		scrollPane.setBounds(157, 207, 145, 63);
 		contentPane.add(scrollPane);
 		
-		listAutores = new JList<String>();
-		listAutores.setEnabled(false);
-		scrollPane.setViewportView(listAutores);
+		listaAutores = new JList<String>();
+		listaAutores.setEnabled(true);
+		scrollPane.setViewportView(listaAutores);
 		modeloLista = new DefaultListModel<String>();
-		listAutores.setModel(modeloLista);
+		listaAutores.setModel(modeloLista);
+		
+		JLabel lblSeleccionarAutores = new JLabel("Seleccionar Autores:");
+		lblSeleccionarAutores.setBounds(380, 226, 120, 14);
+		contentPane.add(lblSeleccionarAutores);
+		
+		JLabel lblAdirAutor = new JLabel("A\u00F1adir autor");
+		lblAdirAutor.setBounds(570, 177, 91, 14);
+		contentPane.add(lblAdirAutor);
+		
+		JLabel lblAadirGenero = new JLabel("A\u00F1adir genero");
+		lblAadirGenero.setBounds(572, 440, 86, 14);
+		contentPane.add(lblAadirGenero);
+		
+		JLabel lblSeleccionarGenero = new JLabel("Seleccionar genero: ");
+		lblSeleccionarGenero.setBounds(380, 468, 120, 14);
+		contentPane.add(lblSeleccionarGenero);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(157, 540, 419, 111);
+		contentPane.add(scrollPane_1);
+		
+		taDescripcion = new JTextArea();
+		scrollPane_1.setViewportView(taDescripcion);
+		taDescripcion.setEditable(false);
+		taDescripcion.setLineWrap(true);
 		
 		
 		btnVolver.addActionListener(this);
@@ -342,23 +353,21 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		btnPasarAutor.addActionListener(this);
 		btnEliminarAutor.addActionListener(this);
 		
-		
-		
 		cargarDatos(isbn);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnVolver) {
-			InicioAdmin inicioAdmin = new InicioAdmin();
-			inicioAdmin.setVisible(true);
+			ListaLibros listaLibros = new ListaLibros(nUsuario);
+			listaLibros.setVisible(true);
 			this.dispose();
 		}else if(e.getSource()==btnModificarLibro) {
 			modificarLibro();
 		}else if(e.getSource()==btnGuardar) {
 			guardarCambios();
 		}else if(e.getSource()==btnMasAutores) {
-			comprobarCampos();
+			comprobarAutor();
 		}else if(e.getSource()== btnMasGeneros)  {
 			comprobarGenero();
 		}else if(e.getSource() == btnPasarAutor) {
@@ -371,7 +380,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 
 	private void eliminarAutor() {
 		try {
-			int eliminar = listAutores.getSelectedIndex();
+			int eliminar = listaAutores.getSelectedIndex();
 			modeloLista.remove(eliminar);
 		}catch (Exception e) {
 			String message="Selecciona el autor en la Lista";
@@ -382,7 +391,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 	private void pasarAutor() {
 		try{
 			String autor = cbAutor.getSelectedItem().toString();
-			modeloLista.addElement(autor);
+			modeloLista.addElement("-" + autor);
 			cbAutor.setSelectedIndex(-1);
 			
 		}catch (Exception e) {
@@ -398,22 +407,51 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		}else {
 			String genero = tfNombreGenero.getText();
 			cbGenero.addItem(genero);
-			cbGenero.setSelectedIndex(-1);
 			tfNombreGenero.setText("");
 		}
-		
+		String message;
+		try{
+			if(tfNombreGenero.getText().length() == 0) {
+				message="El campo genero debe estar lleno";
+				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			}else {
+				/*Genero genero = tfNombreGenero.getText();
+				cbGenero.addItem(genero);*/
+				tfNombreGenero.setText("");
+			}
+		}catch(Exception e) {
+			message="No se ha podido comprobar el autor";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
-	private void comprobarCampos() {
-		if(tfCodAutor.getText().length() == 0 || tfNombreAutor.getText().length() == 0) {
-			String message="Los campos deben estar llenos";
+	private void comprobarAutor() {
+		String message;
+		try{
+			if(tfNombreAutor.getText().length() == 0) {
+				message="Los campos deben estar llenos";
+				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			}else {
+				Autor autor = new Autor(); 
+				autor.setNomAutor(tfNombreAutor.getText());
+				autor.setCodAutor(autor.getNomAutor().substring(0, 3).toUpperCase());
+				Logic logic = LogicFactory.getLogic();
+				if(!logic.existeAutor(autor)) {
+					logic.insertarAutor(autor);
+					message="Autor insertado correctamente";
+					JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+				}
+				else {
+					message="El autor ya existe";
+					JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+				}
+				cbAutor.addItem(autor.getNomAutor());
+				tfNombreAutor.setText("");
+				
+			}
+		}catch(Exception e) {
+			message="No se ha podido comprobar el autor";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-		}else {
-			String autor = tfNombreAutor.getText();
-			cbAutor.addItem(autor);
-			cbAutor.setSelectedIndex(-1);
-			tfNombreAutor.setText("");
-			tfCodAutor.setText("");
 		}
 		
 	}
@@ -426,7 +464,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		tfFechaPubli.setEditable(false);
 		tfStock.setEditable(false);
 		tfDescuento.setEditable(false);
-		tfDescripcion.setEditable(false);
+		taDescripcion.setEditable(false);
 		chckbxOfertaSi.setEnabled(false);
 		chckbxOfertaNo.setEnabled(false);
 		cbAutor.setEnabled(false);
@@ -435,7 +473,6 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		btnPasarAutor.setEnabled(false);
 		btnPasarGenero.setEnabled(false);
 		btnEliminarAutor.setEnabled(false);
-		listAutores.setEnabled(false);
 		
 	}
 
@@ -445,7 +482,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		tfFechaPubli.setEditable(true);
 		tfStock.setEditable(true);
 		tfDescuento.setEditable(true);
-		tfDescripcion.setEditable(true);
+		taDescripcion.setEditable(true);
 		tfNombreAutor.setEditable(true);
 		chckbxOfertaSi.setEnabled(true);
 		chckbxOfertaNo.setEnabled(true);
@@ -456,23 +493,43 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		btnPasarAutor.setEnabled(true);
 		btnPasarGenero.setEnabled(true);
 		btnEliminarAutor.setEnabled(true);
-		listAutores.setEnabled(true);
+		listaAutores.setEnabled(true);
 			
 	}
 	
 	public void cargarDatos(String isbn) {
 		String message;
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		try {
 			Logic logic = LogicFactory.getLogic();
 			Libro libro = logic.cargarLibro(isbn);
 			tfIsbn.setText(libro.getIsbn());
 			tfTitulo.setText(libro.getTitulo());
-			//listAutores.add(libro.getAutor());
-			//tfFechaPubli.setText(libro.getFechaPublicacion().toString());
+			ArrayList<Autor> autoresLibro = logic.cargarAutoresLibro(isbn);
+			for (Autor autor : autoresLibro) {
+				modeloLista.addElement("-" + autor.getNomAutor());
+			}
+			listaAutores.setModel(modeloLista);
+			if(libro.getDescuento()>0.0) {
+				chckbxOfertaSi.setSelected(true);
+			}
+			else {
+				chckbxOfertaNo.setSelected(true);
+			}
 			tfPrecio.setText(String.valueOf(libro.getPrecio()));
 			tfDescuento.setText(String.valueOf(libro.getDescuento()));
 			tfGenero.setText(libro.getGenero());
-			tfDescripcion.setText(libro.getDescripcion());
+			taDescripcion.setText(libro.getDescripcion());
+			tfFechaPubli.setText(libro.getFechaPublicacion().format(formatter));
+			tfStock.setText(String.valueOf(libro.getStock()));
+			ArrayList<String> autores = logic.cargarAutores();
+			ArrayList<String> generos = logic.cargarGeneros();
+			for (String string : generos) {
+				cbGenero.addItem(string);
+			}
+			for (String string : autores) {
+				cbAutor.addItem(string);
+			}
 		}catch(Exception e) {
 			message="Error. No se pudo cargar el libro";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);

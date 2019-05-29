@@ -59,7 +59,7 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnVolver) {
-			InicioAdmin inicio = new InicioAdmin();
+			InicioAdmin inicio = new InicioAdmin(nUsuario);
 			inicio.setVisible(true);
 			this.dispose();
 		}

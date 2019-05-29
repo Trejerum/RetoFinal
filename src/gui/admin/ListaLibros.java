@@ -29,9 +29,9 @@ public class ListaLibros extends JFrame implements ActionListener{
 	private JButton btnModificar;
 	private JLabel lblSeleccionaUnLibro;
 	private JScrollPane scrollPane;
-	private String nusuario;
 	private JTable tablaLibros;
 	private JButton btnVolver;
+	private String nUsuario;
 
 
 	/**
@@ -39,7 +39,7 @@ public class ListaLibros extends JFrame implements ActionListener{
 	 */
 	public ListaLibros(String usuario) {
 		setResizable(false);
-		nusuario = usuario;
+		nUsuario = usuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 452, 530);
 		contentPane = new JPanel();
@@ -71,7 +71,7 @@ public class ListaLibros extends JFrame implements ActionListener{
 		contentPane.add(btnModificar);
 		
 		btnVolver = new JButton("Volver");
-		btnVolver.setBounds(350, 468, 90, 25);
+		btnVolver.setBounds(334, 263, 90, 25);
 		contentPane.add(btnVolver);
 		
 		buscar();
@@ -83,27 +83,18 @@ public class ListaLibros extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnModificar) {
-			getISBN();
+			String isbn = getIsbn();
+			ModificarLibro modificarLibro = new ModificarLibro(nUsuario, isbn);
+			modificarLibro.setVisible(true);
+			this.dispose();
 		}else if(e.getSource()==btnVolver) {
-			InicioAdmin inicio = new InicioAdmin();
+			InicioAdmin inicio = new InicioAdmin(nUsuario);
 			inicio.setVisible(true);
 			this.dispose();
 		}
 		
 	}
-
-	public void getISBN() {
-			int columna = 0;
-			int fila = tablaLibros.getSelectedRow();
-			String isbn = tablaLibros.getModel().getValueAt(fila, columna).toString();
-			System.out.println(isbn);
-			ModificarLibro modificarLibro = new ModificarLibro(isbn, nusuario);
-			modificarLibro.setVisible(true);
-			this.dispose();
-		
-	}
 	
-
 	public void buscar() {
 		try {
 			Logic logic = LogicFactory.getLogic();

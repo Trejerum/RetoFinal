@@ -13,7 +13,6 @@ import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,26 +35,15 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	private JButton btnAñadir;
 	private JLabel lblAdmin;
 	private String nUsuario;
-	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					InicioAdmin frame = new InicioAdmin();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JButton btnCerrarSesion;
 
 	/**
 	 * Create the frame.
 	 */
-	public InicioAdmin() {
+	public InicioAdmin(String usuario) {
+		nUsuario=usuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 363, 215);
+		setBounds(100, 100, 410, 313);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -73,11 +61,11 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		
 		lblLibros = new JLabel("Libros");
 		lblLibros.setFont(new Font("Tahoma", Font.PLAIN, 17));
-		lblLibros.setBounds(10, 78, 73, 14);
+		lblLibros.setBounds(10, 74, 73, 14);
 		contentPane.add(lblLibros);
 		
 		separator = new JSeparator();
-		separator.setBounds(10, 101, 311, 2);
+		separator.setBounds(10, 99, 311, 2);
 		contentPane.add(separator);
 		
 		btnBestSellers = new JButton("Best sellers");
@@ -88,36 +76,35 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		btnModificar = new JButton("Modificar");
 		btnModificar.setBackground(UIManager.getColor("Button.background"));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnModificar.setBounds(10, 146, 149, 23);
+		btnModificar.setBounds(10, 156, 149, 23);
 		contentPane.add(btnModificar);
 		
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnBuscar.setBounds(184, 112, 153, 23);
+		btnBuscar.setBounds(220, 112, 153, 23);
 		contentPane.add(btnBuscar);
 		
 		btnAñadir = new JButton("A\u00F1adir");
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnAñadir.setBounds(184, 146, 153, 23);
+		btnAñadir.setBounds(220, 156, 153, 23);
 		contentPane.add(btnAñadir);
 		
-		lblAdmin = new JLabel("Diego");
+		btnCerrarSesion = new JButton("Cerrar Sesion");
+		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnCerrarSesion.setBounds(122, 218, 142, 46);
+		contentPane.add(btnCerrarSesion);
+		
+		lblAdmin = new JLabel(nUsuario);
 		lblAdmin.setBounds(156, 15, 55, 12);
 		contentPane.add(lblAdmin);
-		try {
-			Logic logic = LogicFactory.getLogic();
-			Usuario usuario = new Usuario();
-			usuario = logic.cargarUsuario(nUsuario);
-			lblAdmin.setText(usuario.getNombre());
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
 		
 		btnModificar.addActionListener(this);
 		btnBuscar.addActionListener(this);
 		btnAñadir.addActionListener(this);
 		btnBestSellers.addActionListener(this);
 		btnEditarInfo.addActionListener(this);
+		btnCerrarSesion.addActionListener(this);
+		
 	}
 
 	@Override
@@ -128,7 +115,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 			this.dispose();
 		}
 		else if(e.getSource()==btnEditarInfo) {
-			PerfilAdmin perfil = new PerfilAdmin();
+			PerfilAdmin perfil = new PerfilAdmin(nUsuario);
 			perfil.setVisible(true);
 			this.dispose();
 		}
@@ -144,6 +131,11 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		}else if(e.getSource()==btnBestSellers) {
 			BestSellersAdmin bestSellers = new BestSellersAdmin(nUsuario);
 			bestSellers.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnCerrarSesion) {
+			Login login = new Login();
+			login.setVisible(true);
 			this.dispose();
 		}
 		

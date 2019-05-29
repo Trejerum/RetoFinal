@@ -13,7 +13,6 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import model.Autor;
-import model.AutoresLibro;
 import model.Compra;
 import model.Genero;
 import model.Libro;
@@ -376,12 +375,17 @@ public class DataAccessImpl implements DataAccess{
 		return autores;
 	}
 
-	public Usuario cargarUsuario(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+	public Usuario cargarUsuario(String nUsuario, boolean esAdmin) throws SQLException, ClassNotFoundException, IOException {
 		Usuario usuario = new Usuario();
-		
+		String sql;
 		try {
 			this.connect();
-			String sql = "select * from usuarios,uconvencional where usuarios.nombreUsuario=? and usuarios.nombreUsuario=uconvencional.nombreUsuario";
+			if(!esAdmin) {
+				sql = "select * from usuarios,uconvencional where usuarios.nombreUsuario=? and usuarios.nombreUsuario=uconvencional.nombreUsuario";
+			}
+			else {
+				sql = "select * from usuarios,uadministrador where usuarios.nombreUsuario=? and usuarios.nombreUsuario=uadministrador.nombreUsuario";
+			}
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, nUsuario);
 			ResultSet result = stmt.executeQuery();
@@ -393,7 +397,6 @@ public class DataAccessImpl implements DataAccess{
 				usuario.setEmail(result.getString("Email"));
 				usuario.setContraseña(result.getString("Contraseña"));
 				usuario.setNombreUsuario(result.getString("nombreUsuario"));
-				usuario.setNumCuenta(result.getInt("NumCuenta"));
 			}
 		}finally {
 			this.disconnect();
@@ -552,12 +555,12 @@ public class DataAccessImpl implements DataAccess{
 		Boolean existeAutor=false;
 		try {
 			this.connect();
-			String sql = "select autores.nombreAutor from autores where autores.nombreAutor=?";
+			String sql = "select autores.codAutor from autores where autores.codAutor=?";
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, autor.getNomAutor());
+			stmt.setString(1, autor.getCodAutor());
 			ResultSet result = stmt.executeQuery();
 			while(result.next()) {
-				if(result.getString("nombreAutor").equalsIgnoreCase(autor.getNomAutor())) {
+				if(result.getString("codAutor").equalsIgnoreCase(autor.getNomAutor())) {
 					existeAutor=true;
 				}
 			}
