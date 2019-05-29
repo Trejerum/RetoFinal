@@ -154,13 +154,19 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener, KeyLis
 	}
 	
 	public void mostrarDescripcion() {
-		int columna=0;
-		int fila = tablaBusqueda.getSelectedRow();
-		String isbn = tablaBusqueda.getModel().getValueAt(fila, columna).toString();
-		Descripcion descripcion = new Descripcion(isbn, nUsuario);
-		descripcion.setVisible(true);
-		JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
-		frame.dispose();
+		try {
+			int columna=0;
+			int fila = tablaBusqueda.getSelectedRow();
+			String isbn = tablaBusqueda.getModel().getValueAt(fila, columna).toString();
+			Descripcion descripcion = new Descripcion(isbn, nUsuario);
+			descripcion.setVisible(true);
+			JFrame frame = (JFrame) SwingUtilities.getWindowAncestor(this);
+			frame.dispose();
+		} catch (Exception e) {
+			String message = "Error. No has seleccionado ningun libro";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+		
 	}
 	
 	public void verRecomendados(ArrayList<Libro> libros) {
