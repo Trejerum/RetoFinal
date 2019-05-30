@@ -7,14 +7,23 @@ import control.LogicFactory;
 import model.Autor;
 import model.Genero;
 import model.Libro;
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'dev-diego' of https://github.com/Trejerum/RetoFinal.git
 import javax.swing.JSeparator;
 import java.awt.Color;
 
 
+
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'dev-diego' of https://github.com/Trejerum/RetoFinal.git
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -24,10 +33,18 @@ import java.awt.event.ActionListener;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'dev-diego' of https://github.com/Trejerum/RetoFinal.git
 import java.util.Enumeration;
 
+<<<<<<< HEAD
 
+=======
+
+>>>>>>> branch 'dev-diego' of https://github.com/Trejerum/RetoFinal.git
 import javax.swing.JTextField;
 import javax.swing.ListModel;
 import javax.swing.UIManager;

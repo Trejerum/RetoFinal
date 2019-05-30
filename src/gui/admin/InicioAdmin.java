@@ -3,16 +3,10 @@ package gui.admin;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
-import control.Logic;
-import control.LogicFactory;
 import gui.all.Login;
-import model.Usuario;
-
 import javax.swing.JSeparator;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,6 +30,8 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	private JLabel lblAdmin;
 	private String nUsuario;
 	private JButton btnCerrarSesion;
+	private JButton btnMantGeneros;
+	private JButton btnMantAutores;
 
 	/**
 	 * Create the frame.
@@ -43,7 +39,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	public InicioAdmin(String usuario) {
 		nUsuario=usuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 410, 313);
+		setBounds(100, 100, 410, 414);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -91,12 +87,22 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		
 		btnCerrarSesion = new JButton("Cerrar Sesion");
 		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		btnCerrarSesion.setBounds(122, 218, 142, 46);
+		btnCerrarSesion.setBounds(116, 299, 142, 46);
 		contentPane.add(btnCerrarSesion);
 		
 		lblAdmin = new JLabel(nUsuario);
 		lblAdmin.setBounds(156, 15, 55, 12);
 		contentPane.add(lblAdmin);
+		
+		btnMantAutores = new JButton("Mantenimiento autores");
+		btnMantAutores.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnMantAutores.setBounds(92, 209, 196, 23);
+		contentPane.add(btnMantAutores);
+		
+		btnMantGeneros = new JButton("Mantenimiento generos");
+		btnMantGeneros.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnMantGeneros.setBounds(92, 245, 196, 23);
+		contentPane.add(btnMantGeneros);
 		
 		btnModificar.addActionListener(this);
 		btnBuscar.addActionListener(this);
@@ -104,6 +110,8 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		btnBestSellers.addActionListener(this);
 		btnEditarInfo.addActionListener(this);
 		btnCerrarSesion.addActionListener(this);
+		btnMantAutores.addActionListener(this);
+		btnMantGeneros.addActionListener(this);
 		
 	}
 
@@ -136,6 +144,16 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		else if(e.getSource()==btnCerrarSesion) {
 			Login login = new Login();
 			login.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnMantAutores) {
+			MantAutores autores = new MantAutores(nUsuario);
+			autores.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnMantGeneros) {
+			MantGeneros generos = new MantGeneros(nUsuario);
+			generos.setVisible(true);
 			this.dispose();
 		}
 		

@@ -11,7 +11,11 @@ import javax.swing.JPanel;
  */
 public class JPanelBackground extends JPanel{
 	
-	// Atributo que guardara la imagen de Background que le pasemos.
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1887336470635243210L;
+			// Atributo que guardara la imagen de Background que le pasemos.
 			private Image background;
 		 
 			// Metodo que es llamado automaticamente por la maquina virtual Java cada vez que repinta

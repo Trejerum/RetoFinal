@@ -173,10 +173,15 @@ public class BusquedaUser extends JFrame implements ActionListener{
 	}
 	
 	public void comprar() {
-		String isbn = panel.getIsbn();
-		ConfirmarCompra confirmarCompra = new ConfirmarCompra(isbn, nUsuario);
-		confirmarCompra.setVisible(true);
-		this.dispose();
+		try {
+			String isbn = panel.getIsbn();
+			ConfirmarCompra confirmarCompra = new ConfirmarCompra(isbn, nUsuario);
+			confirmarCompra.setVisible(true);
+			this.dispose();
+		} catch (Exception e) {
+			String message = "Error. No has seleccionado ningun libro";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	public void verRecomendados() {

@@ -4,7 +4,6 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPasswordField;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -54,7 +53,7 @@ public class PanelPerfil extends JPanel implements ActionListener {
 	 * Create the panel.
 	 */
 	public PanelPerfil(String usuario) {
-		setBackground(new Color(0, 153, 51));
+		setBackground(new Color(240, 240, 240));
 		
 		setLayout(null);
 		nUsuario=usuario;
@@ -256,7 +255,6 @@ public class PanelPerfil extends JPanel implements ActionListener {
 			tfDireccion.setEditable(false);
 			tfEmail.setEditable(false);
 			tfTelefono.setEditable(false);
-			tfUsuario.setEditable(false);
 			tfNumCuenta.setEditable(false);
 			pfContraseña.setEditable(false);
 			pfContraseña.setText(contraseña);
@@ -265,7 +263,6 @@ public class PanelPerfil extends JPanel implements ActionListener {
 			tfDireccion.setForeground(new Color(0, 0, 0));
 			tfEmail.setForeground(new Color(0, 0, 0));
 			tfTelefono.setForeground(new Color(0, 0, 0));
-			tfUsuario.setForeground(new Color(0, 0, 0));
 			pfContraseña.setForeground(new Color(0, 0, 0));
 			tfNumCuenta.setForeground(new Color(0, 0 , 0));
 			btnGuardar.setEnabled(false);
@@ -285,21 +282,18 @@ public class PanelPerfil extends JPanel implements ActionListener {
 		tfDireccion.setEditable(true);
 		tfEmail.setEditable(true);
 		tfTelefono.setEditable(true);
-		tfUsuario.setEditable(true);
-
+		
 		if(!esAdmin) {
 			tfNumCuenta.setEditable(true);
 		}
 
 		tfNumCuenta.setEditable(true);
 		pfContraseña.setEditable(true);
-
 		tfNombre.setForeground(new Color(0, 0 , 205));
 		tfApellidos.setForeground(new Color(0, 0 , 205));
 		tfDireccion.setForeground(new Color(0, 0 , 205));
 		tfEmail.setForeground(new Color(0, 0 , 205));
 		tfTelefono.setForeground(new Color(0, 0 , 205));
-		tfUsuario.setForeground(new Color(0, 0 , 205));
 		pfContraseña.setForeground(new Color(0, 0 , 205));
 		tfNumCuenta.setForeground(new Color(0, 0 , 205));
 		btnGuardar.setEnabled(true);

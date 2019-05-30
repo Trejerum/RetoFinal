@@ -1,7 +1,6 @@
 package model;
 
 import java.sql.Date;
-import java.time.LocalDate;
 /**
  * La clase Compra va a registrar información sobre cada compra que realice un usuario.
  * @author equipo B

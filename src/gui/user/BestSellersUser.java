@@ -3,26 +3,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import gui.all.JPanelBackground;
 import gui.all.PanelBestSellers;
 
 import javax.swing.JSeparator;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.SystemColor;
-import java.awt.TextField;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.time.LocalDate;
 import java.awt.event.ActionEvent;
-import java.awt.Graphics;
-import java.awt.Image;
- 
-import javax.swing.ImageIcon;
-import javax.swing.JPanel;
 
 public class BestSellersUser extends JFrame implements ActionListener{
 
@@ -136,9 +126,6 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		btnCompras.addActionListener(this);
 		btnHome.addActionListener(this);
 		btnUsuario.addActionListener(this);
-		LocalDate calendario = LocalDate.now();
-		TextField texto = new TextField(calendario.toString());
-		String fecha = texto.getText();
 	}
 
 	@Override
