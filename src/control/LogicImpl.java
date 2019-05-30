@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import model.Autor;
 import model.Compra;
 import model.Genero;
+import model.GustoAutor;
+import model.GustoGenero;
 import model.Libro;
 import model.Usuario;
 
@@ -164,6 +166,42 @@ public class LogicImpl implements Logic{
 
 	public void borrarGen(String nGenero) throws Exception {
 		dataAccess.borrarGenero(nGenero);
+		
+	}
+
+	@Override
+	public ArrayList<String> cargarGustosGen(String nUsuario) throws Exception {
+		ArrayList<String> gustosGen = dataAccess.cargarGustosGen(nUsuario);
+		return gustosGen;
+	}
+
+	@Override
+	public ArrayList<String> cargarGustosAut(String nUsuario) throws Exception {
+		ArrayList<String> gustosAut = dataAccess.cargarGustosAut(nUsuario);
+		return gustosAut;
+	}
+
+	@Override
+	public void añadirGustoAut(String nUsuario, String nAutor) throws Exception {
+		dataAccess.regUsGustoAutor(nAutor, nUsuario);
+		
+	}
+	
+	@Override
+	public void añadirGustoGen(String nUsuario, String nGen) throws Exception {
+		dataAccess.regUsGustoGenero(nGen, nUsuario);
+		
+	}
+
+	@Override
+	public void borrarGustoGen(String nUsuario, String nGen) throws Exception {
+		dataAccess.borrarGustoGen(nUsuario, nGen);
+		
+	}
+
+	@Override
+	public void borrarGustoAut(String nUsuario, String nAutor) throws Exception {
+		dataAccess.borrarGustoAut(nUsuario, nAutor);
 		
 	}
 }

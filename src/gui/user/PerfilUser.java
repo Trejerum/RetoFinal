@@ -14,11 +14,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-/**
- * Esta ventana sirve para visualizar los datos del usuario, para que el pueda modificarlos
- * @author EquipoB
- *
- */
+
 public class PerfilUser extends JFrame implements ActionListener{
 
 	
@@ -32,6 +28,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 	private JButton btnBuscar;
 	private String nUsuario;
 	private JButton btnCerrarSesion;
+	private JButton btnEditarGustos;
 
 	/**
 	 * Create the frame.
@@ -40,7 +37,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 		nUsuario=usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 624, 506);
+		setBounds(100, 100, 626, 506);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,6 +64,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 		Image estrella = new ImageIcon(this.getClass().getResource("/favorites.png")).getImage();
 		Image newestrella = estrella.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnBestSellers.setIcon(new ImageIcon(newestrella));
+		
 		btnBestSellers.setBackground(SystemColor.activeCaption);
 		btnBestSellers.setBounds(126, 417, 124, 61);
 		contentPane.add(btnBestSellers);
@@ -76,6 +74,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 		Image monigote = new ImageIcon(this.getClass().getResource("/users.png")).getImage();
 		Image newmonigote = monigote.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		btnUsuario.setIcon(new ImageIcon(newmonigote));
+		
 		btnUsuario.setBackground(new Color(176, 196, 222));
 		btnUsuario.setBounds(493, 417, 128, 61);
 		contentPane.add(btnUsuario);
@@ -85,6 +84,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 		Image carrito = new ImageIcon(this.getClass().getResource("/shopping-cart.png")).getImage();
 		Image newcarrito = carrito.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnCompras.setIcon(new ImageIcon(newcarrito));
+		
 		btnCompras.setBackground(SystemColor.activeCaption);
 		btnCompras.setBounds(370, 417, 128, 61);
 		contentPane.add(btnCompras);
@@ -94,6 +94,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 		Image lupa = new ImageIcon(this.getClass().getResource("/loupe2.png")).getImage();
 		Image newlupa = lupa.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		btnBuscar.setIcon(new ImageIcon(newlupa));
+		
 		btnBuscar.setBackground(SystemColor.activeCaption);
 		btnBuscar.setBounds(248, 417, 124, 61);
 		contentPane.add(btnBuscar);
@@ -103,23 +104,24 @@ public class PerfilUser extends JFrame implements ActionListener{
 		panel.setBounds(0,0,620,478);
 		contentPane.add(panel);
 		
-		//Boton para cerrar sesion
 		btnCerrarSesion = new JButton("Cerrar sesion");
 		btnCerrarSesion.setBounds(494, 30, 117, 23);
 		panel.add(btnCerrarSesion);
 		
-		//Action Listeners
+		btnEditarGustos = new JButton("Editar gustos");
+		btnEditarGustos.setBounds(440, 241, 117, 35);
+		panel.add(btnEditarGustos);
+		
 		btnBestSellers.addActionListener(this);
 		btnBuscar.addActionListener(this);
 		btnCompras.addActionListener(this);
 		btnHome.addActionListener(this);
 		btnUsuario.addActionListener(this);
 		btnCerrarSesion.addActionListener(this);
+		btnEditarGustos.addActionListener(this);
 		
 	}
-	/**
-	 * Estos son los ActionPerformed que sirven para navegar por la pagina
-	 */
+
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnBestSellers) {
 			BestSellersUser bestSellers = new BestSellersUser(nUsuario);
@@ -145,9 +147,14 @@ public class PerfilUser extends JFrame implements ActionListener{
 			login.setVisible(true);
 			this.dispose();
 		}
-		else {
+		else if(e.getSource()==btnUsuario){
 			PerfilUser perfil = new PerfilUser(nUsuario);
 			perfil.setVisible(true);
+			this.dispose();
+		}
+		else if(e.getSource()==btnEditarGustos) {
+			GustosUser gustos = new GustosUser(nUsuario);
+			gustos.setVisible(true);
 			this.dispose();
 		}
 	}

@@ -676,4 +676,68 @@ public class DataAccessImpl implements DataAccess{
 		}
 		
 	}
+
+	public ArrayList<String> cargarGustosGen(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+		ArrayList<String> gustosGen = new ArrayList<String>();
+		try {
+			this.connect();
+			String sql = "select nombreGen from generos, gustoGenero where generos.codGen = gustoGenero.codGen and gustoGenero.nombreUsuario=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, nUsuario);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				gustosGen.add(result.getString("nombreGen"));
+			}
+		}finally {
+			this.disconnect();
+		}
+		return gustosGen;
+	}
+
+	public ArrayList<String> cargarGustosAut(String nUsuario) throws SQLException, ClassNotFoundException, IOException {
+		ArrayList<String> gustosAut = new ArrayList<String>();
+		try {
+			this.connect();
+			String sql = "select nombreautor from autores, gustoautor where autores.codautor = gustoautor.codAutor and gustoautor.nombreUsuario=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, nUsuario);
+			ResultSet result = stmt.executeQuery();
+			while(result.next()) {
+				gustosAut.add(result.getString("nombreautor"));
+			}
+		}finally {
+			this.disconnect();
+		}
+		return gustosAut;
+	}
+
+	@Override
+	public void borrarGustoGen(String nUsuario, String nGen) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "delete from gustoGenero where nombreGen=? and nombreUsuario=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, nGen);
+			stmt.setString(2, nUsuario);
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+
+	@Override
+	public void borrarGustoAut(String nUsuario, String nAutor) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			String sql = "delete from gustoAutor where codAutor=(select codAutor from autores where nombreAutor=?) and nombreUsuario=?";
+			stmt = con.prepareStatement(sql);
+			stmt.setString(1, nAutor);
+			stmt.setString(2, nUsuario);
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+		
+	}
 }
