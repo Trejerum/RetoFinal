@@ -65,7 +65,7 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 
 		lblnameAdmin = new JLabel("");
 		lblnameAdmin.setBounds(170, 11, 87, 16);
-		panel.add(lblnameAdmin);
+		contentPane.add(lblnameAdmin);
 		
 		//Este llama al panel qeu creamos para las dos vetanas, para el admin y el usuario convencional
 		panel = new PanelBestSellers();
