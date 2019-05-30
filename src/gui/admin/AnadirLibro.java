@@ -32,7 +32,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
-
+/**
+ * Esta ventana sirve para amafir un libro a la libreria
+ * @author EquipoB
+ *
+ */
 public class AnadirLibro extends JFrame implements ActionListener{
 
 	private static final long serialVersionUID = -146475275276116997L;
@@ -48,7 +52,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	private JLabel lblIsbn;
 	private JLabel lblPrecio;
 	private JButton btnAñadirLibro;
-	private JLabel lblApellidos;
+	private JLabel lblTitulo;
 	private JLabel lblAutor;
 	private JLabel lblFechaPubli;
 	private JLabel lblOferta;
@@ -62,11 +66,11 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	private JComboBox<String> cbGenero;
 	private JButton btnMasAutores;
 	private JTextField tfNombreAutor;
-	private JLabel lblNombre;
+	private JLabel lblNombreAutor;
 	private JTextField tfGenero;
 	private JLabel lblNuevoGenero;
 	private JLabel lblNuevoAutor;
-	private JLabel lblNombre_1;
+	private JLabel lblNombreGenero;
 	private JTextField tfNombreGenero;
 	private JButton btnMasGeneros;
 	private JComboBox<String> cbAutor;
@@ -76,12 +80,17 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	DefaultListModel<String> modeloLista = new DefaultListModel<String>();
 	private JList<String> listaAutores;
 	private String nUsuario;
-	private JLabel lbleditorial;
+	private JLabel lblEditorial;
 	private JTextField tfEditorial;
 	private JRadioButton rdbtnSi;
 	private JRadioButton rdbtnNo;
 	private ButtonGroup rdbtnGrp;
 	private JTextField tfNumVentas;
+	private JLabel lblSeleccionarAutores;
+	private JLabel lblSeleccionarGenero;
+	private JLabel lblAadirGenero;
+	private JLabel lblAdirAutor;
+	private JLabel lblnumventas;
 
 
 	/**
@@ -99,15 +108,18 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//Etiqueta Añadir Libro, cabezera de la ventana
 		lblModificarLibro = new JLabel("A\u00F1adir Libro");
 		lblModificarLibro.setFont(new Font("Maiandra GD", Font.PLAIN, 30));
 		lblModificarLibro.setBounds(20, 13, 255, 37);
 		contentPane.add(lblModificarLibro);
 		
+		//Separador entre la cabezera del cuerpo
 		separator = new JSeparator();
 		separator.setBounds(0, 56, 816, 2);
 		contentPane.add(separator);
 		
+		//Espacio para meter el ISBN del libro
 		lblIsbn = new JLabel("*ISBN:");
 		lblIsbn.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblIsbn.setBounds(88, 90, 50, 20);
@@ -120,21 +132,25 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		contentPane.add(tfIsbn);
 		tfIsbn.setColumns(10);
 		
+		//Espacio para meter el Precio del libro
 		lblPrecio = new JLabel("*Precio:");
 		lblPrecio.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblPrecio.setBounds(88, 331, 61, 20);
 		contentPane.add(lblPrecio);
+
+		tfPrecio = new JTextField();
+		tfPrecio.setEditable(true);
+		tfPrecio.setForeground(new Color(0, 0, 205));
+		tfPrecio.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfPrecio.setColumns(10);
+		tfPrecio.setBounds(162, 331, 145, 20);
+		contentPane.add(tfPrecio);
 		
-		btnAñadirLibro = new JButton("Añadir Libro");
-		btnAñadirLibro.setFont(new Font("Arial", Font.PLAIN, 15));
-		btnAñadirLibro.setForeground(new Color(0, 0, 255));
-		btnAñadirLibro.setBounds(593, 69, 167, 31);
-		contentPane.add(btnAñadirLibro);
-		
-		lblApellidos = new JLabel("*T\u00EDtulo:");
-		lblApellidos.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblApellidos.setBounds(82, 134, 56, 20);
-		contentPane.add(lblApellidos);
+		//Espacio para meter el Titulo del libro
+		lblTitulo = new JLabel("*T\u00EDtulo:");
+		lblTitulo.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblTitulo.setBounds(82, 134, 56, 20);
+		contentPane.add(lblTitulo);
 		
 		tfTitulo = new JTextField();
 		tfTitulo.setEditable(true);
@@ -144,11 +160,23 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		tfTitulo.setBounds(148, 134, 197, 20);
 		contentPane.add(tfTitulo);
 		
+		//Lista donde metes los autores del libro
 		lblAutor = new JLabel("*Autor:");
 		lblAutor.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblAutor.setBounds(81, 220, 61, 20);
 		contentPane.add(lblAutor);
 		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(157, 207, 145, 63);
+		contentPane.add(scrollPane);
+		
+		listaAutores = new JList<String>();
+		listaAutores.setEnabled(true);
+		scrollPane.setViewportView(listaAutores);
+		modeloLista = new DefaultListModel<String>();
+		listaAutores.setModel(modeloLista);
+		
+		//Lugar donde metes la fecha de publicacion
 		lblFechaPubli = new JLabel("Fecha publicaci\u00F3n:");
 		lblFechaPubli.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblFechaPubli.setBounds(27, 282, 121, 14);
@@ -162,183 +190,16 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		tfFechaPubli.setBounds(162, 282, 86, 20);
 		contentPane.add(tfFechaPubli);
 		
-		tfPrecio = new JTextField();
-		tfPrecio.setEditable(true);
-		tfPrecio.setForeground(new Color(0, 0, 205));
-		tfPrecio.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tfPrecio.setColumns(10);
-		tfPrecio.setBounds(162, 331, 145, 20);
-		contentPane.add(tfPrecio);
-		
-		lblOferta = new JLabel("Oferta:");
-		lblOferta.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblOferta.setBounds(88, 371, 79, 14);
-		contentPane.add(lblOferta);
-		
-		btnVolver = new JButton("Volver");
-		btnVolver.setFont(new Font("Arial", Font.PLAIN, 15));
-		btnVolver.setBounds(635, 626, 122, 37);
-		contentPane.add(btnVolver);
-		
-		tfDescuento = new JTextField();
-		tfDescuento.setEditable(true);
-		tfDescuento.setForeground(new Color(0, 0, 205));
-		tfDescuento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tfDescuento.setColumns(10);
-		tfDescuento.setBounds(248, 399, 61, 16);
-		contentPane.add(tfDescuento);
-		
-		lblDescuento = new JLabel("Descuento:");
-		lblDescuento.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDescuento.setBounds(163, 400, 74, 14);
-		contentPane.add(lblDescuento);
-		
-		lblStock = new JLabel("*Stock:");
-		lblStock.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblStock.setBounds(91, 432, 61, 14);
-		contentPane.add(lblStock);
-		
-		tfStock = new JTextField();
-		tfStock.setEditable(true);
-		tfStock.setForeground(new Color(0, 0, 205));
-		tfStock.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tfStock.setColumns(10);
-		tfStock.setBounds(162, 435, 66, 20);
-		contentPane.add(tfStock);
-		
-		lblGenero = new JLabel("*G\u00E9nero:");
-		lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblGenero.setBounds(81, 497, 68, 20);
-		contentPane.add(lblGenero);
-		
-		lblDescripcion = new JLabel("Descripci\u00F3n:");
-		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblDescripcion.setBounds(63, 557, 79, 14);
-		contentPane.add(lblDescripcion);
-		
 		lblFormateFecha = new JLabel("(dd-mm-yyyy)");
 		lblFormateFecha.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		lblFormateFecha.setBounds(253, 284, 74, 14);
 		contentPane.add(lblFormateFecha);
 		
-		btnMasAutores = new JButton("+");
-		btnMasAutores.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnMasAutores.setBounds(510, 172, 50, 20);
-		contentPane.add(btnMasAutores);
-		
-		cbGenero = new JComboBox<String>();
-		cbGenero.setEnabled(true);
-		cbGenero.setBounds(380, 499, 120, 20);
-		contentPane.add(cbGenero);
-		cbGenero.setSelectedIndex(-1);
-		
-		lblNombre = new JLabel("Nombre");
-		lblNombre.setBounds(380, 152, 46, 14);
-		contentPane.add(lblNombre);
-		
-		tfNombreAutor = new JTextField();
-		tfNombreAutor.setBounds(380, 172, 120, 20);
-		contentPane.add(tfNombreAutor);
-		tfNombreAutor.setColumns(10);
-		
-		tfGenero = new JTextField();
-		tfGenero.setEditable(true);
-		tfGenero.setBounds(162, 499, 145, 20);
-		contentPane.add(tfGenero);
-		tfGenero.setColumns(10);
-		
-		lblNuevoGenero = new JLabel("NUEVO GENERO");
-		lblNuevoGenero.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNuevoGenero.setBounds(414, 402, 123, 14);
-		contentPane.add(lblNuevoGenero);
-		
-		lblNuevoAutor = new JLabel("NUEVO AUTOR");
-		lblNuevoAutor.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNuevoAutor.setBounds(414, 123, 129, 15);
-		contentPane.add(lblNuevoAutor);
-		
-		lblNombre_1 = new JLabel("Nombre");
-		lblNombre_1.setBounds(380, 434, 46, 14);
-		contentPane.add(lblNombre_1);
-		
-		tfNombreGenero = new JTextField();
-		tfNombreGenero.setBounds(380, 454, 120, 20);
-		contentPane.add(tfNombreGenero);
-		tfNombreGenero.setColumns(10);
-		
-		btnMasGeneros = new JButton("+");
-		btnMasGeneros.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnMasGeneros.setBounds(510, 454, 50, 20);
-		contentPane.add(btnMasGeneros);
-		
-		cbAutor = new JComboBox<String>();
-		cbAutor.setEnabled(true);
-		cbAutor.setBounds(380, 250, 163, 20);
-		cbAutor.setSelectedIndex(-1);
-		contentPane.add(cbAutor);
-		
-		btnPasarGenero = new JButton("<<<");
-		btnPasarGenero.setEnabled(true);
-		btnPasarGenero.setBounds(314, 499, 61, 20);
-		contentPane.add(btnPasarGenero);
-		
-		btnPasarAutor = new JButton("<<<");
-		btnPasarAutor.setEnabled(true);
-		btnPasarAutor.setBounds(314, 250, 61, 20);
-		contentPane.add(btnPasarAutor);
-		
-		btnEliminarAutor = new JButton(">>>");
-		btnEliminarAutor.setEnabled(true);
-		btnEliminarAutor.setBounds(316, 220, 56, 20);
-		contentPane.add(btnEliminarAutor);
-		
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(157, 207, 145, 63);
-		contentPane.add(scrollPane);
-		
-		listaAutores = new JList<String>();
-		listaAutores.setEnabled(true);
-		scrollPane.setViewportView(listaAutores);
-		modeloLista = new DefaultListModel<String>();
-		listaAutores.setModel(modeloLista);
-		
-		JLabel lblSeleccionarAutores = new JLabel("Seleccionar Autores:");
-		lblSeleccionarAutores.setBounds(380, 226, 120, 14);
-		contentPane.add(lblSeleccionarAutores);
-		
-		JLabel lblAdirAutor = new JLabel("A\u00F1adir autor");
-		lblAdirAutor.setBounds(570, 177, 91, 14);
-		contentPane.add(lblAdirAutor);
-		
-		JLabel lblAadirGenero = new JLabel("A\u00F1adir genero");
-		lblAadirGenero.setBounds(575, 457, 86, 14);
-		contentPane.add(lblAadirGenero);
-		
-		JLabel lblSeleccionarGenero = new JLabel("Seleccionar genero: ");
-		lblSeleccionarGenero.setBounds(380, 485, 120, 14);
-		contentPane.add(lblSeleccionarGenero);
-		
-		JScrollPane scrollPane_1 = new JScrollPane();
-		scrollPane_1.setBounds(157, 540, 419, 111);
-		contentPane.add(scrollPane_1);
-		
-		taDescripcion = new JTextArea();
-		scrollPane_1.setViewportView(taDescripcion);
-		taDescripcion.setEditable(true);
-		taDescripcion.setLineWrap(true);
-		
-		lbleditorial = new JLabel("*Editorial:");
-		lbleditorial.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lbleditorial.setBounds(74, 173, 86, 14);
-		contentPane.add(lbleditorial);
-		
-		tfEditorial = new JTextField();
-		tfEditorial.setForeground(new Color(0, 0, 205));
-		tfEditorial.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		tfEditorial.setEditable(true);
-		tfEditorial.setBounds(148, 172, 167, 20);
-		contentPane.add(tfEditorial);
-		tfEditorial.setColumns(10);
+		//Sirve para seleccionar si el libro tiene oferta o no
+		lblOferta = new JLabel("Oferta:");
+		lblOferta.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblOferta.setBounds(88, 371, 79, 14);
+		contentPane.add(lblOferta);
 		
 		rdbtnSi = new JRadioButton("Si");
 		rdbtnSi.setBounds(162, 369, 40, 23);
@@ -352,7 +213,172 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		rdbtnGrp.add(rdbtnNo);
 		rdbtnGrp.add(rdbtnSi);
 		
-		JLabel lblnumventas = new JLabel("*NumVentas: ");
+		// Boton para volver a la pestaña anterior
+		btnVolver = new JButton("Volver");
+		btnVolver.setFont(new Font("Arial", Font.PLAIN, 15));
+		btnVolver.setBounds(635, 626, 122, 37);
+		contentPane.add(btnVolver);
+		
+		//Lugar donde metes el descuento del libro
+		lblDescuento = new JLabel("Descuento:");
+		lblDescuento.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDescuento.setBounds(163, 400, 74, 14);
+		contentPane.add(lblDescuento);
+		
+		tfDescuento = new JTextField();
+		tfDescuento.setEditable(true);
+		tfDescuento.setForeground(new Color(0, 0, 205));
+		tfDescuento.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfDescuento.setColumns(10);
+		tfDescuento.setBounds(248, 399, 61, 16);
+		contentPane.add(tfDescuento);
+		
+		
+		//Lugar donde metes el stock que tienes del libro
+		lblStock = new JLabel("*Stock:");
+		lblStock.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblStock.setBounds(91, 432, 61, 14);
+		contentPane.add(lblStock);
+		
+		tfStock = new JTextField();
+		tfStock.setEditable(true);
+		tfStock.setForeground(new Color(0, 0, 205));
+		tfStock.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfStock.setColumns(10);
+		tfStock.setBounds(162, 435, 66, 20);
+		contentPane.add(tfStock);
+		
+		//Sirve para añadir un genero y para crear uno nuevo
+		lblGenero = new JLabel("*G\u00E9nero:");
+		lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblGenero.setBounds(81, 497, 68, 20);
+		contentPane.add(lblGenero);
+		
+		tfGenero = new JTextField();
+		tfGenero.setEditable(true);
+		tfGenero.setBounds(162, 499, 145, 20);
+		contentPane.add(tfGenero);
+		tfGenero.setColumns(10);
+		
+		tfNombreGenero = new JTextField();
+		tfNombreGenero.setBounds(380, 454, 120, 20);
+		contentPane.add(tfNombreGenero);
+		tfNombreGenero.setColumns(10);
+		
+		cbGenero = new JComboBox<String>();
+		cbGenero.setEnabled(true);
+		cbGenero.setBounds(380, 499, 120, 20);
+		contentPane.add(cbGenero);
+		cbGenero.setSelectedIndex(-1);
+
+		lblNuevoGenero = new JLabel("NUEVO GENERO");
+		lblNuevoGenero.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNuevoGenero.setBounds(414, 402, 123, 14);
+		contentPane.add(lblNuevoGenero);
+		
+		btnPasarGenero = new JButton("<<<");
+		btnPasarGenero.setEnabled(true);
+		btnPasarGenero.setBounds(314, 499, 61, 20);
+		contentPane.add(btnPasarGenero);
+
+		lblSeleccionarGenero = new JLabel("Seleccionar genero: ");
+		lblSeleccionarGenero.setBounds(380, 485, 120, 14);
+		contentPane.add(lblSeleccionarGenero);
+		
+		lblNombreGenero = new JLabel("Nombre");
+		lblNombreGenero.setBounds(380, 434, 46, 14);
+		contentPane.add(lblNombreGenero);
+		
+		btnMasGeneros = new JButton("+");
+		btnMasGeneros.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnMasGeneros.setBounds(510, 454, 50, 20);
+		contentPane.add(btnMasGeneros);
+		
+		lblAadirGenero = new JLabel("A\u00F1adir genero");
+		lblAadirGenero.setBounds(575, 457, 86, 14);
+		contentPane.add(lblAadirGenero);
+
+		//Descripcion
+		lblDescripcion = new JLabel("Descripci\u00F3n:");
+		lblDescripcion.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDescripcion.setBounds(63, 557, 79, 14);
+		contentPane.add(lblDescripcion);
+		
+		JScrollPane scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(157, 540, 419, 111);
+		contentPane.add(scrollPane_1);
+		
+		taDescripcion = new JTextArea();
+		scrollPane_1.setViewportView(taDescripcion);
+		taDescripcion.setEditable(true);
+		taDescripcion.setLineWrap(true);
+		
+		//Autores
+		btnMasAutores = new JButton("+");
+		btnMasAutores.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		btnMasAutores.setBounds(510, 172, 50, 20);
+		contentPane.add(btnMasAutores);
+
+		lblNombreAutor = new JLabel("Nombre");
+		lblNombreAutor.setBounds(380, 152, 46, 14);
+		contentPane.add(lblNombreAutor);
+		
+		tfNombreAutor = new JTextField();
+		tfNombreAutor.setBounds(380, 172, 120, 20);
+		contentPane.add(tfNombreAutor);
+		tfNombreAutor.setColumns(10);
+		
+		lblNuevoAutor = new JLabel("NUEVO AUTOR");
+		lblNuevoAutor.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblNuevoAutor.setBounds(414, 123, 129, 15);
+		contentPane.add(lblNuevoAutor);
+		
+		cbAutor = new JComboBox<String>();
+		cbAutor.setEnabled(true);
+		cbAutor.setBounds(380, 250, 163, 20);
+		cbAutor.setSelectedIndex(-1);
+		contentPane.add(cbAutor);
+
+		btnAñadirLibro = new JButton("Añadir Libro");
+		btnAñadirLibro.setFont(new Font("Arial", Font.PLAIN, 15));
+		btnAñadirLibro.setForeground(new Color(0, 0, 255));
+		btnAñadirLibro.setBounds(593, 69, 167, 31);
+		contentPane.add(btnAñadirLibro);
+		
+		btnPasarAutor = new JButton("<<<");
+		btnPasarAutor.setEnabled(true);
+		btnPasarAutor.setBounds(314, 250, 61, 20);
+		contentPane.add(btnPasarAutor);
+		
+		btnEliminarAutor = new JButton(">>>");
+		btnEliminarAutor.setEnabled(true);
+		btnEliminarAutor.setBounds(316, 220, 56, 20);
+		contentPane.add(btnEliminarAutor);
+		
+		lblSeleccionarAutores = new JLabel("Seleccionar Autores:");
+		lblSeleccionarAutores.setBounds(380, 226, 120, 14);
+		contentPane.add(lblSeleccionarAutores);
+		
+		lblAdirAutor = new JLabel("A\u00F1adir autor");
+		lblAdirAutor.setBounds(570, 177, 91, 14);
+		contentPane.add(lblAdirAutor);
+		
+		//Editorial
+		lblEditorial = new JLabel("*Editorial:");
+		lblEditorial.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblEditorial.setBounds(74, 173, 86, 14);
+		contentPane.add(lblEditorial);
+		
+		tfEditorial = new JTextField();
+		tfEditorial.setForeground(new Color(0, 0, 205));
+		tfEditorial.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		tfEditorial.setEditable(true);
+		tfEditorial.setBounds(148, 172, 167, 20);
+		contentPane.add(tfEditorial);
+		tfEditorial.setColumns(10);
+		
+		//Numero de ventas
+		lblnumventas = new JLabel("*NumVentas: ");
 		lblnumventas.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblnumventas.setBounds(63, 472, 104, 14);
 		contentPane.add(lblnumventas);
@@ -363,6 +389,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		contentPane.add(tfNumVentas);
 		tfNumVentas.setColumns(10);
 		
+		//ActionListener
 		btnVolver.addActionListener(this);
 		btnAñadirLibro.addActionListener(this);
 		btnMasAutores.addActionListener(this);
@@ -375,6 +402,9 @@ public class AnadirLibro extends JFrame implements ActionListener{
 	}
 
 	@Override
+	/**
+	 * Aqui se dan funciones a los botones
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnVolver) {
 			InicioAdmin inicio = new InicioAdmin(nUsuario);
@@ -390,12 +420,14 @@ public class AnadirLibro extends JFrame implements ActionListener{
 			pasarAutor();
 		}else if(e.getSource() == btnEliminarAutor) {
 			eliminarAutor();
-		}else if(e.getSource()==btnPasarGenero) {
+		}else if(e.getSource()== btnPasarGenero) {
 			pasarGenero();
 		}
 		
 	}
-
+	/**
+	 * Esta funcion sirve para eliminar un autor de la lista del libro
+	 */
 	private void eliminarAutor() {
 		try {
 			int eliminar = listaAutores.getSelectedIndex();
@@ -405,7 +437,9 @@ public class AnadirLibro extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);	
 		}
 	}
-
+	/**
+	 * Esta funcion sirve para pasar un autor de la combo box a la lista de autores
+	 */
 	private void pasarAutor() {
 		try{
 			String autor = cbAutor.getSelectedItem().toString();
@@ -417,17 +451,23 @@ public class AnadirLibro extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+	/**
+	 * Esta funcion sirve para pasar un genero de la combo box al textField de genero
+	 */
 	private void pasarGenero() {
 		try {
 			String genero = cbGenero.getSelectedItem().toString();
 			tfGenero.setText(genero);
+			cbGenero.setSelectedIndex(-1);
 		}catch(Exception e) {
 			String message="Selecciona el genero en la Combo Box";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-
+	/**
+	 * Comprueba si el textField del genero que quiere crear esta vacio o no, despues si ese genero ya esta creado en la tabla y
+	 * si todo es correcto los inserta en la combobox
+	 */
 	private void comprobarGenero() {
 		String message;
 		try{
@@ -458,12 +498,15 @@ public class AnadirLibro extends JFrame implements ActionListener{
 				tfNombreGenero.setText("");
 			}
 		}catch(Exception e) {
-			message="No se ha podido comprobar el autor";
+			message="No se ha podido comprobar el genero";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}
-
+	/**
+	 * Comprueba si el textField del nombre del autor y del codigo del autor que quiere crear esta vacio o no, despues si ese autor ya esta creado en la tabla y
+	 * si todo esta correcto los inserta en la combobox
+	 */
 	private void comprobarAutor() {
 		String message;
 		try{
@@ -500,7 +543,9 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		}
 		
 	}
-
+	/**
+	 * Esta funcion inserta los datos que hemos introducido del libro en la tabla de libros
+	 */
 	private void AñadirLibro() {
 		String message;
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
@@ -534,6 +579,7 @@ public class AnadirLibro extends JFrame implements ActionListener{
 			logic.insertarLibro(libro, autores);
 			message="Libro añadido correctamente";
 			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+			vaciarTf();
 
 		}catch(Exception e) {
 			message="Error. No se ha podido añadir el libro";
@@ -541,6 +587,9 @@ public class AnadirLibro extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Esta funcion carga en las combo Box los autores y genero de la lista
+	 */
 	public void cargarDatos() {
 		String message;
 		try {
@@ -558,7 +607,9 @@ public class AnadirLibro extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 	    }
 	}
-	
+	/**
+	 * 
+	 */
 	public void vaciarTf() {
 		tfIsbn.setText("");
 		tfTitulo.setText("");

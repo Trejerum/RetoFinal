@@ -11,7 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.UIManager;
-
+/**
+ * En esta ventana aparaecen tus datos de usuario, y desde aqui podras modificarlos
+ * @author EquipoB
+ *
+ */
 public class PerfilAdmin extends JFrame implements ActionListener{
 
 	/**
@@ -36,19 +40,24 @@ public class PerfilAdmin extends JFrame implements ActionListener{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//Aqui se llama al panel que creamos para los dos usuarios
 		PanelPerfil panel = new PanelPerfil(nUsuario);
 		panel.setBounds(0, 0, 616, 401);
 		contentPane.add(panel);
 		
+		//Este boton te lleva a la pagina de inicio
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(475, 359, 131, 31);
 		panel.add(btnVolver);
 		btnVolver.setFont(new Font("Arial", Font.PLAIN, 15));
 		
+		//ActionListener
 		btnVolver.addActionListener(this);
 		
 	}
-
+	/**
+	 * Aqui se dan funciones a los Botones
+	 */
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnVolver) {

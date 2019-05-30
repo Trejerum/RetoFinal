@@ -34,6 +34,7 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
+		//Separador del cuerpo y del pie de la ventana
 		menu_separator = new JSeparator();
 		menu_separator.setBounds(0, 380, 784, 2);
 		contentPane.add(menu_separator);
@@ -42,14 +43,19 @@ public class BusquedaAdmin extends JFrame implements ActionListener{
 		btnVolver.setBounds(10, 388, 89, 27);
 		contentPane.add(btnVolver);
 		
+		//Esto llama al panel que creamos para las dos ventanas, la de usuario convencional y administrador
 		PanelBusquedaLibro panel = new PanelBusquedaLibro(nUsuario);
 		panel.setBounds(0,0,785,450);
 		contentPane.add(panel);
 		
+		//ActionListener de la ventana
 		btnVolver.addActionListener(this);
 	}
 
 	@Override
+	/**
+	 * Aqui se dan funciones a los botones de la ventana
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnVolver) {
 			InicioAdmin inicio = new InicioAdmin(nUsuario);

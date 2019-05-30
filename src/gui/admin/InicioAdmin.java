@@ -11,7 +11,11 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.UIManager;
-
+/**
+ * Esta venta es la de inicio del administrador y desde ahi puede hacer todo, es como el pilar de la aplicacion porque te conecta con todas las ventanas
+ * @author EquipoB
+ *
+ */
 public class InicioAdmin extends JFrame implements ActionListener{
 
 	/**
@@ -35,6 +39,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 
 	/**
 	 * Create the frame.
+	 * @param usuario Sirve para mostrarlo por pantalla al usuario 
 	 */
 	public InicioAdmin(String usuario) {
 		nUsuario=usuario;
@@ -50,6 +55,7 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		lblSesionIniciada.setBounds(10, 13, 142, 14);
 		contentPane.add(lblSesionIniciada);
 		
+		//Esta ventana te lleva a editar tus datos del perfil
 		btnEditarInfo = new JButton("Editar Info.");
 		btnEditarInfo.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnEditarInfo.setBounds(228, 10, 109, 21);
@@ -60,50 +66,60 @@ public class InicioAdmin extends JFrame implements ActionListener{
 		lblLibros.setBounds(10, 74, 73, 14);
 		contentPane.add(lblLibros);
 		
+		//Este separador separa entre la cabezera y el cuerpo
 		separator = new JSeparator();
 		separator.setBounds(10, 99, 311, 2);
 		contentPane.add(separator);
 		
+		//Este boton te lleva a la ventana de bestSellers
 		btnBestSellers = new JButton("Best sellers");
 		btnBestSellers.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnBestSellers.setBounds(10, 112, 149, 23);
 		contentPane.add(btnBestSellers);
 		
+		//Este boton sirve para llevarte a la venta de modificar un libro
 		btnModificar = new JButton("Modificar");
 		btnModificar.setBackground(UIManager.getColor("Button.background"));
 		btnModificar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnModificar.setBounds(10, 156, 149, 23);
 		contentPane.add(btnModificar);
 		
+		//Este boton te lleva a la ventana de busqueda de libro
 		btnBuscar = new JButton("Buscar");
 		btnBuscar.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnBuscar.setBounds(220, 112, 153, 23);
 		contentPane.add(btnBuscar);
 		
+		//Este boton sirve para añadir un nuevo libro
 		btnAñadir = new JButton("A\u00F1adir");
 		btnAñadir.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnAñadir.setBounds(220, 156, 153, 23);
 		contentPane.add(btnAñadir);
 		
+		//Este boton sirve para cerrar sesion
 		btnCerrarSesion = new JButton("Cerrar Sesion");
 		btnCerrarSesion.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnCerrarSesion.setBounds(116, 299, 142, 46);
 		contentPane.add(btnCerrarSesion);
 		
+		//Aqui aparece quien ha iniciado sesion
 		lblAdmin = new JLabel(nUsuario);
 		lblAdmin.setBounds(156, 15, 55, 12);
 		contentPane.add(lblAdmin);
 		
+		//Este boton te lleva a la ventana de mantenimiento de autores
 		btnMantAutores = new JButton("Mantenimiento autores");
 		btnMantAutores.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnMantAutores.setBounds(92, 209, 196, 23);
 		contentPane.add(btnMantAutores);
 		
+		//Este boton te lleva a la ventana de mantenimiento de generos
 		btnMantGeneros = new JButton("Mantenimiento generos");
 		btnMantGeneros.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		btnMantGeneros.setBounds(92, 245, 196, 23);
 		contentPane.add(btnMantGeneros);
 		
+		//Action Listener para los botones
 		btnModificar.addActionListener(this);
 		btnBuscar.addActionListener(this);
 		btnAñadir.addActionListener(this);
@@ -116,6 +132,9 @@ public class InicioAdmin extends JFrame implements ActionListener{
 	}
 
 	@Override
+	/**
+	 * Aqui se dan funciones a los botones, que sirve para navegar entre diferentes ventanas
+	 */
 	public void actionPerformed(ActionEvent e) {			
 		if(e.getSource()==btnModificar) {
 			ListaLibros listaLibros = new ListaLibros(nUsuario);

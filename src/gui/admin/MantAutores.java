@@ -21,7 +21,11 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import javax.swing.ListSelectionModel;
-
+/**
+ * Esta ventana sirve para hacer un mantenimiento de los autores 
+ * @author EquipoB
+ *
+ */
 public class MantAutores extends JFrame implements ActionListener{
 
 	/**
@@ -82,6 +86,9 @@ public class MantAutores extends JFrame implements ActionListener{
 		contentPane.add(tfAñadir);
 		tfAñadir.setColumns(10);
 		
+		/**
+		 * Este boton sirve para añador el genero
+		 */
 		btnAadir = new JButton("A\u00F1adir");
 		btnAadir.setBounds(27, 150, 89, 23);
 		contentPane.add(btnAadir);
@@ -95,16 +102,19 @@ public class MantAutores extends JFrame implements ActionListener{
 		contentPane.add(tfEliminar);
 		tfEliminar.setColumns(10);
 		
+		//Boton para volver a la pagina de inicio
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(428, 308, 89, 23);
 		contentPane.add(btnVolver);
 		
+		//Boton para pasar al textField de eliminar lo seleccionado en la lista
 		btnCargar = new JButton(">>>");
 		btnCargar.setBounds(359, 118, 69, 23);
 		contentPane.add(btnCargar);
 		
 		cargarAutores();
 		
+		//Action Listener de los botones
 		btnAadir.addActionListener(this);
 		btnEliminar.addActionListener(this);
 		btnVolver.addActionListener(this);
@@ -112,6 +122,9 @@ public class MantAutores extends JFrame implements ActionListener{
 	}
 	
 	@Override
+	/**
+	 * Aqui se dan funciones a los botones
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnAadir) {
 			añadirAutor();
@@ -129,7 +142,9 @@ public class MantAutores extends JFrame implements ActionListener{
 		}
 		
 	}
-	
+	/**
+	 * Con esta funcion se cargan todos los autores de la base de datos
+	 */
 	public void cargarAutores() {
 		try {
 			Logic logic = LogicFactory.getLogic();
@@ -144,7 +159,10 @@ public class MantAutores extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+	 /**
+	  * Esta Funcion comprueba primero si el textfield esta llena, despues comprueba si lo introducido en el textfield
+	  * no esta en la tabla de actores y si todo esta correcto lo inserta en la tabla
+	  */
 	private void añadirAutor() {
 		String message;
 		try{
@@ -180,7 +198,9 @@ public class MantAutores extends JFrame implements ActionListener{
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Esta funcion sirve para eliminar un autor de la bsae de datos
+	 */
 	private void eliminarAutor() {
 		String message;
 		try {

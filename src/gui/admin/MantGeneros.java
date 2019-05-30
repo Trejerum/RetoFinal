@@ -21,7 +21,11 @@ import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
-
+/**
+ * Esta ventana sirve para hacer un mantenimietno de los generos
+ * @author EquipoB
+ *
+ */
 public class MantGeneros extends JFrame implements ActionListener{
 
 	/**
@@ -68,6 +72,7 @@ public class MantGeneros extends JFrame implements ActionListener{
 		scrollPane.setBounds(172, 41, 183, 264);
 		contentPane.add(scrollPane);
 		
+		// Aqui aparece los generos de la base de datos
 		listaGeneros = new JList<String>();
 		scrollPane.setViewportView(listaGeneros);
 		
@@ -81,10 +86,12 @@ public class MantGeneros extends JFrame implements ActionListener{
 		contentPane.add(tfAñadir);
 		tfAñadir.setColumns(10);
 		
+		//Boton para añadir genero
 		btnAadir = new JButton("A\u00F1adir");
 		btnAadir.setBounds(27, 150, 89, 23);
 		contentPane.add(btnAadir);
 		
+		//Boton para eliminar generos de la lista
 		btnEliminar = new JButton("Eliminar");
 		btnEliminar.setBounds(469, 150, 89, 23);
 		contentPane.add(btnEliminar);
@@ -94,6 +101,7 @@ public class MantGeneros extends JFrame implements ActionListener{
 		contentPane.add(tfEliminar);
 		tfEliminar.setColumns(10);
 		
+		//Boton para volver a la pagina de inicio
 		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(428, 308, 89, 23);
 		contentPane.add(btnVolver);
@@ -128,7 +136,9 @@ public class MantGeneros extends JFrame implements ActionListener{
 		}
 		
 	}
-	
+	/**
+	 * Con esta funcion se cargan todos los generos de la base de datos
+	 */
 	public void cargarGeneros() {
 		try {
 			Logic logic = LogicFactory.getLogic();
@@ -143,7 +153,10 @@ public class MantGeneros extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+	/**
+	  * Esta Funcion comprueba primero si el textfield esta lleno, despues comprueba si lo introducido en el textfield
+	  * no esta en la tabla de generos y si todo esta correcto lo inserta en la tabla
+	  */
 	private void añadirGenero() {
 		String message;
 		try{
@@ -178,7 +191,9 @@ public class MantGeneros extends JFrame implements ActionListener{
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Esta funcion sirve para eliminar un genero de la bsae de datos
+	 */
 	private void eliminarGenero() {
 		String message;
 		try {

@@ -18,7 +18,11 @@ import javax.swing.table.DefaultTableModel;
 import control.Logic;
 import control.LogicFactory;
 import model.Libro;
-
+/**
+ * Esta ventana te muestra la lista de los libros
+ * @author EquipoB
+ *
+ */
 public class ListaLibros extends JFrame implements ActionListener{
 
 	/**
@@ -34,8 +38,10 @@ public class ListaLibros extends JFrame implements ActionListener{
 	private String nUsuario;
 
 
+	
 	/**
 	 * Create the frame.
+	 * @param usuario 
 	 */
 	public ListaLibros(String usuario) {
 		setResizable(false);
@@ -74,13 +80,17 @@ public class ListaLibros extends JFrame implements ActionListener{
 		btnVolver.setBounds(334, 263, 90, 25);
 		contentPane.add(btnVolver);
 		
-		buscar();
+		cargarLibros();
 		
+		//ActionListener
 		btnModificar.addActionListener(this);
 		btnVolver.addActionListener(this);
 	}
 
 	@Override
+	/**
+	 * Aqui se dan funciones a los botones
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnModificar) {
 			String isbn = getIsbn();
@@ -95,7 +105,10 @@ public class ListaLibros extends JFrame implements ActionListener{
 		
 	}
 	
-	public void buscar() {
+	/**
+	 * Esta funcion te lleva a la base datos y te carga los libros en la tabla
+	 */
+	public void cargarLibros() {
 		try {
 			Logic logic = LogicFactory.getLogic();
 			ArrayList<Libro> libros= new ArrayList<Libro>();
@@ -122,6 +135,10 @@ public class ListaLibros extends JFrame implements ActionListener{
 		}
 	}
 	
+	/**
+	 * Ets funcion sirve para sacar el ISBN del libro seleccionado en la tabla
+	 * @return isbn
+	 */
 	public String getIsbn() {
 		int columna=0;
 		int fila = tablaLibros.getSelectedRow();
