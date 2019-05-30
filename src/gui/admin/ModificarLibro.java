@@ -7,9 +7,9 @@ import control.LogicFactory;
 import model.Autor;
 import model.Genero;
 import model.Libro;
-
 import javax.swing.JSeparator;
 import java.awt.Color;
+
 
 
 import javax.swing.AbstractButton;
@@ -29,6 +29,7 @@ import java.util.Enumeration;
 
 
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.UIManager;
 import javax.swing.JTextArea;
 import javax.swing.JComboBox;
@@ -39,9 +40,6 @@ import javax.swing.JRadioButton;
 
 public class ModificarLibro extends JFrame implements ActionListener{
 
-	/**
-	 * TODO Comprobar si el autor esta ya en la lista
-	 */
 	private static final long serialVersionUID = -146475275276116997L;
 	private JPanel contentPane;
 	private JTextField tfIsbn;
@@ -89,6 +87,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 	private JRadioButton rdbtnSi;
 	private JRadioButton rdbtnNo;
 	private ButtonGroup rdbtnGrp;
+	private JTextField tfNumVentas;
 	
 
 
@@ -217,7 +216,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		
 		lblGenero = new JLabel("*G\u00E9nero:");
 		lblGenero.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblGenero.setBounds(74, 485, 68, 20);
+		lblGenero.setBounds(81, 497, 68, 20);
 		contentPane.add(lblGenero);
 		
 		lblDescripcion = new JLabel("Descripci\u00F3n:");
@@ -243,7 +242,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		
 		cbGenero = new JComboBox<String>();
 		cbGenero.setEnabled(false);
-		cbGenero.setBounds(380, 485, 120, 20);
+		cbGenero.setBounds(380, 499, 120, 20);
 		contentPane.add(cbGenero);
 		cbGenero.setSelectedIndex(-1);
 		
@@ -258,13 +257,13 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		
 		tfGenero = new JTextField();
 		tfGenero.setEditable(false);
-		tfGenero.setBounds(162, 485, 145, 20);
+		tfGenero.setBounds(162, 499, 145, 20);
 		contentPane.add(tfGenero);
 		tfGenero.setColumns(10);
 		
 		lblNuevoGenero = new JLabel("NUEVO GENERO");
 		lblNuevoGenero.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblNuevoGenero.setBounds(420, 394, 123, 14);
+		lblNuevoGenero.setBounds(414, 402, 123, 14);
 		contentPane.add(lblNuevoGenero);
 		
 		lblNuevoAutor = new JLabel("NUEVO AUTOR");
@@ -273,17 +272,17 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		contentPane.add(lblNuevoAutor);
 		
 		lblNombre_1 = new JLabel("Nombre");
-		lblNombre_1.setBounds(380, 420, 46, 14);
+		lblNombre_1.setBounds(380, 434, 46, 14);
 		contentPane.add(lblNombre_1);
 		
 		tfNombreGenero = new JTextField();
-		tfNombreGenero.setBounds(380, 437, 120, 20);
+		tfNombreGenero.setBounds(380, 454, 120, 20);
 		contentPane.add(tfNombreGenero);
 		tfNombreGenero.setColumns(10);
 		
 		btnMasGeneros = new JButton("+");
 		btnMasGeneros.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		btnMasGeneros.setBounds(510, 437, 50, 20);
+		btnMasGeneros.setBounds(510, 454, 50, 20);
 		contentPane.add(btnMasGeneros);
 		
 		cbAutor = new JComboBox<String>();
@@ -294,7 +293,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		
 		btnPasarGenero = new JButton("<<<");
 		btnPasarGenero.setEnabled(false);
-		btnPasarGenero.setBounds(314, 485, 61, 20);
+		btnPasarGenero.setBounds(314, 499, 61, 20);
 		contentPane.add(btnPasarGenero);
 		
 		btnPasarAutor = new JButton("<<<");
@@ -326,11 +325,11 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		contentPane.add(lblAdirAutor);
 		
 		JLabel lblAadirGenero = new JLabel("A\u00F1adir genero");
-		lblAadirGenero.setBounds(572, 440, 86, 14);
+		lblAadirGenero.setBounds(575, 457, 86, 14);
 		contentPane.add(lblAadirGenero);
 		
 		JLabel lblSeleccionarGenero = new JLabel("Seleccionar genero: ");
-		lblSeleccionarGenero.setBounds(380, 468, 120, 14);
+		lblSeleccionarGenero.setBounds(380, 485, 120, 14);
 		contentPane.add(lblSeleccionarGenero);
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
@@ -370,6 +369,17 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		rdbtnSi.setEnabled(false);
 		rdbtnNo.setEnabled(false);
 		
+		JLabel lblnumventas = new JLabel("*NumVentas: ");
+		lblnumventas.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblnumventas.setBounds(63, 472, 104, 14);
+		contentPane.add(lblnumventas);
+		
+		tfNumVentas = new JTextField();
+		tfNumVentas.setEditable(false);
+		tfNumVentas.setBounds(162, 468, 86, 20);
+		contentPane.add(tfNumVentas);
+		tfNumVentas.setColumns(10);
+		
 		btnVolver.addActionListener(this);
 		btnModificarLibro.addActionListener(this);
 		btnMasAutores.addActionListener(this);
@@ -377,6 +387,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		btnMasGeneros.addActionListener(this);
 		btnPasarAutor.addActionListener(this);
 		btnEliminarAutor.addActionListener(this);
+		btnPasarGenero.addActionListener(this);
 		
 		cargarDatos(isbn);
 	}
@@ -399,6 +410,8 @@ public class ModificarLibro extends JFrame implements ActionListener{
 			pasarAutor();
 		}else if(e.getSource() == btnEliminarAutor) {
 			eliminarAutor();
+		}else if(e.getSource()==btnPasarGenero) {
+			pasarGenero();
 		}
 		
 	}
@@ -441,15 +454,14 @@ public class ModificarLibro extends JFrame implements ActionListener{
 			if(tfNombreGenero.getText().length() == 0) {
 				message="El campo genero debe estar lleno";
 				JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-				
 			}else {
 				Genero genero = new Genero();
 				genero.setNomGenero(tfNombreGenero.getText());
 				if(genero.getNomGenero().length()<4) {
-					genero.setCodGenero(genero.getNomGenero().substring(0, genero.getNomGenero().length()));
+					genero.setCodGenero(genero.getNomGenero().substring(0, genero.getNomGenero().length()).toUpperCase());
 				}
 				else {
-					genero.setCodGenero(genero.getNomGenero().substring(0, 3));
+					genero.setCodGenero(genero.getNomGenero().substring(0, 3).toUpperCase());
 				}
 				Logic logic = LogicFactory.getLogic();
 				if(!logic.existeGenero(genero.getCodGenero())) {
@@ -481,7 +493,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 				Autor autor = new Autor(); 
 				autor.setNomAutor(tfNombreAutor.getText());
 				if(autor.getNomAutor().length()<4) {
-					autor.setCodAutor(autor.getNomAutor().substring(0, autor.getNomAutor().length()));
+					autor.setCodAutor(autor.getNomAutor().substring(0, autor.getNomAutor().length()).toUpperCase());
 				}
 				else {
 					autor.setCodAutor(autor.getNomAutor().substring(0, 3).toUpperCase());
@@ -520,6 +532,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 			libro.setDescripcion(taDescripcion.getText());
 			libro.setFechaPublicacion(LocalDate.parse(tfFechaPubli.getText(), formatter));
 			libro.setGenero(tfGenero.getText());
+			libro.setPrecio(Double.parseDouble(tfPrecio.getText()));
 			libro.setStock(Integer.parseInt(tfStock.getText()));
 			libro.setDescuento(Double.parseDouble(tfDescuento.getText()));
 			Enumeration<AbstractButton> botones = rdbtnGrp.getElements();
@@ -529,14 +542,18 @@ public class ModificarLibro extends JFrame implements ActionListener{
 					libro.setOferta(Boolean.parseBoolean(b.getText()));
 				}
 			}
+			libro.setNumVentas(Integer.parseInt(tfNumVentas.getText()));
 			ArrayList<Autor> autores = new ArrayList<Autor>();
-			for(String autor: listaAutores.getSelectedValuesList()) {
-				Autor autor1 = logic.cargarAutor(autor);
-				autores.add(autor1);
+			
+			ListModel<String> modelo = listaAutores.getModel();
+			for (int i = 0; i < modelo.getSize() ; i++) {
+				Autor autor = logic.cargarAutor(modelo.getElementAt(i).substring(1));
+				autores.add(autor);
 			}
-			logic.insertarLibro(libro, autores);
-			
-			
+			logic.guardarDatosLibro(libro, autores);
+			message="Modificacion realizada correctamente";
+			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+
 		}catch(Exception e) {
 			message="Error. No se ha podido realizar el guardado";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
@@ -544,10 +561,10 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		}
 		
 		btnGuardar.setEnabled(false);
-		tfIsbn.setEditable(false);
 		tfTitulo.setEditable(false);
 		tfPrecio.setEditable(false);
 		tfEditorial.setEditable(false);
+		tfNumVentas.setEditable(false);
 		tfFechaPubli.setEditable(false);
 		tfStock.setEditable(false);
 		tfDescuento.setEditable(false);
@@ -561,51 +578,6 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		btnPasarGenero.setEnabled(false);
 		btnEliminarAutor.setEnabled(false);
 		
-		/*String message;
-		try {
-			Logic logic = LogicFactory.getLogic();
-			Usuario usuario = new Usuario();
-			usuario.setNombre(tfNombre.getText());
-			usuario.setApellidos(tfApellidos.getText());
-			usuario.setDireccion(tfDireccion.getText());
-			usuario.setEmail(tfEmail.getText());
-			usuario.setTelefono(Integer.parseInt(tfTelefono.getText()));
-			usuario.setContraseña(tfContraseña.getText());
-			usuario.setNombreUsuario(tfUsuario.getText());
-			if(!esAdmin) {
-				usuario.setNumCuenta(Integer.parseInt(tfNumCuenta.getText()));
-			}
-			else {
-				usuario.setEsAdmin(true);
-			}
-			logic.guardarCambios(usuario);
-			message="Modificacion realizada correctamente";
-			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
-			nUsuario=usuario.getNombreUsuario();
-			tfNombre.setEditable(false);
-			tfApellidos.setEditable(false);
-			tfDireccion.setEditable(false);
-			tfEmail.setEditable(false);
-			tfTelefono.setEditable(false);
-			tfUsuario.setEditable(false);
-			tfNumCuenta.setEditable(false);
-			tfContraseña.setEditable(false);
-			tfNombre.setForeground(new Color(0, 0, 0));
-			tfApellidos.setForeground(new Color(0, 0, 0));
-			tfDireccion.setForeground(new Color(0, 0, 0));
-			tfEmail.setForeground(new Color(0, 0, 0));
-			tfTelefono.setForeground(new Color(0, 0, 0));
-			tfUsuario.setForeground(new Color(0, 0, 0));
-			tfContraseña.setForeground(new Color(0, 0, 0));
-			tfNumCuenta.setForeground(new Color(0, 0 , 0));
-			btnGuardar.setEnabled(false);
-			
-		}catch(Exception e) {
-			message="Error. No se ha podido realizar el guardado";
-			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
-			e.printStackTrace();
-		}*/
-		
 	}
 
 	private void modificarLibro() {
@@ -617,6 +589,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 		tfDescuento.setEditable(true);
 		taDescripcion.setEditable(true);
 		tfNombreAutor.setEditable(true);
+		tfNumVentas.setEditable(true);
 		rdbtnNo.setEnabled(true);
 		rdbtnSi.setEnabled(true);
 		cbAutor.setEnabled(true);
@@ -656,6 +629,7 @@ public class ModificarLibro extends JFrame implements ActionListener{
 			tfFechaPubli.setText(libro.getFechaPublicacion().format(formatter));
 			tfStock.setText(String.valueOf(libro.getStock()));
 			tfEditorial.setText(libro.getEditorial());
+			tfNumVentas.setText(String.valueOf(libro.getNumVentas()));
 			ArrayList<String> autores = logic.cargarAutores();
 			ArrayList<String> generos = logic.cargarGeneros();
 			for (String string : generos) {

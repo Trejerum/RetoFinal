@@ -40,7 +40,7 @@ public class PerfilUser extends JFrame implements ActionListener{
 		nUsuario=usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 626, 506);
+		setBounds(100, 100, 624, 506);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(0, 153, 51));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

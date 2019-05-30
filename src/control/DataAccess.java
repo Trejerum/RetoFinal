@@ -69,5 +69,9 @@ public interface DataAccess {
 	public Autor cargarAutor(String dAutor) throws SQLException, ClassNotFoundException, IOException;
 
 	public void guardarDatosLibro(Libro libro) throws SQLException, ClassNotFoundException, IOException;
+
+	public void borrarAutor(String nAutor) throws SQLException, ClassNotFoundException, IOException;
+
+	public void borrarGenero(String nGenero) throws SQLException, ClassNotFoundException, IOException;
 	
 }

@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.mysql.cj.jdbc.CallableStatement;
+
 import model.Autor;
 import model.Compra;
 import model.Genero;
@@ -23,6 +25,7 @@ public class DataAccessImpl implements DataAccess{
 
 	private Connection con;
 	private PreparedStatement stmt;
+	private CallableStatement cStmt;
 	private String dbHost;
 	private String dbName;
 	private String dbUser;
@@ -397,6 +400,9 @@ public class DataAccessImpl implements DataAccess{
 				usuario.setEmail(result.getString("Email"));
 				usuario.setContraseña(result.getString("Contraseña"));
 				usuario.setNombreUsuario(result.getString("nombreUsuario"));
+				if(!esAdmin) {
+					usuario.setNumCuenta(result.getInt("NumCuenta"));
+				}
 			}
 		}finally {
 			this.disconnect();
@@ -626,16 +632,45 @@ public class DataAccessImpl implements DataAccess{
 	public void guardarDatosLibro(Libro libro) throws SQLException, ClassNotFoundException, IOException {
 		try {
 			this.connect();
-			String sql="update libros set isbn=?, titulo=?, descripcion=?, "
-					+ "fechadepublicacion=?, editorial=?, genero=?, precio=?, oferta=?, descuento=?, stock=?, numVentas=?";
+			String sql="update libros set titulo=?, descripcion=?, "
+					+ "fechadepublicacion=?, editorial=?, genero=?, precio=?, oferta=?, descuento=?, stock=?, numVentas=? where isbn=?";
 			stmt = con.prepareStatement(sql);
-			stmt.setString(1, libro.getIsbn());
-			stmt.setString(2, libro.getTitulo());
-			stmt.setString(3, libro.getDescripcion());
-			stmt.setDate(4, convertirLocalDateADate(libro.getFechaPublicacion()));
-			stmt.setString(5, libro.getEditorial());
-			stmt.setString(6, libro.getGenero());
-			stmt.setDouble(7, libro.getPrecio());
+			stmt.setString(1, libro.getTitulo());
+			stmt.setString(2, libro.getDescripcion());
+			stmt.setDate(3, convertirLocalDateADate(libro.getFechaPublicacion()));
+			stmt.setString(4, libro.getEditorial());
+			stmt.setString(5, libro.getGenero());
+			stmt.setDouble(6, libro.getPrecio());
+			stmt.setBoolean(7, libro.isOferta());
+			stmt.setDouble(8, libro.getDescuento());
+			stmt.setInt(9, libro.getStock());
+			stmt.setInt(10, libro.getNumVentas());
+			stmt.setString(11, libro.getIsbn());
+			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+
+	public void borrarAutor(String nAutor) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			cStmt = (CallableStatement)con.prepareCall("{call borrarAutor(?)}");
+			cStmt.setString(1, nAutor);
+			cStmt.execute();
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+
+	public void borrarGenero(String nGenero) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			cStmt = (CallableStatement) con.prepareCall("{call borrarGenero(?)}");
+			cStmt.setString(1, nGenero);
+			cStmt.execute();
 		}finally {
 			this.disconnect();
 		}
