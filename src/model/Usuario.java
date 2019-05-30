@@ -2,13 +2,13 @@ package model;
 
 /**
  * La clase usuarios va a registrar todos los usuarios de la librería.
+ * 
  * @author grupoB
  *
  */
 
 public class Usuario {
-	
-	
+
 	protected String nombreUsuario;
 	protected String nombre;
 	protected String apellidos;
@@ -18,19 +18,20 @@ public class Usuario {
 	protected int numCuenta;
 	protected boolean esAdmin = false;
 	protected String contraseña;
-	
+
 	/**
 	 * 
 	 * @param nombreUsuario : Sirve para diferenciar a cada usuario y es único.
-	 * @param nombre : Para saber el nombre de la persona.
-	 * @param apellidos : Para saber el apellido de la persona.
-	 * @param direccion : Sirve para poder enviarle el libro a su direccion, despues de realizar la compra.
-	 * @param telefono : Para poder contactar con el usuario.
-	 * @param email : Para enviarle ofertas de sus libros favoritos.
-	 * @param esAdmin : Para saber si es un usuario administrador o no.
-	 * @param contraseña : Sirve para iniciar sesion con su nombre de usuario.
+	 * @param nombre        : Para saber el nombre de la persona.
+	 * @param apellidos     : Para saber el apellido de la persona.
+	 * @param direccion     : Sirve para poder enviarle el libro a su direccion,
+	 *                      despues de realizar la compra.
+	 * @param telefono      : Para poder contactar con el usuario.
+	 * @param email         : Para enviarle ofertas de sus libros favoritos.
+	 * @param esAdmin       : Para saber si es un usuario administrador o no.
+	 * @param contraseña    : Sirve para iniciar sesion con su nombre de usuario.
 	 */
-	//Constructors
+	// Constructors
 	public Usuario(String nombreUsuario, String nombre, String apellidos, String direccion, int telefono, String email,
 			boolean esAdmin, String contraseña) {
 		super();
@@ -43,72 +44,87 @@ public class Usuario {
 		this.esAdmin = esAdmin;
 		this.contraseña = contraseña;
 	}
+
 	public Usuario() {
 		super();
 	}
-	
+
 	/**
-	 * Getters and setters
-	 * Los siguientes métodos get and set se usan para acceder y usar un atributo o también para establecerlo/modificarlo.
+	 * Getters and setters Los siguientes métodos get and set se usan para acceder y
+	 * usar un atributo o también para establecerlo/modificarlo.
+	 * 
 	 * @return
 	 */
 	public String getNombreUsuario() {
 		return nombreUsuario;
 	}
+
 	public void setNombreUsuario(String nombreUsuario) {
 		this.nombreUsuario = nombreUsuario;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public String getApellidos() {
 		return apellidos;
 	}
+
 	public void setApellidos(String apellidos) {
 		this.apellidos = apellidos;
 	}
+
 	public String getDireccion() {
 		return direccion;
 	}
+
 	public void setDireccion(String direccion) {
 		this.direccion = direccion;
 	}
+
 	public int getTelefono() {
 		return telefono;
 	}
+
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
 	public boolean isEsAdmin() {
 		return esAdmin;
 	}
+
 	public void setEsAdmin(boolean esAdmin) {
 		this.esAdmin = esAdmin;
 	}
+
 	public String getContraseña() {
 		return contraseña;
 	}
+
 	public void setContraseña(String contraseña) {
 		this.contraseña = contraseña;
 	}
+
 	public int getNumCuenta() {
 		return numCuenta;
 	}
+
 	public void setNumCuenta(int numCuenta) {
 		this.numCuenta = numCuenta;
 	}
-	
-	
-	
-	
-	
+
 }

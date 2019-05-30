@@ -1,4 +1,5 @@
 package gui.user;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -13,12 +14,14 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+
 /**
  * Esta ventana sirve para ver los bestSellers de la libreria
+ * 
  * @author EquipoB
  *
  */
-public class BestSellersUser extends JFrame implements ActionListener{
+public class BestSellersUser extends JFrame implements ActionListener {
 
 	/**
 	 * 
@@ -32,16 +35,14 @@ public class BestSellersUser extends JFrame implements ActionListener{
 	private JButton btnCompras;
 	private JButton btnBuscar;
 	private String nUsuario;
-		
+
 	/**
-	 * Aquí se definen los botones del menú.
-	 * Se introducen los valores de tamaño
-	 * El color de fondo
-	 * Se declara el ActionPerformed 
-	 * Se indica una imagen que hace de icono.
+	 * Aquí se definen los botones del menú. Se introducen los valores de tamaño El
+	 * color de fondo Se declara el ActionPerformed Se indica una imagen que hace de
+	 * icono.
 	 */
 	public BestSellersUser(String usuario) {
-		nUsuario=usuario;
+		nUsuario = usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 791, 540);
@@ -49,11 +50,11 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		contentPane.setBorder(new EmptyBorder(0, 0, 0, 0));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
+
 		menu_separator = new JSeparator();
 		menu_separator.setBounds(0, 451, 784, 2);
 		contentPane.add(menu_separator);
-		
+
 		// Botón HOME
 		btnHome = new JButton("");
 		Image house = new ImageIcon(this.getClass().getResource("/home2.png")).getImage();
@@ -64,54 +65,52 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		btnHome.setBackground(SystemColor.activeCaption);
 		btnHome.setBounds(0, 451, 156, 61);
 		contentPane.add(btnHome);
-		
-		
+
 		// Botón BestSellers
 		btnBestSellers = new JButton("");
 		Image estrella = new ImageIcon(this.getClass().getResource("/favorites.png")).getImage();
 		Image newestrella = estrella.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnBestSellers.setIcon(new ImageIcon(newestrella));
-		
+
 		btnBestSellers.setBackground(new Color(176, 196, 222));
 		btnBestSellers.setBounds(154, 451, 157, 61);
 		contentPane.add(btnBestSellers);
-		
-		
+
 		// Botón Usuario
 		btnUsuario = new JButton("");
 		Image monigote = new ImageIcon(this.getClass().getResource("/users.png")).getImage();
 		Image newmonigote = monigote.getScaledInstance(36, 36, java.awt.Image.SCALE_SMOOTH);
 		btnUsuario.setIcon(new ImageIcon(newmonigote));
-		
+
 		btnUsuario.setBackground(SystemColor.activeCaption);
 		btnUsuario.setBounds(617, 451, 167, 61);
 		contentPane.add(btnUsuario);
-		
+
 		// Botón Compras
 		btnCompras = new JButton("");
 		Image carrito = new ImageIcon(this.getClass().getResource("/shopping-cart.png")).getImage();
 		Image newcarrito = carrito.getScaledInstance(30, 30, java.awt.Image.SCALE_SMOOTH);
 		btnCompras.setIcon(new ImageIcon(newcarrito));
-		
+
 		btnCompras.setBackground(SystemColor.activeCaption);
 		btnCompras.setBounds(463, 451, 156, 61);
 		contentPane.add(btnCompras);
-		
+
 		// Botón Buscar
 		btnBuscar = new JButton("");
 		Image lupa = new ImageIcon(this.getClass().getResource("/loupe2.png")).getImage();
 		Image newlupa = lupa.getScaledInstance(29, 29, java.awt.Image.SCALE_SMOOTH);
 		btnBuscar.setIcon(new ImageIcon(newlupa));
-		
+
 		btnBuscar.setBackground(SystemColor.activeCaption);
 		btnBuscar.setBounds(309, 451, 156, 61);
 		contentPane.add(btnBuscar);
-		
+
 		PanelBestSellers panel = new PanelBestSellers();
 		panel.setBackground(new Color(176, 196, 222));
 		panel.setBounds(0, 0, 791, 512);
 		contentPane.add(panel);
-		
+
 		btnBestSellers.addActionListener(this);
 		btnBuscar.addActionListener(this);
 		btnCompras.addActionListener(this);
@@ -121,31 +120,27 @@ public class BestSellersUser extends JFrame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==btnHome) {
+		if (e.getSource() == btnHome) {
 			InicioUser inicio = new InicioUser(nUsuario);
 			inicio.setVisible(true);
 			this.dispose();
-		}
-		else if(e.getSource()==btnBuscar){
+		} else if (e.getSource() == btnBuscar) {
 			BusquedaUser busqueda = new BusquedaUser(nUsuario);
 			busqueda.setVisible(true);
 			this.dispose();
-		}
-		else if(e.getSource()==btnCompras) {
+		} else if (e.getSource() == btnCompras) {
 			ComprasRealizadas compras = new ComprasRealizadas(nUsuario);
 			compras.setVisible(true);
 			this.dispose();
-		}
-		else if(e.getSource()==btnUsuario){
+		} else if (e.getSource() == btnUsuario) {
 			PerfilUser perfil = new PerfilUser(nUsuario);
 			perfil.setVisible(true);
 			this.dispose();
-		}
-		else {
+		} else {
 			BestSellersUser best = new BestSellersUser(nUsuario);
 			best.setVisible(true);
 			this.dispose();
 		}
-		
+
 	}
 }

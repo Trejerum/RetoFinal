@@ -1,4 +1,5 @@
 package gui.admin;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -14,12 +15,14 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.UIManager;
+
 /**
  * Esta ventana sirve para visualizar los bestSellers
+ * 
  * @author EquipoB
  *
  */
-public class BestSellersAdmin extends JFrame implements ActionListener{
+public class BestSellersAdmin extends JFrame implements ActionListener {
 
 	/**
 	 * 
@@ -45,39 +48,42 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		//Separador entre la cabezera y el cuerpo
+		setResizable(false);
+
+		// Separador entre la cabezera y el cuerpo
 		menu_separator = new JSeparator();
 		menu_separator.setBounds(0, 420, 784, 2);
 		contentPane.add(menu_separator);
-		
-		//Boton para volver a la ventana de inicio
+
+		// Boton para volver a la ventana de inicio
 		btnVolver = new JButton("Volver");
 		btnVolver.setFont(new Font("Arial", Font.PLAIN, 15));
 		btnVolver.setBounds(65, 439, 167, 31);
 		contentPane.add(btnVolver);
-		
-		//Aqui se visualiza quien ha iniciado sesion en la aplicacion
+
+		// Aqui se visualiza quien ha iniciado sesion en la aplicacion
 		lblSesionIniciada = new JLabel("Sesi\u00F3n iniciada como: ");
 		lblSesionIniciada.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblSesionIniciada.setBounds(26, 11, 134, 14);
 		contentPane.add(lblSesionIniciada);
-		
-		//Aqui se visuliza el nombre del administrador conectado
+
+		// Aqui se visuliza el nombre del administrador conectado
 		lblnameAdmin = new JLabel("");
 		lblnameAdmin.setBounds(170, 11, 87, 16);
 		contentPane.add(lblnameAdmin);
-		
-		//Este llama al panel qeu creamos para las dos vetanas, para el admin y el usuario convencional
+
+		// Este llama al panel qeu creamos para las dos vetanas, para el admin y el
+		// usuario convencional
 		panel = new PanelBestSellers();
 		panel.setBounds(0, 0, 784, 488);
 		contentPane.add(panel);
-		
-		//Action Listener de la ventana
+
+		// Action Listener de la ventana
 		btnVolver.addActionListener(this);
-		
+
 		cargarDatos();
 	}
+
 	/**
 	 * Esta funcion carga los datos de la base de datos en la tabla
 	 */
@@ -89,11 +95,11 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 			usuario = logic.cargarUsuario(nUsuario, logic.esAdmin(nUsuario));
 			lblnameAdmin.setText(usuario.getNombre());
 		} catch (Exception e) {
-			message="Error. No se pudo cargar el usuario";
+			message = "Error. No se pudo cargar el usuario";
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
-		
+
 	}
 
 	@Override
@@ -101,11 +107,11 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 	 * Aqui se dan funciones a los botones
 	 */
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource()==btnVolver) {
+		if (e.getSource() == btnVolver) {
 			InicioAdmin inicio = new InicioAdmin(nUsuario);
 			inicio.setVisible(true);
 			this.dispose();
 		}
-		
+
 	}
 }

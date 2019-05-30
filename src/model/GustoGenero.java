@@ -1,18 +1,21 @@
 package model;
 
 /**
- * La clase GustoGenero almacena los géneros y los usuarios a los que les gustan esos géneros.
+ * La clase GustoGenero almacena los géneros y los usuarios a los que les gustan
+ * esos géneros.
+ * 
  * @author 1dam
  *
  */
 public class GustoGenero {
-	
+
 	private String codGenero;
 	private String nombreUsuario;
-	
+
 	/**
 	 * 
-	 * @param codGenero : El código de género es el idetificador de cada género y es único.
+	 * @param codGenero     : El código de género es el idetificador de cada género
+	 *                      y es único.
 	 * @param nombreUsuario : Sirve para diferenciar a cada usuario y es único.
 	 */
 	// Constructores
@@ -25,9 +28,11 @@ public class GustoGenero {
 	public GustoGenero() {
 		super();
 	}
-	
+
 	/**
-	 * Los siguientes métodos get and set se usan para acceder y usar un atributo o también para establecerlo/modificarlo.
+	 * Los siguientes métodos get and set se usan para acceder y usar un atributo o
+	 * también para establecerlo/modificarlo.
+	 * 
 	 * @return
 	 */
 	// Getters y Setters
