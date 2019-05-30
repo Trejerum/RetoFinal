@@ -13,7 +13,11 @@ import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.SystemColor;
-
+/**
+ * Esta ventana da la bienvenida al usuario y da una breve expliacion de lo que la aplicacion sirve
+ * @author EquipoB
+ *
+ */
 public class InicioUser extends JFrame implements ActionListener{
 
 	
@@ -78,10 +82,7 @@ public class InicioUser extends JFrame implements ActionListener{
 	 
 	}
 	
-	/**
-	 * Aquí de sefinen los botones del menú.
-	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
-	 */
+	
 	public InicioUser(String usuario) {
 		nUsuario=usuario;
 		setResizable(false);
@@ -108,10 +109,6 @@ public class InicioUser extends JFrame implements ActionListener{
 		
 		btnHome.setForeground(new Color(0, 0, 0));
 		btnHome.setBackground(new Color(176, 196, 222));
-		btnHome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnHome.setBounds(0, 378, 157, 61);
 		contentPane.add(btnHome);
 		
@@ -142,10 +139,6 @@ public class InicioUser extends JFrame implements ActionListener{
 		btnCompras.setIcon(new ImageIcon(newcarrito));
 		
 		btnCompras.setBackground(SystemColor.activeCaption);
-		btnCompras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnCompras.setBounds(463, 378, 156, 61);
 		contentPane.add(btnCompras);
 		

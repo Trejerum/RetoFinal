@@ -21,7 +21,10 @@ import control.Logic;
 import control.LogicFactory;
 import gui.all.JPanelBackground;
 import model.Compra;
-
+/**
+ * Esta ventana sirve para que el usuario puede visualizar los libros que ha comprado
+ * @author EquipoB
+ */
 public class ComprasRealizadas extends JFrame implements ActionListener{
 
 	/**
@@ -44,8 +47,11 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	
 	
 	/**
-	 *	Aquí se definen los botones del menú.
-	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
+	 * Aquí se definen los botones del menú.
+	 * Se introducen los valores de tamaño
+	 * El color de fondo
+	 * Se declara el ActionPerformed 
+	 * Se indica una imagen que hace de icono.
 	 */
 	@SuppressWarnings("serial")
 	public ComprasRealizadas(String usuario) {
@@ -71,10 +77,6 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		
 		btnHome.setForeground(new Color(0, 0, 0));
 		btnHome.setBackground(SystemColor.activeCaption);
-		btnHome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnHome.setBounds(0, 407, 156, 61);
 		contentPane.add(btnHome);
 		
@@ -105,10 +107,6 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 		btnCompras.setIcon(new ImageIcon(newcarrito));
 		
 		btnCompras.setBackground(new Color(176, 196, 222));
-		btnCompras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnCompras.setBounds(463, 407, 156, 61);
 		contentPane.add(btnCompras);
 		
@@ -173,6 +171,9 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 	}
 
 	@Override
+	/**
+	 * Estos son los Action permofed, que sirven para navegar por otras ventanas
+	 */
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource()==btnHome) {
 			InicioUser inicio = new InicioUser(nUsuario);
@@ -200,7 +201,9 @@ public class ComprasRealizadas extends JFrame implements ActionListener{
 			this.dispose();
 		}
 	}
-	
+	/**
+	 * Esta funcion sirve para cargar en la tabla las compras que ha realizado el usuario
+	 */
 	public void cargarCompras() {
 		ArrayList<Compra> compras = new ArrayList<Compra>();
 		try {

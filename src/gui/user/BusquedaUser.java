@@ -20,7 +20,11 @@ import java.awt.event.ActionEvent;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.SystemColor;
-
+/**
+ * Esta ventana sirve de buscador para el usuario, puede buscar cualquier libro o sus recomendados
+ * @author EquipoB
+ *
+ */
 public class BusquedaUser extends JFrame implements ActionListener{
 
 	/**
@@ -42,8 +46,11 @@ public class BusquedaUser extends JFrame implements ActionListener{
 	private PanelBusquedaLibro panel;
 
 	/**
-	 * Aquí de sefinen los botones del menú.
-	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
+	 * Aquí se definen los botones del menú.
+	 * Se introducen los valores de tamaño
+	 * El color de fondo
+	 * Se declara el ActionPerformed 
+	 * Se indica una imagen que hace de icono.
 	 */
 	public BusquedaUser(String usuario) {
 		nUsuario=usuario;
@@ -171,7 +178,9 @@ public class BusquedaUser extends JFrame implements ActionListener{
 			this.dispose();
 		}
 	}
-	
+	/**
+	 * Esta funcion sirve para ir a ventana de compra y para que te lleve el isbn y el usuario
+	 */
 	public void comprar() {
 		try {
 			String isbn = panel.getIsbn();
@@ -183,7 +192,9 @@ public class BusquedaUser extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+	/**
+	 * Esta funcion sirve para ver los libros recomendados del usuario
+	 */
 	public void verRecomendados() {
 		ArrayList<Libro> libros=new ArrayList<Libro>();
 		try {

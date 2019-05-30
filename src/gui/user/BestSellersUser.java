@@ -13,7 +13,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+/**
+ * Esta ventana sirve para ver los bestSellers de la libreria
+ * @author EquipoB
+ *
+ */
 public class BestSellersUser extends JFrame implements ActionListener{
 
 	/**
@@ -31,7 +35,10 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		
 	/**
 	 * Aquí se definen los botones del menú.
-	 * Se introducen los valores de tamaño, color de fondo, se declara el ActionPerformed y se indica una imagen que hace de icono.
+	 * Se introducen los valores de tamaño
+	 * El color de fondo
+	 * Se declara el ActionPerformed 
+	 * Se indica una imagen que hace de icono.
 	 */
 	public BestSellersUser(String usuario) {
 		nUsuario=usuario;
@@ -55,10 +62,6 @@ public class BestSellersUser extends JFrame implements ActionListener{
 
 		btnHome.setForeground(new Color(0, 0, 0));
 		btnHome.setBackground(SystemColor.activeCaption);
-		btnHome.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnHome.setBounds(0, 451, 156, 61);
 		contentPane.add(btnHome);
 		
@@ -70,10 +73,6 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		btnBestSellers.setIcon(new ImageIcon(newestrella));
 		
 		btnBestSellers.setBackground(new Color(176, 196, 222));
-		btnBestSellers.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnBestSellers.setBounds(154, 451, 157, 61);
 		contentPane.add(btnBestSellers);
 		
@@ -85,10 +84,6 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		btnUsuario.setIcon(new ImageIcon(newmonigote));
 		
 		btnUsuario.setBackground(SystemColor.activeCaption);
-		btnUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-			}
-		});
 		btnUsuario.setBounds(617, 451, 167, 61);
 		contentPane.add(btnUsuario);
 		
@@ -99,10 +94,6 @@ public class BestSellersUser extends JFrame implements ActionListener{
 		btnCompras.setIcon(new ImageIcon(newcarrito));
 		
 		btnCompras.setBackground(SystemColor.activeCaption);
-		btnCompras.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		btnCompras.setBounds(463, 451, 156, 61);
 		contentPane.add(btnCompras);
 		
