@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import model.Autor;
 import model.Compra;
 import model.Genero;
+import model.GustoAutor;
+import model.GustoGenero;
 import model.Libro;
 import model.Usuario;
 
@@ -59,5 +61,17 @@ public interface Logic {
 	public void borrarAutor(String nAutor) throws Exception;
 	
 	public void borrarGen(String nGenero) throws Exception;
+	
+	public ArrayList<String> cargarGustosGen(String nUsuario) throws Exception;
+	
+	public ArrayList<String> cargarGustosAut(String nUsuario) throws Exception;
+	
+	public void añadirGustoAut(String nUsuario, String nAutor) throws Exception;
+
+	public void añadirGustoGen(String nUsuario, String nGen) throws Exception;
+	
+	public void borrarGustoGen(String nUsuario, String nGen) throws Exception;
+	
+	public void borrarGustoAut(String nUsuario, String nAutor) throws Exception;
 
 }

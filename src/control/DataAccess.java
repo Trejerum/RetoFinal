@@ -7,6 +7,8 @@ import java.util.ArrayList;
 import model.Autor;
 import model.Compra;
 import model.Genero;
+import model.GustoAutor;
+import model.GustoGenero;
 import model.Libro;
 import model.Usuario;
 
@@ -73,5 +75,13 @@ public interface DataAccess {
 	public void borrarAutor(String nAutor) throws SQLException, ClassNotFoundException, IOException;
 
 	public void borrarGenero(String nGenero) throws SQLException, ClassNotFoundException, IOException;
+
+	public ArrayList<String> cargarGustosGen(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
+
+	public ArrayList<String> cargarGustosAut(String nUsuario) throws SQLException, ClassNotFoundException, IOException;
+
+	public void borrarGustoGen(String nUsuario, String nGen) throws SQLException, ClassNotFoundException, IOException;
+
+	public void borrarGustoAut(String nUsuario, String nAutor) throws SQLException, ClassNotFoundException, IOException;
 	
 }
