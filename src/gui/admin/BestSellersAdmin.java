@@ -62,7 +62,8 @@ public class BestSellersAdmin extends JFrame implements ActionListener{
 		lblSesionIniciada.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblSesionIniciada.setBounds(26, 11, 134, 14);
 		contentPane.add(lblSesionIniciada);
-
+		
+		//Aqui se visuliza el nombre del administrador conectado
 		lblnameAdmin = new JLabel("");
 		lblnameAdmin.setBounds(170, 11, 87, 16);
 		contentPane.add(lblnameAdmin);
