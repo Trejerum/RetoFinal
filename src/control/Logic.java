@@ -54,7 +54,7 @@ public interface Logic {
 	
 	public Autor cargarAutor(String autor) throws Exception;
 	
-	public void guardarDatosLibro(Libro libro, Autor autor) throws Exception;
+	public void guardarDatosLibro(Libro libro, ArrayList<Autor> autores) throws Exception;
 	
 	
 

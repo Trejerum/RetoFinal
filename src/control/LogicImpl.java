@@ -40,15 +40,6 @@ public class LogicImpl implements Logic{
 		dataAccess.insertarLibro(libro);
 		for (Autor autor : autores) {
 			dataAccess.insertarLibroAutores(autor, libro.getIsbn());
-			if(!dataAccess.existeAutor(autor)) {
-				dataAccess.insertarAutor(autor);
-			}
-		}
-		Genero genero = new Genero();
-		genero.setCodGenero(libro.getGenero().substring(0, 2));
-		genero.setNomGenero(libro.getGenero());
-		if(!dataAccess.existeGenero(genero.getCodGenero())) {
-			dataAccess.insertarGenero(genero);
 		}
 	}
 
@@ -150,9 +141,19 @@ public class LogicImpl implements Logic{
 		return autor;
 	}
 	
-	public void guardarDatosLibro(Libro libro, Autor autor) throws Exception {
+	public void guardarDatosLibro(Libro libro, ArrayList<Autor> autores) throws Exception {
 		dataAccess.guardarDatosLibro(libro);
+		ArrayList<Autor> autoresLibro = dataAccess.cargarAutoresLibro(libro.getIsbn());
+		for (int i = 0; i < autores.size(); i++) {
+			for (int j = 0; j < autoresLibro.size(); j++) {
+				if(autores.get(i).getCodAutor().equalsIgnoreCase(autoresLibro.get(j).getCodAutor())) {
+					autores.remove(autores.get(i));
+				}
+			}
+		}
+		
+		for (Autor autor : autores) {
+			dataAccess.insertarLibroAutores(autor, libro.getIsbn());
+		}
 	}
-
-	
 }
