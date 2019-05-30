@@ -715,7 +715,7 @@ public class DataAccessImpl implements DataAccess{
 	public void borrarGustoGen(String nUsuario, String nGen) throws SQLException, ClassNotFoundException, IOException {
 		try {
 			this.connect();
-			String sql = "delete from gustoGenero where nombreGen=? and nombreUsuario=?";
+			String sql = "delete from gustoGenero where codGen=(select codGen from generos where nombreGen=?) and nombreUsuario=?";
 			stmt = con.prepareStatement(sql);
 			stmt.setString(1, nGen);
 			stmt.setString(2, nUsuario);

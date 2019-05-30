@@ -222,7 +222,16 @@ public class GustosUser extends JFrame implements ActionListener{
 	}
 	
 	private void borrarGen() {
-		
+		String message;
+		try {
+			Logic logic = LogicFactory.getLogic();
+			logic.borrarGustoGen(nUsuario, listaGustosGeneros.getSelectedValue());
+			modeloGustGen.remove(listaGustosGeneros.getSelectedIndex());
+		}catch(Exception e) {
+			message="No se ha podido borrar el genero";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+		}
 	}
 	
 	private void cargarDatos() {
