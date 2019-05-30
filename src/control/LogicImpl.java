@@ -156,4 +156,14 @@ public class LogicImpl implements Logic{
 			dataAccess.insertarLibroAutores(autor, libro.getIsbn());
 		}
 	}
+
+	public void borrarAutor(String nAutor) throws Exception {
+		dataAccess.borrarAutor(nAutor);
+		
+	}
+
+	public void borrarGen(String nGenero) throws Exception {
+		dataAccess.borrarGenero(nGenero);
+		
+	}
 }

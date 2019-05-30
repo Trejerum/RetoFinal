@@ -56,6 +56,8 @@ public interface Logic {
 	
 	public void guardarDatosLibro(Libro libro, ArrayList<Autor> autores) throws Exception;
 	
+	public void borrarAutor(String nAutor) throws Exception;
 	
+	public void borrarGen(String nGenero) throws Exception;
 
 }

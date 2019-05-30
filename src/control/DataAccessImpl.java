@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.mysql.cj.jdbc.CallableStatement;
+
 import model.Autor;
 import model.Compra;
 import model.Genero;
@@ -23,6 +25,7 @@ public class DataAccessImpl implements DataAccess{
 
 	private Connection con;
 	private PreparedStatement stmt;
+	private CallableStatement cStmt;
 	private String dbHost;
 	private String dbName;
 	private String dbUser;
@@ -644,6 +647,30 @@ public class DataAccessImpl implements DataAccess{
 			stmt.setInt(10, libro.getNumVentas());
 			stmt.setString(11, libro.getIsbn());
 			stmt.executeUpdate();
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+
+	public void borrarAutor(String nAutor) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			cStmt = (CallableStatement)con.prepareCall("{call borrarAutor(?)}");
+			cStmt.setString(1, nAutor);
+			cStmt.execute();
+		}finally {
+			this.disconnect();
+		}
+		
+	}
+
+	public void borrarGenero(String nGenero) throws SQLException, ClassNotFoundException, IOException {
+		try {
+			this.connect();
+			cStmt = (CallableStatement) con.prepareCall("{call borrarGenero(?)}");
+			cStmt.setString(1, nGenero);
+			cStmt.execute();
 		}finally {
 			this.disconnect();
 		}

@@ -13,8 +13,6 @@ import javax.swing.border.EmptyBorder;
 import control.Logic;
 import control.LogicFactory;
 import model.Autor;
-import model.Genero;
-
 import javax.swing.JScrollPane;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -22,6 +20,7 @@ import javax.swing.JTextField;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
+import javax.swing.ListSelectionModel;
 
 public class MantAutores extends JFrame implements ActionListener{
 
@@ -41,6 +40,7 @@ public class MantAutores extends JFrame implements ActionListener{
 	private DefaultListModel<String> modeloAut;
 	private String nUsuario;
 	private JButton btnVolver;
+	private JButton btnCargar;
 	/**
 	 * Create the frame.
 	 */
@@ -48,7 +48,7 @@ public class MantAutores extends JFrame implements ActionListener{
 		nUsuario=usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 561, 371);
+		setBounds(100, 100, 595, 371);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -61,7 +61,7 @@ public class MantAutores extends JFrame implements ActionListener{
 		
 		lblBorrarAutor = new JLabel("Borrar Genero");
 		lblBorrarAutor.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblBorrarAutor.setBounds(413, 85, 82, 23);
+		lblBorrarAutor.setBounds(457, 85, 82, 23);
 		contentPane.add(lblBorrarAutor);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -69,6 +69,7 @@ public class MantAutores extends JFrame implements ActionListener{
 		contentPane.add(scrollPane);
 		
 		listaAutores = new JList<String>();
+		listaAutores.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		scrollPane.setViewportView(listaAutores);
 		
 		lblListaAutores = new JLabel("Lista Autores");
@@ -86,11 +87,11 @@ public class MantAutores extends JFrame implements ActionListener{
 		contentPane.add(btnAadir);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(413, 150, 89, 23);
+		btnEliminar.setBounds(450, 150, 89, 23);
 		contentPane.add(btnEliminar);
 		
 		tfEliminar = new JTextField();
-		tfEliminar.setBounds(388, 119, 129, 20);
+		tfEliminar.setBounds(434, 119, 129, 20);
 		contentPane.add(tfEliminar);
 		tfEliminar.setColumns(10);
 		
@@ -98,11 +99,16 @@ public class MantAutores extends JFrame implements ActionListener{
 		btnVolver.setBounds(428, 308, 89, 23);
 		contentPane.add(btnVolver);
 		
+		btnCargar = new JButton(">>>");
+		btnCargar.setBounds(359, 118, 69, 23);
+		contentPane.add(btnCargar);
+		
 		cargarAutores();
 		
 		btnAadir.addActionListener(this);
 		btnEliminar.addActionListener(this);
 		btnVolver.addActionListener(this);
+		btnCargar.addActionListener(this);
 	}
 	
 	@Override
@@ -117,6 +123,9 @@ public class MantAutores extends JFrame implements ActionListener{
 			InicioAdmin inicio = new InicioAdmin(nUsuario);
 			inicio.setVisible(true);
 			this.dispose();
+		}
+		else if(e.getSource()==btnCargar) {
+			pasarAutor();
 		}
 		
 	}
@@ -170,10 +179,23 @@ public class MantAutores extends JFrame implements ActionListener{
 			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
-		
 	}
 	
 	private void eliminarAutor() {
-		//TODO crear el procedimiento en la base de datos y escribir el codigo de acceso
+		String message;
+		try {
+			Logic logic = LogicFactory.getLogic();
+			logic.borrarAutor(tfEliminar.getText());
+			modeloAut.removeElement(tfEliminar.getText());
+			message="Autor borrado correctamente";
+			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+		}catch(Exception e) {
+			message="No se ha podido comprobar el autor";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private void pasarAutor() {
+		tfEliminar.setText(listaAutores.getSelectedValue());
 	}
 }

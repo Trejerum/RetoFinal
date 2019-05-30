@@ -40,6 +40,7 @@ public class MantGeneros extends JFrame implements ActionListener{
 	private DefaultListModel<String> modeloGen;
 	private String nUsuario;
 	private JButton btnVolver;
+	private JButton btnCargar;
 	/**
 	 * Create the frame.
 	 */
@@ -47,7 +48,7 @@ public class MantGeneros extends JFrame implements ActionListener{
 		nUsuario=usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 561, 371);
+		setBounds(100, 100, 596, 371);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -60,7 +61,7 @@ public class MantGeneros extends JFrame implements ActionListener{
 		
 		lblBorrarGenero = new JLabel("Borrar Genero");
 		lblBorrarGenero.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblBorrarGenero.setBounds(413, 85, 82, 23);
+		lblBorrarGenero.setBounds(476, 85, 82, 23);
 		contentPane.add(lblBorrarGenero);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -85,11 +86,11 @@ public class MantGeneros extends JFrame implements ActionListener{
 		contentPane.add(btnAadir);
 		
 		btnEliminar = new JButton("Eliminar");
-		btnEliminar.setBounds(413, 150, 89, 23);
+		btnEliminar.setBounds(469, 150, 89, 23);
 		contentPane.add(btnEliminar);
 		
 		tfEliminar = new JTextField();
-		tfEliminar.setBounds(388, 119, 129, 20);
+		tfEliminar.setBounds(444, 119, 129, 20);
 		contentPane.add(tfEliminar);
 		tfEliminar.setColumns(10);
 		
@@ -97,11 +98,16 @@ public class MantGeneros extends JFrame implements ActionListener{
 		btnVolver.setBounds(428, 308, 89, 23);
 		contentPane.add(btnVolver);
 		
+		btnCargar = new JButton(">>>");
+		btnCargar.setBounds(365, 118, 69, 23);
+		contentPane.add(btnCargar);
+		
 		cargarGeneros();
 		
 		btnAadir.addActionListener(this);
 		btnEliminar.addActionListener(this);
 		btnVolver.addActionListener(this);
+		btnCargar.addActionListener(this);
 	}
 	
 	@Override
@@ -116,6 +122,9 @@ public class MantGeneros extends JFrame implements ActionListener{
 			InicioAdmin inicio = new InicioAdmin(nUsuario);
 			inicio.setVisible(true);
 			this.dispose();
+		}
+		else if(e.getSource()==btnCargar) {
+			pasarGenero();
 		}
 		
 	}
@@ -171,6 +180,20 @@ public class MantGeneros extends JFrame implements ActionListener{
 	}
 	
 	private void eliminarGenero() {
-		//TODO crear el procedimiento en la base de datos y escribir el codigo de acceso
+		String message;
+		try {
+			Logic logic = LogicFactory.getLogic();
+			logic.borrarGen(tfEliminar.getText());
+			modeloGen.removeElement(tfEliminar.getText());
+			message="Genero borrado correctamente";
+			JOptionPane.showMessageDialog(this, message, "Informacion", JOptionPane.INFORMATION_MESSAGE);
+		}catch(Exception e) {
+			message="No se ha podido comprobar el genero";
+			JOptionPane.showMessageDialog(this, message, "Error", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private void pasarGenero() {
+		tfEliminar.setText(listaGeneros.getSelectedValue());
 	}
 }
