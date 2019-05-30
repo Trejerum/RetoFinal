@@ -71,7 +71,7 @@ public class ConfirmarCompra extends JFrame implements ActionListener, ChangeLis
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 648, 384);
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(0, 153, 51));
+		contentPane.setBackground(new Color(176, 196, 222));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);

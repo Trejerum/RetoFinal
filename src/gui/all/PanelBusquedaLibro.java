@@ -191,23 +191,19 @@ public class PanelBusquedaLibro extends JPanel implements ActionListener, KeyLis
 		return isbn;
 	}
 
-
-	@Override
-	public void keyPressed(KeyEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-	@Override
 	public void keyReleased(KeyEvent e) {
 		buscar();
 		
 	}
 
+	@Override
+	public void keyPressed(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
 
 	@Override
-	public void keyTyped(KeyEvent e) {
+	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
