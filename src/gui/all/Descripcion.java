@@ -64,8 +64,8 @@ public class Descripcion extends JFrame implements ActionListener {
 
 		lbltituloLibro = new JLabel("(Titulo libro)");
 		lbltituloLibro.setFont(new Font("Tahoma", Font.BOLD, 16));
-		lbltituloLibro.setHorizontalAlignment(SwingConstants.CENTER);
-		lbltituloLibro.setBounds(128, 11, 207, 35);
+		lbltituloLibro.setHorizontalAlignment(SwingConstants.LEFT);
+		lbltituloLibro.setBounds(36, 11, 422, 35);
 		contentPane.add(lbltituloLibro);
 
 		taLibro = new JTextArea();
