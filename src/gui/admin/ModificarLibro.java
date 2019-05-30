@@ -7,7 +7,6 @@ import control.LogicFactory;
 import model.Autor;
 import model.Genero;
 import model.Libro;
-
 import javax.swing.JSeparator;
 import java.awt.Color;
 

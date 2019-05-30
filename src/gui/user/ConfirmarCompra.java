@@ -27,7 +27,11 @@ import model.Libro;
 import model.Usuario;
 
 import javax.swing.JSpinner;
-
+/**
+ * Esta ventana sirve para confirmar la compra de un libro
+ * @author EquipoB
+ *
+ */
 public class ConfirmarCompra extends JFrame implements ActionListener, ChangeListener {
 
 	/**
@@ -158,7 +162,10 @@ public class ConfirmarCompra extends JFrame implements ActionListener, ChangeLis
 			comprar();
 		}
 	}
-	
+	/**
+	 * Esta funcion sirve para cargar los datos del libro que el anteriormente ha seleccionado en la tabla, pasando el ISBN
+	 * @param isbn
+	 */
 	public void cargarDatos(String isbn) {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		try {
@@ -182,7 +189,9 @@ public class ConfirmarCompra extends JFrame implements ActionListener, ChangeLis
 			e.printStackTrace();
 		}
 	}
-	
+	/**
+	 * Esta funcion sirve para que el usuario pueda comprar libros
+	 */
 	public void comprar() {
 		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
 		String message;
@@ -219,6 +228,9 @@ public class ConfirmarCompra extends JFrame implements ActionListener, ChangeLis
 	}
 
 	@Override
+	/**
+	 * Esta funcion sirve para saber cuantas unidades quiere comprar de un libro el usuario
+	 */
 	public void stateChanged(ChangeEvent e) {
 		if((Integer) spinner.getValue()<=0) {
 			spinner.setValue(1);
